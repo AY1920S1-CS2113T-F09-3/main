@@ -1,4 +1,5 @@
 package duke.items;
+
 import java.util.Calendar;
 import java.util.List;
 //TODO: Import an existing datetime class or write a better one.
@@ -28,8 +29,11 @@ public class DateTime {
             calendar.set(Calendar.MONTH, Integer.parseInt(dateToken[1]) - 1); // jan is 0, dec is 11
             calendar.set(Calendar.YEAR, Integer.parseInt(dateToken[2]));
 
-            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time) / 100); // set with the first 2 elements - the hour
-            calendar.set(Calendar.MINUTE, Integer.parseInt(time) % 100); // set with the last 2 elements, the minutes
+            // set with the first 2 elements - the hour
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time) / 100);
+            // set with the last 2 elements, the minutes
+            calendar.set(Calendar.MINUTE, Integer.parseInt(time) % 100);
+            // set seconds to be 0 by default
             calendar.set(Calendar.SECOND, 0);
 
             this.at = calendar;
@@ -47,8 +51,9 @@ public class DateTime {
     public String returnFormattedDate() {
         if (valid) {
             return ("" + at.getTime());
-        } else
+        } else {
             return dateAndTime;
+        }
     }
 
 }
