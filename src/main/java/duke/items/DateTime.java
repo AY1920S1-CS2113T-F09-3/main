@@ -9,12 +9,15 @@ import java.util.List;
  */
 
 public class DateTime {
+    private String dateAndTime;
+    private boolean valid;
     private Calendar at;
 
     /**
      * DateTime constructor. Converts input string into attributes of the date and time.
      */
     public DateTime(String dateAndTime) {
+        this.dateAndTime = dateAndTime;
         Calendar calendar = Calendar.getInstance();
         try {
             String[] dateTimeToken = dateAndTime.split(" ", 2);
@@ -30,8 +33,10 @@ public class DateTime {
             calendar.set(Calendar.SECOND, 0);
 
             this.at = calendar;
+            valid = true;
         } catch (Exception e) {
-            System.out.println("Invalid datetime. Correct format: dd/mm/yyyy hhmm");
+            System.out.println("Inproper datetime. Correct format: dd/mm/yyyy hhmm\n Task is still registered.");
+            valid = false;
         }
     }
 
@@ -40,7 +45,10 @@ public class DateTime {
      * Returns the date in a friendlier format.
      */
     public String returnFormattedDate() {
-        return ("" + at.getTime());
+        if (valid) {
+            return ("" + at.getTime());
+        } else
+            return dateAndTime;
     }
 
 }
