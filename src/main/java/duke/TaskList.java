@@ -202,9 +202,9 @@ public class TaskList {
     }
 
     /**
-     * Looks for undone deadlines within the next 24hrs and prints the task.
+     * Looks for undone deadlines within the next 5 Days and prints the task.
      */
-    public void printReminders () {
+    public void printReminders() {
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
         long millisInFiveDays = 5 * 24 * 60 * 60 * 1000;
@@ -213,7 +213,7 @@ public class TaskList {
             if (task instanceof Deadline && !task.getIsDone()) {
                 Deadline deadline = (Deadline) task;
                 long timeDifference = deadline.getDate().getTime() - now.getTime();
-                if ( timeDifference <= millisInFiveDays && timeDifference > 0) {
+                if (timeDifference <= millisInFiveDays && timeDifference > 0) {
                     task.printTaskDetails();
                 }
             }
