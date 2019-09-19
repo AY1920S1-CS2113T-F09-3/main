@@ -150,7 +150,7 @@ public class TaskList {
     }
 
     /**
-    * Snooze a task for a day
+    * Snooze a task for a day.
     * @param i the index of the task to be snoozed.
     */
     public void snoozeTask(int i) {
@@ -167,6 +167,7 @@ public class TaskList {
             printTaskNonexistent();
         }
     }
+
     /**
      * Prints error message if a nonexistent task index is accessed.
      * Prints the task list for user to choose again.

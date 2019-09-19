@@ -46,12 +46,17 @@ public class DateTime {
     }
 
     /**
-     * Returns the Date in the DateTime object
-     * @return Time in Calendar-Date format
+     * Returns the Date in the DateTime object.
+     * @return Time in Calendar-Date format.
      */
     public Date getAt() {
         return at;
     }
+
+    /**
+     * Sets the calendar date.
+     * @param date to be set.
+     */
     public void setDate(Date date) {
         at = (date);
     }
