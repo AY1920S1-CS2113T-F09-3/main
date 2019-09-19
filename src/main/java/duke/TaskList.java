@@ -160,6 +160,8 @@ public class TaskList {
                 ((Snooze) taskList.get(i)).snooze(); //Snooze task.
                 System.out.print("Nice! I've snoozed this task: ");
                 System.out.println(taskList.get(i).getDescription()); //Prints task name
+            } else {
+                System.out.println("Only Events and Deadlines are able to be snoozed!");
             }
         } catch (IndexOutOfBoundsException e) {
             printTaskNonexistent();
