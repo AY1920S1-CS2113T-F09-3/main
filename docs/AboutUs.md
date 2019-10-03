@@ -11,7 +11,7 @@ It is this change that we at Eggventory strive towards timelessly.
 # Project Team
 
 ## Raghav
-<p align = "left"> <img src="./images/Raghav-B.png" alt="Raghav" height=70% width=70%> </p>
+<p align = "left"> <img src="./images/Raghav-B.png" alt="Raghav" height=20% width=20%> </p>
 
 [[github](https://github.com/Raghav-B)][[portfolio](https://github.com/Raghav-B)]
 
@@ -25,7 +25,7 @@ It is this change that we at Eggventory strive towards timelessly.
 ---
 
 ## Rebecca
-<p align = "left"> <img src="./images/cyanoei.png" alt="Rebecca" height=70% width=70%> </p>
+<p align = "left"> <img src="./images/cyanoei.png" alt="Rebecca" height=20% width=20%> </p>
 
 [[github](https://github.com/cyanoei)][[portfolio](https://github.com/cyanoei)]
 
@@ -40,7 +40,7 @@ It is this change that we at Eggventory strive towards timelessly.
 ---
 
 ## Yanbo
-<p align = "left"> <img src="./images/yanprosobo.png" alt="Yan Bo" height=70% width=70%> </p>
+<p align = "left"> <img src="./images/yanprosobo.png" alt="Yan Bo" height=20% width=20%> </p>
 
 [[github](https://github.com/yanprosobo)][[portfolio](https://github.com/yanprosobo)]
 
@@ -53,7 +53,7 @@ It is this change that we at Eggventory strive towards timelessly.
 ---
 
 ## Rishab
-<p align = "left"> <img src="./images/patwaririshab.png" alt="Rishab" height=70% width=70%> </p>
+<p align = "left"> <img src="./images/patwaririshab.png" alt="Rishab" height=20% width=20%> </p>
 
 [[github](https://github.com/patwaririshab)][[portfolio](https://github.com/patwaririshab)]
 
@@ -65,7 +65,7 @@ It is this change that we at Eggventory strive towards timelessly.
 * Code quality assurance
 
 ## Benjamin
-<p align = "left"> <img src="./images/Deculsion.png" alt="Benjamin" height=70% width=70%> </p>
+<p align = "left"> <img src="./images/Deculsion.png" alt="Benjamin" height=20% width=20%> </p>
 
 [[github](https://github.com/Deculsion)][[portfolio](https://github.com/Deculsion)]
 
