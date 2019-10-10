@@ -37,7 +37,7 @@ public class AddCommandTest {
         StockList testList = new StockList();
         new AddCommand(CommandType.ADD, "testStockType", "t0000", 100,
                 "testDescription").execute(testList);
-        assertEquals("testDescription",testList.getList().get(1).getName());
+        assertEquals("testDescription",testList.getList().get(0).getStock(0).getDescription());
     }
 
     /*

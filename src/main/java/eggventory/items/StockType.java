@@ -40,8 +40,8 @@ public class StockType {
      */
     public StockType(String name, boolean isUniqueStock) {
         this.name = name;
-        stocks = new ArrayList<>();
-        quantity = 0;
+        this.stocks = new ArrayList<>();
+        this.quantity = 0;
         this.isUniqueStock = isUniqueStock;
     }
 
@@ -51,8 +51,8 @@ public class StockType {
      */
     public StockType(String name) {
         this.name = name;
-        stocks = new ArrayList<>();
-        quantity = 0;
+        this.stocks = new ArrayList<>();
+        this.quantity = 0;
         this.isUniqueStock = false;
     }
 
@@ -74,7 +74,7 @@ public class StockType {
      */
     public boolean addStock(String stockType, String stockCode, int quantity, String description) {
         stocks.add(new CollectiveStock(stockType, stockCode, quantity, description));
-        quantity++;
+        this.quantity++;
         return true;
     }
 
@@ -85,7 +85,7 @@ public class StockType {
      */
     public void deleteStock(String stockCode) {
         stocks.removeIf(stock -> stock.getStockCode().equals(stockCode));
-        quantity--;
+        this.quantity--;
     }
 
     /**
