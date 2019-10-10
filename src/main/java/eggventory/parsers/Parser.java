@@ -1,4 +1,4 @@
-package eggventory;
+package eggventory.parsers;
 
 import eggventory.commands.Command;
 import eggventory.commands.AddCommand;
@@ -15,25 +15,12 @@ import eggventory.enums.CommandType;
  */
 public class Parser {
 
-    private int processDoAfter(String input) throws BadInputException {
-        String shortStr;
-        String[] splitStr;
-        int taskIndex;
-
-        shortStr = input.substring(input.indexOf("/after"));
-
-        try {
-            splitStr = shortStr.split(" ", 3); //splits into "/after" "x" and other stuff, where "x" is an int
-            taskIndex = Integer.parseInt(splitStr[1]); //check if this is an int
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            throw new BadInputException("Please input the index number of the task that has to be done first.");
-        }
-        return taskIndex;
-    }
 
     /**
      * Processes the contents of an add command (everything after the word "add").
      * Splits up the input string into an array containing the various attributes of the stock being added.
+     * Ignores leading/trailing whitespace between the first word and subsequent string,
+     * and between all commands' arguments.
      *
      * @param input String containing the attributes of the stock.
      * @return an array consisting of StockType, StockCode, Quantity and Description.
@@ -41,12 +28,17 @@ public class Parser {
      */
     private String[] processAdd(String input) throws InsufficientInfoException {
 
-        String[] addInput = input.split(" ", 4); //There are 4 attributes for now.
+        String[] addInput = input.split(" +", 4); //There are 4 attributes for now.
 
-        if (addInput.length < 4 | addInput[0].isBlank() | addInput[1].isBlank()
-                | addInput[2].isBlank() | addInput[3].isBlank()) {
+        if (addInput.length < 4) {
             throw new InsufficientInfoException("Please enter stock information after the 'add' command in"
                     + " this format:\nadd <StockType> <StockCode> <Quantity> <Description>");
+        } else {
+
+            if (addInput[0].isBlank() | addInput[1].isBlank() | addInput[2].isBlank() | addInput[3].isBlank()) {
+                throw new InsufficientInfoException("Please enter stock information after the 'add' command in"
+                        + " this format:\nadd <StockType> <StockCode> <Quantity> <Description>");
+            }
         }
 
         return addInput;
@@ -70,17 +62,12 @@ public class Parser {
           TODO: also split parser up into multiple parser modules depending on the first command.
         */
 
-        int afterIndex;
-        afterIndex = -1;
-        if (listInput.contains("/after")) {
-            afterIndex = processDoAfter(listInput);
-            listInput = listInput.replace(" /after " + Integer.toString(afterIndex), "");
-        }
+        listInput = listInput.strip(); //Remove leading/trailing whitespace.
 
         //Extract the first word.
         //inputArr[0] i s the main command word.
         //inputArr[1] is the subsequent command string, and may also be empty.
-        String[] inputArr = listInput.split(" ", 2);
+        String[] inputArr = listInput.split(" +", 2);
         Command command;
 
         switch (inputArr[0]) {
