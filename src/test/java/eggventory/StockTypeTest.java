@@ -1,6 +1,7 @@
 package eggventory;
 
 import eggventory.items.Stock;
+import eggventory.items.StockType;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,16 +15,16 @@ class StockTypeTest {
 
     @Test
     void getStockList() {
-
         ArrayList<Stock> testList = new ArrayList<>();
         testList.add(new Stock("Resistor", "R50", 500, "Test Resistor"));
-        StockType testStockType = new StockType(testList);
+        StockType testStockType = new StockType("Resistor");
+        testStockType.addStock("Resistor", "R50", 500, "Test Resistor");
         assertEquals(testList, testStockType.getStockList());
     }
 
     @Test
     void getSize() {
-        StockType testStockType = new StockType();
+        StockType testStockType = new StockType("Resistor");
         assertEquals(0,testStockType.getSize());
         testStockType.addStock("Resistor", "R50", 500, "Test Resistor");
         assertEquals(1,testStockType.getSize());
@@ -31,7 +32,7 @@ class StockTypeTest {
 
     @Test
     void addStock() {
-        StockType testStockType = new StockType();
+        StockType testStockType = new StockType("Resistor");
         assertTrue(testStockType.addStock("Resistor", "R50", 500,
 
                 "Test Resistor"));
@@ -40,7 +41,7 @@ class StockTypeTest {
 
     @Test
     void getStock() {
-        StockType testStockType = new StockType();
+        StockType testStockType = new StockType("Resistor");
         testStockType.addStock("Resistor", "R50", 500, "Test Resistor");
         assertEquals("Test Resistor", testStockType.getStock(0).getDescription());
     }
@@ -49,9 +50,9 @@ class StockTypeTest {
     void deleteStock() {
         ArrayList<Stock> testList = new ArrayList<>();
         testList.add(new Stock("Resistor", "R50", 500, "Test Resistor"));
-        StockType testStockType = new StockType(testList);
+        StockType testStockType = new StockType("Resistor");
         assertEquals(1,testStockType.getSize());
-        testStockType.deleteStock(0);
+        testStockType.deleteStock("R50");
         assertEquals(0,testStockType.getSize());
     }
 }

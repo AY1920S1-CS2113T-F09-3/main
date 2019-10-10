@@ -1,18 +1,14 @@
 package eggventory.commands;
 
-import eggventory.StockType;
+import eggventory.items.StockType;
 import eggventory.Storage;
 import eggventory.Ui;
 import eggventory.enums.CommandType;
-import eggventory.exceptions.BadInputException;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
