@@ -6,11 +6,11 @@ import eggventory.items.Stock;
 import eggventory.items.StockType;
 
 public class StockList {
-    private ArrayList<StockType>stockList;
+    private ArrayList<StockType> stockList;
     private int quantity;
 
     /**
-     * Constructs a new StockList object using an already existing stockList
+     * Constructs a new StockList object using an already existing stockList.
      * @param stockList ArrayList<> of StockType objects. There should already be a default "Uncategorised" StockType.
      */
     public StockList(ArrayList<StockType> stockList) {
@@ -31,6 +31,13 @@ public class StockList {
         stockList.add(new StockType(name, false));
     }
 
+    /**
+     * Adds a new Stock object to the list.
+     * @param stockType A String matching exactly the StockType to add the new Stock object under.
+     * @param stockCode A unique String that identifies the Stock.
+     * @param quantity Quantity of the stock.
+     * @param description A String describing the nature of the Stock object.
+     */
     public void addStock(String stockType, String stockCode, int quantity, String description) {
         for (StockType listType: stockList) {
             if (listType.getName().equals(stockType)) {
@@ -43,12 +50,20 @@ public class StockList {
         stockList.get(0).addStock("Uncategorised", stockCode, quantity, description);
     }
 
+    /**
+     * Deletes a Stock object from a list.
+     * @param stockCode The unique String that identifies a Stock.
+     */
     public void deleteStock(String stockCode) {
         for (StockType stockType : stockList) {
             stockType.deleteStock(stockCode);
         }
     }
 
+    /**
+     * Saves the list into a String.
+     * @return The String that will be directly saved into file.
+     */
     public String saveDetailsString() {
         String details = "";
 

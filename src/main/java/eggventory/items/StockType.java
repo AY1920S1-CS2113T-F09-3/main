@@ -4,7 +4,6 @@ import eggventory.items.CollectiveStock;
 import eggventory.items.UniqueStock;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import eggventory.exceptions.BadInputException;
 import eggventory.items.Stock;
@@ -22,13 +21,23 @@ public class StockType {
     private int quantity;
     private boolean isUniqueStock;
 
+    /**
+     * Creates a new StockType object. This overload should only be called from a Storage class.
+     * @param name A unique name identifying the StockType.
+     * @param savedFile A fully constructed ArrayList of Stock objects.
+     */
     public StockType(String name, ArrayList<Stock> savedFile) {
         this.name = name;
         stocks = savedFile;
         quantity = savedFile.size();
-        isUniqueStock = IsUniqueStock();
+        isUniqueStock = isUniqueStock();
     }
 
+    /**
+     * Creates a new StockType object. StockType should only be instantiated from a StockList class.
+     * @param name A unique name identifying the StockType.
+     * @param isUniqueStock true if the Stock objects are a UniqueStock.
+     */
     public StockType(String name, boolean isUniqueStock) {
         this.name = name;
         stocks = new ArrayList<>();
@@ -36,6 +45,10 @@ public class StockType {
         this.isUniqueStock = isUniqueStock;
     }
 
+    /**
+     * Creates a new StockType object. StockType should only be instantiated from a StockList class.
+     * @param name A unique name identifying the StockType.
+     */
     public StockType(String name) {
         this.name = name;
         stocks = new ArrayList<>();
@@ -46,13 +59,12 @@ public class StockType {
     /**
      * Determines whether this StockType is a collection of UniqueStock or CollectiveStock.
      */
-    private boolean IsUniqueStock() {
+    private boolean isUniqueStock() {
         for (Stock stock : stocks) {
-           if (stock instanceof CollectiveStock) {
-               return false;
-           }
+            if (stock instanceof CollectiveStock) {
+                return false;
+            }
         }
-
         return true;
     }
 
@@ -76,6 +88,10 @@ public class StockType {
         quantity--;
     }
 
+    /**
+     * Creates a String of all Stock objects under this StockType.
+     * @return The String of all Stock objects.
+     */
     public String saveDetailsString() {
         String details = "";
         for (Stock stock : stocks) {
@@ -107,6 +123,10 @@ public class StockType {
      */
     public int getSize() {
         return stocks.size();
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public String getName() {

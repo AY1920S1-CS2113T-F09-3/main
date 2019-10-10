@@ -14,6 +14,7 @@ import eggventory.items.Stock;
 public class DeleteCommand extends Command {
 
     private String stockCode;
+
     public DeleteCommand(CommandType type, String stockCode) {
         super(type);
         this.stockCode = stockCode;
