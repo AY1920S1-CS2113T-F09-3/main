@@ -1,6 +1,6 @@
 package eggventory.commands;
 
-import eggventory.StockType;
+import eggventory.items.StockType;
 import eggventory.Ui;
 import eggventory.Storage;
 import eggventory.enums.CommandType;
