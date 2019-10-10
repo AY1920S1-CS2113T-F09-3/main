@@ -53,6 +53,6 @@ class StockTypeTest {
         StockType testStockType = new StockType("Resistor");
         assertEquals(1,testStockType.getSize());
         testStockType.deleteStock("R50");
-        assertEquals(0,testStockType.getSize());
+        assertEquals(0,testStockType.getQuantity());
     }
 }

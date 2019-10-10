@@ -1,5 +1,6 @@
 package eggventory.commands;
 
+import eggventory.StockList;
 import eggventory.items.StockType;
 import eggventory.Storage;
 import eggventory.Ui;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AddCommandTest {
     private OutputStream os = new ByteArrayOutputStream();
     private PrintStream ps = new PrintStream(os);
-    private StockType testStockType = new StockType();
+    private StockType testStockType = new StockType("testStockType");
     private Ui testUi = new Ui();
     private Storage testStorage = new Storage("");
     private String indent = "        ";
@@ -33,10 +34,10 @@ public class AddCommandTest {
 
     @Test
     void testExecute() {
-        StockType testList = new StockType();
+        StockList testList = new StockList();
         new AddCommand(CommandType.ADD, "testStockType", "t0000", 100,
                 "testDescription").execute(testList);
-        assertEquals("testDescription",testList.getStock(0).getDescription());
+        assertEquals("testDescription",testList.getList().get(1).getName());
     }
 
     /*
