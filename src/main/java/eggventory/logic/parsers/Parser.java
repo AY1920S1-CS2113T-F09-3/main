@@ -84,7 +84,7 @@ public class Parser {
         listInput = listInput.strip(); //Remove leading/trailing whitespace.
 
         //Extract the first word.
-        //inputArr[0] is the main command word.
+        //inputArr[0] i s the main command word.
         //inputArr[1] is the subsequent command string, and may also be empty.
         String[] inputArr = listInput.split(" +", 2);
         Command command;
