@@ -25,8 +25,8 @@ public class DeleteCommand extends Command {
         Stock deleted = list.deleteStock(stockCode);
         String output;
         if (deleted == null) {
-            output = String.format("Sorry, I cannot find the stock that stock code \"%s\" refers to. " +
-                    "Please try again." , stockCode);
+            output = String.format("Sorry, I cannot find the stock that stock code \"%s\" refers to. "
+                    + "Please try again.", stockCode);
             ui.print(output);
             return output;
         } else {

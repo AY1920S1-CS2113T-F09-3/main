@@ -25,17 +25,17 @@ public class ParseDelete {
 
         switch (deleteInput[0]) {
 
-            case "stock":
-                deleteInput[1] = deleteInput[1].strip();
-                deleteCommand = new DeleteCommand(CommandType.DELETE, deleteInput[1]);
-                break;
-            /*
-            case "stocktype":
-                addCommand = processDeleteStockType(inputString);
-                break;
-             */
-            default:
-                throw new BadInputException("Unexpected value: " + deleteInput[0]);
+        case "stock":
+            deleteInput[1] = deleteInput[1].strip();
+            deleteCommand = new DeleteCommand(CommandType.DELETE, deleteInput[1]);
+            break;
+        /*
+        case "stocktype":
+            addCommand = processDeleteStockType(inputString);
+            break;
+         */
+        default:
+            throw new BadInputException("Unexpected value: " + deleteInput[0]);
         }
 
         return deleteCommand;

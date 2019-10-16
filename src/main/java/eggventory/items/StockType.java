@@ -49,17 +49,19 @@ public class StockType {
         //this.isUniqueStock = false;
     }
 
-//    /**
-//     * Determines whether this StockType is a collection of UniqueStock or CollectiveStock.
-//     */
-//    private boolean isUniqueStock() {
-//        for (Stock stock : stocks) {
-//            if (stock instanceof CollectiveStock) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+    /**
+     * Determines whether this StockType is a collection of UniqueStock or CollectiveStock.
+     */
+    /*
+        private boolean isUniqueStock() {
+            for (Stock stock : stocks) {
+                if (stock instanceof CollectiveStock) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    */
 
     /**
      * Returns the entire stockList.
