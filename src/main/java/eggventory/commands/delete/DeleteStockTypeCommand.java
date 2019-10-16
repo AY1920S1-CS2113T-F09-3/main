@@ -30,7 +30,7 @@ public class DeleteStockTypeCommand extends Command {
         StockType deleted = list.deleteStockType(stockTypeName);
 
         if (deleted == null) {
-            output = String.format("Sorry, I cannot find the stock that stock type \"%s\" refers to. "
+            output = String.format("Sorry, I cannot find the stock type \"%s\" refers to. "
                     + "Please try again.", stockTypeName);
             ui.print(output);
         } else {
