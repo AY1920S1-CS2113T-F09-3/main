@@ -1,3 +1,5 @@
+//random comment at eggventory.java
+
 package eggventory;
 
 import eggventory.commands.Command;
