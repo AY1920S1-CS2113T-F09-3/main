@@ -46,12 +46,9 @@ public class ParseAdd {
      * @throws InsufficientInfoException if there are insufficient details provided.
      */
     private Command processAddStockType(String input) throws InsufficientInfoException {
-        String[] addInput = input.split(" +", 1);
+        String[] addInput = input.split(" +");
 
-        if (addInput.length < 1) {
-            throw new InsufficientInfoException("Please enter stock information after the 'add' command in"
-                    + " this format:\nadd stocktype <StockType> <StockCode> <Quantity> <Description>");
-        } else if (addInput[0].isBlank()) {
+        if (addInput[0].isBlank()) {
             throw new InsufficientInfoException("Please enter stock information after the 'add' command in"
                     + " this format:\nadd stocktype <StockType>");
         }
