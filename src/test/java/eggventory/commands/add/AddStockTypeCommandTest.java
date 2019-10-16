@@ -22,6 +22,6 @@ class AddStockTypeCommandTest {
         String output = new AddStockTypeCommand(CommandType.ADD, "testStockType")
                 .execute(testList, testUi, testStorage);
 
-        assertEquals(String.format("Nice! I have successfully added the stocktype: testStockType"), output);
+        assertEquals("Nice! I have successfully added the stocktype: testStockType", output);
     }
 }
