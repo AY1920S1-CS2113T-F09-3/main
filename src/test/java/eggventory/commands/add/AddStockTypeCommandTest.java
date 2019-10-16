@@ -17,7 +17,7 @@ class AddStockTypeCommandTest {
     private Storage testStorage = new Storage("");
 
     @Test
-    void testExecute_AddStocktypeSuccess() throws BadInputException {
+    void testExecute_AddStocktypeSuccess() {
         StockList testList = new StockList();
         testList.addStockType("testStockType");
 

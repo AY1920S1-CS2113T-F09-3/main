@@ -29,7 +29,7 @@ public class AddStockTypeCommand extends Command {
     * @throws BadInputException
     */
    @Override
-   public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
+   public String execute(StockList list, Ui ui, Storage storage) {
       String output;
 
       list.addStockType(name);
