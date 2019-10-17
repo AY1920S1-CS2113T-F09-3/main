@@ -75,16 +75,20 @@ public class StockType {
 
     /**
      * Returns a stock of the user's choice.
-     *
      * @param i the index of the stock selected.
      */
     public Stock getStock(int i) {
         return stocks.get(i);
     }
 
+    /**
+     * Returns a stock of the user's choice.
+     * @param stockCode String which uniquely identifies a Stock.
+     * @return If Stock exits, the Stock otherwise null.
+     */
     public Stock getStock(String stockCode) {
-        for (Stock stock: stocks){
-            if(stockCode.equals(stock.getStockCode())){
+        for (Stock stock: stocks) {
+            if (stockCode.equals(stock.getStockCode())) {
                 return stock;
             }
         }
@@ -107,8 +111,15 @@ public class StockType {
         return name;
     }
 
-
-    public String setName(String newName) { this.name = newName; return this.name; }
+    /**
+     * Updates the name of the StockType.
+     * @param newName String which uniquely identifies a StockType.
+     * @return The name of the StockType, for printing purpose.
+     */
+    public String setName(String newName) {
+        this.name = newName;
+        return this.name;
+    }
 
     /**
      * Adds a stock to the stockList.
@@ -145,32 +156,40 @@ public class StockType {
         //this.quantity--;
     }
 
+    /**
+     * Updates the values of properties of a Stock.
+     * @param stockCode String which uniquely identifies a Stock.
+     * @param property The attribute of a Stock we want to update.
+     * @param newValue The new value of the attribute to be updated.
+     * @return The unedited Stock, for printing purpose.
+     */
     public Stock setStock(String stockCode, Property property, String newValue) {
-        Stock editedStock;
-        for(Stock stock: stocks) {
-            if (stockCode.equals(stock.getStockCode())){
-                editedStock = stock;
+        Stock uneditedStock;
+        for (Stock stock: stocks) {
+            if (stockCode.equals(stock.getStockCode())) {
+                uneditedStock = stock;
                 switch (property) {
-                    case STOCKCODE:
-                        stock.setStockCode(newValue);
-                        break;
-                    case QUANTITY:
-                        stock.setQuantity(Integer.parseInt(newValue));
-                        break;
-                    case LOANED:
-                        stock.setLoaned(Integer.parseInt(newValue));
-                        break;
-                    case LOST:
-                        stock.setLost(Integer.parseInt(newValue));
-                        break;
-                    case DESCRIPTION:
-                        stock.setDescription(newValue);
-                        break;
-                    case MINIMUM:
-                        stock.setMinimum(Integer.parseInt(newValue));
-                        break;
+                case STOCKCODE:
+                    stock.setStockCode(newValue);
+                    break;
+                case QUANTITY:
+                    stock.setQuantity(Integer.parseInt(newValue));
+                    break;
+                case LOANED:
+                    stock.setLoaned(Integer.parseInt(newValue));
+                    break;
+                case LOST:
+                    stock.setLost(Integer.parseInt(newValue));
+                    break;
+                case DESCRIPTION:
+                    stock.setDescription(newValue);
+                    break;
+                case MINIMUM:
+                    stock.setMinimum(Integer.parseInt(newValue));
+                    break;
+                default:
                 }
-                return editedStock;
+                return uneditedStock;
             }
         }
         return null;

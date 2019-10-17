@@ -18,6 +18,13 @@ public class EditStockCommand extends Command {
     private Property property; //Stores the property you want to edit
     private String newValue; //Stores the newValue you want
 
+    /**
+     * Initializes all the attributes of the details of the stock to be edited.
+     * @param type The type of command.
+     * @param stockCode The unique String that identifies a Stock.
+     * @param property The property of the Stock that is to be changed.
+     * @param newValue The newValue of the property.
+     */
     public EditStockCommand(CommandType type, String stockCode, Property property, String newValue) {
         super(type);
         this.stockCode = stockCode;
@@ -25,8 +32,15 @@ public class EditStockCommand extends Command {
         this.newValue = newValue;
     }
 
+    /**
+     * Executes the actual editing of the stock's property.
+     * @param list StockList containing all the StockTypes.
+     * @param cli  Cli object to display output to.
+     * @param storage  Storage object to handle saving and loading of any data.
+     * @return String of the output, for JUnit testing.
+     */
     @Override
-    public String execute (StockList list, Cli cli, Storage storage) {
+    public String execute(StockList list, Cli cli, Storage storage) {
         String output;
         Stock edited = list.setStock(stockCode, property, newValue);
         output = String.format("Awesome! I have successfully updated the following stock: %s | %s | %d | %s\n",

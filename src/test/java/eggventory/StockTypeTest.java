@@ -34,7 +34,7 @@ class StockTypeTest {
     }
 
     @Test
-    void addStock_SUCCESS() {
+    void addStock_Success() {
         StockType testStockType = new StockType("Resistor");
         assertTrue(testStockType.addStock("Resistor", "R50", 500,"Test Resistor"));
 
@@ -59,7 +59,7 @@ class StockTypeTest {
     }
 
     @Test
-    void setStock_STOCKCODE_SUCCESS() {
+    void setStock_StockCode_Success() {
         StockType testStockType = new StockType("testList");
         testStockType.addStock("testList", "R50", 500, "Test Resistor");
         testStockType.setStock("R50", Property.STOCKCODE, "R500");
@@ -68,7 +68,7 @@ class StockTypeTest {
     }
 
     @Test
-    void setStock_QUANTITY_SUCCESS() {
+    void setStock_Quantity_Success() {
         StockType testStockType = new StockType("testList");
         testStockType.addStock("testList", "R50", 500, "Test Resistor");
         testStockType.setStock("R50", Property.QUANTITY, "1950");
@@ -76,22 +76,22 @@ class StockTypeTest {
     }
 
     @Test
-    void setStock_LOANED_SUCCESS() {
+    void setStock_Loaned_Success() {
 
     }
 
     @Test
-    void setStock_LOST_SUCCESS() {
+    void setStock_Lost_Success() {
 
     }
 
     @Test
-    void setStock_DESCRIPTION_SUCCESS() {
+    void setStock_Description_Success() {
 
     }
 
     @Test
-    void setStock_MINIMUM_SUCCESS() {
+    void setStock_Minimum_Success() {
 
     }
 }

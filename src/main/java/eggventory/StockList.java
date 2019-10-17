@@ -115,9 +115,9 @@ public class StockList {
      * @param newValue  The new value of the property we want to edit.
      * @return the stock before edits, for printing purposes.
      */
-    public Stock setStock(String stockCode, Property property, String newValue ) {
+    public Stock setStock(String stockCode, Property property, String newValue) {
         Stock beforeEdits;
-        for(StockType stockType : stockList) {
+        for (StockType stockType : stockList) {
             beforeEdits = stockType.setStock(stockCode, property, newValue);
             if (beforeEdits != null) { //The corresponding stockCode was found in the StockList
                 return beforeEdits;
@@ -126,14 +126,19 @@ public class StockList {
         return null;
     }
 
-
-    public StockType setStockType(String stockTypeName, String newName){
-        StockType edited;
-        for (StockType stockType : stockList){
-            if (stockTypeName.equals(stockType.getName())){
-                edited = stockType;
+    /**
+     * Edits a StockType object in a StockList. Note, the only edit to StockType in this version is to its name.
+     * @param stockTypeName The unique String that identifies a StockType.
+     * @param newName The newName of the StockType.
+     * @return the stockType before editing, for printing purpose.
+     */
+    public StockType setStockType(String stockTypeName, String newName) {
+        StockType previous;
+        for (StockType stockType : stockList) {
+            if (stockTypeName.equals(stockType.getName())) {
+                previous = stockType;
                 stockType.setName(newName);
-                return edited;
+                return previous;
             }
         }
         return null;
