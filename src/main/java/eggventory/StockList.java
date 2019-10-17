@@ -41,7 +41,8 @@ public class StockList {
     }
 
     /**
-     * Deletes a StockType object from a list.
+     * Prints every stock within stocklist. Should only be called by Ui.
+     * Deletes a StockType object, and all the stocks under it.
      * @param name Name of StockType to be deleted
      * @return The object if it was deleted, null if nothing waas deleted.
      */
@@ -128,24 +129,6 @@ public class StockList {
         }
 
         return total;
-    }
-
-    /**
-     * Prints every stock within stocklist. Should only be called by Ui.
-     * Deletes a StockType object, and all the stocks under it.
-     * @param stockTypeName The name of the StockType to delete.
-     * @return the stockType deleted, for printing purposes.
-     */
-    public StockType deleteStockType(String stockTypeName) {
-        StockType deleted;
-        for (StockType stockType : stockList) {
-            if (stockTypeName.equals(stockType.getName())) {
-                deleted = stockType;
-                stockList.remove(stockType);
-                return deleted;
-            }
-        }
-        return null;
     }
 
     /**
