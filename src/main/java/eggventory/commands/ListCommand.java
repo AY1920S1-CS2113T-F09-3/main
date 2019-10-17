@@ -6,8 +6,11 @@ import eggventory.ui.Cli;
 import eggventory.enums.CommandType;
 
 public class ListCommand extends Command {
-    public ListCommand(CommandType type) {
+    private String query;
+
+    public ListCommand(CommandType type, String query) {
         super(type);
+        this.query = query;
     }
 
     @Override

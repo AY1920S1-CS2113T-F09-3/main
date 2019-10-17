@@ -9,3 +9,6 @@ add:    add stock <Stock Type> <Stock Code> <Quantity> <Description>
                     If you intend to increase the quantity of the stock, please use 'edit'
 <Description>       A short description of the stock
 <Stock Type>        The category name of the stock
+
+E.g. add stock resistor 12345 50 100ohm
+E.g. add stocktype resistor
