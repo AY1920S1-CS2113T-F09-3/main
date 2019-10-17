@@ -39,12 +39,17 @@ public class ListCommand extends Command {
             cli.print(output);
         }
 
-        // condition below checks if query is the name of any stocktype
-        else if(this.query.equals("justtocompile"))  {
-            //do query for that specific stocktype
-        }
+        //do query for that specific stocktype
+        //if it does not exists, prompt error.
         else {
-            //show error
+            String listString = "";
+            listString = list.toString(this.query);
+            output = listString;
+            if (listString.equals("")) {
+                cli.print("Invalid command: No such stocktype. list stock / list stocktype/ list <stocktype>");
+            } else {
+                cli.print(output);
+            }
         }
         return output;
     }

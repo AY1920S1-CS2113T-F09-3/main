@@ -11,4 +11,5 @@ add:    add stock <Stock Type> <Stock Code> <Quantity> <Description>
 <Stock Type>        The category name of the stock
 
 E.g. add stock resistor 12345 50 100ohm
+E.g. add stock resistor 23456 70 800ohm
 E.g. add stocktype resistor

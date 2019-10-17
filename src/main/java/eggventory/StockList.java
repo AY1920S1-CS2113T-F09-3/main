@@ -154,8 +154,8 @@ public class StockList {
     public String toStocktypeString() {
         String ret = "";
         ret += "QUERY INVENTORY\n";
-        ret += "------------------------\n";
         for (StockType stocktype : stockList) {
+            ret += "------------------------\n";
             ret += stocktype.toString() + "\n";
         }
         return ret;
@@ -167,10 +167,14 @@ public class StockList {
      */
     public String toString(String query) {
         String ret = "";
-        ret += "QUERY INVENTORY\n";
-        ret += "------------------------\n";
+        boolean found = false;
         for (StockType stocktype : stockList) {
             if (stocktype.getName().equals(query)) {
+                if (found == false) {
+                    ret += "QUERY INVENTORY\n";
+                    ret += "------------------------\n";
+                    found = true;
+                }
                 ret += stocktype.toString() + "\n";
             }
         }
