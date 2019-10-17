@@ -28,7 +28,7 @@ public class HelpCommand extends Command {
     public String execute(StockList list, Ui ui, Storage storage) {
         String output = "";
         String filename;
-        if(this.options == null) {
+        if (this.options == null) {
             filename = "\\src\\main\\java\\eggventory\\commands\\help\\Help.txt";
             try {
                 Path filePath = Paths.get(System.getProperty("user.dir"), filename);
@@ -39,41 +39,39 @@ public class HelpCommand extends Command {
             }
         } else {
             switch (options) {
-                case "add":
-                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpadd.txt";
-                    try {
-                        Path filePath = Paths.get(System.getProperty("user.dir"), filename);
-                        output = Files.readString(filePath); //default UTF-8 charset.
-                        ui.print(output);
-                    } catch (IOException e) {
-                        System.out.println("Error in reading Helpadd.txt");
-                    }
-                    break;
+            case "add":
+                filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpadd.txt";
+                try {
+                    Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                    output = Files.readString(filePath); //default UTF-8 charset.
+                    ui.print(output);
+                } catch (IOException e) {
+                    System.out.println("Error in reading Helpadd.txt");
+                }
+                break;
+            case "edit":
+                filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpedit.txt";
+                try {
+                    Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                    output = Files.readString(filePath); //default UTF-8 charset.
+                    ui.print(output);
+                } catch (IOException e) {
+                    System.out.println("Error in reading Helpedit.txt");
+                }
+                break;
 
-                case "edit":
-                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpedit.txt";
-                    try {
-                        Path filePath = Paths.get(System.getProperty("user.dir"), filename);
-                        output = Files.readString(filePath); //default UTF-8 charset.
-                        ui.print(output);
-                    } catch (IOException e) {
-                        System.out.println("Error in reading Helpedit.txt");
-                    }
-                    break;
-
-                case "delete":
-                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpdelete.txt";
-                    try {
-                        Path filePath = Paths.get(System.getProperty("user.dir"), filename);
-                        output = Files.readString(filePath); //default UTF-8 charset.
-                        ui.print(output);
-                    } catch (IOException e) {
-                        System.out.println("Error in reading Helpdelete.txt");
-                    }
-                    break;
-
-                default:
-                    System.out.println("Your help command is not defined. Please enter 'help' for reference.");
+            case "delete":
+                filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpdelete.txt";
+                try {
+                    Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                    output = Files.readString(filePath); //default UTF-8 charset.
+                    ui.print(output);
+                } catch (IOException e) {
+                    System.out.println("Error in reading Helpdelete.txt");
+                }
+                break;
+            default:
+                System.out.println("Your help command is not defined. Please enter 'help' for reference.");
             }
         }
         return output;

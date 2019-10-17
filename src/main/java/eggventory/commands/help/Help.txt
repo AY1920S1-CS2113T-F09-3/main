@@ -16,7 +16,7 @@ edit
     edit stock <Property> <New Value>
     edit person <Property> <New Value>
 
-list
+*list
     list stock
     list stocktypes
     list stocktype <Stock Type>
