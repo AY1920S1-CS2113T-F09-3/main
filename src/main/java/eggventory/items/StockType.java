@@ -198,41 +198,6 @@ public class StockType {
     }
 
     /**
-     * Adds a stock to the stockList.
-     * @return True if item was added successfully.
-     */
-    public boolean addStock(String stockType, String stockCode, int quantity, String description) {
-        stocks.add(new CollectiveStock(stockType, stockCode, quantity, description));
-        //this.quantity++;
-        return true;
-    }
-
-
-    /**
-     * Deletes a stock of the user's choice.
-     *
-     * @param stockCode The code of the stock to be deleted.
-     * @return true if some stockCode was found and the corresponding stock removed. false if none were found.
-     */
-    public Stock deleteStock(String stockCode) {
-
-        //While this is nice, we are unable to print a confirmation message of the stock deleted.
-        //stocks.removeIf(stock -> stock.getStockCode().equals(stockCode));
-
-        Stock deletedStock;
-
-        for (Stock stock : stocks) {
-            if (stockCode.equals(stock.getStockCode())) {
-                deletedStock = stock; //Not sure if this is a copy or not. Assumes unique stockCodes.
-                stocks.remove(stock);
-                return deletedStock;
-            }
-        }
-        return null;
-        //this.quantity--;
-    }
-
-    /**
      * Updates the values of properties of a Stock.
      * @param stockCode String which uniquely identifies a Stock.
      * @param property The attribute of a Stock we want to update.

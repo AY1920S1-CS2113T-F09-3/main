@@ -155,7 +155,7 @@ public class StockList {
         return null;
     }
 
-
+    /**
      * Gets the total number of stocks in this stockList. This sums the number of stocks across stockTypes.
      * @return the total number of stocks.
      */
