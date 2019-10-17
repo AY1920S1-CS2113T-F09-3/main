@@ -27,7 +27,7 @@ public class HelpCommand extends Command {
     public String execute(StockList list, Ui ui, Storage storage) {
         String output = "";
         if(this.options == null) {
-            String filename = "\\src\\main\\java\\eggventory\\commands\\Help.txt";
+            String filename = "\\src\\main\\java\\eggventory\\commands\\help\\Help.txt";
             try {
                 Path filePath = Paths.get(System.getProperty("user.dir"), filename);
                 output = Files.readString(filePath); //default UTF-8 charset.
