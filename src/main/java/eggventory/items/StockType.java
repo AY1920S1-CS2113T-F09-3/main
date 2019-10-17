@@ -1,5 +1,7 @@
 package eggventory.items;
 
+import eggventory.enums.Property;
+
 import java.util.ArrayList;
 
 /**
@@ -80,6 +82,15 @@ public class StockType {
         return stocks.get(i);
     }
 
+    public Stock getStock(String stockCode) {
+        for (Stock stock: stocks){
+            if(stockCode.equals(stock.getStockCode())){
+                return stock;
+            }
+        }
+        return null;
+    }
+
     /**
      * Gets the total number of stocks.
      * @return the number of stocks in this stockType.
@@ -96,6 +107,9 @@ public class StockType {
         return name;
     }
 
+
+    public String setName(String newName) { this.name = newName; return this.name; }
+
     /**
      * Adds a stock to the stockList.
      * @return True if item was added successfully.
@@ -105,6 +119,7 @@ public class StockType {
         //this.quantity++;
         return true;
     }
+
 
     /**
      * Deletes a stock of the user's choice.
@@ -128,6 +143,37 @@ public class StockType {
         }
         return null;
         //this.quantity--;
+    }
+
+    public Stock setStock(String stockCode, Property property, String newValue) {
+        Stock editedStock;
+        for(Stock stock: stocks) {
+            if (stockCode.equals(stock.getStockCode())){
+                editedStock = stock;
+                switch (property) {
+                    case STOCKCODE:
+                        stock.setStockCode(newValue);
+                        break;
+                    case QUANTITY:
+                        stock.setQuantity(Integer.parseInt(newValue));
+                        break;
+                    case LOANED:
+                        stock.setLoaned(Integer.parseInt(newValue));
+                        break;
+                    case LOST:
+                        stock.setLost(Integer.parseInt(newValue));
+                        break;
+                    case DESCRIPTION:
+                        stock.setDescription(newValue);
+                        break;
+                    case MINIMUM:
+                        stock.setMinimum(Integer.parseInt(newValue));
+                        break;
+                }
+                return editedStock;
+            }
+        }
+        return null;
     }
 
     /**
@@ -157,4 +203,5 @@ public class StockType {
         }
         return details;
     }
+
 }

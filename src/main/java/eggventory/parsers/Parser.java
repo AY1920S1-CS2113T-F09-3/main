@@ -85,6 +85,15 @@ public class Parser {
             }
             break;
         }
+            case "edit": {
+            if (inputArr.length == 1) {
+                throw new BadInputException("'" + inputArr[0] + "' requires 1 or more arguments.");
+            }
+            else {
+                command = editParser.parse(inputArr[1]);
+            }
+            break;
+            }
 
         default:
             command = new Command(); //Bad Command
