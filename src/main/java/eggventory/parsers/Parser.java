@@ -89,11 +89,11 @@ public class Parser {
 
         case "help": {
             if (inputArr.length == 1) {
-                command = new HelpCommand(CommandType.HELP);
                 //display general help
+                command = new HelpCommand(CommandType.HELP);
             } else {
-                command = new HelpCommand(CommandType.HELP, inputArr[1]);
                 //display full help.
+                command = new HelpCommand(CommandType.HELP, inputArr[1]);
             }
             break;
         }
