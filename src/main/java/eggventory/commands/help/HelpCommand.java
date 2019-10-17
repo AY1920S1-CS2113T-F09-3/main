@@ -1,10 +1,10 @@
-package eggventory.commands;
+package eggventory.commands.help;
 
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
-import eggventory.Ui;
+import eggventory.ui.Cli;
 import eggventory.Storage;
 import eggventory.StockList;
 import eggventory.enums.CommandType;
@@ -25,7 +25,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public String execute(StockList list, Ui ui, Storage storage) {
+    public String execute(StockList list, Cli cli, Storage storage) {
         String output = "";
         String filename;
         if (this.options == null) {
@@ -33,7 +33,7 @@ public class HelpCommand extends Command {
             try {
                 Path filePath = Paths.get(System.getProperty("user.dir"), filename);
                 output = Files.readString(filePath); //default UTF-8 charset.
-                ui.print(output);
+                cli.print(output);
             } catch (IOException e) {
                 System.out.println("Error in reading help.txt");
             }
@@ -44,7 +44,7 @@ public class HelpCommand extends Command {
                 try {
                     Path filePath = Paths.get(System.getProperty("user.dir"), filename);
                     output = Files.readString(filePath); //default UTF-8 charset.
-                    ui.print(output);
+                    cli.print(output);
                 } catch (IOException e) {
                     System.out.println("Error in reading Helpadd.txt");
                 }
@@ -54,7 +54,7 @@ public class HelpCommand extends Command {
                 try {
                     Path filePath = Paths.get(System.getProperty("user.dir"), filename);
                     output = Files.readString(filePath); //default UTF-8 charset.
-                    ui.print(output);
+                    cli.print(output);
                 } catch (IOException e) {
                     System.out.println("Error in reading Helpedit.txt");
                 }
@@ -65,7 +65,7 @@ public class HelpCommand extends Command {
                 try {
                     Path filePath = Paths.get(System.getProperty("user.dir"), filename);
                     output = Files.readString(filePath); //default UTF-8 charset.
-                    ui.print(output);
+                    cli.print(output);
                 } catch (IOException e) {
                     System.out.println("Error in reading Helpdelete.txt");
                 }
