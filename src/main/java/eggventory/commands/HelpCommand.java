@@ -1,5 +1,9 @@
 package eggventory.commands;
 
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 import eggventory.Ui;
 import eggventory.Storage;
 import eggventory.StockList;
@@ -21,9 +25,15 @@ public class HelpCommand extends Command {
 
     @Override
     public String execute(StockList list, Ui ui, Storage storage) {
-        String output;
+        String output = "";
         if(this.options == null) {
-            output = "JUST HELP";
+            String filename = "\\src\\main\\java\\eggventory\\commands\\Help.txt";
+            try {
+                Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                output = Files.readString(filePath); //default UTF-8 charset.
+            } catch (IOException e) {
+                System.out.println("Error in reading help.txt");
+            }
             ui.print(output);
         } else {
             output = "HELP " + this.options;
