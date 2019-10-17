@@ -1,13 +1,12 @@
 package eggventory.parsers;
 
 import eggventory.commands.Command;
-import eggventory.commands.AddCommand;
-import eggventory.commands.DeleteCommand;
 import eggventory.commands.FindCommand;
+import eggventory.commands.help.HelpCommand;
 import eggventory.commands.ListCommand;
-import eggventory.exceptions.InsufficientInfoException;
-import eggventory.exceptions.BadInputException;
 import eggventory.enums.CommandType;
+import eggventory.exceptions.BadInputException;
+import eggventory.exceptions.InsufficientInfoException;
 
 /**
  * Interprets command strings by the user, and converts them to command objects that can be executed.
@@ -60,7 +59,7 @@ public class Parser {
 
         case "delete":
             inputArr[1] = inputArr[1].strip(); //Removes whitespace after the stockCode so that it can parse correctly.
-            command = new DeleteCommand(CommandType.DELETE, inputArr[1]);
+            command = deleteParser.parse(inputArr[1]);
             break;
 
         //Commands which require string input.
@@ -84,6 +83,17 @@ public class Parser {
             } else {
                 command = new Command();
                 throw new BadInputException("Please enter the search description.");
+            }
+            break;
+        }
+
+        case "help": {
+            if (inputArr.length == 1) {
+                //display general help
+                command = new HelpCommand(CommandType.HELP);
+            } else {
+                //display full help.
+                command = new HelpCommand(CommandType.HELP, inputArr[1]);
             }
             break;
         }
