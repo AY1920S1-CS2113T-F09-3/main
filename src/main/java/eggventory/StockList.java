@@ -148,15 +148,15 @@ public class StockList {
     }
 
     /**
-     * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
-     * @return The string of the stocklist whose stocktype matches query.
+     * Prints all the stocktypes that are currently handled by Eggventory. Should only be called by Cli.
+     * @return The string of all the stocktypes
      */
     public String toStocktypeString() {
         String ret = "";
         ret += "QUERY INVENTORY\n";
         for (StockType stocktype : stockList) {
             ret += "------------------------\n";
-            ret += stocktype.toString() + "\n";
+            ret += stocktype.getName() + "\n";
         }
         return ret;
     }
@@ -171,7 +171,7 @@ public class StockList {
         for (StockType stocktype : stockList) {
             if (stocktype.getName().equals(query)) {
                 if (found == false) {
-                    ret += "QUERY INVENTORY\n";
+                    ret += query + " INVENTORY\n";
                     ret += "------------------------\n";
                     found = true;
                 }
