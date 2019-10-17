@@ -33,6 +33,33 @@ public class StockList {
     }
 
     /**
+     *
+     * @param name
+     */
+    public void addStockType(String name) {
+        stockList.add(new StockType(name, false));
+    }
+
+    /**
+     * Deletes a StockType object from a list.
+     * @param name Name of StockType to be deleted
+     * @return The object if it was deleted, null if nothing waas deleted.
+     */
+    public StockType deleteStockType(String name) {
+        StockType deleted;
+
+        for (StockType stocktype : stockList) {
+            if (stocktype.getName().equals(name)) {
+                deleted = stocktype;
+                stockList.remove(stocktype);
+                return deleted;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Returns a stockType from stockList if it exits else retuns a null StockType.
      * @param stockType The unique string that identifies a stockType
      * @return stockType of stockList
@@ -56,24 +83,7 @@ public class StockList {
     }
 
     /**
-     * Gets the total number of stocks in this stockList. This sums the number of stocks across stockTypes.
-     * @return the total number of stocks.
-     */
-    public int getStockQuantity() { //The number of stocks in the list, across all stockTypes.
-        int total = 0;
-        for (StockType stockType : stockList) {
-            total += stockType.getQuantity();
-        }
-
-        return total;
-    }
-
-    public void addStockType(String name) {
-        stockList.add(new StockType(name, false));
-    }
-
-    /**
-     * Checks whether mentioned stockType already exists.
+     * Adds a Stock to the specified StockType in the list.
      * @param stockType A String matching exactly the StockType to add the new Stock object under.
      * @param stockCode A unique String that identifies the Stock.
      * @param quantity Quantity of the stock.
@@ -92,25 +102,6 @@ public class StockList {
     }
 
     /**
-     * Deletes a StockType object from a list.
-     * @param name Name of StockType to be deleted
-     * @return The object if it was deleted, null if nothing waas deleted.
-     */
-    public StockType deleteStockType(String name) {
-        StockType deleted;
-
-        for (StockType stocktype : stockList) {
-            if (stocktype.getName().equals(name)) {
-                deleted = stocktype;
-                stockList.remove(stocktype);
-                return deleted;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Deletes a Stock object from a list.
      * @param stockCode The unique String that identifies a Stock.
      * @return true if some stock was deleted, and false if the stock could not be found.
@@ -124,6 +115,19 @@ public class StockList {
             }
         }
         return null;
+    }
+
+    /**
+     * Gets the total number of stocks in this stockList. This sums the number of stocks across stockTypes.
+     * @return the total number of stocks.
+     */
+    public int getStockQuantity() { //The number of stocks in the list, across all stockTypes.
+        int total = 0;
+        for (StockType stockType : stockList) {
+            total += stockType.getQuantity();
+        }
+
+        return total;
     }
 
     /**
