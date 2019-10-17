@@ -36,7 +36,19 @@ public class HelpCommand extends Command {
             }
             ui.print(output);
         } else {
-            output = "HELP IS HERE FOR " + this.options;
+            switch(options) {
+                case "add":
+                    String filename = "\\src\\main\\java\\eggventory\\commands\\help\\HelpAdd.txt";
+                    try {
+                        Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                        output = Files.readString(filePath); //default UTF-8 charset.
+                    } catch (IOException e) {
+                        System.out.println("Error in reading help.txt");
+                    }
+                    break;
+
+            }
+            //output = "HELP IS HERE FOR " + this.options;
             ui.print(output);
         }
         return output;
