@@ -92,6 +92,25 @@ public class StockList {
     }
 
     /**
+     * Deletes a StockType object from a list.
+     * @param name Name of StockType to be deleted
+     * @return The object if it was deleted, null if nothing waas deleted.
+     */
+    public StockType deleteStockType(String name) {
+        StockType deleted;
+
+        for (StockType stocktype : stockList) {
+            if (stocktype.getName().equals(name)) {
+                deleted = stocktype;
+                stockList.remove(stocktype);
+                return deleted;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Deletes a Stock object from a list.
      * @param stockCode The unique String that identifies a Stock.
      * @return true if some stock was deleted, and false if the stock could not be found.
