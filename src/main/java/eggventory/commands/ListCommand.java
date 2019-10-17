@@ -39,7 +39,7 @@ public class ListCommand extends Command {
 
         } else { // list <stocktype> command
             String listString = "";
-            listString = list.toString(this.query);
+            listString = list.findStock(this.query);
             output = listString;
             if (listString.equals("")) {
                 cli.print("Invalid command: No such stocktype. list stock / list stocktype/ list <stocktype>");
