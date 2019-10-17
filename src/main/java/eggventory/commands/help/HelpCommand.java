@@ -9,6 +9,7 @@ import eggventory.Storage;
 import eggventory.StockList;
 import eggventory.enums.CommandType;
 import eggventory.commands.Command;
+import eggventory.enums.CommandType;
 
 public class HelpCommand extends Command {
     private String options;
@@ -36,19 +37,13 @@ public class HelpCommand extends Command {
             }
             ui.print(output);
         } else {
-            switch(options) {
-                case "add":
-                    String filename = "\\src\\main\\java\\eggventory\\commands\\help\\HelpAdd.txt";
-                    try {
-                        Path filePath = Paths.get(System.getProperty("user.dir"), filename);
-                        output = Files.readString(filePath); //default UTF-8 charset.
-                    } catch (IOException e) {
-                        System.out.println("Error in reading help.txt");
-                    }
-                    break;
-
+            String filename = "\\src\\main\\java\\eggventory\\commands\\help\\Help" + options + ".txt";
+            try {
+                Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                output = Files.readString(filePath); //default UTF-8 charset.
+            } catch (IOException e) {
+                String errorMsg = "Error in reading Help" + options + ".txt";
             }
-            //output = "HELP IS HERE FOR " + this.options;
             ui.print(output);
         }
         return output;
