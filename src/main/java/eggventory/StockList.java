@@ -148,6 +148,36 @@ public class StockList {
     }
 
     /**
+     * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
+     * @return The string of the stocklist whose stocktype matches query.
+     */
+    public String toStocktypeString() {
+        String ret = "";
+        ret += "QUERY INVENTORY\n";
+        ret += "------------------------\n";
+        for (StockType stocktype : stockList) {
+            ret += stocktype.toString() + "\n";
+        }
+        return ret;
+    }
+
+    /**
+     * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
+     * @return The string of the stocklist whose stocktype matches query.
+     */
+    public String toString(String query) {
+        String ret = "";
+        ret += "QUERY INVENTORY\n";
+        ret += "------------------------\n";
+        for (StockType stocktype : stockList) {
+            if (stocktype.getName().equals(query)) {
+                ret += stocktype.toString() + "\n";
+            }
+        }
+        return ret;
+    }
+
+    /**
      * Saves the list into a String.
      * @return The String that will be directly saved into file.
      */
