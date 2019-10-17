@@ -35,7 +35,7 @@ public class HelpCommand extends Command {
                 output = Files.readString(filePath); //default UTF-8 charset.
                 cli.print(output);
             } catch (IOException e) {
-                System.out.println("Error in reading help.txt");
+                cli.print("Error in reading help.txt");
             }
         } else {
             switch (options) {
@@ -46,7 +46,7 @@ public class HelpCommand extends Command {
                     output = Files.readString(filePath); //default UTF-8 charset.
                     cli.print(output);
                 } catch (IOException e) {
-                    System.out.println("Error in reading Helpadd.txt");
+                    cli.print("Error in reading Helpadd.txt");
                 }
                 break;
             case "edit":
@@ -56,7 +56,7 @@ public class HelpCommand extends Command {
                     output = Files.readString(filePath); //default UTF-8 charset.
                     cli.print(output);
                 } catch (IOException e) {
-                    System.out.println("Error in reading Helpedit.txt");
+                    cli.print("Error in reading Helpedit.txt");
                 }
                 break;
 
@@ -67,11 +67,11 @@ public class HelpCommand extends Command {
                     output = Files.readString(filePath); //default UTF-8 charset.
                     cli.print(output);
                 } catch (IOException e) {
-                    System.out.println("Error in reading Helpdelete.txt");
+                    cli.print("Error in reading Helpdelete.txt");
                 }
                 break;
             default:
-                System.out.println("Your help command is not defined. Please enter 'help' for reference.");
+                cli.print("Your help command is not defined. Please enter 'help' for reference.");
             }
         }
         return output;
