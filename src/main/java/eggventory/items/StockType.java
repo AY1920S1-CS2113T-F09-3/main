@@ -97,12 +97,45 @@ public class StockType {
         //this.quantity--;
     }
 
+    /**
+     * Accesses and sets a new stockCode of a stock.
+     * @param oldStockCode The current stockcode referring to this stock.
+     * @param newStockCode The new stockcode to change to.
+     */
     public void setStockCode(String oldStockCode, String newStockCode) {
         for (Stock stock : stocks) {
             if (stock.getStockCode().equals(oldStockCode)) {
                 stock.setStockCode(newStockCode);
                 return;
             }
+        }
+    }
+
+    /**
+     * Accesses and sets the quantity of a Stock.
+     * @param stockCode StockCode of the stock to change
+     * @param quantity New quantity of the stock to change
+     */
+    public void setStockQuantity(String stockCode, int quantity) {
+        for (Stock stock : stocks) {
+            if (stock.getStockCode().equals(stockCode)) {
+                stock.setQuantity(quantity);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Accesses and sets the description of a Stock.
+     * @param stockCode StockCode of the stock to change
+     * @param description New description of the stock to change
+     */
+    public void setStockDescription (String stockCode, String description) {
+        for (Stock stock : stocks) {
+                if (stock.getStockCode().equals(stockCode)) {
+                    stock.setDescription(description);
+                    return;
+                }
         }
     }
 
