@@ -17,8 +17,8 @@ public class ListCommand extends Command {
     public String execute(StockList list, Cli cli, Storage storage) {
         String output = "";
 
-        if (this.query.equals("stock")) {
-            //Outstanding case for a single
+        if (this.query.equals("stock")) { //list stock command
+            //Outstanding case when list is empty
             int max = list.getStockQuantity();
             String listString = "";
             if (max == 0) {
@@ -30,18 +30,14 @@ public class ListCommand extends Command {
             listString = list.toString(); //Should contain all the stockTypes already, need not iterate.
             output = listString;
             cli.print(output);
-        }
 
-        else if (this.query.equals("stocktype")) {
+        } else if (this.query.equals("stocktype")) { //list stocktype command
             String listString = "";
             listString = list.toStocktypeString(); //Should contain all the stockTypes already, need not iterate.
             output = listString;
             cli.print(output);
-        }
 
-        //do query for that specific stocktype
-        //if it does not exists, prompt error.
-        else {
+        } else { // list <stocktype> command
             String listString = "";
             listString = list.toString(this.query);
             output = listString;
