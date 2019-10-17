@@ -36,7 +36,7 @@ public class HelpCommand extends Command {
             }
             ui.print(output);
         } else {
-            output = "HELP " + this.options;
+            output = "HELP IS HERE FOR " + this.options;
             ui.print(output);
         }
         return output;
