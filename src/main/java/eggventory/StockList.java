@@ -33,8 +33,8 @@ public class StockList {
     }
 
     /**
-     *
-     * @param name
+     * Adds a new StockType to the list.
+     * @param name Name of new stocktype being added.
      */
     public void addStockType(String name) {
         stockList.add(new StockType(name, false));

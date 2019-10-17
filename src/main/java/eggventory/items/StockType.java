@@ -130,12 +130,12 @@ public class StockType {
      * @param stockCode StockCode of the stock to change
      * @param description New description of the stock to change
      */
-    public void setStockDescription (String stockCode, String description) {
+    public void setStockDescription(String stockCode, String description) {
         for (Stock stock : stocks) {
-                if (stock.getStockCode().equals(stockCode)) {
-                    stock.setDescription(description);
-                    return;
-                }
+            if (stock.getStockCode().equals(stockCode)) {
+                stock.setDescription(description);
+                return;
+            }
         }
     }
 
