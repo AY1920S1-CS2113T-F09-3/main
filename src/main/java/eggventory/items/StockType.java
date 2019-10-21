@@ -238,8 +238,7 @@ public class StockType {
     /**
      * Determines if any of the stocks in this stockType have the same stockCode.
      * @param stockCode the queried stockCode.
-     * @return true if one of the stocks in this stockType has that stockCode.
-     * false if none of the stocks have this stockCode.
+     * @return true if a stock in this stockType has that stockCode and false if none of the stocks have this stockCode.
      */
     public boolean isExistingStockCode(String stockCode) {
         for (Stock stock : stocks) {
