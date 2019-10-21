@@ -43,4 +43,6 @@ public class AddStockCommandTest {
                 + "Quantity: %d Description: %s","testStockType", "t0000", 100, "testDescription"), output);
 
     }
+
+    
 }
