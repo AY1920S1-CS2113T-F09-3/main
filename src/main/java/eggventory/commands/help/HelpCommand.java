@@ -58,39 +58,38 @@ public class HelpCommand extends Command {
             }
         } else {
             switch (this.options) {
-                case "add":
-                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpadd.txt";
-                    try {
-                        Path filePath = Paths.get(System.getProperty("user.dir"), filename);
-                        output = Files.readString(filePath); //default UTF-8 charset.
-                        ui.print(output);
-                    } catch (IOException e) {
-                        ui.print("Error in reading Helpadd.txt");
-                    }
-                    break;
-                case "edit":
-                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpedit.txt";
-                    try {
-                        Path filePath = Paths.get(System.getProperty("user.dir"), filename);
-                        output = Files.readString(filePath); //default UTF-8 charset.
-                        ui.print(output);
-                    } catch (IOException e) {
-                        ui.print("Error in reading Helpedit.txt");
-                    }
-                    break;
-
-                case "delete":
-                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpdelete.txt";
-                    try {
-                        Path filePath = Paths.get(System.getProperty("user.dir"), filename);
-                        output = Files.readString(filePath); //default UTF-8 charset.
-                        ui.print(output);
-                    } catch (IOException e) {
-                        ui.print("Error in reading Helpdelete.txt");
-                    }
-                    break;
-                default:
-                    ui.print("Your help command is not defined. Please enter 'help' for reference.");
+            case "add":
+                filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpadd.txt";
+                try {
+                    Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                    output = Files.readString(filePath); //default UTF-8 charset.
+                    ui.print(output);
+                } catch (IOException e) {
+                    ui.print("Error in reading Helpadd.txt");
+                }
+                break;
+            case "edit":
+                filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpedit.txt";
+                try {
+                    Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                    output = Files.readString(filePath); //default UTF-8 charset.
+                    ui.print(output);
+                } catch (IOException e) {
+                    ui.print("Error in reading Helpedit.txt");
+                }
+                break;
+            case "delete":
+                filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpdelete.txt";
+                try {
+                    Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                    output = Files.readString(filePath); //default UTF-8 charset.
+                    ui.print(output);
+                } catch (IOException e) {
+                    ui.print("Error in reading Helpdelete.txt");
+                }
+                break;
+            default:
+                ui.print("Your help command is not defined. Please enter 'help' for reference.");
             }
         }
         return output;
