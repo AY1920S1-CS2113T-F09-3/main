@@ -78,7 +78,6 @@ public class HelpCommand extends Command {
                     ui.print("Error in reading Helpedit.txt");
                 }
                 break;
-
             case "delete":
                 filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpdelete.txt";
                 try {
