@@ -28,7 +28,7 @@ public class HelpCommand extends Command {
 
     /**
      * Constructor for command: "help xyz" where xyz are first parsed.
-     * @param type The type of the command
+     * @param type The type of the command testtest
      * @param options The command syntax for which detailed help is required
      */
     public HelpCommand(CommandType type, String options) {
