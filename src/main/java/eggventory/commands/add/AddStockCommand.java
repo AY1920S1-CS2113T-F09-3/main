@@ -44,12 +44,19 @@ public class AddStockCommand extends Command {
     @Override
     public String execute(StockList list, Cli cli, Storage storage) {
         String output;
-        list.addStock(stockType, stockCode, quantity, description);
-        storage.save(list);
-        output = String.format("Nice! I have successfully added the stock: StockType: %s StockCode: %s Quantity: %d "
-                + "Description: %s",stockType, stockCode, quantity, description);
-        cli.print(output);
 
+        if (list.isExistingStockCode(stockCode)) {
+            output = String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
+                    + "Please enter a different stock code.", stockCode);
+
+        } else {
+            list.addStock(stockType, stockCode, quantity, description);
+            storage.save(list);
+            output = String.format("Nice! I have successfully added the stock: StockType: %s StockCode: %s "
+                    + "Quantity: %d Description: %s", stockType, stockCode, quantity, description);
+        }
+
+        cli.print(output);
         return output;
     }
 

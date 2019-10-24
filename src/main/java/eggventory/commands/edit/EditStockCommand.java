@@ -35,13 +35,21 @@ public class EditStockCommand extends Command {
     /**
      * Executes the actual editing of the stock's property.
      * @param list StockList containing all the StockTypes.
-     * @param cli  Cli object to display output to.
+     * @param cli Cli object instance to display output to.
      * @param storage  Storage object to handle saving and loading of any data.
      * @return String of the output, for JUnit testing.
      */
     @Override
     public String execute(StockList list, Cli cli, Storage storage) {
         String output;
+
+        if (property == Property.STOCKCODE && list.isExistingStockCode(newValue)) {
+            output = String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
+                    + "Please enter a different stock code.", newValue);
+            cli.print(output);
+            return output;
+        }
+
         Stock edited = list.setStock(stockCode, property, newValue);
         output = String.format("Awesome! I have successfully updated the following stock: %s | %s | %d | %s\n",
                 edited.getStockType(), edited.getStockCode(), edited.getQuantity(),
