@@ -17,7 +17,6 @@ class AddStockTypeCommandTest {
     @Test
     void testExecute_AddStocktypeSuccess() {
         StockList testList = new StockList();
-        testList.addStockType("testStockType");
 
         String output = new AddStockTypeCommand(CommandType.ADD, "testStockType")
                 .execute(testList, testCli, testStorage);
