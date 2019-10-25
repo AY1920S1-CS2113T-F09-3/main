@@ -1,13 +1,10 @@
+//@@author Raghav-B
+
 package eggventory.ui;
 
 import eggventory.StockList;
-import eggventory.Storage;
-import eggventory.commands.Command;
-import eggventory.enums.CommandType;
 import eggventory.items.Stock;
-import eggventory.parsers.Parser;
-import javafx.application.Application;
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
@@ -21,7 +18,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class Gui extends Application {
+/**
+ * This is a controller class used to control the Gui.fxml from the entry point for
+ * our application, the Eggventory class. Inherits most of its functionality from Cli
+ * to ensure backwards compatibility with testing and if we choose to fall back to a
+ * Cli implementation. Overrides some Cli functionality to interface with the Gui instead
+ * of Cli.
+ */
+public class Gui extends Ui  {
     @FXML
     private TextField inputField;
     @FXML
@@ -31,64 +35,68 @@ public class Gui extends Application {
     @FXML
     private ScrollPane outputTableScroll;
 
-    /**
-     * Prints eggventory introduction message.
-     */
-    public void printIntro() {
-        String logo = "  _      __    __                     __         ____         _   __         __               \n"
-                + " | | /| / /__ / /______  __ _  ___   / /____    / __/__ ____ | | / /__ ___  / /____  ______ __\n"
-                + " | |/ |/ / -_) / __/ _ \\/  ' \\/ -_) / __/ _ \\  / _// _ `/ _ `/ |/ / -_) _ \\/ __/ _ \\/"
-                + " __/ // /\n"
-                + " |__/|__/\\__/_/\\__/\\___/_/_/_/\\__/  \\__/\\___/ /___/\\_, /\\_, /|___/\\__/_//_/\\__/\\___/_/"
-                + "  \\_, / \n"
-                + "                                                  /___//___/                           /___/  \n";
-
-        outputField.appendText(logo + "Hello! I'm Humpty Dumpty\n" + "What can I do for you?");
+    public Gui() {
     }
 
-    @Override
-    public void start(Stage stage) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/Gui.fxml"));
-            fxmlLoader.setController(this);
-            Stage ap = fxmlLoader.load();
-            ap.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+    /**
+     * Starts the REPL loop and creates the JavaFX window.
+     * @param runMethod Function passed in for REPL loop.
+     */
+    public void initialize(Runnable runMethod) {
+        Platform.startup(() -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/Gui.fxml"));
+                fxmlLoader.setController(this);
+                Stage stage = fxmlLoader.load();
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            printIntro();
+
+            // Event handler for pressing ENTER
+            inputField.setOnKeyPressed(keyEvent -> {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    runMethod.run();
+                }
+            });
+
+            // Event handler for pressing TAB
+            inputField.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent ->  {
+                if (keyEvent.getCode() == KeyCode.TAB) {
+                    inputField.appendText("Tab has been pressed! ");
+                    keyEvent.consume();
+                }
+            });
+        });
+    }
+
+    /**
+     * Reads in user input from inputField TextBox and outputs to outputField
+     * TextArea.
+     * @return Returns String to be used by Parser in REPL loop.
+     */
+    public String read() {
+        String userInput = inputField.getText();
+
+        if (!userInput.equals("")) { // Check for blank input
+            inputField.setText("");
+            outputField.appendText("\n" + userInput);
         }
 
-        String currentDir = System.getProperty("user.dir");
-        String filePath = currentDir + "/data/saved_tasks.txt";
+        return userInput;
+    }
 
-        Cli cli = new Cli();
-        Storage storage = new Storage(filePath);
-        StockList stockList = storage.load();
-        Parser parser = new Parser();
-        printIntro();
+    /**
+     * Prints text output in the outputField TextArea.
+     * @param printString The raw String to be printed out, after some extra formatting.
+     */
+    public String print(String printString) {
+        String output = printFormatter(printString);
+        outputField.appendText("\n" + output);
 
-        // Event handler for user pressing enter in the text input.
-        inputField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    String userInput = inputField.getText();
-                    inputField.setText("");
-                    outputField.appendText("\n" + userInput);
-
-                    try {
-                        Command command = parser.parse(userInput);
-                        command.execute(stockList, cli, storage);
-                        //drawTable(stockList);
-
-                        if (command.getType() == CommandType.BYE) {
-                            System.exit(0);
-                        }
-                    } catch (Exception e) {
-                        printError(e);
-                    }
-                }
-            }
-        });
+        return output;
     }
 
     /**
@@ -119,34 +127,5 @@ public class Gui extends Application {
 
         outputTable.getColumns().removeAll();
         outputTable.getColumns().addAll(stockTypeCol, stockCodeCol, quantityCol, descriptionCol);
-    }
-
-    /**
-     * Prints text output in the outputField TextArea to essentially replace the Cli.print()
-     * command.
-     * @param printString The raw String to be printed out, after some extra formatting.
-     */
-    public void print(String printString) {
-        String line = "____________________________________________________________";
-        String output;
-        output = addIndent() + line + "\n";
-
-        String[] linesToPrint = printString.split("\n", 0);
-        for (int i = 0; i < linesToPrint.length; i++) {
-            output += (addIndent() + linesToPrint[i]) + "\n";
-        }
-        output += addIndent() + line + "\n";
-
-        //outputField.setText(outputField.getText() + "\n" + output);
-        //outputField.setScrollTop(Integer.MAX_VALUE);
-        outputField.appendText("\n" + output);
-    }
-
-    public void printError(Exception e) {
-        print("Parser error: \n" + e);
-    }
-
-    public static String addIndent() {
-        return "        ";
     }
 }

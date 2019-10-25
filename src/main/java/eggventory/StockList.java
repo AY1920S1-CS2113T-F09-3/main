@@ -1,11 +1,12 @@
 package eggventory;
 
-import eggventory.enums.Property;
+import eggventory.enums.StockProperty;
 import eggventory.items.Stock;
 import eggventory.items.StockType;
 
 import java.util.ArrayList;
 
+//@@author Deculsion
 public class StockList {
     private ArrayList<StockType> stockList;
 
@@ -61,6 +62,7 @@ public class StockList {
         return null;
     }
 
+    //@@author
     /**
      * Returns a stockType from stockList if it exits else retuns a null StockType.
      * @param stockType The unique string that identifies a stockType
@@ -126,7 +128,7 @@ public class StockList {
      * @param newValue  The new value of the property we want to edit.
      * @return the stock before edits, for printing purposes.
      */
-    public Stock setStock(String stockCode, Property property, String newValue) {
+    public Stock setStock(String stockCode, StockProperty property, String newValue) {
         Stock beforeEdits;
         for (StockType stockType : stockList) {
             beforeEdits = stockType.setStock(stockCode, property, newValue);
@@ -168,22 +170,37 @@ public class StockList {
         return total;
     }
 
+    //@@author cyanoei
     /**
-     * Prints every stock within stocklist. Should only be called by Cli.
-     * @return The string of the stocklist.
+     * Determines if any of the stocks in this stockList have the same stockCode.
+     * @param stockCode the queried stockCode.
+     * @return true if a stock in this stockList has that stockCode and false if none of the stocks have this stockCode.
      */
-    public String toString() {
-        String ret = "";
-        ret += "CURRENT INVENTORY\n";
-
-        for (StockType stocktype : stockList) {
-            ret += "------------------------\n";
-            ret += stocktype.toString() + "\n";
+    public boolean isExistingStockCode(String stockCode) {
+        for (StockType stockType : stockList) {
+            if (stockType.isExistingStockCode(stockCode)) {
+                return true;
+            }
         }
-
-        return ret;
+        return false;
     }
 
+    /**
+     * Determines if the queried stockType already exists in the system.
+     * @param stockTypeName the new name for a stockType that the user wants to add/edit.
+     * @return true if the stockType is already implemented, false if it is new.
+     */
+    public boolean isExistingStockType(String stockTypeName) {
+        for (StockType stockType : stockList) {
+            if (stockType.getName().equals(stockTypeName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    //@@author
     /**
      * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
      * @return The string of the stocklist whose stocktype matches query.
@@ -215,6 +232,22 @@ public class StockList {
             ret += "------------------------\n";
             ret += stocktype.getName() + "\n";
         }
+        return ret;
+    }
+
+    /**
+     * Prints every stock within stocklist. Should only be called by Cli.
+     * @return The string of the stocklist.
+     */
+    public String toString() {
+        String ret = "";
+        ret += "CURRENT INVENTORY\n";
+
+        for (StockType stocktype : stockList) {
+            ret += "------------------------\n";
+            ret += stocktype.toString() + "\n";
+        }
+
         return ret;
     }
 

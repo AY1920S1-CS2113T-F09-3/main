@@ -4,9 +4,9 @@ import eggventory.StockList;
 import eggventory.Storage;
 import eggventory.commands.Command;
 import eggventory.enums.CommandType;
-import eggventory.enums.Property;
+import eggventory.enums.StockProperty;
 import eggventory.items.Stock;
-import eggventory.ui.Cli;
+import eggventory.ui.Ui;
 
 /**
  * Command objects for editing stocks
@@ -15,7 +15,7 @@ import eggventory.ui.Cli;
 public class EditStockCommand extends Command {
 
     private String stockCode;
-    private Property property; //Stores the property you want to edit
+    private StockProperty property; //Stores the property you want to edit
     private String newValue; //Stores the newValue you want
 
     /**
@@ -25,7 +25,7 @@ public class EditStockCommand extends Command {
      * @param property The property of the Stock that is to be changed.
      * @param newValue The newValue of the property.
      */
-    public EditStockCommand(CommandType type, String stockCode, Property property, String newValue) {
+    public EditStockCommand(CommandType type, String stockCode, StockProperty property, String newValue) {
         super(type);
         this.stockCode = stockCode;
         this.property = property;
@@ -35,19 +35,27 @@ public class EditStockCommand extends Command {
     /**
      * Executes the actual editing of the stock's property.
      * @param list StockList containing all the StockTypes.
-     * @param cli  Cli object to display output to.
+     * @param ui Ui implementation to display output to.
      * @param storage  Storage object to handle saving and loading of any data.
      * @return String of the output, for JUnit testing.
      */
     @Override
-    public String execute(StockList list, Cli cli, Storage storage) {
+    public String execute(StockList list, Ui ui, Storage storage) {
         String output;
+
+        if (property == StockProperty.STOCKCODE && list.isExistingStockCode(newValue)) {
+            output = String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
+                    + "Please enter a different stock code.", newValue);
+            ui.print(output);
+            return output;
+        }
+
         Stock edited = list.setStock(stockCode, property, newValue);
         output = String.format("Awesome! I have successfully updated the following stock: %s | %s | %d | %s\n",
                 edited.getStockType(), edited.getStockCode(), edited.getQuantity(),
                 edited.getDescription());
         storage.save(list);
-        cli.print(output);
+        ui.print(output);
         return output;
     }
 }

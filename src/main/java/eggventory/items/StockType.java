@@ -1,9 +1,10 @@
 package eggventory.items;
 
-import eggventory.enums.Property;
+import eggventory.enums.StockProperty;
 
 import java.util.ArrayList;
 
+//@@author Deculsion
 /**
  * Manages the list of (different types of classes),
  * including all the methods to modify the list:
@@ -24,8 +25,6 @@ public class StockType {
     public StockType(String name, ArrayList<Stock> savedFile) {
         this.name = name;
         stocks = savedFile;
-        //quantity = savedFile.size();
-        //isUniqueStock = isUniqueStock();
     }
 
     /**
@@ -36,8 +35,6 @@ public class StockType {
     public StockType(String name, boolean isUniqueStock) {
         this.name = name;
         this.stocks = new ArrayList<>();
-        //this.quantity = 0;
-        //this.isUniqueStock = isUniqueStock;
     }
 
     /**
@@ -47,23 +44,7 @@ public class StockType {
     public StockType(String name) {
         this.name = name;
         this.stocks = new ArrayList<>();
-        //this.quantity = 0;
-        //this.isUniqueStock = false;
     }
-
-    /**
-     * Determines whether this StockType is a collection of UniqueStock or CollectiveStock.
-     */
-    /*
-        private boolean isUniqueStock() {
-            for (Stock stock : stocks) {
-                if (stock instanceof CollectiveStock) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    */
 
     /**
      * Adds a stock to the stockList.
@@ -71,7 +52,6 @@ public class StockType {
      */
     public boolean addStock(String stockType, String stockCode, int quantity, String description) {
         stocks.add(new CollectiveStock(stockType, stockCode, quantity, description));
-        //this.quantity++;
         return true;
     }
 
@@ -83,9 +63,6 @@ public class StockType {
      */
     public Stock deleteStock(String stockCode) {
 
-        //While this is nice, we are unable to print a confirmation message of the stock deleted.
-        //stocks.removeIf(stock -> stock.getStockCode().equals(stockCode));
-
         Stock deletedStock;
 
         for (Stock stock : stocks) {
@@ -96,7 +73,6 @@ public class StockType {
             }
         }
         return null;
-        //this.quantity--;
     }
 
     /**
@@ -141,6 +117,7 @@ public class StockType {
         }
     }
 
+    //@@author
     /**
      * Returns the entire stockList.
      * @return the stockList.
@@ -171,6 +148,7 @@ public class StockType {
         return null;
     }
 
+    //@@author Deculsion
     /**
      * Gets the total number of stocks.
      * @return the number of stocks in this stockType.
@@ -190,13 +168,12 @@ public class StockType {
     /**
      * Updates the name of the StockType.
      * @param newName String which uniquely identifies a StockType.
-     * @return The name of the StockType, for printing purpose.
      */
-    public String setName(String newName) {
+    public void setName(String newName) {
         this.name = newName;
-        return this.name;
     }
 
+    //@@author
     /**
      * Updates the values of properties of a Stock.
      * @param stockCode String which uniquely identifies a Stock.
@@ -204,7 +181,7 @@ public class StockType {
      * @param newValue The new value of the attribute to be updated.
      * @return The unedited Stock, for printing purpose.
      */
-    public Stock setStock(String stockCode, Property property, String newValue) {
+    public Stock setStock(String stockCode, StockProperty property, String newValue) {
         Stock uneditedStock;
         for (Stock stock: stocks) {
             if (stockCode.equals(stock.getStockCode())) {
@@ -236,6 +213,22 @@ public class StockType {
         return null;
     }
 
+    //@@author cyanoei
+    /**
+     * Determines if any of the stocks in this stockType have the same stockCode.
+     * @param stockCode the queried stockCode.
+     * @return true if a stock in this stockType has that stockCode and false if none of the stocks have this stockCode.
+     */
+    public boolean isExistingStockCode(String stockCode) {
+        for (Stock stock : stocks) {
+            if (stock.getStockCode().equals(stockCode)) {
+                return true;
+            }
+        }
+        return false; //If none of the stocks had the same code.
+    }
+
+    //@@author Deculsion
     /**
      * A string of all the stock objects within this stocktype. Should only be called by Cli and StockList.
      * @return A string list of all the stock objects and their details.
