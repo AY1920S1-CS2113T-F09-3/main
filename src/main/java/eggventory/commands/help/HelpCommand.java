@@ -19,6 +19,8 @@ import eggventory.enums.CommandType;
  */
 public class HelpCommand extends Command {
     private String options;
+    private static String OS = System.getProperty("os.name").toLowerCase();
+
 
     /**
      * Constructor for command: "help".
@@ -49,15 +51,33 @@ public class HelpCommand extends Command {
     @Override
     public String execute(StockList list, Ui ui, Storage storage) {
         String output = "";
+        String filename;
         if (this.options == null) {
+            if(OS.indexOf("win") >= 0){
+                filename = "\\src\\main\\java\\eggventory\\commands\\help\\Help.txt";
+            }
+            else {
+                filename ="/src/main/java/eggventory/commands/help/Help.txt";
+            }
+
             try {
-                output = getStringFromFile("/help/Help.txt");
+                Path filePath = Paths.get(System.getProperty("user.dir"), filename);
+                output = Files.readString(filePath); //default UTF-8 charset.
+                System.out.println(output);
+                ui.print(output);
             } catch (IOException e) {
-                ui.print("Error in reading Help.txt");
+                ui.print("Error in reading help.txt");
+                ui.print(e.toString());
             }
         } else {
             switch (this.options) {
             case "add":
+                if(OS.indexOf("win") >= 0){
+                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpadd.txt";
+                }
+                else {
+                    filename ="src/main/java/eggventory/commands/help/Helpadd.txt";
+                }
                 try {
                     output = getStringFromFile("/help/HelpAdd.txt");
                 } catch (IOException e) {
@@ -65,6 +85,12 @@ public class HelpCommand extends Command {
                 }
                 break;
             case "edit":
+                if(OS.indexOf("win") >= 0){
+                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpedit.txt";
+                }
+                else {
+                    filename = "src/main/java/eggventory/commands/help/Helpedit.txt";
+                }
                 try {
                     output = getStringFromFile("/help/HelpEdit.txt");
                 } catch (IOException e) {
@@ -72,6 +98,12 @@ public class HelpCommand extends Command {
                 }
                 break;
             case "delete":
+                if(OS.indexOf("win") >= 0){
+                    filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpdelete.txt";
+                }
+                else {
+                    filename = "src/main/java/eggventory/commands/help/Helpdelete.txt";
+                }
                 try {
                     output = getStringFromFile("/help/HelpDelete.txt");
                 } catch (IOException e) {
