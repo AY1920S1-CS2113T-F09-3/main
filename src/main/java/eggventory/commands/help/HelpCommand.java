@@ -53,65 +53,64 @@ public class HelpCommand extends Command {
         String output = "";
         String filename;
         if (this.options == null) {
-            if(OS.indexOf("win") >= 0){
+            if (OS.indexOf("win") >= 0) {
                 filename = "\\src\\main\\java\\eggventory\\commands\\help\\Help.txt";
+            } else {
+                filename = "/src/main/java/eggventory/commands/help/Help.txt";
             }
-            else {
-                filename ="/src/main/java/eggventory/commands/help/Help.txt";
-            }
-
             try {
                 Path filePath = Paths.get(System.getProperty("user.dir"), filename);
                 output = Files.readString(filePath); //default UTF-8 charset.
-                System.out.println(output);
                 ui.print(output);
             } catch (IOException e) {
-                ui.print("Error in reading help.txt");
-                ui.print(e.toString());
+                output = "Error in reading help.txt";
+                ui.print(output);
             }
         } else {
             switch (this.options) {
             case "add":
-                if(OS.indexOf("win") >= 0){
+                if (OS.indexOf("win") >= 0) {
                     filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpadd.txt";
-                }
-                else {
-                    filename ="src/main/java/eggventory/commands/help/Helpadd.txt";
+                } else {
+                    filename =   "src/main/java/eggventory/commands/help/Helpadd.txt";
                 }
                 try {
                     output = getStringFromFile("/help/HelpAdd.txt");
                 } catch (IOException e) {
-                    ui.print("Error in reading HelpAdd.txt");
+                    output = "Error in reading Helpadd.txt";
+                    ui.print(output);
                 }
                 break;
             case "edit":
-                if(OS.indexOf("win") >= 0){
+                if (OS.indexOf("win") >= 0) {
                     filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpedit.txt";
-                }
-                else {
+                } else {
                     filename = "src/main/java/eggventory/commands/help/Helpedit.txt";
                 }
                 try {
                     output = getStringFromFile("/help/HelpEdit.txt");
                 } catch (IOException e) {
-                    ui.print("Error in reading HelpEdit.txt");
+                    output = "Error in reading Helpedit.txt";
+                    ui.print(output);
                 }
                 break;
             case "delete":
-                if(OS.indexOf("win") >= 0){
+
+                if (OS.indexOf("win") >= 0) {
                     filename = "\\src\\main\\java\\eggventory\\commands\\help\\Helpdelete.txt";
-                }
-                else {
+                } else {
                     filename = "src/main/java/eggventory/commands/help/Helpdelete.txt";
                 }
                 try {
                     output = getStringFromFile("/help/HelpDelete.txt");
                 } catch (IOException e) {
-                    ui.print("Error in reading HelpDelete.txt");
+                    output = "Error in reading Helpdelete.txt";
+                    ui.print(output);
                 }
                 break;
             default:
-                ui.print("Your help command is not defined. Please enter 'help' for reference.");
+                output = "Your help command is not defined. Please enter 'help' for reference.";
+                ui.print(output);
             }
             ui.print(output);
         }
