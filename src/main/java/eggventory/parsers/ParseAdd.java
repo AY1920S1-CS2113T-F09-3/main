@@ -7,7 +7,7 @@ import eggventory.enums.CommandType;
 import eggventory.exceptions.BadInputException;
 import eggventory.exceptions.InsufficientInfoException;
 
-
+//@@author cyanoei
 public class ParseAdd {
 
     /**
@@ -37,6 +37,7 @@ public class ParseAdd {
     }
 
 
+    //@@author Deculsion
     /**
      * Processes the contents of an add stocktype command (everything after the words "add" and "stocktype").
      * Splits up the input string into an array containing the various attributes of the stocktype being added.
@@ -56,8 +57,7 @@ public class ParseAdd {
         return new AddStockTypeCommand(CommandType.ADD, addInput[0]);
     }
 
-
-
+    //@@author cyanoei
     /**
      * Processes a user command that began with the word "add".
      * Used to differentiate between the different elements the user is able to add (stock, stocktype, loan),
