@@ -4,8 +4,9 @@ import eggventory.commands.Command;
 import eggventory.enums.CommandType;
 import eggventory.parsers.Parser;
 import eggventory.ui.Cli;
-import eggventory.ui.Ui;
 import eggventory.ui.Gui;
+import eggventory.ui.Ui;
+
 
 /**
  * Eggventory is a task list that supports 3 types of classes - Todos, deadlines and events.
@@ -17,6 +18,7 @@ public class Eggventory {
     private static Parser parser;
     private static Ui ui;
     private static StockList stockList;
+    private static PersonList personList;
 
     /**
      * Sets up the frontend, the Gui and the event handlers. This will create an instance of the
@@ -45,6 +47,7 @@ public class Eggventory {
      */
     private static void userInteraction() {
         try {
+
             String userInput = ui.read();
 
             Command command = parser.parse(userInput);
