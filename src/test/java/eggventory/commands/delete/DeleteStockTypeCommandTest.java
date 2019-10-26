@@ -33,6 +33,7 @@ public class DeleteStockTypeCommandTest {
         assertEquals("Sorry, Uncategorised is the default category, and cannot be deleted.", output);
     }
 
+    //@@author patwaririshab
     @Test
     void testExecute_deleteStockType_success() {
 

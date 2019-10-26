@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author patwaririshab
 class AddStockTypeCommandTest {
 
     private StockList testStockList = new StockList();
@@ -24,6 +25,7 @@ class AddStockTypeCommandTest {
         assertEquals("Nice! I have successfully added the stocktype: testStockType", output);
     }
 
+    //@@author cyanoei
     @Test
     void testExecute_AddRepeatedStockType_Error() {
         StockList testList = new StockList();

@@ -8,6 +8,8 @@ import eggventory.enums.StockProperty;
 import eggventory.items.Stock;
 import eggventory.ui.Ui;
 
+
+//@@author patwaririshab
 /**
  * Command objects for editing stocks
  * Requires the stockCode (as listed by the system) of the stock.

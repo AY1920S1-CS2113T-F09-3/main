@@ -8,9 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author patwaririshab
 public class AddStockCommandTest {
-    //    private OutputStream os = new ByteArrayOutputStream();
-    //    private PrintStream ps = new PrintStream(os);
     private StockList testStockList = new StockList();
     private Cli testCli = new Cli();
     private Storage testStorage = new Storage("");

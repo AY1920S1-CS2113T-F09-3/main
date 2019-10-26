@@ -14,8 +14,7 @@ import java.util.ArrayList;
 public class StockType {
     private String name;
     private ArrayList<Stock> stocks;
-    //private int quantity;
-    //private boolean isUniqueStock;
+
 
     /**
      * Creates a new StockType object. This overload should only be called from a Storage class.
@@ -173,7 +172,7 @@ public class StockType {
         this.name = newName;
     }
 
-    //@@author
+    //@@author patwaririshab
     /**
      * Updates the values of properties of a Stock.
      * @param stockCode String which uniquely identifies a Stock.

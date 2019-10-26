@@ -7,6 +7,7 @@ import eggventory.enums.CommandType;
 import eggventory.items.StockType;
 import eggventory.ui.Ui;
 
+//@@author patwaririshab
 /**
  * Edits the attributes of StockType.
  */

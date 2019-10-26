@@ -8,6 +8,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author patwaririshab
 class StockTest {
     Stock testStock = new Stock("Test", "R0000", 100, "Test Stock");
     OutputStream os = new ByteArrayOutputStream();
