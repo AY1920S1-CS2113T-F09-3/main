@@ -2,12 +2,14 @@ package eggventory;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StockListTest {
     //@@author Deculsion
     @Test
     void addStockType() {
+        StockList testList = new StockList();
+
     }
 
     @Test
