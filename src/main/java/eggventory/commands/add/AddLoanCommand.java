@@ -7,6 +7,7 @@ import eggventory.commands.Command;
 import eggventory.enums.CommandType;
 import eggventory.ui.Ui;
 
+//@@author cyanoei
 public class AddLoanCommand extends Command {
 
     private String stockCode;

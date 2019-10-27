@@ -8,6 +8,7 @@ import eggventory.enums.CommandType;
 import eggventory.exceptions.BadInputException;
 import eggventory.ui.Ui;
 
+//@@author cyanoei
 public class DeleteLoanCommand extends Command {
 
     private String stockCode;
