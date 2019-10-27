@@ -56,11 +56,26 @@ public final class LoanList {
      * @param matricNo the matric number of the Person.
      */
     public static boolean deleteLoan(String stockCode, String matricNo) {
-        //Should first check if the pair is valid.
-        //if invalid, throw exception.
-        LoanPair loanPair = new LoanPair(stockCode, matricNo);
-        boolean removeSuccess = loanPairs.remove(loanPair);
-        loanList.remove(loanPair);
+        //Construct the pair.
+        LoanPair queryPair = new LoanPair(stockCode, matricNo);
+
+        boolean removeSuccess = false;
+
+        //Check if the pair matches any in our list.
+        //If so, use the pair from the list to remove.
+        for (LoanPair loanPair : loanPairs) {
+            if (loanPair.equals(queryPair)) {
+                removeSuccess = true;
+                queryPair = loanPair; //Reassign the instance.
+                break;
+            }
+        }
+
+        if (removeSuccess) {
+            loanList.remove(queryPair);
+            loanPairs.remove(queryPair);
+        }
+
         return removeSuccess;
     }
 
@@ -74,11 +89,15 @@ public final class LoanList {
      * @return the quantity.
      */
     public static int getLoanQuantity(String stockCode, String matricNo) {
+        //Construct the pair.
         LoanPair queryPair = new LoanPair(stockCode, matricNo);
 
+        //Check if the pair matches any in our list.
+        //If so, use the one from the list to access the quantity.
         for (LoanPair loanPair : loanPairs) {
-            if (loanPair.equals(queryPair));
-            return loanList.get(loanPair).getQuantity();
+            if (loanPair.equals(queryPair)) {
+                return loanList.get(loanPair).getQuantity();
+            }
         }
 
         return -1;

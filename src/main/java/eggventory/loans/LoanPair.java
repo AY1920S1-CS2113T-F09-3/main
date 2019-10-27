@@ -29,4 +29,13 @@ public class LoanPair {
     public String getMatricNo() {
         return matricNo;
     }
+
+    /**
+     * Custom .equals method to compare two LoanPairs.
+     * @param other the LoanPair to compare to.
+     * @return true if their stockCode and matricNo are the same, false otherwise.
+     */
+    public boolean equals(LoanPair other) {
+        return this.stockCode.equals(other.getStockCode()) && this.matricNo.equals(other.getMatricNo());
+    }
 }
