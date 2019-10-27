@@ -60,7 +60,7 @@ public class ParseAdd {
 
     //@@author cyanoei
 
-    private Command processAddLoan(String input) throws InsufficientInfoException{
+    private Command processAddLoan(String input) throws InsufficientInfoException {
         String[] addInput = input.split(" +");
 
         if (addInput.length < 3) {

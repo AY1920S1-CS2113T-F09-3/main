@@ -42,7 +42,8 @@ public final class LoanList {
      * @param loanDate the date the loan was made.
      * @param returnDate the date the loan is to be returned.
      */
-    public static void addLoan(String stockCode, String matricNo, int quantity, Calendar loanDate, Calendar returnDate) {
+    public static void addLoan(String stockCode, String matricNo, int quantity,
+                               Calendar loanDate, Calendar returnDate) {
         //Add one set of information to the table, and one to the list.
         LoanPair loanPair = new LoanPair(stockCode, matricNo);
         loanPairs.add(loanPair);
