@@ -79,8 +79,10 @@ public class Loan {
      */
     @Override
     public String toString() {
-        return getMatricNo() + " loaned " + getQuantity() + " of " + getStockCode() + ". due: " + loanDate;
+        return getMatricNo() + " loaned " + getQuantity() + " of " + getStockCode() + ".";
     }
+
+    //@@author
 
 
 }

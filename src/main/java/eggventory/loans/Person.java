@@ -1,12 +1,9 @@
 package eggventory.loans;
 
-import java.util.ArrayList;
-
 public class Person {
 
     private String matricNo;
     private String name;
-    private ArrayList<Loan> personLoans;
 
     public Person(String matricNo, String name) {
         this.matricNo = matricNo;
