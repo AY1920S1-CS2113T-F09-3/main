@@ -7,8 +7,6 @@ import eggventory.ui.Cli;
 import eggventory.ui.Gui;
 import eggventory.ui.Ui;
 
-import java.util.Calendar;
-
 
 /**
  * Eggventory is a task list that supports 3 types of classes - Todos, deadlines and events.
@@ -21,7 +19,7 @@ public class Eggventory {
     private static Ui ui;
     private static StockList stockList;
     private static PersonList personList;
-    private static LoanList loanList;
+    //private static LoanList loanList;
 
     /**
      * Sets up the frontend, the Gui and the event handlers. This will create an instance of the
@@ -35,8 +33,9 @@ public class Eggventory {
         storage = new Storage(filePath);
         parser = new Parser();
         stockList = storage.load();
-        loanList = new LoanList();
+        //loanList = new LoanList();
 
+        /*
         Calendar date = Calendar.getInstance();
         loanList.addLoan("R500", "A123", 100, date, date);
         loanList.addLoan("R500", "A6000", 100, date, date);
@@ -46,7 +45,7 @@ public class Eggventory {
         System.out.print("All: \n" + loanList.printLoans());
         System.out.print("A123: \n" + loanList.printPersonLoans("A123"));
         System.out.print("R500: \n" + loanList.printStockLoans("R500"));
-
+        */
 
 
         if (args.length >= 1 && args[0].equals("cli")) {

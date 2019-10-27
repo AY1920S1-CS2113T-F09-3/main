@@ -1,6 +1,7 @@
 package eggventory.parsers;
 
 import eggventory.commands.Command;
+import eggventory.commands.add.AddLoanCommand;
 import eggventory.commands.add.AddStockCommand;
 import eggventory.commands.add.AddStockTypeCommand;
 import eggventory.enums.CommandType;
@@ -58,6 +59,22 @@ public class ParseAdd {
     }
 
     //@@author cyanoei
+
+    private Command processAddLoan(String input) throws InsufficientInfoException{
+        String[] addInput = input.split(" +");
+
+        if (addInput.length < 3) {
+            throw new InsufficientInfoException("Please enter loan information after the 'add' command in"
+                    + " this format:\nadd loan <StockCode> <MatricNo> <Quantity>");
+        } else if (addInput[0].isBlank() | addInput[1].isBlank() | addInput[2].isBlank()) {
+            throw new InsufficientInfoException("Please enter loan information after the 'add' command in"
+                    + " this format:\nadd loan <StockCode> <MatricNo> <Quantity>");
+        }
+
+        return new AddLoanCommand(CommandType.ADD, addInput[0], addInput[1], Integer.parseInt(addInput[2]));
+    }
+
+
     /**
      * Processes a user command that began with the word "add".
      * Used to differentiate between the different elements the user is able to add (stock, stocktype, loan),
@@ -83,6 +100,11 @@ public class ParseAdd {
         case "stocktype":
             addCommand = processAddStockType(addInput[1]);
             break;
+
+        case "loan":
+            addCommand = processAddLoan(addInput[1]);
+            break;
+
         default:
             throw new BadInputException("Unexpected value: " + addInput[0]);
         }
