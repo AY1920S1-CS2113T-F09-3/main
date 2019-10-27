@@ -33,7 +33,8 @@ public class Loan {
      * @param returnDate the date the loans have to be returned by.
      */
     public Loan(String stockCode, String matricNo, int quantity, Calendar loanDate, Calendar returnDate) {
-        //Parser should have determined beforehand that the Person and Stock being referred to are existing entries.
+        //AddLoanCommand should have determined beforehand that the Person and Stock being referred to
+        //are existing entries.
         this.stockCode = stockCode;
         this.matricNo = matricNo;
         this.quantity = quantity;
