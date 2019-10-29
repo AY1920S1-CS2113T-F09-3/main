@@ -1,9 +1,12 @@
 package eggventory.items;
 
-
+<<<<<<< HEAD
+import eggventory.enums.Property;
+=======
 import eggventory.loans.Loan;
 
 import java.util.ArrayList;
+>>>>>>> 651db9b1f285eb4d1304c487b1acbcdad7c1f564
 
 /**
  * An abstract class representing a type of item that the lab keeps and is able to loan out.

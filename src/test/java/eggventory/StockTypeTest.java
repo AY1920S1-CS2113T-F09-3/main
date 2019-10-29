@@ -29,6 +29,7 @@ class StockTypeTest {
     }
     */
 
+    //@@author Deculsion
     @Test
     void getQuantity() {
         StockType testStockType = new StockType("Resistor");
@@ -62,6 +63,7 @@ class StockTypeTest {
         assertEquals(0,testStockType.getQuantity());
     }
 
+    //@@author
     @Test
     void setStock_StockCode_Success() {
         StockType testStockType = new StockType("testList");

@@ -3,20 +3,28 @@ package eggventory.parsers;
 import eggventory.commands.Command;
 import eggventory.commands.FindCommand;
 import eggventory.commands.help.HelpCommand;
-import eggventory.commands.ListCommand;
 import eggventory.commands.ByeCommand;
 import eggventory.enums.CommandType;
 import eggventory.exceptions.BadInputException;
 import eggventory.exceptions.InsufficientInfoException;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
+//@@author cyanoei
 /**
  * Interprets command strings by the user, and converts them to command objects that can be executed.
  */
 public class Parser {
 
+    private static HashSet<String> reservedNames = new HashSet<>(Arrays.asList(
+            "all" // Add more when needed
+    ));
+
     private ParseAdd addParser;
     private ParseDelete deleteParser;
     private ParseEdit editParser;
+    private ParseList listParser;
 
     /**
      * Parser object contains submodules for parsing commands with many different options.
@@ -25,6 +33,17 @@ public class Parser {
         addParser = new ParseAdd();
         deleteParser = new ParseDelete();
         editParser = new ParseEdit();
+        listParser = new ParseList();
+    }
+
+    /**
+     * Checks if input String is an invalid String based on the reserved keywords in the
+     * reservedNames HashSet.
+     * @param input input String to check.
+     * @return True if invalid, false otherwise.
+     */
+    public static boolean isReserved(String input) {
+        return reservedNames.contains(input);
     }
 
     /**
@@ -52,10 +71,12 @@ public class Parser {
         switch (inputArr[0]) {
         //Commands which are single words.
         case "list":
-            if (inputArr.length != 2) {
-                throw new BadInputException("Usage of list: list stock, list stocktypes or list <stocktype>");
+            if (inputArr.length <= 1) {
+                // TODO: Interface this with HELP feature or CommandDictionary.
+                throw new BadInputException("Usage of list: 'list stock', 'list stocktype all' or "
+                        + "'list stocktype <Stock Type>'");
             } else {
-                command = new ListCommand(CommandType.LIST, inputArr[1]);
+                command = listParser.parse(inputArr[1]);
             }
             break;
         case "bye":
