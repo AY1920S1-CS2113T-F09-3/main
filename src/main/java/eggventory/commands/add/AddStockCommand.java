@@ -2,6 +2,7 @@ package eggventory.commands.add;
 
 import eggventory.StockList;
 import eggventory.commands.Command;
+import eggventory.exceptions.BadInputException;
 import eggventory.ui.Ui;
 import eggventory.Storage;
 import eggventory.items.DateTime;
@@ -42,13 +43,12 @@ public class AddStockCommand extends Command {
      * @param storage Storage object to handle saving and loading of any data.
      */
     @Override
-    public String execute(StockList list, Ui ui, Storage storage) {
+    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
         String output;
 
         if (list.isExistingStockCode(stockCode)) {
-            output = String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
-                    + "Please enter a different stock code.", stockCode);
-
+            throw new BadInputException(String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
+                    + "Please enter a different stock code.", stockCode));
         } else {
             list.addStock(stockType, stockCode, quantity, description);
             storage.save(list);
