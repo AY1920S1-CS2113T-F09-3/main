@@ -1,5 +1,6 @@
 package eggventory.commands.delete;
 
+import eggventory.exceptions.BadInputException;
 import eggventory.ui.Ui;
 import eggventory.StockList;
 import eggventory.Storage;
@@ -21,15 +22,16 @@ public class DeleteStockCommand extends Command {
     }
 
     @Override
-    public String execute(StockList list, Ui ui, Storage storage) {
+    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
 
         Stock deleted = list.deleteStock(stockCode);
         String output;
         if (deleted == null) {
+
             output = String.format("Sorry, I cannot find the stock that stock code \"%s\" refers to. "
                     + "Please try again.", stockCode);
             ui.print(output);
-            return output;
+            throw new BadInputException(output);
         } else {
             output = String.format("I deleted the following stock: StockType: %s StockCode: %s Quantity: %d "
                     + "Description: %s", deleted.getStockType(), stockCode,

@@ -47,8 +47,8 @@ public class AddStockCommand extends Command {
         String output;
 
         if (list.isExistingStockCode(stockCode)) {
-            throw new BadInputException(String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
-                    + "Please enter a different stock code.", stockCode));
+            throw new BadInputException(String.format("Sorry, the stock code \"%s\" is already"
+                    + " assigned to a stock in the system. Please enter a different stock code.", stockCode));
         } else {
             list.addStock(stockType, stockCode, quantity, description);
             storage.save(list);

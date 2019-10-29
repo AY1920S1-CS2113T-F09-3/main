@@ -2,6 +2,7 @@ package eggventory.commands.add;
 
 import eggventory.StockList;
 import eggventory.Storage;
+import eggventory.exceptions.BadInputException;
 import eggventory.ui.Ui;
 import eggventory.commands.Command;
 import eggventory.enums.CommandType;
@@ -26,11 +27,11 @@ public class AddStockTypeCommand extends Command {
      * @param storage Storage object to handle saving and loading of any data.
      */
     @Override
-    public String execute(StockList list, Ui ui, Storage storage) {
+    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
         String output;
 
         if (list.isExistingStockType(name)) {
-            output = String.format("Sorry, \"%s\" is already an existing stock type.", name);
+            throw new BadInputException(String.format("Sorry, \"%s\" is already an existing stock type.", name));
 
         } else {
             list.addStockType(name);
