@@ -1,10 +1,11 @@
 package eggventory.commands.add;
 
-import eggventory.StockList;
-import eggventory.Storage;
-import eggventory.exceptions.BadInputException;
+import eggventory.model.StockList;
+import eggventory.storage.Storage;
+import eggventory.commons.exceptions.BadInputException;
+import eggventory.logic.commands.add.AddStockCommand;
 import eggventory.ui.Cli;
-import eggventory.enums.CommandType;
+import eggventory.commons.enums.CommandType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

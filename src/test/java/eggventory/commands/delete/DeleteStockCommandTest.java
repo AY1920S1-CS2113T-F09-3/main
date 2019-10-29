@@ -1,9 +1,10 @@
 package eggventory.commands.delete;
 
-import eggventory.StockList;
-import eggventory.Storage;
-import eggventory.enums.CommandType;
-import eggventory.exceptions.BadInputException;
+import eggventory.model.StockList;
+import eggventory.storage.Storage;
+import eggventory.commons.enums.CommandType;
+import eggventory.commons.exceptions.BadInputException;
+import eggventory.logic.commands.delete.DeleteStockCommand;
 import eggventory.ui.Cli;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +20,9 @@ public class DeleteStockCommandTest {
     int testQuantity;
     String testDescription;
 
+    //@@author patwaririshab
     @Test
-    void testExecuteDeleteStock_ValidStock_Success() throws BadInputException {
+    void testExecuteDeleteStock_validStock_success() throws BadInputException {
         testStockType = "Uncategorised";
         testStockCode = "R5";
         testQuantity = 1000;
@@ -33,8 +35,9 @@ public class DeleteStockCommandTest {
                 testQuantity, testDescription), output);
     }
 
+    //@@author patwaririshab
     @Test
-    void testExecuteDeleteStock_NonexistentStock_ThrowsBadInputException() throws BadInputException {
+    void testExecuteDeleteStock_nonexistentStock_throwsBadInputException() throws BadInputException {
         testStockType = "Uncategorised";
         testStockCode = "R5";
         testQuantity = 1000;

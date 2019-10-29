@@ -1,5 +1,6 @@
 package eggventory.items;
 
+import eggventory.model.items.Stock;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
