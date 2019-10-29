@@ -1,4 +1,4 @@
-package eggventory.commands;
+package eggventory.logic.commands;
 
 import eggventory.model.StockList;
 import eggventory.storage.Storage;

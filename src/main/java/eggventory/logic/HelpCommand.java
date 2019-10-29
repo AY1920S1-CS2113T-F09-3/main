@@ -1,4 +1,4 @@
-package eggventory.logic.commands.help;
+package eggventory.logic;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package eggventory.commands.delete;
+package eggventory.logic.commands.delete;
 
 import eggventory.model.StockList;
 import eggventory.storage.Storage;

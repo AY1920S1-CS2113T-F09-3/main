@@ -1,4 +1,4 @@
-package eggventory.commands;
+package eggventory.logic.commands;
 
 import org.junit.jupiter.api.Test;
 
