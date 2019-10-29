@@ -1,25 +1,20 @@
 package eggventory.commands;
 
+import eggventory.exceptions.BadInputException;
 import eggventory.ui.Ui;
 import eggventory.StockList;
 import eggventory.Storage;
-import eggventory.exceptions.BadInputException;
 import eggventory.enums.CommandType;
+
 
 /**
  * This is an abstract class.
  * Command objects are sent from the Parser and executed with StockType or Cli.
  * Commands include: add, delete, find, list.
  */
-
-public class Command {
+public abstract class Command {
 
     protected CommandType type;
-
-    //Currently the default constructor is a bad command
-    public Command() {
-        this.type = CommandType.BAD;
-    }
 
     public Command(CommandType type) {
         this.type = type;
@@ -30,15 +25,7 @@ public class Command {
     }
 
     /**
-     * Executes the command.
-     * Prints the list or saves the list and sends exit message.
-     * Might need to separate into bye and list commands.
+     * Executes the command. Need to implement if inheriting from Command class.
      */
-    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
-        if (type == CommandType.BYE) {
-            storage.save(list);
-            ui.printExitMessage();
-        }
-        return null;
-    }
+    public abstract String execute(StockList list, Ui ui, Storage storage) throws BadInputException;
 }

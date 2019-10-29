@@ -1,6 +1,8 @@
 package eggventory.items;
 
-import eggventory.enums.Property;
+import eggventory.loans.Loan;
+
+import java.util.ArrayList;
 
 /**
  * An abstract class representing a type of item that the lab keeps and is able to loan out.
@@ -19,6 +21,7 @@ public class Stock {
     private int lost;
     private int minimum; //Minimum quantity the lab should maintain.
     //private int loanLimit; //Maximum quantity an individual can loan. To implement in the future.
+    private ArrayList<Loan> stockLoans;
 
     /**
      * An stock is first added with its stockType, stockCode, description and quantity.
@@ -211,5 +214,18 @@ public class Stock {
         System.out.println(description + ": " + lost + " lost.");
     }
 
-
+    //@@author Raghav-B
+    /**
+     * Returns data of Stock in format that can be read by GUI's TableView.
+     * @return ArrayList containing data of Stock.
+     */
+    public ArrayList<String> getDataAsArray() {
+        ArrayList<String> dataArray = new ArrayList<>();
+        dataArray.add(stockType);
+        dataArray.add(stockCode);
+        dataArray.add(String.valueOf(quantity));
+        dataArray.add(description);
+        return dataArray;
+    }
+    //@@author
 }
