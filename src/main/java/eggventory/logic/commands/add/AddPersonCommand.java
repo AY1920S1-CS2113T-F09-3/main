@@ -4,16 +4,18 @@ package eggventory.logic.commands.add;
 
 import eggventory.commons.enums.CommandType;
 import eggventory.commons.exceptions.BadInputException;
+import eggventory.logic.commands.Command;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.ui.Ui;
 
-public class AddPersonCommand {
+public class AddPersonCommand extends Command{
     private String name;
     private String matricNo;
 
     public AddPersonCommand(CommandType type, String matricNo, String name) {
+        super(type);
         this.name = name;
         this.matricNo = matricNo;
     }

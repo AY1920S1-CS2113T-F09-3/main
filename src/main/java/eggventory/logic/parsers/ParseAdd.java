@@ -2,6 +2,7 @@ package eggventory.logic.parsers;
 
 import eggventory.logic.commands.Command;
 import eggventory.logic.commands.add.AddLoanCommand;
+import eggventory.logic.commands.add.AddPersonCommand;
 import eggventory.logic.commands.add.AddStockCommand;
 import eggventory.logic.commands.add.AddStockTypeCommand;
 import eggventory.commons.enums.CommandType;
@@ -46,6 +47,17 @@ public class ParseAdd {
         }
 
         return new AddStockTypeCommand(CommandType.ADD, addInput[0]);
+    }
+
+    private Command processAddPerson(String input) throws BadInputException {
+        String[] addInput = input.split(" +");
+
+        if (Parser.isReserved(addInput[0])) {
+            throw new BadInputException("'" + addInput[0] + "' is an invalid name as it is a keyword" +
+                    "for an existing command.");
+        }
+
+        return new AddPersonCommand(CommandType.ADD, addInput[0], addInput[1]);
     }
 
     //@@author cyanoei
@@ -95,13 +107,14 @@ public class ParseAdd {
             addCommand = processAddLoan(addInput[1]);
             break;
 
-            case "person":
-                if (!Parser.isCommandComplete(inputString, 2)) {
-                    throw new InsufficientInfoException("Please enter person information after the 'add' command in" +
-                            "this format:\nadd person <MatricNo> <Name>");
-                }
+        case "person":
+            if (!Parser.isCommandComplete(inputString, 2)) {
+                throw new InsufficientInfoException("Please enter person information after the 'add' command in" +
+                        "this format:\nadd person <MatricNo> <Name>");
+            }
 
-                addCommand = processAddPerson(addInput[1]);
+            addCommand = processAddPerson(addInput[1]);
+            break;
 
         default:
             throw new BadInputException("Unexpected value: " + addInput[0]);
