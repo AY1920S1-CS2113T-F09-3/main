@@ -106,7 +106,7 @@ class StockTest {
 
     @Test
     void saveDetailsString() {
-        assertEquals("TestType/#T/500/Test/0", testStock.saveDetailsString());
+        assertEquals("TestType,#T,500,Test,0", testStock.saveDetailsString());
     }
 
     @Test
