@@ -38,7 +38,6 @@ class StockTypeTest {
     void addStock_Success() {
         StockType testStockType = new StockType("Resistor");
         assertTrue(testStockType.addStock("Resistor", "R50", 500,"Test Resistor"));
-
     }
 
     @Test
