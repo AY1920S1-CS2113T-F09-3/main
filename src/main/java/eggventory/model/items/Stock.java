@@ -2,6 +2,7 @@ package eggventory.model.items;
 
 
 import eggventory.model.loans.Loan;
+import eggventory.ui.Gui;
 
 import java.util.ArrayList;
 
@@ -77,6 +78,7 @@ public class Stock {
         return description;
     }
 
+    //@@author patwaririshab
     /**
      * Sets the name of the stock.
      * @param description the name of the stock.
@@ -95,6 +97,7 @@ public class Stock {
         return quantity;
     }
 
+    //@@author patwaririshab
     /**
      * Sets the new total number of this stock. To be used by 'change' or 'qty' commands to modify the number.
      * @param newTotal the new total number of items.
@@ -111,6 +114,7 @@ public class Stock {
         return loaned;
     }
 
+    //@@author patwaririshab
     /**
      * Sets the number of this stock on loan. To be used by the 'loan' command.
      * @param loaned the number of items on loan.
@@ -127,6 +131,7 @@ public class Stock {
         return lost;
     }
 
+    //@@author patwaririshab
     /**
      * Sets the number of this stock that have been lost. To be used by the 'lost' command.
      * @param lost the number of items lost.
@@ -143,6 +148,7 @@ public class Stock {
         return minimum;
     }
 
+    //@@author patwaririshab
     /**
      * Updates the minimum quantity of stock that the lab wishes to maintain. To be implemented in the future.
      * @param minimum The minimum quantity.
@@ -176,44 +182,46 @@ public class Stock {
         return stockType + "/" + stockCode + "/" + quantity + "/" + description + "/" + minimum;
     }
 
-    //TODO: Fix methods below for new UI.print() implementation.
-
-    /**
-     * Prints the complete details of all the items of this type.
-     * Format example: 560ohm Resistors: 280 available. 100 on loan. 20 lost. (400 total.)
-     * To be used with the 'stock all' command.
-     */
-    public void printAll() {
-        System.out.println(description + ": " + numAvailable() + " available. " + loaned + " on loan. "
-                + lost + " lost. (" + quantity + " total.)");
-    }
-
-    /**
-     * Prints the name and number of available items. Used as part of printing a list of available items.
-     * Format example: 560ohm Resistors: 280
-     * To be used with the 'stock' command.
-     */
-    public void printAvailable() {
-        System.out.println(description + ": " + numAvailable() + " available.");
-    }
-
-    /**
-     * Prints the name and number of items on loan. Used as part of printing a list of items on loan.
-     * Format example: 560ohm Resistors: 100
-     * To be used with the 'stock loan' command.
-     */
-    public void printLoan() {
-        System.out.println(description + ": " + loaned + " on loan.");
-    }
-
-    /**
-     * Prints the name and number of lost items. Used as part of printing a list of lost items.
-     * Format example: 560ohm Resistors: 20
-     * To be used with the 'stock lost' command.
-     */
-    public void printLost() {
-        System.out.println(description + ": " + lost + " lost.");
-    }
+    //    //TODO: Fix methods below for new UI.print() implementation.
+    //
+    //    /**
+    //     * Prints the complete details of all the items of this type.
+    //     * Format example: 560ohm Resistors: 280 available. 100 on loan. 20 lost. (400 total.)
+    //     * To be used with the 'stock all' command.
+    //     */
+    //    public String printAll() {
+    //        String output = description + ": " + numAvailable() + " available. " + loaned + " on loan. "
+    //                + lost + " lost. (" + quantity + " total.)";
+    //
+    //
+    //    }
+    //
+    //    /**
+    //     * Prints the name and number of available items. Used as part of printing a list of available items.
+    //     * Format example: 560ohm Resistors: 280
+    //     * To be used with the 'stock' command.
+    //     */
+    //    public void printAvailable() {
+    //        System.out.println(description + ": " + numAvailable() + " available.");
+    //    }
+    //
+    //    /**
+    //     * Prints the name and number of items on loan. Used as part of printing a list of items on loan.
+    //     * Format example: 560ohm Resistors: 100
+    //     * To be used with the 'stock loan' command.
+    //     */
+    //    public void printLoan() {
+    //        System.out.println(description + ": " + loaned + " on loan.");
+    //    }
+    //
+    //    /**
+    //     * Prints the name and number of lost items. Used as part of printing a list of lost items.
+    //     * Format example: 560ohm Resistors: 20
+    //     * To be used with the 'stock lost' command.
+    //     */
+    //    public void printLost() {
+    //        System.out.println(description + ": " + lost + " lost.");
+    //    }
 
     //@@author Raghav-B
     /**
@@ -228,5 +236,4 @@ public class Stock {
         dataArray.add(description);
         return dataArray;
     }
-    //@@author
 }
