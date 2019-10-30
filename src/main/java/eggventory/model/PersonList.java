@@ -8,11 +8,8 @@ import java.util.ArrayList;
 //@@author Raghav-B
 public final class PersonList {
 
-    private static ArrayList<Person> personList;
+    private static ArrayList<Person> personList = new ArrayList<Person>();
 
-    public static void PersonList() {
-        personList = new ArrayList<>();
-    }
 
     /**
      * Adds a unique Person to the personList.
