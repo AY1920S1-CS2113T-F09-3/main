@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class DeleteStockCommandTest {
     StockList testStockList = new StockList();
     Cli testCli = new Cli();
-    Storage testStorage = new Storage("");
+    Storage testStorage = new Storage("","");
     String testStockType;
     String testStockCode;
     int testQuantity;

@@ -14,7 +14,7 @@ public class DeleteStockTypeCommandTest {
 
     private StockList testStockList = new StockList();
     private Cli testCli = new Cli();
-    private Storage testStorage = new Storage("");
+    private Storage testStorage = new Storage("","");
 
     @Test
     void testExecute_deleteStocktypeNotFound_errorMessage() {

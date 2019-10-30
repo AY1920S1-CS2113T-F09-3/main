@@ -271,8 +271,8 @@ public class StockList {
     }
 
     //@@author patwaririshab
-    /***
-     * Saves the stocktypes into a String
+    /**
+     * Saves the stocktypes into a String.
      * @return The String will be directly saved into a saved_stocktypes file.
      */
     public String saveStockTypesString() {
@@ -285,6 +285,7 @@ public class StockList {
 
         return stockTypesString.toString();
     }
+
     //@@author Raghav-B
     /**
      * Returns TableStruct containing data on all stocks contained by StockList. This

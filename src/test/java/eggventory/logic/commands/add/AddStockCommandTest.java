@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AddStockCommandTest {
     private StockList testStockList = new StockList();
     private Ui testCli = new UiStub();
-    private Storage testStorage = new Storage("");
+    private Storage testStorage = new Storage("","");
     String testStockType;
     String testStockCode;
     String testDescription;

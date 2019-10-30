@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FindCommandTest {
     Cli cli = new Cli();
-    Storage storage = new Storage("");
+    Storage storage = new Storage("", "");
     StockList stockList = new StockList();
 
     /*

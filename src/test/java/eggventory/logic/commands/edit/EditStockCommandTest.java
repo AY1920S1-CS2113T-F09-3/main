@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EditStockCommandTest {
     StockList testStockList = new StockList();
     Ui testCli = new UiStub();
-    Storage testStorage = new Storage("");
+    Storage testStorage = new Storage("","");
 
     @Test
     void testExecuteEditStockCode_RepeatedStockCode_ReturnsErrorMessage() {

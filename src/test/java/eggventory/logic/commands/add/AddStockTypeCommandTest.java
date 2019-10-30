@@ -16,7 +16,7 @@ class AddStockTypeCommandTest {
 
     private StockList testStockList = new StockList();
     private Cli testCli = new Cli();
-    private Storage testStorage = new Storage("");
+    private Storage testStorage = new Storage("", "");
 
     @Test
     void testExecuteAddStockType_ValidStockType_Succeeds() throws BadInputException {
