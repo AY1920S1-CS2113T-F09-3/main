@@ -2,6 +2,7 @@ package eggventory.storage;
 
 import eggventory.logic.commands.add.AddStockCommand;
 import eggventory.commons.enums.CommandType;
+import eggventory.logic.commands.add.AddStockTypeCommand;
 import eggventory.model.StockList;
 
 import java.io.File;
@@ -19,10 +20,12 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    private String filePath;
+    private String stockFilePath;
+    private String stockTypesFilePath;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String stockFilePath, String stockTypesFilePath) {
+        this.stockFilePath = stockFilePath;
+        this.stockTypesFilePath = stockTypesFilePath;
     }
 
     /**
@@ -31,20 +34,26 @@ public class Storage {
     public StockList load() {
         StockList savedList = new StockList();
 
-        if (Files.notExists(Paths.get(filePath))) {
+        if (Files.notExists(Paths.get(stockFilePath)) || Files.notExists(Paths.get(stockTypesFilePath))) {
             try {
                 Files.createDirectory(Paths.get("data/"));
             } catch (IOException e) {
                 System.out.println("Unknown IO error when creating 'data/' folder.");
             }
         }
-        File f = new File(filePath);
-
+        File f = new File(stockTypesFilePath);
+        File f2 = new File(stockFilePath);
         try {
-            Scanner s = new Scanner(f); //Create a Scanner using the File as the source
+            Scanner s = new Scanner(f); //Create a Scanner to read saved_stocktypes file
+            Scanner s2 = new Scanner(f2); //Create a Scanner using the File as the source
 
             while (s.hasNext()) {
                 String itemRaw = s.nextLine();
+                AddStockTypeCommand cmd1 = new AddStockTypeCommand(CommandType.ADD, itemRaw);
+                cmd1.execute(savedList);
+            }
+            while (s2.hasNext()) {
+                String itemRaw = s2.nextLine();
                 String[] item = itemRaw.split(",", 0);
 
                 AddStockCommand cmd = new AddStockCommand(CommandType.ADD, item[0], item[1],
@@ -55,19 +64,18 @@ public class Storage {
                 */
                 cmd.execute(savedList);
             }
+
+
         } catch (FileNotFoundException e) {
             System.out.println("Save file not found. New list will be created instead.");
-        //} catch (BadInputException e) {
-            //System.out.println("Save file format wrong. Please fix it manually or use a new list.");
         } catch (Exception e) {
             System.out.println("Save file cannot be read. Please fix it manually or use a new list.");
         }
-
         return savedList; //Returns a StockList.
     }
 
-    //@@author patwaririshab
-    private void writeToFile(String textToAdd) throws IOException {
+
+    private void writeToFile(String textToAdd, String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
@@ -81,19 +89,12 @@ public class Storage {
      * Saves existing StockType to a text file.
      */
     public void save(StockList stockList) {
-        /*
-            StringBuilder tasksToSave = new StringBuilder();
-
-            int max = stockList.getQuantity(); //The number of stockTypes in the stockList.
-
-            for (int i = 0; i < max; i++) { //Index starts from 0.
-                tasksToSave.append(stockList.saveDetailsString()).append(System.lineSeparator());
-            }
-        */
-        String taskListToSave = stockList.saveDetailsString();
+        String stocksToSave = stockList.saveDetailsString();
+        String stockTypesToSave = stockList.saveStockTypesString();
 
         try {
-            writeToFile(taskListToSave);
+            writeToFile(stocksToSave, stockFilePath);
+            writeToFile(stockTypesToSave, stockTypesFilePath);
         } catch (IOException e) {
             System.out.println("Something went wrong saving the file :(");
         }
