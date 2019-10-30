@@ -34,6 +34,7 @@ class StockTypeTest {
         assertEquals(1,testStockType.getQuantity());
     }
 
+    //@@author patwaririshab
     @Test
     void addStock_Success() {
         StockType testStockType = new StockType("Resistor");
@@ -41,6 +42,7 @@ class StockTypeTest {
 
     }
 
+    //@@author patwaririshab
     @Test
     void getStock() {
         StockType testStockType = new StockType("Resistor");
@@ -48,6 +50,7 @@ class StockTypeTest {
         assertEquals("Test Resistor", testStockType.getStock(0).getDescription());
     }
 
+    //@@author patwaririshab
     @Test
     void deleteStock() {
         ArrayList<Stock> testList = new ArrayList<>();
@@ -59,7 +62,7 @@ class StockTypeTest {
         assertEquals(0,testStockType.getQuantity());
     }
 
-    //@@author
+    //@@author patwaririshab
     @Test
     void setStock_StockCode_Success() {
         StockType testStockType = new StockType("testList");
@@ -69,6 +72,7 @@ class StockTypeTest {
         assertEquals(null, testStockType.getStock("R50"));
     }
 
+    //@@author patwaririshab
     @Test
     void setStock_Quantity_Success() {
         StockType testStockType = new StockType("testList");

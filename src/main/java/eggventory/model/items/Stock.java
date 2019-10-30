@@ -179,7 +179,7 @@ public class Stock {
      * @return the string to save.
      */
     public String saveDetailsString() {
-        return stockType + "/" + stockCode + "/" + quantity + "/" + description + "/" + minimum;
+        return stockType + "," + stockCode + "," + quantity + "," + description + "," + minimum;
     }
 
     //    //TODO: Fix methods below for new UI.print() implementation.

@@ -4,10 +4,7 @@ import eggventory.logic.commands.add.AddStockCommand;
 import eggventory.commons.enums.CommandType;
 import eggventory.model.StockList;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -43,7 +40,7 @@ public class Storage {
 
             while (s.hasNext()) {
                 String itemRaw = s.nextLine();
-                String[] item = itemRaw.split("/", 0);
+                String[] item = itemRaw.split(",", 0);
 
                 AddStockCommand cmd = new AddStockCommand(CommandType.ADD, item[0], item[1],
                         Integer.parseInt(item[2]), item[3]);
@@ -66,8 +63,11 @@ public class Storage {
 
     private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+        pw.print(textToAdd);
+        pw.flush();
+        pw.close();
     }
 
     //@@author cyanoei
