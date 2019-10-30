@@ -89,4 +89,24 @@ public final class PersonList {
         return -1;
     }
 
+    //@@author Deculsion
+    public static int getSize() {
+        return PersonList.getSize();
+    }
+
+    public static String listToString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("List of people registered\n");
+        sb.append("------------------------\n");
+
+        for (int i = 0; i < personList.size(); i++) {
+            sb.append(String.format("%d: %s\n",
+                    i, personList.get(i).toString())
+            );
+        }
+
+        return sb.toString();
+    }
+    //@@author
+
 }
