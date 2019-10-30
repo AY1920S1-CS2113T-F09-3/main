@@ -10,10 +10,16 @@ import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.ui.Ui;
 
-public class AddPersonCommand extends Command{
+public class AddPersonCommand extends Command {
     private String name;
     private String matricNo;
 
+    /**
+     * Adds a person to the statc PersonList class.
+     * @param type Enum for the command type.
+     * @param matricNo Matriculation number of person being added.
+     * @param name Full name of person being added.
+     */
     public AddPersonCommand(CommandType type, String matricNo, String name) {
         super(type);
         this.name = name;
@@ -27,11 +33,11 @@ public class AddPersonCommand extends Command{
      * @param storage to storage to save data
      * @return The string that is output to ui.
      */
-    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException{
+    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
         PersonList.add(matricNo, name);
 
-        String output = String.format("Nice, I have added this person for you.\n" +
-                "Matriculation No.: %s | Name: %s", matricNo, name);
+        String output = String.format("Nice, I have added this person for you.\n"
+                + "Matriculation No.: %s | Name: %s", matricNo, name);
 
         ui.print(output);
         return output;

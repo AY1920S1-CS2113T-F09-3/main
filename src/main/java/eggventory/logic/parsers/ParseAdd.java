@@ -53,8 +53,8 @@ public class ParseAdd {
         String[] addInput = input.split(" +");
 
         if (Parser.isReserved(addInput[0])) {
-            throw new BadInputException("'" + addInput[0] + "' is an invalid name as it is a keyword" +
-                    "for an existing command.");
+            throw new BadInputException("'" + addInput[0] + "' is an invalid name as it is a keyword"
+                    + "for an existing command.");
         }
 
         return new AddPersonCommand(CommandType.ADD, addInput[0], addInput[1]);
@@ -110,8 +110,8 @@ public class ParseAdd {
 
         case "person":
             if (!Parser.isCommandComplete(inputString, 2)) {
-                throw new InsufficientInfoException("Please enter person information after the 'add' command in" +
-                        "this format:\nadd person <MatricNo> <Name>");
+                throw new InsufficientInfoException("Please enter person information after the 'add' command in"
+                        + "this format:\nadd person <MatricNo> <Name>");
             }
 
             addCommand = processAddPerson(addInput[1]);
