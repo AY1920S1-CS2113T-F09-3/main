@@ -31,6 +31,7 @@ class AddPersonCommandTest {
 
     @Test
     void testExecuteAddPerson_RepeatedPerson_ThrowsBadInputException() throws BadInputException {
+        // Adding of A12345A again not needed as PersonList is static.
         Exception exception = assertThrows(BadInputException.class, () ->
                 new AddPersonCommand(CommandType.ADD, "A12345A", "Akshay Narayan")
                         .execute(testStockList,testCli,testStorage)
