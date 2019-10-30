@@ -95,6 +95,14 @@ public class ParseAdd {
             addCommand = processAddLoan(addInput[1]);
             break;
 
+            case "person":
+                if (!Parser.isCommandComplete(inputString, 2)) {
+                    throw new InsufficientInfoException("Please enter person information after the 'add' command in" +
+                            "this format:\nadd person <MatricNo> <Name>");
+                }
+
+                addCommand = processAddPerson(addInput[1]);
+
         default:
             throw new BadInputException("Unexpected value: " + addInput[0]);
         }

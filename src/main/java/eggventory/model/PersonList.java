@@ -6,11 +6,11 @@ import eggventory.model.loans.Person;
 import java.util.ArrayList;
 
 //@@author Raghav-B
-public class PersonList {
+public final class PersonList {
 
-    private ArrayList<Person> personList;
+    private static ArrayList<Person> personList;
 
-    public PersonList() {
+    public static void PersonList() {
         personList = new ArrayList<>();
     }
 
@@ -20,7 +20,7 @@ public class PersonList {
      * @param name Name to assign to Person. Not unique.
      * @throws BadInputException If Person already exists.
      */
-    public void add(String matricNo, String name) throws BadInputException {
+    public static void add(String matricNo, String name) throws BadInputException {
         if (findPerson(matricNo) != -1) { // Person exists already
             throw new BadInputException("The Person with the specified matriculation number already exists!\n Did you"
                     + " mean to edit this Person's details instead?");
@@ -34,7 +34,7 @@ public class PersonList {
      * @return The unedited Person, for printing purpose.
      * @throws BadInputException If desired Person cannot be found.
      */
-    public Person delete(String matricNo) throws BadInputException {
+    public static Person delete(String matricNo) throws BadInputException {
         int personDeleteIndex = findPerson(matricNo);
         if (personDeleteIndex == -1) {
             throw new BadInputException("Could not find a Person with the specified matriculation number.");
@@ -53,7 +53,7 @@ public class PersonList {
      * @return The unedited Person, for printing purpose.
      * @throws BadInputException If no Person could be found.
      */
-    public Person edit(String matricNo, PersonProperty property, String newValue) throws BadInputException {
+    public static Person edit(String matricNo, PersonProperty property, String newValue) throws BadInputException {
         Person uneditedPerson;
         int editPersonIndex = findPerson(matricNo);
         if (editPersonIndex == -1) {
@@ -82,7 +82,7 @@ public class PersonList {
      * @param matricNo Search query: matricNo.
      * @return index of Person found in PersonList.
      */
-    public int findPerson(String matricNo) {
+    public static int findPerson(String matricNo) {
         for (int i = 0; i < personList.size(); i++) {
             if (personList.get(i).getMatricNo().equals(matricNo)) {
                 return i;
