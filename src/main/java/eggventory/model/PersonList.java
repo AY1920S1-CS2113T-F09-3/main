@@ -3,7 +3,10 @@ package eggventory.model;
 import eggventory.commons.enums.PersonProperty;
 import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.loans.Person;
+import eggventory.ui.TableStruct;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 //@@author Raghav-B
 public final class PersonList {
@@ -92,6 +95,20 @@ public final class PersonList {
     //@@author Deculsion
     public static int getSize() {
         return PersonList.getSize();
+    }
+
+    public TableStruct getAllPersonStruct() {
+        TableStruct tableStruct = new TableStruct("Person List");
+        tableStruct.setTableColumns("Matriculation No.", "Full Name");
+
+        ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
+        for (Person person: personList) {
+            dataArray.add(person.getDataAsArray());
+        }
+
+        tableStruct.setTableData(dataArray);
+
+        return tableStruct;
     }
 
     public static String listToString() {
