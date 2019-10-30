@@ -13,6 +13,12 @@ public class ListPersonCommand extends Command {
         super(type);
     }
 
+    /**
+     * Executes the command.
+     * @param stockList Stocklist object.
+     * @param ui ui object.
+     * @param storage storage objcet.
+     */
     public String execute(StockList stockList, Ui ui, Storage storage) {
         String output = "";
 

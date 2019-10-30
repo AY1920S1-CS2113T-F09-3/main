@@ -97,6 +97,10 @@ public final class PersonList {
         return personList.size();
     }
 
+    /**
+     * Creates a tablestruct of all persons in personlist.
+     * @return A tablestruct object.
+     */
     public static TableStruct getAllPersonStruct() {
         TableStruct tableStruct = new TableStruct("Person List");
         tableStruct.setTableColumns("Matriculation No.", "Full Name");
@@ -111,6 +115,10 @@ public final class PersonList {
         return tableStruct;
     }
 
+    /**
+     * Converts the person list to a string.
+     * @return A string representing all data in personlist.
+     */
     public static String listToString() {
         StringBuilder sb = new StringBuilder();
         sb.append("List of people registered\n");

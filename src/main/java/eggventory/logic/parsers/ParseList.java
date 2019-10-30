@@ -38,6 +38,7 @@ public class ParseList {
         return new ListPersonCommand(CommandType.LIST);
 
     }
+
     /**
      * Processes a user command that began with the word "list".
      * Used to differentiate between the different elements the user is able to list (stock, stocktype, etc),
