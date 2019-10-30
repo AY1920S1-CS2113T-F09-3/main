@@ -31,7 +31,7 @@ public class Eggventory {
      */
     public static void main(String[] args) {
         String currentDir = System.getProperty("user.dir");
-        String filePath = currentDir + "/data/saved_tasks.csv";
+        String filePath = currentDir + "/data/saved_stocks.csv";
 
         storage = new Storage(filePath);
         parser = new Parser();
