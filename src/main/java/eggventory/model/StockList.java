@@ -125,7 +125,7 @@ public class StockList {
         return null;
     }
 
-    //@@author
+    //@@author patwaririshab
     /**
      * Edits a Stock object in a StockList.
      * @param stockCode The unique String that identifies a Stock.

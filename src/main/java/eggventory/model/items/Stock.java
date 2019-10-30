@@ -78,7 +78,7 @@ public class Stock {
         return description;
     }
 
-    //@@author patwaririshab
+
     /**
      * Sets the name of the stock.
      * @param description the name of the stock.
@@ -97,7 +97,7 @@ public class Stock {
         return quantity;
     }
 
-    //@@author patwaririshab
+
     /**
      * Sets the new total number of this stock. To be used by 'change' or 'qty' commands to modify the number.
      * @param newTotal the new total number of items.
@@ -114,7 +114,7 @@ public class Stock {
         return loaned;
     }
 
-    //@@author patwaririshab
+
     /**
      * Sets the number of this stock on loan. To be used by the 'loan' command.
      * @param loaned the number of items on loan.
@@ -131,7 +131,7 @@ public class Stock {
         return lost;
     }
 
-    //@@author patwaririshab
+
     /**
      * Sets the number of this stock that have been lost. To be used by the 'lost' command.
      * @param lost the number of items lost.
@@ -148,7 +148,7 @@ public class Stock {
         return minimum;
     }
 
-    //@@author patwaririshab
+
     /**
      * Updates the minimum quantity of stock that the lab wishes to maintain. To be implemented in the future.
      * @param minimum The minimum quantity.
@@ -236,4 +236,5 @@ public class Stock {
         dataArray.add(description);
         return dataArray;
     }
+    //@@author
 }

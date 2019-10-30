@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author patwaririshab
 public class DeleteStockTypeCommandTest {
 
     private StockList testStockList = new StockList();
@@ -34,7 +35,6 @@ public class DeleteStockTypeCommandTest {
         assertEquals("Sorry, Uncategorised is the default category, and cannot be deleted.", output);
     }
 
-    //@@author patwaririshab
     @Test
     void testExecute_deleteStockType_success() {
 
@@ -53,5 +53,5 @@ public class DeleteStockTypeCommandTest {
                 + "I also deleted the following stocks of that type: \n" + "1. %s | %s | %d | %s\n",
                 testStockType, testStockType, testStockCode, testQuantity, testDescription), output);
     }
-
+    //@@author
 }

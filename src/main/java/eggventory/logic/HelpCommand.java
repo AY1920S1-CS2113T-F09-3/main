@@ -17,8 +17,6 @@ import eggventory.commons.enums.CommandType;
  */
 public class HelpCommand extends Command {
     private String options;
-    private static String OS = System.getProperty("os.name").toLowerCase();
-
 
     /**
      * Constructor for command: "help".

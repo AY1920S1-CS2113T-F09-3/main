@@ -3,9 +3,10 @@ package eggventory.logic.commands.add;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.commons.exceptions.BadInputException;
-import eggventory.logic.commands.add.AddStockCommand;
+import eggventory.stubs.UiStub;
 import eggventory.ui.Cli;
 import eggventory.commons.enums.CommandType;
+import eggventory.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 //@@author patwaririshab
 public class AddStockCommandTest {
     private StockList testStockList = new StockList();
-    private Cli testCli = new Cli();
+    private Ui testCli = new UiStub();
     private Storage testStorage = new Storage("");
     String testStockType;
     String testStockCode;
@@ -22,7 +23,6 @@ public class AddStockCommandTest {
     int testQuantity;
 
 
-    //@@author patwaririshab
     @Test
     void testExecuteAddStock_ValidStock_Succeeds() throws BadInputException {
         testStockList.addStockType("testStockType");

@@ -66,6 +66,7 @@ public class Storage {
         return savedList; //Returns a StockList.
     }
 
+    //@@author patwaririshab
     private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -97,4 +98,5 @@ public class Storage {
             System.out.println("Something went wrong saving the file :(");
         }
     }
+    //@@author
 }
