@@ -94,10 +94,10 @@ public final class PersonList {
 
     //@@author Deculsion
     public static int getSize() {
-        return PersonList.getSize();
+        return personList.size();
     }
 
-    public TableStruct getAllPersonStruct() {
+    public static TableStruct getAllPersonStruct() {
         TableStruct tableStruct = new TableStruct("Person List");
         tableStruct.setTableColumns("Matriculation No.", "Full Name");
 
@@ -118,7 +118,7 @@ public final class PersonList {
 
         for (int i = 0; i < personList.size(); i++) {
             sb.append(String.format("%d: %s\n",
-                    i, personList.get(i).toString())
+                    i + 1, personList.get(i).toString())
             );
         }
 

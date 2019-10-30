@@ -24,6 +24,7 @@ public class ListPersonCommand extends Command {
 
         output = PersonList.listToString();
         ui.print(output);
+        ui.drawTable(PersonList.getAllPersonStruct());
 
         return output;
 
