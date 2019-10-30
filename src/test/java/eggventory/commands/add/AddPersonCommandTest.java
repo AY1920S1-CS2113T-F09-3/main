@@ -17,15 +17,15 @@ class AddPersonCommandTest {
     private StockList testStockList = new StockList();
     private Cli testCli = new Cli();
     private Storage testStorage = new Storage("");
-    private PersonList PersonList = new PersonList();
+    private PersonList personList = new PersonList();
 
     @Test
     void testExecuteAddPerson_ValidPerson_Succeeds() throws BadInputException {
         String output = new AddPersonCommand(CommandType.ADD, "A12345A", "Akshay Narayan")
                 .execute(testStockList, testCli, testStorage);
 
-        assertEquals("Nice, I have added this person for you.\n" +
-                "Matriculation No.: A12345A | Name: Akshay Narayan", output);
+        assertEquals("Nice, I have added this person for you.\n"
+                + "Matriculation No.: A12345A | Name: Akshay Narayan", output);
 
     }
 
