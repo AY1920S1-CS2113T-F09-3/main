@@ -55,4 +55,5 @@ public class EditStockTypeCommand extends Command {
         ui.drawTable(list.getAllStockTypesStruct());
         return output;
     }
+    //@@author
 }

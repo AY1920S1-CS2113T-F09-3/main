@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//@@author patwaririshab
 class EditStockTypeCommandTest {
     StockList testStockList = new StockList();
     Ui testUi = new UiStub();
@@ -28,5 +29,5 @@ class EditStockTypeCommandTest {
                 testNameB, testNameA);
         assertThrows(DuplicateEntryException.class,() -> cmd.execute(testStockList, testUi, testStorage));
     }
-
+    //@@author
 }
