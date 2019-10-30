@@ -1,15 +1,14 @@
 package eggventory;
 
-import eggventory.enums.Property;
-import eggventory.items.Stock;
-import eggventory.items.StockType;
+import eggventory.commons.enums.StockProperty;
+import eggventory.model.items.Stock;
+import eggventory.model.items.StockType;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 
 class StockTypeTest {
@@ -25,6 +24,7 @@ class StockTypeTest {
     }
     */
 
+    //@@author Deculsion
     @Test
     void getQuantity() {
         StockType testStockType = new StockType("Resistor");
@@ -33,11 +33,11 @@ class StockTypeTest {
         assertEquals(1,testStockType.getQuantity());
     }
 
+    //@@author patwaririshab
     @Test
     void addStock_Success() {
         StockType testStockType = new StockType("Resistor");
         assertTrue(testStockType.addStock("Resistor", "R50", 500,"Test Resistor"));
-
     }
 
     @Test
@@ -62,7 +62,7 @@ class StockTypeTest {
     void setStock_StockCode_Success() {
         StockType testStockType = new StockType("testList");
         testStockType.addStock("testList", "R50", 500, "Test Resistor");
-        testStockType.setStock("R50", Property.STOCKCODE, "R500");
+        testStockType.setStock("R50", StockProperty.STOCKCODE, "R500");
         assertEquals("R500",testStockType.getStock("R500").getStockCode());
         assertEquals(null, testStockType.getStock("R50"));
     }
@@ -71,7 +71,7 @@ class StockTypeTest {
     void setStock_Quantity_Success() {
         StockType testStockType = new StockType("testList");
         testStockType.addStock("testList", "R50", 500, "Test Resistor");
-        testStockType.setStock("R50", Property.QUANTITY, "1950");
+        testStockType.setStock("R50", StockProperty.QUANTITY, "1950");
         assertEquals(1950, testStockType.getStock("R50").getQuantity());
     }
 

@@ -1,7 +1,6 @@
-//@@author Raghav-B
-
 package eggventory.ui;
 
+//@@author Raghav-B
 public abstract class Ui {
 
     public abstract void initialize(Runnable runMethod);
@@ -71,5 +70,8 @@ public abstract class Ui {
      */
     String addLine() {
         return "____________________________________________________________";
+    }
+
+    public void drawTable(TableStruct tableStruct) {
     }
 }

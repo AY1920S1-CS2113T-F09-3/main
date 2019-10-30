@@ -1,23 +1,22 @@
-//@@author Raghav-B
-
 package eggventory.ui;
 
-import eggventory.StockList;
-import eggventory.items.Stock;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import java.io.IOException;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+//@@author Raghav-B
 /**
  * This is a controller class used to control the Gui.fxml from the entry point for
  * our application, the Eggventory class. Inherits most of its functionality from Cli
@@ -27,64 +26,95 @@ import java.io.IOException;
  */
 public class Gui extends Ui  {
     @FXML
-    private TextField inputField;
+    private TextFlow textFlow;
     @FXML
     private TextArea outputField;
     @FXML
-    private TableView outputTable;
+    private TableView<ArrayList<String>> outputTable;
     @FXML
     private ScrollPane outputTableScroll;
 
-    public Gui() {
-    }
+    private InputTextBox inputField;
 
     /**
-     * Starts the REPL loop and creates the JavaFX window.
-     * @param runMethod Function passed in for REPL loop.
+     * Starts the REPL loop and creates the JavaFX window along with other JavaFX controls
+     * and event handlers.
+     * @param runMethod Function passed in for REPL loop that is called by some event handlers.
      */
     public void initialize(Runnable runMethod) {
         Platform.startup(() -> {
+            Stage stage = new Stage();
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/Gui.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Gui.fxml"));
                 fxmlLoader.setController(this);
-                Stage stage = fxmlLoader.load();
+                stage = fxmlLoader.load();
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
+            inputField = new InputTextBox(textFlow);
+            outputTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             printIntro();
 
-            // Event handler for pressing ENTER
-            inputField.setOnKeyPressed(keyEvent -> {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    runMethod.run();
+            // Event handler for UP and DOWN arrow keys.
+            stage.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
+                if (keyEvent.getCode() == KeyCode.UP) {
+                    if (inputField.getAllText().equals("")) {
+                        // Can't cycle through command possibilities when
+                        // inputField is empty.
+                        return;
+                    }
+                    inputField.appendText("", -1);
+                } else if (keyEvent.getCode() == KeyCode.DOWN) {
+                    if (inputField.getAllText().equals("")) {
+                        // Can't cycle through command possibilities when
+                        // inputField is empty.
+                        return;
+                    }
+                    inputField.appendText("", 1);
+                } else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+                    inputField.removeFromWord();
+                    keyEvent.consume();
                 }
             });
 
-            // Event handler for pressing TAB
-            inputField.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent ->  {
-                if (keyEvent.getCode() == KeyCode.TAB) {
-                    inputField.appendText("Tab has been pressed! ");
+            // Event handler for all other keys.
+            stage.addEventFilter(KeyEvent.KEY_TYPED, keyEvent ->  {
+                switch ((int) keyEvent.getCharacter().charAt(0)) {
+                case 13: // ENTER
+                    if (inputField.getAllText().equals("")) {
+                        // No input is parsed if there is no text input
+                        // in inputField.
+                        break;
+                    }
+                    runMethod.run();
+                    break;
+                case 9: // TAB
+                    if (inputField.getAllText().equals("")) {
+                        // Prevents autocompletion when user has not even input anything.
+                        return;
+                    }
+                    inputField.acceptSearchText();
                     keyEvent.consume();
+                    break;
+                default: // All other characters
+                    inputField.appendText(keyEvent.getCharacter(), 0);
+                    break;
                 }
             });
         });
     }
 
     /**
-     * Reads in user input from inputField TextBox and outputs to outputField
+     * Reads in user input from inputField and outputs to outputField
      * TextArea.
      * @return Returns String to be used by Parser in REPL loop.
      */
     public String read() {
-        String userInput = inputField.getText();
-
-        if (!userInput.equals("")) { // Check for blank input
-            inputField.setText("");
-            outputField.appendText("\n" + userInput);
-        }
-
+        String userInput = inputField.getAllText();
+        inputField.clearAllText();
+        outputField.appendText("\n" + userInput);
         return userInput;
     }
 
@@ -102,30 +132,36 @@ public class Gui extends Ui  {
     /**
      * Can be called to redraw the table output as and when needed. Takes in a StockList object
      * that it uses to redraw the entire table.
-     * @param stockList Input StockList object to be used to draw the table.
+     * @param tableStruct Structure that holds all data to be displayed.
      */
-    public void drawTable(StockList stockList) {
-        TableColumn<String, Stock> stockTypeCol = new TableColumn<>("Stock Type");
-        stockTypeCol.setCellValueFactory(new PropertyValueFactory<>("stockType"));
+    public void drawTable(TableStruct tableStruct) { // TODO: Change to master list...
+        outputTable.getColumns().clear();
+        outputTable.getItems().clear();
+        outputTable.refresh();
+        TableColumn mainColumn = new TableColumn(tableStruct.getTableName());
+        outputTable.getColumns().add(mainColumn);
 
-        TableColumn<String, Stock> stockCodeCol = new TableColumn<>("Stock Code");
-        stockCodeCol.setCellValueFactory(new PropertyValueFactory<>("stockCode"));
-
-        TableColumn<Integer, Stock> quantityCol = new TableColumn<>("Quantity");
-        quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-
-        TableColumn<String, Stock> descriptionCol = new TableColumn<>("Description");
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-
-        /*for (int i = 0; i < stockList.getStockQuantity(); i++) {
-            for (int i = 0; i < stockList.getStockType().getQuantity(); i++) {
-                outputTable.getItems().add(stockList.getStockType())
+        // Iterating through columns to setup all columns.
+        System.out.println(tableStruct.getTableColumnSize());
+        for (int i = 0; i < tableStruct.getTableColumnSize(); i++) {
+            // Creating column with header
+            TableColumn<ArrayList<String>, String> column = new TableColumn<>(tableStruct.getColumnName(i));
+            // Assigning column to take row values from data stores in tableFormat ArrayList.
+            int finalI = i;
+            if (finalI == 0) {
+                column.setCellValueFactory(cell -> new ReadOnlyObjectWrapper(
+                        outputTable.getItems().indexOf(cell.getValue()) + 1));
+            } else {
+                column.setCellValueFactory(cell -> new ReadOnlyObjectWrapper(cell.getValue().get(finalI - 1)));
             }
-        }
-        // TODO: Can add more columns for loaned, lost, and minimum later...
-        */
 
-        outputTable.getColumns().removeAll();
-        outputTable.getColumns().addAll(stockTypeCol, stockCodeCol, quantityCol, descriptionCol);
+            // Adding column to table to be visualized.
+            mainColumn.getColumns().add(column);
+        }
+
+        // Adding data from tableStruct to outputTable row by row.
+        for (int i = 0; i < tableStruct.getTableRowSize(); i++) {
+            outputTable.getItems().add(tableStruct.getRowData(i));
+        }
     }
 }

@@ -1,11 +1,15 @@
 package eggventory;
 
-import eggventory.commands.Command;
-import eggventory.enums.CommandType;
-import eggventory.parsers.Parser;
+import eggventory.logic.commands.Command;
+import eggventory.commons.enums.CommandType;
+import eggventory.logic.parsers.Parser;
+import eggventory.model.PersonList;
+import eggventory.model.StockList;
+import eggventory.storage.Storage;
 import eggventory.ui.Cli;
-import eggventory.ui.Ui;
 import eggventory.ui.Gui;
+import eggventory.ui.Ui;
+
 
 /**
  * Eggventory is a task list that supports 3 types of classes - Todos, deadlines and events.
@@ -17,6 +21,8 @@ public class Eggventory {
     private static Parser parser;
     private static Ui ui;
     private static StockList stockList;
+    private static PersonList personList;
+    //private static LoanList loanList;
 
     /**
      * Sets up the frontend, the Gui and the event handlers. This will create an instance of the
@@ -25,11 +31,27 @@ public class Eggventory {
      */
     public static void main(String[] args) {
         String currentDir = System.getProperty("user.dir");
-        String filePath = currentDir + "/data/saved_tasks.txt";
+        String stockFilePath = currentDir + "/data/saved_stocks.csv";
+        String stockTypesFilePath = currentDir + "/data/saved_stocktypes.csv";
 
-        storage = new Storage(filePath);
+        storage = new Storage(stockFilePath, stockTypesFilePath);
         parser = new Parser();
         stockList = storage.load();
+        //loanList = new LoanList();
+        personList = new PersonList();
+
+        /*
+        Calendar date = Calendar.getInstance();
+        loanList.addLoan("R500", "A123", 100, date, date);
+        loanList.addLoan("R500", "A6000", 100, date, date);
+        loanList.addLoan("ARDUINO", "A123", 100, date, date);
+        loanList.addLoan("NO", "A12", 100, date, date);
+
+        System.out.print("All: \n" + loanList.printLoans());
+        System.out.print("A123: \n" + loanList.printPersonLoans("A123"));
+        System.out.print("R500: \n" + loanList.printStockLoans("R500"));
+        */
+
 
         if (args.length >= 1 && args[0].equals("cli")) {
             ui = new Cli();
@@ -45,6 +67,7 @@ public class Eggventory {
      */
     private static void userInteraction() {
         try {
+
             String userInput = ui.read();
 
             Command command = parser.parse(userInput);
