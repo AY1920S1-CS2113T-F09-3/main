@@ -18,12 +18,8 @@ public class ParseList {
         return new ListStockCommand(CommandType.LIST);
     }
 
-    private Command processListStockType(String input) throws BadInputException {
+    private Command processListStockType(String input){
         String[] inputArr = input.split(" ");
-        if (inputArr.length > 2) { // Checking for extra arguments
-            throw new BadInputException("Usage of list: 'list stock', 'list stocktype all' or "
-                    + "'list stocktype <Stock Type>'");
-        }
         return new ListStockTypeCommand(CommandType.LIST, inputArr[0]);
     }
 
