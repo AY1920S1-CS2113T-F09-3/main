@@ -256,6 +256,11 @@ public class StockList {
         return ret.toString();
     }
 
+    public boolean isStockTypeEmpty(StockType stocktype) {
+        return (stocktype.getQuantity() == 0);
+    }
+
+
     /**
      * Saves the list into a String.
      * @return The String that will be directly saved into file.
@@ -263,7 +268,7 @@ public class StockList {
     public String saveDetailsString() {
         StringBuilder details = new StringBuilder();
         for (StockType stocktype : stockList) {
-            if(stocktype.getQuantity() != 0 ) {
+            if (isStockTypeEmpty(stocktype) == false) {
                 details.append(stocktype.saveDetailsString()).append("\n");
             }
         }
