@@ -8,6 +8,8 @@ import eggventory.logic.commands.Command;
 import eggventory.commons.enums.CommandType;
 import eggventory.model.items.Stock;
 
+//@@author cyanoei
+
 /**
  * Command objects for deleting stocks.
  * Requires the index (as listed by the system) of the stock. //TODO: Change this to the stock code.

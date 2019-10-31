@@ -59,7 +59,7 @@ public class Parser {
         String[] commandArr = command.split(" ");
         return commandArr.length - 1 >= reqArguments;
     }
-    //@@author
+    //@@author cyanoei
 
     /**
      * Checks if the command keyword (first word is valid).
@@ -174,3 +174,5 @@ public class Parser {
         return userCommand;
     }
 }
+
+//@@author
