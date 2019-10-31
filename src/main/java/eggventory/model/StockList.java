@@ -262,9 +262,10 @@ public class StockList {
      */
     public String saveDetailsString() {
         StringBuilder details = new StringBuilder();
-
         for (StockType stocktype : stockList) {
-            details.append(stocktype.saveDetailsString()).append("\n");
+            if(stocktype.getQuantity() != 0 ) {
+                details.append(stocktype.saveDetailsString()).append("\n");
+            }
         }
 
         return details.toString();
