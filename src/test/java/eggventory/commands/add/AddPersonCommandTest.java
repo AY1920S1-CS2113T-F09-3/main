@@ -9,9 +9,11 @@ import eggventory.storage.Storage;
 import eggventory.stubs.UiStub;
 import eggventory.ui.Cli;
 import eggventory.ui.Ui;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class AddPersonCommandTest {
 
@@ -24,16 +26,14 @@ class AddPersonCommandTest {
     void testExecuteAddPerson_ValidPerson_Succeeds() throws BadInputException {
         AddPersonCommand cmd =  new AddPersonCommand(CommandType.ADD, "A12343A", "Akshay "
                 + "Narayan");
-//        assertEquals("Nice, I have added this person for you.\n"
-//                + "Matriculation No.: A12345A | Name: Akshay Narayan",cmd.execute(testStockList, testCli, testStorage));
         assertDoesNotThrow(() -> cmd.execute(testStockList, testCli, testStorage));
     }
 
     @Test
     void testExecuteAddPerson_RepeatedPerson_ThrowsBadInputException() throws BadInputException {
         // Adding of A12345A again not needed as PersonList is static.
-        Exception exception = assertThrows(BadInputException.class, () ->
-                new AddPersonCommand(CommandType.ADD, "A12345A", "Akshay Narayan")
+        Exception exception = Assertions.assertThrows(BadInputException.class, () ->
+                new AddPersonCommand(CommandType.ADD, "A12345A", "Not Akshay Narayan")
                         .execute(testStockList,testCli,testStorage)
         );
 
