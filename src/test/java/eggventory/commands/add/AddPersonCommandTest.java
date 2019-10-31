@@ -16,7 +16,7 @@ class AddPersonCommandTest {
 
     private StockList testStockList = new StockList();
     private Cli testCli = new Cli();
-    private Storage testStorage = new Storage("");
+    private Storage testStorage = new Storage("", "");
     private PersonList personList = new PersonList();
 
     @Test
