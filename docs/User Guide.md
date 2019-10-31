@@ -1,5 +1,5 @@
 <h1 id="eggventory-user-guide">Eggventory User Guide</h1>
-<p>By: Team F09-03<br>
+<p>By: Team F09-03<br> 
 Dated: 24 October 2019</p>
 <h2 id="table-of-contents">Table of contents</h2>
 <h3 id="introduction-"><a href="#introduction">1. Introduction </a></h3>
