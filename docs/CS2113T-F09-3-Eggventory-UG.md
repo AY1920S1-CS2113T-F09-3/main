@@ -1,9 +1,3 @@
----
-extensions:
-  preset: gfm
-
----
-
 <h1 id="eggventory-user-guideby-team-f09-03">Eggventory User GuideBy: Team F09-03</h1>
 <p>Dated:  October 2019</p>
 <h2 id="table-of-contents">Table of contents</h2>
