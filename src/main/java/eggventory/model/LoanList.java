@@ -44,7 +44,6 @@ public final class LoanList {
      */
     public static void addLoan(String stockCode, String matricNo, int quantity,
                                Calendar loanDate, Calendar returnDate) {
-        //Add one set of information to the table, and one to the list.
         Loan loan = new Loan(stockCode, matricNo, quantity, loanDate, returnDate);
 
         loansList.add(loan);
@@ -89,7 +88,7 @@ public final class LoanList {
      * Returns the loaned date of a Loan.
      * @param stockCode the stockCode of the Stock loaned.
      * @param matricNo the matric number of the Person making the Loan.
-     * @return the loaned date. 
+     * @return the loaned date.
      */
     public static Calendar getStockLoanDate(String stockCode, String matricNo) {
         Loan loan = findLoan(stockCode, matricNo);
