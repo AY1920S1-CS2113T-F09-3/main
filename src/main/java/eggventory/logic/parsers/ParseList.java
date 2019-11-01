@@ -2,29 +2,40 @@ package eggventory.logic.parsers;
 
 import eggventory.commons.exceptions.InsufficientInfoException;
 import eggventory.logic.commands.Command;
+import eggventory.logic.commands.CommandDictionary;
+import eggventory.logic.commands.list.ListPersonCommand;
 import eggventory.logic.commands.list.ListStockCommand;
 import eggventory.logic.commands.list.ListStockTypeCommand;
 import eggventory.commons.enums.CommandType;
 import eggventory.commons.exceptions.BadInputException;
 
+//@@author yanprosobo
 public class ParseList {
 
     private Command processListStock(String input) throws BadInputException {
         String[] inputArr = input.split(" ");
         if (inputArr.length > 1) { // Checking if anything extraneous is after stock
-            throw new BadInputException("Usage of list: 'list stock', 'list stocktype all' or "
-                    + "'list stocktype <Stock Type>'");
+            throw new BadInputException(CommandDictionary.getCommandUsage("list stock"));
         }
         return new ListStockCommand(CommandType.LIST);
     }
 
     private Command processListStockType(String input) throws BadInputException {
         String[] inputArr = input.split(" ");
-        if (inputArr.length > 2) { // Checking for extra arguments
-            throw new BadInputException("Usage of list: 'list stock', 'list stocktype all' or "
-                    + "'list stocktype <Stock Type>'");
+        if (inputArr.length > 1) { // Checking for extra arguments
+            throw new BadInputException(CommandDictionary.getCommandUsage("list stocktype"));
         }
         return new ListStockTypeCommand(CommandType.LIST, inputArr[0]);
+    }
+
+    private Command processListPerson(String input) throws BadInputException {
+        String[] inputArr = input.split(" +");
+        if (inputArr.length > 1) {
+            throw new BadInputException(CommandDictionary.getCommandUsage("list person"));
+        }
+
+        return new ListPersonCommand(CommandType.LIST);
+
     }
 
     /**
@@ -48,17 +59,20 @@ public class ParseList {
 
         case "stocktype":
             if (!Parser.isCommandComplete(inputString, 1)) {
-                throw new InsufficientInfoException("Please enter stock information after the 'list' command in"
-                        + " this format:\nlist stocktype <StockType> OR list stocktype all");
+                throw new InsufficientInfoException(CommandDictionary.getCommandUsage("list stocktype"));
             }
             listCommand = processListStockType(inputArr[1]);
             break;
 
+        case "person":
+            listCommand = processListPerson(inputArr[0]);
+            break;
+
         default:
-            throw new BadInputException("Usage of list: 'list stock', 'list stocktype all' or "
-                    + "'list stocktype <Stock Type>'");
+            throw new BadInputException(CommandDictionary.getCommandUsage("list"));
         }
 
         return listCommand;
     }
 }
+//@@author
