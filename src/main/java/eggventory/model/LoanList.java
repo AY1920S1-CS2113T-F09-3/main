@@ -1,17 +1,17 @@
 package eggventory.model;
 
 import eggventory.model.loans.Loan;
-import eggventory.model.loans.LoanPair;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
 //@@author cyanoei
+
 /**
  * The LoanList class stores:
  * 1) A list of Loan objects containing individual Loan details, and
- * 2) and a list of pairs showing the relationships between the Stocks and Persons loaning them.
+ * 2) A HashMap mapping StockCode to quantity of Stock loaned out.
  * Adding, editing and deleting loans updates both these lists.
  * Loans can be printed as a complete list of all loans, or only by the Person or Stock involved.
  */
@@ -51,6 +51,8 @@ public final class LoanList {
         updateStockLoaned(stockCode, quantity);
     }
 
+    //@@author Deculsion
+
     /**
      * Deletes a Loan object from the system. Removes both records of the loan.
      * @param stockCode the stockCode of the Stock.
@@ -70,13 +72,10 @@ public final class LoanList {
     }
 
     /**
-     * Returns the Loan quantity of a queried Loan.
-     * The map requires the exact same instance of the key in order to access the quantity.
-     * Therefore constructing the key (pair of matricNo/stockCode) cannot directly access the value (the Loan).
-     * Rather, we have to compare the pairs using .equals and then use the original instance to access the Loan.
+     * Returns the Loan quantity of a particular queried Loan.
      * @param stockCode the stockCode of the Stock involved.
      * @param matricNo the matric number of the Person involved.
-     * @return the quantity.
+     * @return the quantity of the Stock loaned.
      */
     public static int getLoanQuantity(String stockCode, String matricNo) {
         Loan loan = findLoan(stockCode, matricNo);
@@ -86,13 +85,53 @@ public final class LoanList {
         return loan.getQuantity();
     }
 
+    /**
+     * Returns the loaned date of a Loan.
+     * @param stockCode the stockCode of the Stock loaned.
+     * @param matricNo the matric number of the Person making the Loan.
+     * @return the loaned date. 
+     */
+    public static Calendar getStockLoanDate(String stockCode, String matricNo) {
+        Loan loan = findLoan(stockCode, matricNo);
+        if (loan == null) {
+            return null;
+        }
+        return loan.getLoanDate();
+    }
+
+    /**
+     * Returns the due date of the Loan.
+     * @param stockCode the stockCode of the Stock loaned.
+     * @param matricNo the matric number of the Person making the Loan.
+     * @return the return date.
+     */
+    public static Calendar getStockReturnDate(String stockCode, String matricNo) {
+        Loan loan = findLoan(stockCode, matricNo);
+        if (loan == null) {
+            return null;
+        }
+        return loan.getReturnDate();
+    }
+
+    /**
+     * Returns the total quantity of a Stock that is on loan.
+     * @param stockCode the stockCode of the queried stock.
+     * @return the total quantity of that Stock which is on loan.
+     */
     public static int getStockLoanedQuantity(String stockCode) {
         return stockLoaned.get(stockCode);
     }
 
+
+    /**
+     * Returns the Loan of a particular Stock to a particular Person.
+     * @param stockCode the stockCode of the Stock.
+     * @param matricNo the matric number of the Person.
+     * @return the Loan object of this particular loan pair.
+     */
     private static Loan findLoan(String stockCode, String matricNo) {
         for (Loan loan : loansList) {
-            if (loan.getStockCode().equals(stockCode) && loan.getMatricNo().equals(matricNo)) {
+            if (loan.loanEquals(stockCode, matricNo)) {
                 return loan;
             }
         }
@@ -100,6 +139,11 @@ public final class LoanList {
         return null;
     }
 
+    /**
+     * Updates the quantity of Stock loaned out. Used when loans are added or deleted/returned.
+     * @param stockCode the Stock whose loaned quantity is changed.
+     * @param quantity the amount the quantity is changing by.
+     */
     private static void updateStockLoaned(String stockCode, int quantity) {
         if (stockLoaned.containsKey(stockCode)) {
             quantity += stockLoaned.get(stockCode);
@@ -107,6 +151,11 @@ public final class LoanList {
         stockLoaned.put(stockCode, quantity);
     }
 
+    /**
+     * Returns a list of Loans made by a single Person.
+     * @param matricNo the matric number of the Person.
+     * @return the list.
+     */
     private static ArrayList<Loan> getPersonLoans(String matricNo) {
         ArrayList<Loan> loans = new ArrayList<Loan>();
         for (Loan loan : loansList) {
@@ -118,7 +167,6 @@ public final class LoanList {
         return loans;
     }
 
-    //TODO: Add getters for the loan and return dates also.
     /**
      * Means of obtaining all the Loans of a single type of Stock.
      * @param stockCode the unique identifier of the Stock.
