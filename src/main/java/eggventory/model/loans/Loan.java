@@ -1,5 +1,6 @@
 package eggventory.model.loans;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 //@@author cyanoei
@@ -82,6 +83,15 @@ public class Loan {
     @Override
     public String toString() {
         return getMatricNo() + " loaned " + getQuantity() + " of " + getStockCode() + ".";
+    }
+
+    public ArrayList<String> getStockDataAsArray() {
+        ArrayList<String> data = new ArrayList<>();
+
+        data.add(stockCode);
+        data.add(String.valueOf(quantity));
+
+        return data;
     }
 
     //@@author

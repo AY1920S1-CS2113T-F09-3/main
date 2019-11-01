@@ -2,6 +2,7 @@ package eggventory.model;
 
 import eggventory.model.loans.Loan;
 import eggventory.model.loans.LoanPair;
+import eggventory.ui.TableStruct;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -180,6 +181,22 @@ public final class LoanList {
         }
 
         return output;
+    }
+
+    public static TableStruct getPersonLoansStruct(String matricNo) {
+        TableStruct dataTable = new TableStruct("Loans of " + matricNo);
+        dataTable.setTableColumns("Stock Code", "Quantity Loaned");
+
+        ArrayList<Loan> loans = getPersonLoans(matricNo);
+        ArrayList<ArrayList<String>> dataList = new ArrayList<>();
+
+        for (Loan loan : loans) {
+            dataList.add(loan.getStockDataAsArray());
+        }
+
+        dataTable.setTableData(dataList);
+
+        return dataTable;
     }
 
     //@@author
