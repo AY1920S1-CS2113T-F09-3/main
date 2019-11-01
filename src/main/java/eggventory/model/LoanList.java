@@ -59,7 +59,9 @@ public final class LoanList {
     public static boolean deleteLoan(String stockCode, String matricNo) {
         Loan loan = findLoan(stockCode, matricNo);
 
-        if (loan == null) return false;
+        if (loan == null) {
+            return false;
+        }
 
         updateStockLoaned(stockCode, loan.getQuantity() * -1);
         loansList.remove(loan);
@@ -78,7 +80,9 @@ public final class LoanList {
      */
     public static int getLoanQuantity(String stockCode, String matricNo) {
         Loan loan = findLoan(stockCode, matricNo);
-        if (loan == null) return -1;
+        if (loan == null) {
+            return -1;
+        }
         return loan.getQuantity();
     }
 

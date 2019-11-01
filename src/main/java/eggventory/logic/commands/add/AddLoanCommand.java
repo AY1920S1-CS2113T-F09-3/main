@@ -51,8 +51,7 @@ public class AddLoanCommand extends Command {
                     + "Stock: %s | Person: %s | Quantity: %d", stockCode, matricNo, quantity));
 
             ui.print(output);
-        }
-        else {
+        } else {
             output = ("OOPS there is insufficient stock to loan out!");
         }
 
