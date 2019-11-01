@@ -10,7 +10,7 @@ import eggventory.storage.Storage;
 import eggventory.ui.Ui;
 
 //@@author Deculsion
-public class ListPersonLoansCommand extends Command{
+public class ListPersonLoansCommand extends Command {
     String matricNo;
 
     public ListPersonLoansCommand(CommandType type, String matricNo) {

@@ -85,6 +85,9 @@ public class Loan {
         return getMatricNo() + " loaned " + getQuantity() + " of " + getStockCode() + ".";
     }
 
+    /**
+     * Gets the data of this stock as an arraylist.
+     */
     public ArrayList<String> getStockDataAsArray() {
         ArrayList<String> data = new ArrayList<>();
 
