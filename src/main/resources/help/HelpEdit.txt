@@ -9,8 +9,8 @@ edit:       edit stock <Stock Code> <Stock Property> <New Value>
 <Stock Type>        The category name of the stock
 *<Matric No.>        The matriculation number of the person/student
 *<Person Property>   The attribute of the person. This includes 'name' or 'matric'
-<Quantity>          The number of stock in the inventory
-<Description>       The description of the stock
+<Quantity>          The number of that stock in the inventory
+<Description>       A short description of the stock
 <New Value>         The value of the property mentioned will be replaced by this new value
 
 E.g. edit stock R500 quantity 100
