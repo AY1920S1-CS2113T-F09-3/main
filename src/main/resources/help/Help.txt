@@ -18,14 +18,14 @@ edit
     edit stocktype <Stock Type> <New Value>
     *edit person <Matric No.> <Person Property> <New Value>
 
-*list
+list
     list stock
     list stocktype all
     list stocktype <Stock Type>
     list person
-    list loan
-    list template
-    list lost
+    *list loan
+    *list template
+    *list lost
 
 *find
     find stock <Query>

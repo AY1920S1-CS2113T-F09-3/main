@@ -2,6 +2,7 @@ Deletes existing item, item type or person in the database.
 
 delete:     delete stock <Stock Code>
             delete stocktype <Stock Type>
+            *delete loan?
             *delete person <Matric No.>
 
 <Stock Code>        The model number of the existing stock

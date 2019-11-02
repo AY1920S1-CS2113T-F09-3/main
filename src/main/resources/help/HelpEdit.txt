@@ -2,6 +2,7 @@ Directly modifies the value of a property of an item, item type or person.
 
 edit:       edit stock <Stock Code> <Stock Property> <New Value>
             edit stocktype <Stock Type> <New Value>
+            *edit loan??
             *edit person <Matric No.> <Person Property> <New Value>
 
 <Stock Code>        The model number of the existing stock
