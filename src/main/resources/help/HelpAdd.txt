@@ -1,8 +1,8 @@
-Add new items or item types into the database.
+Add new items, item types or people into the database.
 
-add:    add stock <Stock Type> <Stock Code> <Quantity> <Description>
-        add stocktype <Stock Type>
-        add person <Matric No.> <Name>
+add:        add stock <Stock Type> <Stock Code> <Quantity> <Description>
+            add stocktype <Stock Type>
+            add person <Matric No.> <Name>
 
 <Stock Type>        The category name of the stock
 <Stock Code>        The model number of the new stock

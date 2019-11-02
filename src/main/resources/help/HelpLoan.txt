@@ -1,1 +1,4 @@
-helploan
+Keep a record of items and the person who loaned those items in the inventory.
+
+loan:       loan add <Matric No.> <Stock Code> <Quantity>
+            *?loan add template <Matric No.> <Template name>
