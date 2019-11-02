@@ -8,4 +8,4 @@ delete:     delete stock <Stock Code>
 <Stock Type>        The category name of the stock
 *<Matric No.>        The matriculation number of the person/student
 
-You can find out existing stock code and stock type by using 'list'
+You can find out existing stock code, stock type and person by using 'list'
