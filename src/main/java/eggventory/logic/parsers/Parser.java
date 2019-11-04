@@ -1,9 +1,11 @@
 package eggventory.logic.parsers;
 
 import eggventory.logic.commands.Command;
+import eggventory.logic.commands.CommandDictionary;
 import eggventory.logic.commands.FindCommand;
 import eggventory.logic.HelpCommand;
 import eggventory.logic.commands.ByeCommand;
+import eggventory.logic.commands.EchoCommand;
 import eggventory.commons.enums.CommandType;
 import eggventory.commons.exceptions.BadInputException;
 import eggventory.commons.exceptions.InsufficientInfoException;
@@ -59,7 +61,7 @@ public class Parser {
         String[] commandArr = command.split(" ");
         return commandArr.length - 1 >= reqArguments;
     }
-    //@@author
+    //@@author cyanoei
 
     /**
      * Checks if the command keyword (first word is valid).
@@ -87,9 +89,7 @@ public class Parser {
         //Commands which are single words.
         case "list":
             if (inputArr.length == 1) {
-                // TODO: Interface this with HELP feature or CommandDictionary.
-                throw new InsufficientInfoException("Usage of list: 'list stock', 'list stocktype all' or "
-                        + "'list stocktype <Stock Type>'");
+                throw new InsufficientInfoException(CommandDictionary.getCommandUsage("list"));
             } else {
                 command = listParser.parse(inputArr[1]);
             }
@@ -100,8 +100,7 @@ public class Parser {
 
         case "delete":
             if (inputArr.length == 1) {
-                throw new InsufficientInfoException("Usage of delete: delete stock <StockCode>, delete stocktype "
-                        + "<StockType, or delete loan <StockCode> <MatricNo>");
+                throw new InsufficientInfoException(CommandDictionary.getCommandUsage("delete"));
             }
             inputArr[1] = inputArr[1].strip(); //Removes whitespace after the stockCode so that it can parse correctly.
             command = deleteParser.parse(inputArr[1]);
@@ -110,8 +109,7 @@ public class Parser {
         //Commands which require string input.
         case "add": {
             if (inputArr.length == 1) { //User command only said "add" and nothing else.
-                //TODO: Instead of BadInputException, we should be returning a helpCommand.
-                throw new InsufficientInfoException("'" + inputArr[0] + "' requires 1 or more arguments.");
+                throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add"));
             } else {
                 command = addParser.parse(inputArr[1]);
             }
@@ -119,7 +117,7 @@ public class Parser {
         }
         case "find": {
             if (inputArr.length == 1) {
-                throw new InsufficientInfoException("'" + inputArr[0] + "' requires 1 or more arguments.");
+                throw new InsufficientInfoException(CommandDictionary.getCommandUsage("find"));
             }
 
             String description = inputArr[1].trim(); //Might need to catch empty string exceptions?
@@ -132,7 +130,7 @@ public class Parser {
         }
         case "edit": {
             if (inputArr.length == 1) {
-                throw new InsufficientInfoException("'" + inputArr[0] + "' requires 1 or more arguments.");
+                throw new InsufficientInfoException(CommandDictionary.getCommandUsage("edit"));
             } else {
                 command = editParser.parse(inputArr[1]);
             }
@@ -147,7 +145,14 @@ public class Parser {
                 command = new HelpCommand(CommandType.HELP, inputArr[1]);
             }
             break;
+
         }
+
+        case "echo": {
+            command = new EchoCommand(CommandType.EDIT, inputArr[1]);
+            break;
+        }
+
         default:
             throw new BadInputException("Sorry, I don't recognise that input keyword!");
         }
@@ -174,3 +179,5 @@ public class Parser {
         return userCommand;
     }
 }
+
+//@@author
