@@ -60,7 +60,7 @@ public class Parser {
         String[] commandArr = command.split(" ");
         return commandArr.length - 1 >= reqArguments;
     }
-    //@@author
+    //@@author cyanoei
 
     /**
      * Checks if the command keyword (first word is valid).
@@ -108,7 +108,6 @@ public class Parser {
         //Commands which require string input.
         case "add": {
             if (inputArr.length == 1) { //User command only said "add" and nothing else.
-                //TODO: Instead of BadInputException, we should be returning a helpCommand.
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add"));
             } else {
                 command = addParser.parse(inputArr[1]);
@@ -172,3 +171,5 @@ public class Parser {
         return userCommand;
     }
 }
+
+//@@author
