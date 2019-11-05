@@ -11,9 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class TemplateListTest {
 
     Loan[] loans = new Loan[1];
+
     public TemplateListTest() {
         loans[0] = new Loan("TestCode", "1");
     }
+
     @Test
     void addTemplate() {
         assertTrue(TemplateList.addTemplate("Test Template", loans));
