@@ -232,7 +232,7 @@ public class StockList {
      */
     public String toStocktypeString() {
         StringBuilder ret = new StringBuilder();
-        ret.append("QUERY INVENTORY\n");
+        ret.append("LISTING STOCKTYPES\n");
         for (StockType stocktype : stockList) {
             ret.append("------------------------\n");
             ret.append(stocktype.getName()).append("\n");
@@ -249,7 +249,6 @@ public class StockList {
         ret.append("CURRENT INVENTORY\n");
 
         for (StockType stocktype : stockList) {
-            ret.append("------------------------\n");
             ret.append(stocktype.toString()).append("\n");
         }
 

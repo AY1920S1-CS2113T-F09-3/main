@@ -1,7 +1,6 @@
 package eggventory.model.items;
 
 import eggventory.commons.enums.StockProperty;
-import eggventory.commons.exceptions.BadInputException;
 
 import java.util.ArrayList;
 
@@ -15,6 +14,9 @@ import java.util.ArrayList;
 public class StockType {
     private String name;
     private ArrayList<Stock> stocks;
+
+    private static String stockTypeHeader = "------------------------\n";
+
 
 
     /**
@@ -269,15 +271,24 @@ public class StockType {
         return false; //If none of the stocks had the same code.
     }
 
+
+
     //@@author Deculsion
     /**
      * A string of all the stock objects within this stocktype. Should only be called by Cli and StockList.
      * @return A string list of all the stock objects and their details.
      */
     public String toString() {
-        StringBuilder ret = new StringBuilder();
-        int i = 1;
 
+        //Do not show empty stockTypes.
+        if (stocks.size() == 0) {
+            return "";
+        }
+
+        StringBuilder ret = new StringBuilder();
+        ret.append(stockTypeHeader);
+
+        int i = 1;
         for (Stock stock : stocks) {
             ret.append(String.format("%d. ", i++)).append(stock.toString()).append("\n");
         }
