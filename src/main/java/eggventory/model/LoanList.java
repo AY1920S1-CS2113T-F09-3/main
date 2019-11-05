@@ -1,6 +1,8 @@
 package eggventory.model;
 
 import eggventory.model.loans.Loan;
+import eggventory.model.loans.LoanPair;
+import eggventory.ui.TableStruct;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,12 +73,21 @@ public final class LoanList {
     }
 
     /**
-     * Returns the Loan quantity of a particular queried Loan.
+     * Adds a new stock to track in LoanList.
+     * @param stockCode The code of the stock
+     * @param quantity The starting quantity of the stock
+     */
+    public static void addStock(String stockCode, int quantity) {
+        updateStockLoaned(stockCode, quantity);
+    }
+
+    /**
+     * Returns the quantity of a certain Stock that a Person has loaned out.
      * @param stockCode the stockCode of the Stock involved.
      * @param matricNo the matric number of the Person involved.
-     * @return the quantity of the Stock loaned.
+     * @return the quantity loaned out by a person.
      */
-    public static int getLoanQuantity(String stockCode, String matricNo) {
+    public static int getPersonLoanQuantity(String stockCode, String matricNo) {
         Loan loan = findLoan(stockCode, matricNo);
         if (loan == null) {
             return -1;
@@ -113,11 +124,14 @@ public final class LoanList {
     }
 
     /**
-     * Returns the total quantity of a Stock that is on loan.
-     * @param stockCode the stockCode of the queried stock.
-     * @return the total quantity of that Stock which is on loan.
+     * Returns the total quantity of a certain Stock has been loaned out.
+     * @param stockCode stockCode of the queried Stock.
+     * @return The total quantity currently loaned out.
      */
     public static int getStockLoanedQuantity(String stockCode) {
+        if (stockLoaned.get(stockCode) == null) {
+            return -1;
+        }
         return stockLoaned.get(stockCode);
     }
 
@@ -227,6 +241,45 @@ public final class LoanList {
         }
 
         return output;
+    }
+
+    /**
+     * Returns all loan data as a TableStruct.
+     * @return The TableStruct of all data.
+     */
+    public static TableStruct getAllLoansStruct() {
+        TableStruct dataTable = new TableStruct("Loan list");
+        dataTable.setTableColumns("Matric No.", "Name", "StockCode", "Quantity");
+
+        ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
+        for (Loan loan : loansList) {
+            dataArray.add(loan.getDataAsArray());
+        }
+
+        dataTable.setTableData(dataArray);
+
+        return dataTable;
+
+    }
+
+    /**
+     * Returns all of a person's loans as a TableStruct.
+     * @param matricNo Matriculation number of person to output.
+     */
+    public static TableStruct getPersonLoansStruct(String matricNo) {
+        TableStruct dataTable = new TableStruct("Loans of " + matricNo);
+        dataTable.setTableColumns("Stock Code", "Quantity Loaned");
+
+        ArrayList<Loan> loans = getPersonLoans(matricNo);
+        ArrayList<ArrayList<String>> dataList = new ArrayList<>();
+
+        for (Loan loan : loans) {
+            dataList.add(loan.getStockDataAsArray());
+        }
+
+        dataTable.setTableData(dataList);
+
+        return dataTable;
     }
 
     //@@author
