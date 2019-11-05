@@ -45,3 +45,5 @@ list
     undo
 *redo
     redo
+bye
+    bye
