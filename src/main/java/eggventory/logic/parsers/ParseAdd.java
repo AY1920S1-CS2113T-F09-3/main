@@ -2,7 +2,11 @@ package eggventory.logic.parsers;
 
 import eggventory.logic.commands.Command;
 import eggventory.logic.commands.CommandDictionary;
-import eggventory.logic.commands.add.*;
+import eggventory.logic.commands.add.AddPersonCommand;
+import eggventory.logic.commands.add.AddLoanCommand;
+import eggventory.logic.commands.add.AddStockCommand;
+import eggventory.logic.commands.add.AddStockTypeCommand;
+import eggventory.logic.commands.add.AddTemplateCommand;
 import eggventory.commons.enums.CommandType;
 import eggventory.commons.exceptions.BadInputException;
 import eggventory.commons.exceptions.InsufficientInfoException;
@@ -70,7 +74,7 @@ public class ParseAdd {
         ArrayList<Pair<String, String>> loanPairs = new ArrayList<>();
 
         for (int i = 1; i < addInput.length; i += 2) {
-            loanPairs.add(new Pair<>(addInput[i], addInput[i+1]));
+            loanPairs.add(new Pair<>(addInput[i], addInput[i + 1]));
         }
 
         return new AddTemplateCommand(CommandType.ADD, addInput[0], loanPairs);
