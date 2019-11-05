@@ -37,7 +37,7 @@ public class AddLoanCommand extends Command {
     }
 
     private boolean sufficientStock() {
-        if (quantity - LoanList.getStockLoanedQuantity(stockCode) < 0) {
+        if (LoanList.getStockLoanedQuantity(stockCode) - quantity < 0) {
             return false;
         }
         return true;
