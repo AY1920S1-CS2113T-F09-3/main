@@ -29,7 +29,7 @@ public class TemplateList {
      * @return Boolean representing whether the operation was a success.
      */
     public static boolean deleteTemplate(String name) {
-        if (templateExists(name)) {
+        if (!templateExists(name)) {
             return false;
         }
 
