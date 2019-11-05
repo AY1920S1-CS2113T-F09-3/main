@@ -99,6 +99,10 @@ public class Loan {
         return data;
     }
 
+    /**
+     * Gets all data of this loan as an arraylist.
+     * @return The array list of all data in this loan.
+     */
     public ArrayList<String> getDataAsArray() {
         ArrayList<String> dataArray = new ArrayList<>();
 

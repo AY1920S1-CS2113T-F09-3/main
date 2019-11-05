@@ -197,7 +197,11 @@ public final class LoanList {
         return output;
     }
 
-    public static TableStruct getAllLoans() {
+    /**
+     * Returns all loan data as a TableStruct.
+     * @return The TableStruct of all data.
+     */
+    public static TableStruct getAllLoansStruct() {
         TableStruct dataTable = new TableStruct("Loan list");
         dataTable.setTableColumns("Matric No.", "Name", "StockCode", "Quantity");
 

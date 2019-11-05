@@ -94,6 +94,11 @@ public final class PersonList {
 
     //@@author Deculsion
 
+    /**
+     * Returns the name of a person given the matric number.
+     * @param matricNo Matric No of person to search for
+     * @return The name of the person.
+     */
     public static String getName(String matricNo) {
         Person person = personList.get(findPerson(matricNo));
 
