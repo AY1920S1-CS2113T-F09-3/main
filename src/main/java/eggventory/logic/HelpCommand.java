@@ -83,6 +83,7 @@ public class HelpCommand extends Command {
                 } catch (IOException e) {
                     output = "Error in reading HelpBye.txt";
                 }
+                break;
             default:
                 output = "Your help command is not defined. Please enter 'help' for reference.";
             }
