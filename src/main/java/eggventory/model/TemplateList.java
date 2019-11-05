@@ -8,6 +8,12 @@ import java.util.HashMap;
 public class TemplateList {
     private static HashMap<String, Loan[]> templates = new HashMap<>();
 
+    /**
+     * Adds a specified template.
+     * @param name Name of the template.
+     * @param loans Array of Loan objects to be associated with the template.
+     * @return Boolean representing whether the operation was a success.
+     */
     public static boolean addTemplate(String name, Loan[] loans) {
         if (templateExists(name)) {
             return false;
@@ -17,6 +23,11 @@ public class TemplateList {
         return true;
     }
 
+    /**
+     * Deletes a specified template.
+     * @param name Name of the template.
+     * @return Boolean representing whether the operation was a success.
+     */
     public static boolean deleteTemplate(String name) {
         if (templateExists(name)) {
             return false;
@@ -27,7 +38,15 @@ public class TemplateList {
         return true;
     }
 
+    /**
+     * Returns all the loans of a template.
+     * @param name Name of template.
+     * @return An array of Loan objects of the template. Null if it doesn't exist.
+     */
     public static Loan[] getTemplateLoans(String name) {
+        if (!templateExists(name)) {
+            return null;
+        }
         return templates.get(name);
     }
 
@@ -39,7 +58,15 @@ public class TemplateList {
         return false;
     }
 
+    /**
+     * Prints all loans of a template.
+     * @param name Name of template to print.
+     * @return A string of all the loans within the template.
+     */
     public static String printTemplateLoans(String name) {
+        if (!templateExists(name)) {
+            return "The template does not exist!";
+        }
         Loan[] loans = templates.get(name);
         StringBuilder sb = new StringBuilder();
 
