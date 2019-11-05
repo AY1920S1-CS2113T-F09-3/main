@@ -1,5 +1,7 @@
 package eggventory.model.loans;
 
+import eggventory.model.PersonList;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -95,6 +97,17 @@ public class Loan {
         data.add(String.valueOf(quantity));
 
         return data;
+    }
+
+    public ArrayList<String> getDataAsArray() {
+        ArrayList<String> dataArray = new ArrayList<>();
+
+        dataArray.add(matricNo);
+        dataArray.add(PersonList.getName(matricNo));
+        dataArray.add(stockCode);
+        dataArray.add(Integer.toString(quantity));
+
+        return dataArray;
     }
 
     //@@author

@@ -93,6 +93,13 @@ public final class PersonList {
     }
 
     //@@author Deculsion
+
+    public static String getName(String matricNo) {
+        Person person = personList.get(findPerson(matricNo));
+
+        return person.getName();
+    }
+
     public static int getSize() {
         return personList.size();
     }
