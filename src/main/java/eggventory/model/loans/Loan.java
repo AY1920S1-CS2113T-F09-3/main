@@ -1,7 +1,6 @@
 package eggventory.model.loans;
 
 import eggventory.model.PersonList;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -123,7 +122,6 @@ public class Loan {
 
         return dataArray;
     }
-
     //@@author
 
 

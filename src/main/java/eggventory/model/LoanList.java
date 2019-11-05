@@ -103,6 +103,15 @@ public final class LoanList {
     }
 
     /**
+     * Adds a new stock to track in LoanList.
+     * @param stockCode The code of the stock
+     * @param quantity The starting quantity of the stock
+     */
+    public static void addStock(String stockCode, int quantity) {
+        updateStockLoaned(stockCode, quantity);
+    }
+
+    /**
      * Returns the quantity of a certain Stock that a Person has loaned out.
      * @param stockCode the stockCode of the Stock involved.
      * @param matricNo the matric number of the Person involved.
