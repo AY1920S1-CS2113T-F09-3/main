@@ -3,6 +3,7 @@ package eggventory.logic.parsers;
 import eggventory.commons.exceptions.InsufficientInfoException;
 import eggventory.logic.commands.Command;
 import eggventory.logic.commands.CommandDictionary;
+import eggventory.logic.commands.list.ListLoanCommand;
 import eggventory.logic.commands.list.ListPersonCommand;
 import eggventory.logic.commands.list.ListPersonLoansCommand;
 import eggventory.logic.commands.list.ListStockCommand;

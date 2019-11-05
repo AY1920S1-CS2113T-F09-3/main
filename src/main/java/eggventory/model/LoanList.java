@@ -250,7 +250,6 @@ public final class LoanList {
 
     }
 
-
     /**
      * Returns all of a person's loans as a TableStruct.
      * @param matricNo Matriculation number of person to output.
