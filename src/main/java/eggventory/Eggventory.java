@@ -22,9 +22,6 @@ public class Eggventory {
     private static Parser parser;
     private static Ui ui;
     private static StockList stockList;
-    private static LoanList loanList;
-    private static PersonList personList;
-    //private static LoanList loanList;
 
     /**
      * Sets up the frontend, the Gui and the event handlers. This will create an instance of the
@@ -39,8 +36,6 @@ public class Eggventory {
         storage = new Storage(stockFilePath, stockTypesFilePath);
         parser = new Parser();
         stockList = storage.load();
-        loanList = new LoanList();
-        personList = new PersonList();
 
         /*
         Calendar date = Calendar.getInstance();
