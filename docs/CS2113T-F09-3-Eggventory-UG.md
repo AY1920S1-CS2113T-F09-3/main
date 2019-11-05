@@ -429,14 +429,9 @@ lost | `lost <Stock Code> <Quantity>`
   ### Other Commands  
 |Command| Syntax  
 |---|---|
--   Undo
-    
-
-
--   
 undo last command | `undo`  
 redo previous command | `redo`  
-exit applicatio
+exit application | `bye`
  
 
 
