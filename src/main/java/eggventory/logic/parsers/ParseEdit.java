@@ -31,7 +31,8 @@ public class ParseEdit {
             return new EditStockCommand(CommandType.EDIT, stockCode, StockProperty.STOCKCODE,
                     editInput[2].toLowerCase());
         case "quantity":
-            return new EditStockCommand(CommandType.EDIT, stockCode, StockProperty.QUANTITY, editInput[2].toLowerCase());
+            return new EditStockCommand(CommandType.EDIT, stockCode, StockProperty.QUANTITY,
+                    editInput[2].toLowerCase());
         case "loaned":
             return new EditStockCommand(CommandType.EDIT, stockCode, StockProperty.LOANED, editInput[2].toLowerCase());
         case "lost":

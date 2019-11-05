@@ -52,7 +52,7 @@ public class StockType {
      * @return True if item was added successfully.
      */
     public boolean addStock(String stockType, String stockCode, int quantity, String description)
-            throws BadInputException{
+            throws BadInputException {
         stocks.add(new CollectiveStock(stockType, stockCode, quantity, description));
         return true;
     }
