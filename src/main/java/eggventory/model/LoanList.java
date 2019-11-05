@@ -69,6 +69,17 @@ public final class LoanList {
 
         return true;
     }
+    //@@author
+
+    //@@author Deculsion
+
+    public static void addLoan(String matricNo, String template) {
+        Loan[] loans = TemplateList.getTemplateLoans(template);
+
+        for (Loan loan : loans) {
+            addLoan(loan.getStockCode(), matricNo, loan.getQuantity());
+        }
+    }
 
     /**
      * Adds a new stock to track in LoanList.
@@ -132,7 +143,9 @@ public final class LoanList {
 
         return loans;
     }
+    //@@author
 
+    //@@author cyanoei
     //TODO: Add getters for the loan and return dates also.
     /**
      * Means of obtaining all the Loans of a single type of Stock.
