@@ -5,7 +5,6 @@ import eggventory.logic.commands.Command;
 import eggventory.logic.commands.CommandDictionary;
 import eggventory.logic.commands.list.ListStockCommand;
 import eggventory.logic.commands.list.ListStockTypeCommand;
-import eggventory.logic.commands.list.ListLoanCommand;
 import eggventory.logic.commands.list.ListPersonLoansCommand;
 import eggventory.logic.commands.list.ListPersonCommand;
 import eggventory.commons.enums.CommandType;
@@ -45,7 +44,8 @@ public class ParseList {
 
         switch (inputArr.length) {
         case 1:
-            return new ListLoanCommand(CommandType.LIST);
+            throw new BadInputException(CommandDictionary.getCommandUsage("list loan"));
+            //return new ListLoanCommand(CommandType.LIST);
         case 2:
             return new ListPersonLoansCommand(CommandType.LIST, inputArr[1]);
 
