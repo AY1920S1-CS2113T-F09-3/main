@@ -1,5 +1,6 @@
 package eggventory.logic.commands.edit;
 
+import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.logic.commands.Command;
@@ -40,9 +41,10 @@ public class EditStockCommand extends Command {
      * @param ui Ui implementation to display output to.
      * @param storage  Storage object to handle saving and loading of any data.
      * @return String of the output, for JUnit testing.
+     * @throws BadInputException if any inputs are not accepted.
      */
     @Override
-    public String execute(StockList list, Ui ui, Storage storage) {
+    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
         String output;
 
         if (property == StockProperty.STOCKCODE && list.isExistingStockCode(newValue)) {

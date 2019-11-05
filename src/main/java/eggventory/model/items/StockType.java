@@ -1,6 +1,7 @@
 package eggventory.model.items;
 
 import eggventory.commons.enums.StockProperty;
+import eggventory.commons.exceptions.BadInputException;
 
 import java.util.ArrayList;
 
@@ -16,8 +17,6 @@ public class StockType {
     private ArrayList<Stock> stocks;
 
     private static String stockTypeHeader = "------------------------\n";
-
-
 
     /**
      * Creates a new StockType object. This overload should only be called from a Storage class.
@@ -52,7 +51,8 @@ public class StockType {
      * Adds a stock to the stockList.
      * @return True if item was added successfully.
      */
-    public boolean addStock(String stockType, String stockCode, int quantity, String description) {
+    public boolean addStock(String stockType, String stockCode, int quantity, String description)
+            throws BadInputException{
         stocks.add(new CollectiveStock(stockType, stockCode, quantity, description));
         return true;
     }
@@ -99,7 +99,7 @@ public class StockType {
      * @param quantity New quantity of the stock to change
      * @return Stock if stockCode is found, else null
      */
-    public Stock setStockQuantity(String stockCode, int quantity) {
+    public Stock setStockQuantity(String stockCode, int quantity) throws BadInputException {
         for (Stock stock : stocks) {
             if (stock.getStockCode().equals(stockCode)) {
                 stock.setQuantity(quantity);
@@ -237,7 +237,8 @@ public class StockType {
      * @param newValue The new value of the attribute to be updated.
      * @return The unedited Stock, for printing purpose.
      */
-    public Stock setStock(String stockCode, StockProperty property, String newValue) {
+    public Stock setStock(String stockCode, StockProperty property, String newValue)
+            throws BadInputException {
         switch (property) {
         case STOCKCODE:
             return this.setStockCode(stockCode, newValue);

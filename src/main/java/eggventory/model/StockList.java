@@ -1,6 +1,7 @@
 package eggventory.model;
 
 import eggventory.commons.enums.StockProperty;
+import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.items.Stock;
 import eggventory.model.items.StockType;
 import eggventory.ui.TableStruct;
@@ -96,7 +97,8 @@ public class StockList {
      * @param quantity Quantity of the stock.
      * @param description A String describing the nature of the Stock object.
      */
-    public void addStock(String stockType, String stockCode, int quantity, String description) {
+    public void addStock(String stockType, String stockCode, int quantity, String description)
+            throws BadInputException {
         for (StockType listType: stockList) {
             if (listType.getName().equals(stockType)) {
                 listType.addStock(stockType, stockCode, quantity, description);
@@ -133,7 +135,8 @@ public class StockList {
      * @param newValue  The new value of the property we want to edit.
      * @return the stock before edits, for printing purposes.
      */
-    public Stock setStock(String stockCode, StockProperty property, String newValue) {
+    public Stock setStock(String stockCode, StockProperty property, String newValue)
+            throws BadInputException {
         Stock updatedStock;
         for (StockType stockType : stockList) {
             updatedStock = stockType.setStock(stockCode, property, newValue);
