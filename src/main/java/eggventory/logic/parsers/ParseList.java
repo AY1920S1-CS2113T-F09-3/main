@@ -3,10 +3,7 @@ package eggventory.logic.parsers;
 import eggventory.commons.exceptions.InsufficientInfoException;
 import eggventory.logic.commands.Command;
 import eggventory.logic.commands.CommandDictionary;
-import eggventory.logic.commands.list.ListPersonCommand;
-import eggventory.logic.commands.list.ListPersonLoansCommand;
-import eggventory.logic.commands.list.ListStockCommand;
-import eggventory.logic.commands.list.ListStockTypeCommand;
+import eggventory.logic.commands.list.*;
 import eggventory.commons.enums.CommandType;
 import eggventory.commons.exceptions.BadInputException;
 
@@ -30,15 +27,29 @@ public class ParseList {
     }
 
     private Command processListPerson(String input) throws BadInputException {
-        String[] inputArr = input.split(" +");
-        switch (inputArr.length) {
-        case 1:
-            return new ListPersonCommand(CommandType.LIST);
-        case 2:
-            return new ListPersonLoansCommand(CommandType.LIST, inputArr[1]);
-        default:
+        String[] inputArr = input.split(" ");
+
+        if (inputArr.length > 1) {
             throw new BadInputException(CommandDictionary.getCommandUsage("list person"));
         }
+
+        return new ListPersonCommand(CommandType.LIST);
+    }
+
+    private Command processListLoan(String input) throws BadInputException {
+        String[] inputArr = input.split(" +");
+
+        switch(inputArr.length) {
+            case 1:
+                return new ListLoanCommand(CommandType.LIST);
+            case 2:
+                return new ListPersonLoansCommand(CommandType.LIST, inputArr[1]);
+
+            default:
+                throw new BadInputException(CommandDictionary.getCommandUsage("list loan"));
+
+        }
+
     }
 
     /**
@@ -71,11 +82,16 @@ public class ParseList {
             listCommand = processListPerson(inputArr[0]);
             break;
 
+        case "loan":
+            listCommand = processListLoan(inputString);
+            break;
+
         default:
             throw new BadInputException(CommandDictionary.getCommandUsage("list"));
         }
 
         return listCommand;
     }
+
 }
 //@@author
