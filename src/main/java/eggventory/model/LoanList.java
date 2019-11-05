@@ -197,6 +197,12 @@ public final class LoanList {
         return output;
     }
 
+    public static TableStruct getAllLoans() {
+        TableStruct dataTable = new TableStruct("Loan list");
+        dataTable.setTableColumns("Matric No.", "Name", "StockCode", "Quantity");
+    }
+
+
     /**
      * Returns all of a person's loans as a TableStruct.
      * @param matricNo Matriculation number of person to output.
