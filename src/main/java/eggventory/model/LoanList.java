@@ -71,13 +71,10 @@ public final class LoanList {
     }
 
     /**
-     * Returns the Loan quantity of a queried Loan.
-     * The map requires the exact same instance of the key in order to access the quantity.
-     * Therefore constructing the key (pair of matricNo/stockCode) cannot directly access the value (the Loan).
-     * Rather, we have to compare the pairs using .equals and then use the original instance to access the Loan.
+     * Returns the quantity of a certain Stock that a Person has loaned out.
      * @param stockCode the stockCode of the Stock involved.
      * @param matricNo the matric number of the Person involved.
-     * @return the quantity.
+     * @return the quantity loaned out by a person.
      */
     public static int getLoanQuantity(String stockCode, String matricNo) {
         Loan loan = findLoan(stockCode, matricNo);
@@ -87,7 +84,15 @@ public final class LoanList {
         return loan.getQuantity();
     }
 
+    /**
+     * Returns the total quantity of a certain Stock has been loaned out.
+     * @param stockCode stockCode of the Stock to check
+     * @return The quantity loaned out
+     */
     public static int getStockLoanedQuantity(String stockCode) {
+        if (stockLoaned.get(stockCode) == null) {
+            return -1;
+        }
         return stockLoaned.get(stockCode);
     }
 
