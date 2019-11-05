@@ -199,7 +199,17 @@ public final class LoanList {
 
     public static TableStruct getAllLoans() {
         TableStruct dataTable = new TableStruct("Loan list");
-        dataTable.setTableColumns("Matric No.", "Name", "StockCode", "Quantity");
+        dataTable.setTableColumns("Matric No.", "Name", "StockCode", "Quantity");:
+
+        ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
+        for (Loan loan : loansList) {
+            dataArray.add(loan.getDataAsArray());
+        }
+
+        dataTable.setTableData(dataArray);
+
+        return dataTable;
+
     }
 
 
