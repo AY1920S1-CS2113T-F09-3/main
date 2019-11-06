@@ -24,9 +24,7 @@ public class ListTemplateCommand extends Command {
             output = "OOPS That template name does not exist!";
             ui.print(output);
             return output;
-        }
-
-        else {
+        } else {
             output = TemplateList.printTemplateLoans(name);
             ui.drawTable(TemplateList.getTemplateLoanStruct(name));
         }

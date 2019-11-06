@@ -66,6 +66,14 @@ public class TemplateList {
         return false;
     }
 
+    /**
+     * Returns whether there are any templates stored.
+     */
+    public static boolean isEmpty() {
+        return templates.isEmpty();
+    }
+
+
     private static ArrayList<String> getNamesSorted() {
         ArrayList<String> names = new ArrayList<>();
         for (String name : templates.keySet()) {
@@ -120,6 +128,10 @@ public class TemplateList {
         return sb.toString();
     }
 
+    /**
+     * Gets the loans of a template as a TableStruct.
+     * @param name Name of template.
+     */
     public static TableStruct getTemplateLoanStruct(String name) {
         TableStruct dataTable = new TableStruct("Loans of template:" + name);
         dataTable.setTableColumns("Stock Code", "Quantity");
@@ -136,6 +148,9 @@ public class TemplateList {
         return dataTable;
     }
 
+    /**
+     * Gets every template in a loan as a TableStruct.
+     */
     public static TableStruct getAllTemplateLoanStruct() {
         TableStruct dataTable = new TableStruct("Template List");
         dataTable.setTableColumns("Name", "Stock Code", "Quantity");

@@ -18,6 +18,8 @@ public class CommandDictionary {
         // Add Commands
         commandDict.add(new Pair<>("add stock", "<StockType> <StockCode> <Quantity> <Description>"));
         commandDict.add(new Pair<>("add stocktype", "<StockType>"));
+        commandDict.add(new Pair<>("add loan", "<StockCode> <Quantity>"));
+        commandDict.add(new Pair<>("add stocktype", "<StockType>"));
         commandDict.add(new Pair<>("add person", "<MatricNo> <Name>"));
         commandDict.add(new Pair<>("add template", "<TemplateName> {<StockCode>, <Quantity>}"));
 
