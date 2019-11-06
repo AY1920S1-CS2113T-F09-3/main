@@ -35,30 +35,6 @@ public class EditStockCommand extends Command {
         this.newValue = newValue;
     }
 
-    //@@author cyanoei
-
-    /**
-     * Formats an error message for the case of editing to a repeated stockCode.
-     * @param newStockCode the new stockCode chosen by the user.
-     * @return the error message.
-     */
-    public String repeatedStockCodeOutput(String newStockCode) {
-        return String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
-                + "Please enter a different stock code.", newStockCode);
-    }
-
-    /**
-     * Formats an error message for the case of trying to edit a nonexistent stockCode.
-     * @param stockCode the stockCode which does not exist in the system. 
-     * @return the error message.
-     */
-    public String nonexistentStockCodeOutput(String stockCode) {
-        return String.format("Sorry, the stock code \"%s\" cannot be found in the system. "
-                + "Please enter a different stock code.", stockCode);
-    }
-
-    //@@author patwaririshab
-
     /**
      * Executes the actual editing of the stock's property.
      * @param list StockList containing all the StockTypes.
@@ -72,20 +48,6 @@ public class EditStockCommand extends Command {
         String output;
 
         Stock edited = list.setStock(stockCode, property, newValue);
-
-        //Check this first because it is the more important issue.
-        if (edited == null) {
-            output = nonexistentStockCodeOutput(stockCode);
-            ui.print(output);
-            return output;
-        }
-
-        if (property == StockProperty.STOCKCODE && list.isExistingStockCode(newValue)) {
-            output = repeatedStockCodeOutput(newValue);
-            ui.print(output);
-            return output;
-        }
-
         output = String.format("Awesome! I have successfully updated the following stock:\n"
                         + "stocktype: %s\n"
                         + "stockcode: %s\n"

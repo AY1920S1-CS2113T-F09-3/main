@@ -127,6 +127,28 @@ public class StockList {
         return null;
     }
 
+    //@@author cyanoei
+
+    /**
+     * Formats an error message for the case of editing to a repeated stockCode.
+     * @param newStockCode the new stockCode chosen by the user.
+     * @return the error message.
+     */
+    public String repeatedStockCodeOutput(String newStockCode) {
+        return String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
+                + "Please enter a different stock code.", newStockCode);
+    }
+
+    /**
+     * Formats an error message for the case of trying to edit a nonexistent stockCode.
+     * @param stockCode the stockCode which does not exist in the system.
+     * @return the error message.
+     */
+    public String nonexistentStockCodeOutput(String stockCode) {
+        return String.format("Sorry, the stock code \"%s\" cannot be found in the system. "
+                + "Please enter a different stock code.", stockCode);
+    }
+
     //@@author patwaririshab
     /**
      * Edits a Stock object in a StockList.
@@ -138,6 +160,17 @@ public class StockList {
     public Stock setStock(String stockCode, StockProperty property, String newValue)
             throws BadInputException {
         Stock updatedStock;
+
+        //Error: StockCode not found.
+        if (!isExistingStockCode(stockCode)) {
+            throw new BadInputException(nonexistentStockCodeOutput(stockCode));
+        }
+
+        //Error: New StockCode is already used.
+        if (property == StockProperty.STOCKCODE && isExistingStockCode(newValue)) {
+            throw new BadInputException(repeatedStockCodeOutput(newValue));
+        }
+
         for (StockType stockType : stockList) {
             updatedStock = stockType.setStock(stockCode, property, newValue);
             if (updatedStock != null) { //The corresponding stockCode was found in the StockList
@@ -252,7 +285,10 @@ public class StockList {
         ret.append("CURRENT INVENTORY\n");
 
         for (StockType stocktype : stockList) {
-            ret.append(stocktype.toString()).append("\n");
+            if (stocktype.toString() != "") { //Does not print empty StockTypes.
+                ret.append("------------------------\n");
+                ret.append(stocktype.toString()).append("\n");
+            }
         }
 
         return ret.toString();

@@ -16,8 +16,6 @@ public class StockType {
     private String name;
     private ArrayList<Stock> stocks;
 
-    private static String stockTypeHeader = "------------------------\n";
-
     /**
      * Creates a new StockType object. This overload should only be called from a Storage class.
      * @param name A unique name identifying the StockType.
@@ -287,7 +285,6 @@ public class StockType {
         }
 
         StringBuilder ret = new StringBuilder();
-        ret.append(stockTypeHeader);
 
         int i = 1;
         for (Stock stock : stocks) {
