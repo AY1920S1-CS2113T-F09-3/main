@@ -58,7 +58,7 @@ public class Parser {
      */
     public static boolean isCommandComplete(String command, int reqArguments) {
         String[] commandArr = command.split(" ");
-        return commandArr.length - 1 >= reqArguments;
+        return commandArr.length >= reqArguments;
     }
     //@@author cyanoei
 

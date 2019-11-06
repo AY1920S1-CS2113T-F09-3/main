@@ -1,6 +1,7 @@
 package eggventory.logic.commands.add;
 
 import eggventory.model.LoanList;
+import eggventory.model.PersonList;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.logic.commands.Command;
@@ -36,6 +37,13 @@ public class AddLoanCommand extends Command {
         return true;
     }
 
+    private boolean personExists() {
+        if (PersonList.findPerson(matricNo) == -1) {
+            return false;
+        }
+        return true;
+    }
+
     private boolean sufficientStock() {
         if (LoanList.getStockLoanedQuantity(stockCode) - quantity < 0) {
             return false;
@@ -53,7 +61,9 @@ public class AddLoanCommand extends Command {
     public String execute(StockList list, Ui ui, Storage storage) {
         String output = "";
         if (!stockExists()) {
-            output += "OOPS that stock does not exist!";
+            output += "Sorry, that stock does not exist!";
+        } else if (!personExists()){
+            output += "Sorry, that person does not exist!";
         } else if (!sufficientStock()) {
             output = ("OOPS there is insufficient stock to loan out!");
         } else {
