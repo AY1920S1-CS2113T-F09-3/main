@@ -12,6 +12,11 @@ import eggventory.commons.exceptions.InsufficientInfoException;
 //@@author cyanoei
 public class ParseDelete {
 
+    /**
+     * Processes a command to delete a loan.
+     * @param input the string containing both the person's matric number and the StockCode.
+     * @return the delete command.
+     */
     private Command processDeleteLoan(String input) {
         String[] deleteInput = input.split(" +");
         return new DeleteLoanCommand(CommandType.DELETE, deleteInput[0], deleteInput[1]);

@@ -83,6 +83,14 @@ public class ParseAdd {
     }
 
     //@@author cyanoei
+
+    /**
+     * Processes the user command to add a loan.
+     * @param input string in the format <MatricNo> <StockCode> <Quantity>
+     * @return
+     * @throws BadInputException
+     * @throws InsufficientInfoException
+     */
     private Command processAddLoan(String input) throws BadInputException, InsufficientInfoException {
         String[] addInput = input.split(" +");
         if (Parser.isReserved(addInput[0])) {
@@ -94,7 +102,7 @@ public class ParseAdd {
             return new AddLoanByTemplateCommand(CommandType.ADD, addInput[0], addInput[1]);
         }
 
-        if (!Parser.isCommandComplete(input, 2)) {
+        if (!Parser.isCommandComplete(input, 3)) {
             throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
         }
         return new AddLoanCommand(CommandType.ADD, addInput[0], addInput[1], Integer.parseInt(addInput[2]));
@@ -132,7 +140,7 @@ public class ParseAdd {
             break;
 
         case "loan":
-            if (!Parser.isCommandComplete(inputString, 2)) {
+            if (!Parser.isCommandComplete(inputString, 3)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
             }
             addCommand = processAddLoan(addInput[1]);
