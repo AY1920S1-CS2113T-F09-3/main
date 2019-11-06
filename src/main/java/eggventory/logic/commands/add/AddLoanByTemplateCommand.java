@@ -15,9 +15,14 @@ import java.util.ArrayList;
 
 public class AddLoanByTemplateCommand extends Command {
 
-    String matricNo;
-    String name;
+    private String matricNo;
+    private String name;
 
+    /**
+     * Adds new loans to a matric using a loan template.
+     * @param matricNo Matric number of student to add the loans to.
+     * @param name Name of template to get loans from.
+     */
     public AddLoanByTemplateCommand(CommandType type, String matricNo,  String name) {
         super(type);
         this.matricNo = matricNo;
