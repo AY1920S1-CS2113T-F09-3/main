@@ -122,7 +122,7 @@ public class ParseAdd {
             break;
 
         case "loan":
-            if (!Parser.isCommandComplete(inputString, 3)) {
+            if (!Parser.isCommandComplete(inputString, 2)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
             }
             addCommand = processAddLoan(addInput[1]);
