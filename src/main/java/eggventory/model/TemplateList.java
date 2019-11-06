@@ -1,7 +1,11 @@
 package eggventory.model;
 
 import eggventory.model.loans.Loan;
+import eggventory.ui.TableStruct;
 
+import javax.print.DocFlavor;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 //@@author Deculsion
@@ -58,6 +62,39 @@ public class TemplateList {
         return false;
     }
 
+    private static ArrayList<String> getNamesSorted() {
+        ArrayList<String> names = new ArrayList<>();
+        for (String name : templates.keySet()) {
+            names.add(name);
+        }
+
+        Collections.sort(names);
+
+        return names;
+    }
+
+    /**
+     * Returns a string of all templates currently stored in alphabetical order.
+     * @return A string representation of the templates.
+     */
+    public static String printTemplateNames() {
+        ArrayList<String> names;
+        StringBuilder sb = new StringBuilder();
+
+        names = getNamesSorted();
+
+        sb.append("Here are the names of all the templates you have");
+
+        for (String name: names) {
+            sb.append(name);
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
+
+
     /**
      * Prints all loans of a template.
      * @param name Name of template to print.
@@ -77,5 +114,53 @@ public class TemplateList {
         }
 
         return sb.toString();
+    }
+
+    public static TableStruct getTemplateLoanStruct(String name) {
+        TableStruct dataTable = new TableStruct("Loans of template:" + name);
+        dataTable.setTableColumns("Stock Code", "Quantity");
+
+        ArrayList<ArrayList<String>> dataArr = new ArrayList<>();
+        Loan[] loanArr = getTemplateLoans(name);
+
+        for (Loan loan: loanArr) {
+            dataArr.add(loan.getStockDataAsArray());
+        }
+
+        dataTable.setTableData(dataArr);
+
+        return dataTable;
+    }
+
+    public static TableStruct getAllTemplateLoanStruct() {
+        TableStruct dataTable = new TableStruct("Template List");
+        dataTable.setTableColumns("Name", "Stock Code", "Quantity");
+
+        ArrayList<ArrayList<String>> dataArr = new ArrayList<>();
+
+        for (String name : templates.keySet()) {
+            ArrayList<String> template = new ArrayList<>();
+            getLoansArrayCompact(name, template);
+            dataArr.add(template);
+        }
+
+        dataTable.setTableData(dataArr);
+
+        return dataTable;
+    }
+
+    private static void getLoansArrayCompact(String name, ArrayList<String> template) {
+        Loan[] loans = getTemplateLoans(name);
+        StringBuilder stockcodeSB = new StringBuilder();
+        StringBuilder quantitySB = new StringBuilder();
+
+        for (Loan loan : loans) {
+            stockcodeSB.append(loan.getStockCode()).append("\n");
+            quantitySB.append(String.valueOf(loan.getQuantity())).append("\n");
+        }
+
+        template.add(name);
+        template.add(stockcodeSB.toString());
+        template.add(quantitySB.toString());
     }
 }
