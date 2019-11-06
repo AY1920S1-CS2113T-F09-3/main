@@ -161,8 +161,4 @@ public class ParseAdd {
 
     }
 
-    private void checkIfCommandComplete() {
-
-    }
-
 }
