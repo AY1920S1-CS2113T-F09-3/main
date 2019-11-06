@@ -9,9 +9,9 @@ import eggventory.model.loans.Loan;
 import eggventory.storage.Storage;
 import eggventory.ui.Ui;
 import javafx.util.Pair;
-
 import java.util.ArrayList;
 
+//@@author Deculsion
 public class AddTemplateCommand extends Command {
 
     String name;
@@ -48,3 +48,4 @@ public class AddTemplateCommand extends Command {
 
     }
 }
+//@@author
