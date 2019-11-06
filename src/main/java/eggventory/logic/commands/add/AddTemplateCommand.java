@@ -45,7 +45,7 @@ public class AddTemplateCommand extends Command {
             TemplateList.addTemplate(name, loans);
             output = TemplateList.printTemplateLoans(name);
         }
-
+      
         ui.print(output);
 
         return output;

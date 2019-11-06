@@ -102,7 +102,7 @@ public class ParseList {
         case "loan":
             listCommand = processListLoan(inputString);
             break;
-
+            
         case "template":
             listCommand = processListTemplate(inputString);
             break;

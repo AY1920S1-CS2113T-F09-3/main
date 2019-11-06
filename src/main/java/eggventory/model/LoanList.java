@@ -69,7 +69,6 @@ public final class LoanList {
             addLoan(loan.getStockCode(), matricNo, loan.getQuantity());
         }
     }
-    //@@author
 
     //@@author cyanoei
     /**
