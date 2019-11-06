@@ -54,7 +54,11 @@ public class TemplateList {
         return templates.get(name);
     }
 
-    private static boolean templateExists(String name) {
+    /**
+     * Returns whether the template of a given name exists.
+     * @param name Name of template to check for.
+     */
+    public static boolean templateExists(String name) {
         if (templates.containsKey(name)) {
             return true;
         }
@@ -139,8 +143,7 @@ public class TemplateList {
         ArrayList<ArrayList<String>> dataArr = new ArrayList<>();
 
         for (String name : templates.keySet()) {
-            ArrayList<String> template = new ArrayList<>();
-            getLoansArrayCompact(name, template);
+            ArrayList<String> template = getLoansArrayCompact(name);
             dataArr.add(template);
         }
 
@@ -149,18 +152,22 @@ public class TemplateList {
         return dataTable;
     }
 
-    private static void getLoansArrayCompact(String name, ArrayList<String> template) {
+    private static ArrayList<String> getLoansArrayCompact(String name) {
+        ArrayList<String> template = new ArrayList<>();
         Loan[] loans = getTemplateLoans(name);
+
         StringBuilder stockcodeSB = new StringBuilder();
         StringBuilder quantitySB = new StringBuilder();
 
         for (Loan loan : loans) {
             stockcodeSB.append(loan.getStockCode()).append("\n");
-            quantitySB.append(String.valueOf(loan.getQuantity())).append("\n");
+            quantitySB.append(loan.getQuantity()).append("\n");
         }
 
         template.add(name);
         template.add(stockcodeSB.toString());
         template.add(quantitySB.toString());
+
+        return template;
     }
 }
