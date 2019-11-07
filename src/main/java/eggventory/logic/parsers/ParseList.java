@@ -3,11 +3,15 @@ package eggventory.logic.parsers;
 import eggventory.commons.exceptions.InsufficientInfoException;
 import eggventory.logic.commands.Command;
 import eggventory.logic.commands.CommandDictionary;
-import eggventory.logic.commands.list.ListPersonCommand;
-import eggventory.logic.commands.list.ListStockCommand;
-import eggventory.logic.commands.list.ListStockTypeCommand;
 import eggventory.commons.enums.CommandType;
 import eggventory.commons.exceptions.BadInputException;
+import eggventory.logic.commands.list.ListLoanCommand;
+import eggventory.logic.commands.list.ListPersonCommand;
+import eggventory.logic.commands.list.ListPersonLoansCommand;
+import eggventory.logic.commands.list.ListStockCommand;
+import eggventory.logic.commands.list.ListStockTypeCommand;
+import eggventory.logic.commands.list.ListTemplateCommand;
+import eggventory.logic.commands.list.ListTemplatesAllCommand;
 
 //@@author yanprosobo
 public class ParseList {
@@ -29,13 +33,40 @@ public class ParseList {
     }
 
     private Command processListPerson(String input) throws BadInputException {
-        String[] inputArr = input.split(" +");
+        String[] inputArr = input.split(" ");
+
         if (inputArr.length > 1) {
             throw new BadInputException(CommandDictionary.getCommandUsage("list person"));
         }
 
         return new ListPersonCommand(CommandType.LIST);
+    }
 
+    private Command processListLoan(String input) throws BadInputException {
+        String[] inputArr = input.split(" +");
+
+        switch (inputArr.length) {
+        case 1:
+            return new ListLoanCommand(CommandType.LIST);
+        case 2:
+            return new ListPersonLoansCommand(CommandType.LIST, inputArr[1]);
+
+        default:
+            throw new BadInputException(CommandDictionary.getCommandUsage("list loan"));
+        }
+
+    }
+
+    private Command processListTemplate(String input) throws BadInputException {
+        String[] inputArr = input.split(" +");
+        switch (inputArr.length) {
+        case 1:
+            return new ListTemplatesAllCommand(CommandType.LIST);
+        case 2:
+            return new ListTemplateCommand(CommandType.LIST, inputArr[1]);
+        default:
+            throw new BadInputException(CommandDictionary.getCommandUsage("list template"));
+        }
     }
 
     /**
@@ -58,6 +89,7 @@ public class ParseList {
             break;
 
         case "stocktype":
+            //Required: stockType <name>
             if (!Parser.isCommandComplete(inputString, 1)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("list stocktype"));
             }
@@ -68,11 +100,20 @@ public class ParseList {
             listCommand = processListPerson(inputArr[0]);
             break;
 
+        case "loan":
+            listCommand = processListLoan(inputString);
+            break;
+            
+        case "template":
+            listCommand = processListTemplate(inputString);
+            break;
+
         default:
             throw new BadInputException(CommandDictionary.getCommandUsage("list"));
         }
 
         return listCommand;
     }
+
 }
 //@@author

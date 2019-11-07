@@ -1,7 +1,16 @@
 package eggventory.model.items;
 
+import eggventory.commons.exceptions.BadInputException;
+
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+=======
+//@@author cyanoei
+
+//TODO: Since 5 Nov the quantity-related features have been broken by the sanity check for negatives.
+
+>>>>>>> 0ead4dac0680edb31a38f228f887550bdcec3627
 /**
  * A child of the Stock class.
  * A UniqueStock is a group of many items (eg. Arduino Uno) that share the same stockCode, description etc.,
@@ -23,7 +32,8 @@ public class UniqueStock extends Stock {
      * @param quantity    The quantity (number of items) of this stock.
      * @param description The name of the stock. (eg. 500ohm resistor, mini breadboard)
      */
-    public UniqueStock(String stockType, String stockCode, int quantity, String description) {
+    public UniqueStock(String stockType, String stockCode, int quantity, String description)
+            throws BadInputException {
         super(stockType, stockCode, quantity, description);
         for (int i = 0; i < quantity; i++) {
             uniqueStockList.add(new Item(i + 1));
@@ -41,7 +51,7 @@ public class UniqueStock extends Stock {
             uniqueStockList.add(new Item(oldTotal + i));
         }
 
-        super.setQuantity(oldTotal + addQuantity); //Updates the quantity
+        //super.setQuantity(oldTotal + addQuantity); //Updates the quantity
     }
 
     /**
@@ -50,7 +60,7 @@ public class UniqueStock extends Stock {
      */
     public void addUnique(int index) {
         uniqueStockList.add(new Item(index));
-        super.setQuantity(super.getQuantity() + 1); //Increment quantity.
+        //super.setQuantity(super.getQuantity() + 1); //Increment quantity.
     }
 
     /**
@@ -73,7 +83,7 @@ public class UniqueStock extends Stock {
             uniqueStockList.remove(targetItem);
         }
 
-        super.setQuantity(super.getQuantity() - 1); //Decrement quantity.
+        //super.setQuantity(super.getQuantity() - 1); //Decrement quantity.
     }
 
     //Note: toString works as per normal, treating UniqueStock as a CollectiveStock.

@@ -1,6 +1,7 @@
 package eggventory.model;
 
 import eggventory.commons.enums.StockProperty;
+import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.items.Stock;
 import eggventory.model.items.StockType;
 import eggventory.ui.TableStruct;
@@ -96,7 +97,8 @@ public class StockList {
      * @param quantity Quantity of the stock.
      * @param description A String describing the nature of the Stock object.
      */
-    public void addStock(String stockType, String stockCode, int quantity, String description) {
+    public void addStock(String stockType, String stockCode, int quantity, String description)
+            throws BadInputException {
         for (StockType listType: stockList) {
             if (listType.getName().equals(stockType)) {
                 listType.addStock(stockType, stockCode, quantity, description);
@@ -125,6 +127,26 @@ public class StockList {
         return null;
     }
 
+    /**
+     * Formats an error message for the case of editing to a repeated stockCode.
+     * @param newStockCode the new stockCode chosen by the user.
+     * @return the error message.
+     */
+    public String repeatedStockCodeOutput(String newStockCode) {
+        return String.format("Sorry, the stock code \"%s\" is already assigned to a stock in the system. "
+                + "Please enter a different stock code.", newStockCode);
+    }
+
+    /**
+     * Formats an error message for the case of trying to edit a nonexistent stockCode.
+     * @param stockCode the stockCode which does not exist in the system.
+     * @return the error message.
+     */
+    public String nonexistentStockCodeOutput(String stockCode) {
+        return String.format("Sorry, the stock code \"%s\" cannot be found in the system. "
+                + "Please enter a different stock code.", stockCode);
+    }
+
     //@@author patwaririshab
     /**
      * Edits a Stock object in a StockList.
@@ -133,8 +155,20 @@ public class StockList {
      * @param newValue  The new value of the property we want to edit.
      * @return the stock before edits, for printing purposes.
      */
-    public Stock setStock(String stockCode, StockProperty property, String newValue) {
+    public Stock setStock(String stockCode, StockProperty property, String newValue)
+            throws BadInputException {
         Stock updatedStock;
+
+        //Error: StockCode not found.
+        if (!isExistingStockCode(stockCode)) {
+            throw new BadInputException(nonexistentStockCodeOutput(stockCode));
+        }
+
+        //Error: New StockCode is already used.
+        if (property == StockProperty.STOCKCODE && isExistingStockCode(newValue)) {
+            throw new BadInputException(repeatedStockCodeOutput(newValue));
+        }
+
         for (StockType stockType : stockList) {
             updatedStock = stockType.setStock(stockCode, property, newValue);
             if (updatedStock != null) { //The corresponding stockCode was found in the StockList
@@ -151,12 +185,17 @@ public class StockList {
      * @return the stockType before editing, for printing purpose.
      */
     public StockType setStockType(String stockTypeName, String newName) {
-        StockType previous;
+        StockType updated;
         for (StockType stockType : stockList) {
             if (stockTypeName.equals(stockType.getName())) {
-                previous = stockType;
+                updated = stockType;
                 stockType.setName(newName);
-                return previous;
+
+                for (Stock stock : stockType.getStockList()) {
+                    stock.setStockType(newName);
+                }
+
+                return updated;
             }
         }
         return null;
@@ -166,7 +205,7 @@ public class StockList {
      * Gets the total number of stocks in this stockList. This sums the number of stocks across stockTypes.
      * @return the total number of stocks.
      */
-    public int getStockQuantity() { //The number of stocks in the list, across all stockTypes.
+    public int getTotalNumberOfStocks() { //The number of stocks in the list, across all stockTypes.
         int total = 0;
         for (StockType stockType : stockList) {
             total += stockType.getQuantity();
@@ -176,6 +215,22 @@ public class StockList {
     }
 
     //@@author cyanoei
+
+    /**
+     * Obtains the quantity of a Stock based on its StockCode.
+     * @param stockCode the StockCode of the Stock.
+     * @return the quantity of the stock, if found, otherwise -1. 
+     */
+    public int getStockQuantity(String stockCode) {
+        Stock stock = findStock(stockCode);
+        if (stock == null) {
+            return -1;
+        } else {
+            return stock.getQuantity();
+        }
+    }
+
+
     /**
      * Determines if any of the stocks in this stockList have the same stockCode.
      * @param stockCode the queried stockCode.
@@ -204,13 +259,28 @@ public class StockList {
         return false;
     }
 
+    /**
+     * Searches for a stock in the stockList which has that stockCode.
+     * @param stockCode the stockCode being queried.
+     * @return the stock in question.
+     */
+    public Stock findStock(String stockCode) {
+        for (StockType stocktype : stockList) {
+            for (Stock stock : stocktype.getStockList()) {
+                if (stock.getStockCode().equals(stockCode)) {
+                    return stock;
+                }
+            }
+        }
+        return null;
+    }
 
-    //@@author
+    //@@author yanprosobo
     /**
      * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
      * @return The string of the stocklist whose stocktype matches query.
      */
-    public String findStock(String query) {
+    public String queryStocks(String query) {
         StringBuilder ret = new StringBuilder();
         boolean found = false;
         for (StockType stocktype : stockList) {
@@ -232,7 +302,7 @@ public class StockList {
      */
     public String toStocktypeString() {
         StringBuilder ret = new StringBuilder();
-        ret.append("QUERY INVENTORY\n");
+        ret.append("LISTING STOCKTYPES\n");
         for (StockType stocktype : stockList) {
             ret.append("------------------------\n");
             ret.append(stocktype.getName()).append("\n");
@@ -249,8 +319,10 @@ public class StockList {
         ret.append("CURRENT INVENTORY\n");
 
         for (StockType stocktype : stockList) {
-            ret.append("------------------------\n");
-            ret.append(stocktype.toString()).append("\n");
+            if (stocktype.toString() != "") { //Does not print empty StockTypes.
+                ret.append("------------------------\n");
+                ret.append(stocktype.toString()).append("\n");
+            }
         }
 
         return ret.toString();
@@ -269,7 +341,7 @@ public class StockList {
         StringBuilder details = new StringBuilder();
         for (StockType stocktype : stockList) {
             if (isStockTypeEmpty(stocktype) == false) {
-                details.append(stocktype.saveDetailsString()).append("\n");
+                details.append(stocktype.saveDetailsString()); //Don't need to add newline.
             }
         }
 

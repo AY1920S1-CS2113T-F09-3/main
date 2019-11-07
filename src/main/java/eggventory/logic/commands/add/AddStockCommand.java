@@ -1,12 +1,12 @@
 package eggventory.logic.commands.add;
 
-import eggventory.model.StockList;
-import eggventory.logic.commands.Command;
-import eggventory.commons.exceptions.BadInputException;
-import eggventory.ui.Ui;
-import eggventory.storage.Storage;
-import eggventory.model.items.DateTime;
 import eggventory.commons.enums.CommandType;
+import eggventory.commons.exceptions.BadInputException;
+import eggventory.logic.commands.Command;
+import eggventory.model.StockList;
+import eggventory.model.items.DateTime;
+import eggventory.storage.Storage;
+import eggventory.ui.Ui;
 
 /**
  * Command objects for adding Stocks.
@@ -41,6 +41,7 @@ public class AddStockCommand extends Command {
      * @param list StockType to add the item to.
      * @param ui Ui implementation to display output to.
      * @param storage Storage object to handle saving and loading of any data.
+     * @throws BadInputException if any of the inputs are not accepted.
      */
     @Override
     public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
@@ -66,8 +67,9 @@ public class AddStockCommand extends Command {
      * Executes the actual adding of task to the StockType.
      * Only to be used by Storage.load() - handles the adding without showing UI output.
      * @param list StockType to add the item to.
+     * @throws BadInputException likely if user had edited the save file to have unaccepted values.
      */
-    public void execute(StockList list) {
+    public void execute(StockList list) throws BadInputException {
         list.addStock(stockType, stockCode, quantity, description);
     }
 }
