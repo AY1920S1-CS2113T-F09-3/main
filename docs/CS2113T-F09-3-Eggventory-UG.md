@@ -170,7 +170,7 @@ Keywords to modify each property:
     
 Format: `edit stock <Stock Code> <Property> <New Value>`  
   
-eg. `edit stock R500 quantity 1000 description stockcode Res500`
+eg. `edit stock R500 quantity 1000` : Changes the quantity of the stock R500 to 1000.
   
 #### 3.3.4 Listing Stock: `list stock`  
     
