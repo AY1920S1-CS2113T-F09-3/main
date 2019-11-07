@@ -120,7 +120,7 @@ Stocks may be Collective or Unique. Collective stocks consist of items that are 
   
 Stocks have the following properties:  
 | Property | Description |  
-|---:|---|  
+|---:|---| 
 StockType|The category the stock belongs to. The StockType should have previously been added to the inventory system before being referenced.  
 StockCode|nique string of numbers and letters, used to identify the stock.  
 Quantity | The number of items under the stock.
@@ -250,26 +250,32 @@ Format: `list person`
     
 #### 3.5.1 Adding a Loan: `add loan`
     
-This adds a new Loan made by a Person.  is possible to add multiple stocks at once.  
+This adds a new Loan and assigns it to a Person.
   
-Format: `add loan <Matric No.> {<Stock Code> <Quantity>}`  
+Format: `add loan <Matric No.> <Stock Code> <Quantity>`  
   
 eg. `add loan A0123456 R500 1000 X123 80`  
+
+#### 3.5.2 Deleting a Loan: `delete loan`
+This deletes an existing Loan assigned to a Person. If there are multiple loans of the same StockCode to the same
+ Person, the first instance of such a Loan will be deleted.
+
+Format: `delete loan <MatricNo> <StockCode>`
+
+e.g. `delete loan A0123456 R500`
   
-#### 3.5.2 Returning specific Loans: `loan return` [coming in v1.4]  
+#### 3.5.3 Returning specific Loans: `loan return` [coming in v2.0]  
     
 This marks specific Loans of a Person as returned.  
   Format: `loan return <Matric No.> {<Stock Code> <Quantity>}`  
   
-#### 3.5.3 Returning all Loans: `loan returnall` [coming in v1.4] 
+#### 3.5.4 Returning all Loans: `loan returnall` [coming in v2.0] 
     
 This marks all Loans of a Person as returned.  
-  
-
 
 Format: `loan returnall <Matric No.>`  
   
-#### 3.5.4 Listing all Persons and their Loans: `list  loan`
+#### 3.5.5 Listing all Persons and their Loans: `list  loan`
     
 This lists out all loans currently recorded, listed by the Person who made the loan.  
   
@@ -279,15 +285,16 @@ Format: `list loan`
 ### 3.6 Loaning using Templates
     
 To speed up the loaning process, Eggventory allows you to create loan templates. These templates are simply lists of
- stocks and quantity to be loaned out all at once. The name of each template must be unique, or it will not added. 
+ stocks and quantity to be loaned out all at once. 
   
 #### 3.6.1 Adding loan templates: `add template`  
-
-This creates a template that can be substituted for {<Stock Code> <Quantity>} in loan commands.  
+This creates a new template of Loans. 
   
-Format: `add template “<TemplateName>” {<StockCode> <Quantity>}`  
+Format: `add template <TemplateName> {<StockCode> <Quantity>}`  
   
 e.g. `add template CG1112_Alex R500 5 A123 1`  
+ 
+ Note: The name of each template must be unique, or it will not be added. 
   
 #### 3.6.2  Deleting a Template: `delete template`  
 
@@ -299,7 +306,8 @@ eg. `delete template CG1112_Alex`
   
 #### 3.6.3 Making a Loan from a template: `add loan`
 
-This adds a Loan to a Person from a Template.  
+This adds a Loan to a Person from a Template. Every loan in the template will be added to the person as if you added
+ them individually. 
 
 Format: `add loan <Matric. No> <Template Name>`  
   
