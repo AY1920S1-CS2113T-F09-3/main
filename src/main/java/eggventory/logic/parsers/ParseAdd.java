@@ -108,6 +108,7 @@ public class ParseAdd {
      */
     private Command processAddLoan(String input) {
         String[] addInput = input.split(" +");
+        System.out.println("Working");
 
         if (TemplateList.templateExists(addInput[1])) {
             return new AddLoanByTemplateCommand(CommandType.ADD, addInput[0], addInput[1]);
@@ -151,7 +152,8 @@ public class ParseAdd {
 
         case "loan":
             //Required: loan <matric> <stockCode> <quantity>
-            if (!Parser.isCommandComplete(inputString, 3)) {
+            if (!Parser.isCommandComplete(inputString, 3) || !Parser.isCommandComplete(inputString,
+                    2)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
             }
             addCommand = processAddLoan(addInput[1]);
