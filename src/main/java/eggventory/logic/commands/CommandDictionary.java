@@ -46,8 +46,6 @@ public class CommandDictionary {
 
         // Find Commands
         commandDict.add(new Pair<>("find description", "<Query>"));
-        commandDict.add(new Pair<>("find stock", "<Query>"));
-        commandDict.add(new Pair<>("find stocktype", "<Query>"));
 
         // Loan Commands
         commandDict.add(new Pair<>("loan add", "<MatricNo> <StockCode> <Quantity>"));
