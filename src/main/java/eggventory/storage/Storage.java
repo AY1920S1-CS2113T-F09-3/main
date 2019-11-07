@@ -1,7 +1,11 @@
 package eggventory.storage;
 
 import eggventory.commons.enums.CommandType;
-import eggventory.logic.commands.add.*;
+import eggventory.logic.commands.add.AddStockTypeCommand;
+import eggventory.logic.commands.add.AddPersonCommand;
+import eggventory.logic.commands.add.AddTemplateCommand;
+import eggventory.logic.commands.add.AddStockCommand;
+import eggventory.logic.commands.add.AddLoanCommand;
 import eggventory.logic.parsers.ParseAdd;
 import eggventory.model.LoanList;
 import eggventory.model.PersonList;
