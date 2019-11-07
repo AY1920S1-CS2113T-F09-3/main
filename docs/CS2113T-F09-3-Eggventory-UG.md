@@ -97,9 +97,9 @@ Format: `delete stocktype <StockType>`
 
 #### 3.2.3 Editing Stock Types: `edit stocktype`  
     
-This changes the name of the selected stock type.  
+This changes the name of the selected stock type.
   
-Format: `edit stocktype <StockType><name>`
+Format: `edit stocktype <StockType> <NewStockType>`
 
 #### 3.2.4 Listing Stock Types: `list stocktype`  
   
@@ -140,8 +140,7 @@ Format|Purpose|
 `-mq <MinQuantity>` |Sets the minimum quantity of stock that should be maintained in the inventory  
 `-u`|Sets the stock to contain items that are unique  
   
-    
-  
+
 Format: `add stock <StockType> <Stock Code> <Quantity> <Description> {<optional parameter>}`  
   
 eg. `add stock Resistor R500 1000 500ohm resistor -mq 100`  
@@ -153,7 +152,7 @@ This removes a stock from the inventory, including any references to loaned out 
   
 #### 3.3.3 Editing Stock: `edit  stock`  
     
-This directly modifies the value of a property stock. You may modify as many properties as you wish in one command.  
+This directly modifies the value of a property stock. You may modify as many properties as you wish in one command.
   
 Keywords to modify each property:  
 
@@ -170,12 +169,12 @@ Keywords to modify each property:
     
 Format: `edit stock <Stock Code> {<Property> <New Value>}`  
   
-eg. `edit stock R500 quantity 1000 description stockcode Res500`  
+eg. `edit stock R500 quantity 1000 description stockcode Res500`
   
 #### 3.3.4 Listing Stock: `list stock`  
     
 This lists out all Stocks that are present in the inventory.  
-Format: list stock  
+Format: `list stock`
   
 #### 3.3.5 Listing Stock of a particular StockType: `list <StockType>`  
     
@@ -189,15 +188,14 @@ eg. `list Resistor`
 ### 3.4 Managing your list of People  
 People have to be added to the system before they can take loans from the inventory. Each person is identified by their matric number, as the inventory primarily loans out stock to students.  
   
-#### 3.4.1 Adding a Person: `add person`  
+#### 3.4.1 Adding a Person: `add person`
   
 This adds a new person to keep track that will loan stock.  
-  
-
 
 Format: `add person <Matric No.> <Name>`  
   
 eg. `add person A0123456`  
+
 Note: By nature, the matric number of each Person should be unique, meaning no two individuals are allowed to share the same matric number.  
   
   
@@ -208,8 +206,6 @@ Optional Parameters:
 |---|---|  
 |`-n <Name>`|Sets the name of the person being added|
 |`-c <Course>`|Sets the course of the person being added|
-  
-
 
 Format: `add person <Matric. No> {<flag> <optional parameter>}`  
   
@@ -227,7 +223,6 @@ eg. `delete person A0123456`
 This directly modifies the value of a property of a person. You may modify as many properties as you wish in one command.  
   
 Properties:  
-  
 - matric 
 - name 
   
@@ -369,8 +364,6 @@ Format: `autosave on` OR `autosave off`
 Format: `bye`  
   
 ## 4. FAQ    
-    
-
 
 ## 5. Command Summary  
 ### Add Commands  
@@ -392,7 +385,7 @@ delete person | `delete person <MatricNo>`
 |Command| Syntax
 |---|---|  
 edit stock | `edit stock <StockCode> <Property> <NewValue>`
-edit stocktype | `<  
+edit stocktype | `edit stocktype <StockType> <NewStockType>`
 edit person | `edit person <MatricNo> <Property> <NewValue>`  
   
 ### List Commands  
@@ -411,7 +404,7 @@ list lost | `list lost`
 
 |Command| Syntax  
 |---|---|  
-add loan | `add loan <MatricNo> <StockCode> <Quantity>
+add loan | `add loan <MatricNo> <StockCode> <Quantity>`
 loan return | `loan return <MatricNo> <StockCode> <Quantity>`
 loan returnall | `loan returnall <MatricNo>`
 
