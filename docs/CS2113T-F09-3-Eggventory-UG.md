@@ -168,7 +168,7 @@ Keywords to modify each property:
 - minquantity  
       
     
-Format: `edit stock <Stock Code> {<Property> <New Value>}`  
+Format: `edit stock <Stock Code> <Property> <New Value>`  
   
 eg. `edit stock R500 quantity 1000 description stockcode Res500`
   
@@ -195,7 +195,7 @@ This adds a new person to keep track that will loan stock.
 
 Format: `add person <Matric No.> <Name>`  
   
-eg. `add person A0123456`  
+eg. `add person A0123456 Akshay`  
 
 Note: By nature, the matric number of each Person should be unique, meaning no two individuals are allowed to share the same matric number.  
   
@@ -227,7 +227,8 @@ Properties:
 - matric 
 - name 
   
-Format: `edit person <Matric No.> {<Property> <New Value>edit person A0123456 name Alex`  
+Format: `edit person <Matric No.> <Property> <New Value>`
+e.g. `edit person A0123456 name Alex`
   
 #### 3.4.4 Listing all People: `list person`  
     
