@@ -97,6 +97,28 @@ public class Storage {
     /**
      * Converts savefile into a LoanList object.
      */
+    public PersonList loadPersonList() {
+        PersonList savedPersonList = new PersonList();
+        File f4 = new File(personListFilePath);
+        try {
+            Scanner s4 = new Scanner(f4); //Create a Scanner using LoanListFilePath as source
+            while (s4.hasNext()) {
+                String itemRaw = s4.nextLine();
+                String[] item = itemRaw.split(",", 0);
+                AddPersonCommand addPersons = new AddPersonCommand(CommandType.ADD, item[0], item[1]);
+                addPersons.executeLoadPersonList(savedPersonList);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Save file not found. New list will be created instead.");
+        } catch (Exception e) {
+            System.out.println("Save file cannot be read. Please fix it manually or use a new list.");
+        }
+        return savedPersonList;
+    }
+
+    /**
+     * Converts savefile into a LoanList object.
+     */
     public LoanList loadLoanList() {
         LoanList savedLoanList = new LoanList();
         File f3 = new File(loanListFilePath);
@@ -115,28 +137,6 @@ public class Storage {
             System.out.println("Save file cannot be read. Please fix it manually or use a new list.");
         }
         return savedLoanList;
-    }
-
-    /**
-     * Converts savefile into a LoanList object.
-     */
-    public PersonList loadPersonList() {
-        PersonList savedPersonList = new PersonList();
-        File f4 = new File(personListFilePath);
-        try {
-            Scanner s4 = new Scanner(f4); //Create a Scanner using LoanListFilePath as source
-            while (s4.hasNext()) {
-                String itemRaw = s4.nextLine();
-                String[] item = itemRaw.split(",", 0);
-                AddPersonCommand addPersons = new AddPersonCommand(CommandType.ADD, item[0], item[1]);
-                addPersons.executeLoadPersonList(savedPersonList);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Save file not found. New list will be created instead.");
-        } catch (Exception e) {
-            System.out.println("Save file cannot be read. Please fix it manually or use a new list.");
-        }
-        return savedPersonList;
     }
 
 
