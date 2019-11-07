@@ -149,7 +149,7 @@ eg. `add stock Resistor R500 1000 500ohm resistor -mq 100`
 #### 3.3.2 Deleting Stocks: `delete  stock`  
     
 This removes a stock from the inventory, including any references to loaned out stock.  
-  Format: delete stock <Stock Code>  
+  Format: `delete stock <Stock Code>`
   
 #### 3.3.3 Editing Stock: `edit  stock`  
     
