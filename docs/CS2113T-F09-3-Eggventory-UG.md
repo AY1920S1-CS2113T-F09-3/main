@@ -1,4 +1,5 @@
-# Eggventory User GuideBy: Team F09-03  
+# Eggventory User Guide
+By: Team F09-03  
 Dated: 7 November 2019  
 ## Table of contents  
 ### [1. Introduction ](#introduction)  
