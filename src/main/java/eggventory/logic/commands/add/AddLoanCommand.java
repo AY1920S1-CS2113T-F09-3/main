@@ -1,11 +1,11 @@
 package eggventory.logic.commands.add;
 
+import eggventory.commons.enums.CommandType;
+import eggventory.logic.commands.Command;
 import eggventory.model.LoanList;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
-import eggventory.logic.commands.Command;
-import eggventory.commons.enums.CommandType;
 import eggventory.ui.Ui;
 
 //@@author cyanoei
@@ -68,8 +68,12 @@ public class AddLoanCommand extends Command {
             output = ("OOPS there is insufficient stock to loan out!");
         } else {
             LoanList.addLoan(matricNo, stockCode, quantity);
+
+            String personName = PersonList.getName(matricNo);
+            String stockDescription = stockCode;  //In future write a method to get the stock description. 
+
             output = (String.format("Nice, I have added this loan for you: \n"
-                    + "Person: %s | Stock: %s | Quantity: %d", matricNo, stockCode, quantity));
+                    + "Person: %s | Stock: %s | Quantity: %d", personName, stockDescription, quantity));
         }
 
         ui.print(output);
