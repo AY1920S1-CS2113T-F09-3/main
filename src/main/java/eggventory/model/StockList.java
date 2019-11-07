@@ -185,12 +185,17 @@ public class StockList {
      * @return the stockType before editing, for printing purpose.
      */
     public StockType setStockType(String stockTypeName, String newName) {
-        StockType previous;
+        StockType updated;
         for (StockType stockType : stockList) {
             if (stockTypeName.equals(stockType.getName())) {
-                previous = stockType;
+                updated = stockType;
                 stockType.setName(newName);
-                return previous;
+
+                for (Stock stock : stockType.getStockList()) {
+                    stock.setStockType(newName);
+                }
+
+                return updated;
             }
         }
         return null;

@@ -73,7 +73,7 @@ public class AddLoanCommand extends Command {
 
         } else if (!sufficientStock()) {
             output = ("OOPS there is insufficient stock to loan out!");
-            
+
         } else {
             LoanList.addLoan(matricNo, stockCode, quantity);
 

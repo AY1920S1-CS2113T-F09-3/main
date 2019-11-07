@@ -56,7 +56,13 @@ public class Stock {
         return stockType;
     }
 
-    //Should not allow updating of stockType for now (so no setter)
+    /**
+     * Updates the stockType. Only used when a stockType is renamed, to change the stockType of all Stocks under it.
+     * @param stockType the new stockType.
+     */
+    public void setStockType(String stockType) {
+        this.stockType = stockType;
+    }
 
     /** Gets the stock code.
      * @return the stock code.
