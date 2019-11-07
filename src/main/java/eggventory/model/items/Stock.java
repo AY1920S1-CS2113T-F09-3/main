@@ -126,7 +126,7 @@ public class Stock {
     public void quantityLoanCheck(int newTotal) throws BadInputException {
         int loanedQuantity = LoanList.getStockLoanedQuantity(stockCode);
 
-        if (loanedQuantity == -1) { //This means none of that stock has been loaned out, and this check doesn't matter.
+        if (loanedQuantity == 0) { //This means none of that stock has been loaned out, and this check doesn't matter.
             return;
         }
 

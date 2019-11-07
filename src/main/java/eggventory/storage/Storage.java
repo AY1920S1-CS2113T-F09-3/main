@@ -1,24 +1,14 @@
 package eggventory.storage;
 
-import eggventory.logic.commands.Command;
 import eggventory.commons.enums.CommandType;
-import eggventory.logic.commands.add.AddLoanCommand;
-import eggventory.logic.commands.add.AddPersonCommand;
-import eggventory.logic.commands.add.AddStockCommand;
-import eggventory.logic.commands.add.AddStockTypeCommand;
-import eggventory.logic.commands.add.AddTemplateCommand;
+import eggventory.logic.commands.add.*;
 import eggventory.logic.parsers.ParseAdd;
 import eggventory.model.LoanList;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
 import eggventory.model.TemplateList;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -69,8 +59,8 @@ public class Storage {
         File f2 = new File(stockFilePath);
 
         try {
-            Scanner s = new Scanner(f); //Create a Scanner to read saved_stocktypes file
-            Scanner s2 = new Scanner(f2); //Create a Scanner using the File as the source
+            Scanner s = new Scanner(f); //Create a Scanner to read saved_stocktypes file.
+            Scanner s2 = new Scanner(f2); //Create a Scanner to read the saved_stocks file.
 
 
             while (s.hasNext()) {
@@ -83,11 +73,7 @@ public class Storage {
                 String[] item = itemRaw.split(",", 0);
 
                 AddStockCommand loadStocks = new AddStockCommand(CommandType.ADD, item[0], item[1],
-                        Integer.parseInt(item[2]), item[3]);
-
-                /*Todo: In the future, call setMinimum here to update the minimum value (item[4]) instead of defaulting.
-                    Also applies for other optional params that we may add.
-                */
+                        Integer.parseInt(item[2]), item[3], Integer.parseInt(item[4]));
 
                 loadStocks.execute(savedList);
             }
