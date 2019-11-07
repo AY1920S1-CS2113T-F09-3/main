@@ -60,7 +60,7 @@ public class AddLoanCommand extends Command {
      */
     public String execute(StockList list, Ui ui, Storage storage) {
         String output = "";
-        if (!personExists()){
+        if (!personExists()) {
             output += String.format("Sorry, the person with matric number \"%s\" does not exist!", matricNo);
         } else if (!stockExists()) {
             output += String.format("Sorry, that stock with StockCode \"%s\" does not exist!", stockCode);

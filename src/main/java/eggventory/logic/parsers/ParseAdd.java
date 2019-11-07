@@ -69,6 +69,13 @@ public class ParseAdd {
 
     private Command processAddTemplate(String input) throws BadInputException {
         String[] addInput = input.split(" +");
+
+        //Checks if template name is reserved.
+        if (Parser.isReserved(addInput[0])) {
+            throw new BadInputException("'" + addInput[0] + "' is an invalid name as it is a keyword"
+                    + " for an existing command.");
+        }
+
         if (addInput.length % 2 == 0) { // A parameter is missing if there are odd number of arguments.
             throw new BadInputException("Template is missing a <StockCode> or <Quantity>");
         }
@@ -86,17 +93,11 @@ public class ParseAdd {
 
     /**
      * Processes the user command to add a loan.
-     * @param input string in the format <MatricNo> <StockCode> <Quantity>
-     * @return
-     * @throws BadInputException
-     * @throws InsufficientInfoException
+     * @param input string in the format matricNo, stockCode and quantity.
+     * @return a command to add a loan.
      */
-    private Command processAddLoan(String input) throws BadInputException, InsufficientInfoException {
+    private Command processAddLoan(String input) {
         String[] addInput = input.split(" +");
-        if (Parser.isReserved(addInput[0])) {
-            throw new BadInputException("'" + addInput[0] + "' is an invalid name as it is a keyword"
-                    + " for an existing command.");
-        }
 
         if (TemplateList.templateExists(addInput[1])) {
             return new AddLoanByTemplateCommand(CommandType.ADD, addInput[0], addInput[1]);
