@@ -72,7 +72,6 @@ public class Parser {
     /**
      * Checks if a string input is an integer.
      * @param testInteger the input to test.
-     * @return true if it can be parsed as an integer, false otherwise.
      */
     public static void isCheckIsInteger(String testInteger, String inputName) throws BadInputException {
         try {

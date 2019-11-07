@@ -43,7 +43,7 @@ public class ParseAdd {
      * Removes the optional parameter "minimum quantity" from the input string, for description to be parsed normally.
      * @param fullInput the original user command string.
      * @param minQuantity the minimum quantity (integer) as found earlier.
-     * @return the string without " -m <Quantity>".
+     * @return the string without " -m Quantity".
      */
     private String removeMinInput(String fullInput, int minQuantity) {
         fullInput = fullInput.replace(" -m " + Integer.toString(minQuantity), "");
