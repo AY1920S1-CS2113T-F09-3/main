@@ -1,6 +1,7 @@
 package eggventory.logic.commands;
 
 import eggventory.model.LoanList;
+import eggventory.model.PersonList;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.commons.enums.CommandType;
@@ -11,6 +12,7 @@ public class ByeCommand extends Command {
     public ByeCommand(CommandType type) {
         super(type);
     }
+
     /**
      * Closes and exits the application.
      * @param list Unused.
@@ -32,8 +34,9 @@ public class ByeCommand extends Command {
      * @param storage Used to save the stocklist one final time before quitting.
      * @return String object with value null.
      */
-    public String executeSaveMoreLists(StockList list, Ui ui, Storage storage, LoanList loanList) {
-        storage.save(list, loanList);
+    public String executeSaveMoreLists(StockList list, Ui ui, Storage storage, LoanList loanList,
+                                       PersonList personList) {
+        storage.save(list, loanList, personList);
         ui.printExitMessage();
 
         return null;

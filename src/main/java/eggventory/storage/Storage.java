@@ -1,10 +1,12 @@
 package eggventory.storage;
 
 import eggventory.logic.commands.add.AddLoanCommand;
+import eggventory.logic.commands.add.AddPersonCommand;
 import eggventory.logic.commands.add.AddStockCommand;
 import eggventory.commons.enums.CommandType;
 import eggventory.logic.commands.add.AddStockTypeCommand;
 import eggventory.model.LoanList;
+import eggventory.model.PersonList;
 import eggventory.model.StockList;
 
 import java.io.File;
@@ -25,11 +27,21 @@ public class Storage {
     private String stockFilePath;
     private String stockTypesFilePath;
     private String loanListFilePath;
+    private String personListFilePath;
 
-    public Storage(String stockFilePath, String stockTypesFilePath, String loanListFilePath) {
+    /**
+     * Initialises storage object.
+     * @param stockFilePath path to saved_stocks.csv.
+     * @param stockTypesFilePath path to saved_stocktypes.csv.
+     * @param loanListFilePath  path to saved_loanist.csv.
+     * @param personListFilePath path to saved_personlist.csv.
+     */
+    public Storage(String stockFilePath, String stockTypesFilePath, String loanListFilePath,
+                   String personListFilePath) {
         this.stockFilePath = stockFilePath;
         this.stockTypesFilePath = stockTypesFilePath;
         this.loanListFilePath = loanListFilePath;
+        this.personListFilePath = personListFilePath;
     }
 
     /**
@@ -82,6 +94,9 @@ public class Storage {
         return savedList; //Returns a StockList.
     }
 
+    /**
+     * Converts savefile into a LoanList object.
+     */
     public LoanList loadLoanList() {
         LoanList savedLoanList = new LoanList();
         File f3 = new File(loanListFilePath);
@@ -100,6 +115,28 @@ public class Storage {
             System.out.println("Save file cannot be read. Please fix it manually or use a new list.");
         }
         return savedLoanList;
+    }
+
+    /**
+     * Converts savefile into a LoanList object.
+     */
+    public PersonList loadPersonList() {
+        PersonList savedPersonList = new PersonList();
+        File f4 = new File(personListFilePath);
+        try {
+            Scanner s4 = new Scanner(f4); //Create a Scanner using LoanListFilePath as source
+            while (s4.hasNext()) {
+                String itemRaw = s4.nextLine();
+                String[] item = itemRaw.split(",", 0);
+                AddPersonCommand addPersons = new AddPersonCommand(CommandType.ADD, item[0], item[1]);
+                addPersons.executeLoadPersonList(savedPersonList);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Save file not found. New list will be created instead.");
+        } catch (Exception e) {
+            System.out.println("Save file cannot be read. Please fix it manually or use a new list.");
+        }
+        return savedPersonList;
     }
 
 
@@ -128,15 +165,20 @@ public class Storage {
         }
     }
 
-    public void save(StockList stockList, LoanList loanList) {
+    /**
+     * Saves existing StockList, StockType, LoanList, PersonList into a text file.
+     */
+    public void save(StockList stockList, LoanList loanList, PersonList personList) {
         String stocksToSave = stockList.saveDetailsString();
         String stockTypesToSave = stockList.saveStockTypesString();
         String loanListToSave = loanList.saveLoanListString();
+        String personListToSave = personList.savePersonListString();
 
         try {
             writeToFile(stocksToSave, stockFilePath);
             writeToFile(stockTypesToSave, stockTypesFilePath);
             writeToFile(loanListToSave, loanListFilePath);
+            writeToFile(personListToSave, personListFilePath);
         } catch (IOException e) {
             System.out.println("Something went wrong saving the file :(");
         }

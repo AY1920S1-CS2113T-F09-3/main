@@ -37,11 +37,13 @@ public class Eggventory {
         String stockFilePath = currentDir + "/data/saved_stocks.csv";
         String stockTypesFilePath = currentDir + "/data/saved_stocktypes.csv";
         String loanListFilePath = currentDir + "/data/saved_loanlist.csv";
+        String personListFilePath = currentDir + "/data/saved_personlist.csv";
 
-        storage = new Storage(stockFilePath, stockTypesFilePath, loanListFilePath);
+        storage = new Storage(stockFilePath, stockTypesFilePath, loanListFilePath, personListFilePath);
         parser = new Parser();
         stockList = storage.load();
         loanList = storage.loadLoanList();
+        personList = storage.loadPersonList();
 
         /*
         Calendar date = Calendar.getInstance();
@@ -75,7 +77,7 @@ public class Eggventory {
 
             Command command = parser.parse(userInput);
             if (command.getType().equals(CommandType.BYE)) {
-                ((ByeCommand) command).executeSaveMoreLists(stockList, ui, storage, loanList);
+                ((ByeCommand) command).executeSaveMoreLists(stockList, ui, storage, loanList, personList);
             }
             command.execute(stockList, ui, storage);
 
