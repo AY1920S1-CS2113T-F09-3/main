@@ -41,6 +41,7 @@ public class ParseDelete {
         switch (deleteInput[0]) {
 
         case "stock":
+            //Required: stock <stockCode>
             if (!Parser.isCommandComplete(inputString, 1)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("delete stock"));
             }
@@ -49,6 +50,7 @@ public class ParseDelete {
             break;
 
         case "stocktype":
+            //Required: stockType <name>
             if (!Parser.isCommandComplete(inputString, 1)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("delete stocktype"));
             }
@@ -56,6 +58,7 @@ public class ParseDelete {
             break;
 
         case "loan":
+            //Required: loan <matric> <stockCode>
             if (!Parser.isCommandComplete(inputString, 2)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("delete loan"));
             }

@@ -102,9 +102,6 @@ public class ParseAdd {
             return new AddLoanByTemplateCommand(CommandType.ADD, addInput[0], addInput[1]);
         }
 
-        if (!Parser.isCommandComplete(input, 3)) {
-            throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
-        }
         return new AddLoanCommand(CommandType.ADD, addInput[0], addInput[1], Integer.parseInt(addInput[2]));
     }
 
@@ -126,6 +123,7 @@ public class ParseAdd {
 
         switch (addInput[0]) {
         case "stock":
+            //Required: stock <stockType> <stockCode> <quantity> <description>
             if (!Parser.isCommandComplete(inputString, 4)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add stock"));
             }
@@ -133,6 +131,7 @@ public class ParseAdd {
             break;
 
         case "stocktype":
+            //Required: stocktype <stockType name>
             if (!Parser.isCommandComplete(inputString, 1)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add stocktype"));
             }
@@ -140,6 +139,7 @@ public class ParseAdd {
             break;
 
         case "loan":
+            //Required: loan <matric> <stockCode> <quantity>
             if (!Parser.isCommandComplete(inputString, 3)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
             }
@@ -147,6 +147,7 @@ public class ParseAdd {
             break;
 
         case "person":
+            //Required: person <matric> <name>
             if (!Parser.isCommandComplete(inputString, 2)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add person"));
             }
@@ -155,6 +156,7 @@ public class ParseAdd {
             break;
 
         case "template":
+            //Required: template <name> <stockCode> <quantity> (and other pairs if needed)
             if (!Parser.isCommandComplete(inputString, 3)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add template"));
             }
