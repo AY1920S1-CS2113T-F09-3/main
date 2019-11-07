@@ -325,4 +325,12 @@ public class StockType {
     public Stock getStockWithIndex (int i) {
         return stocks.get(i);
     }
+
+    public String queryStocksDescription (String query) {
+        String output = "";
+        for (Stock stock: stocks) {
+            output += stock.containDescription(query);
+        }
+        return output;
+    }
 }

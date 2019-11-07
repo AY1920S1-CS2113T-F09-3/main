@@ -2,6 +2,7 @@ package eggventory.logic.commands.find;
 
 import eggventory.ui.Ui;
 import eggventory.model.items.StockType;
+import eggventory.model.items.Stock;
 import eggventory.logic.commands.Command;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
@@ -25,20 +26,20 @@ public class FindDescriptionCommand extends Command {
     @Override
     public String execute(StockList list, Ui ui, Storage storage) {
         String output;
-        //int max = list.getQuantity(); Note by Rebs: changed variable name to be more specific.
         int stockTypeQuantity = list.getStockTypeQuantity();
         boolean found = false;
+        int counter = 1;
 
         String listString = "";
+        //for each stocktype
         for (int i = 0; i < stockTypeQuantity; i++) {
-            int stockQuantity = list.get(i).getQuantity();
-            for (int j = 0; j < stockQuantity; j++) {
-                if (list.get(i).getStockWithIndex(j).getDescription().contains(search)) { //Only search the description.
-                    // Adding task to print with associated index to final string
-                    listString += (i + 1 + ". " + list.get(i).getStockWithIndex(j).toString() + "\n");
-                    found = true;
-                }
-            }
+            StockType currStockType = list.get(i);
+            listString += currStockType.queryStocksDescription(search);
+        }
+
+        //condition is false if listString had no changes.
+        if (!listString.equals("")) {
+            found = true;
         }
 
         if (!found) {

@@ -30,6 +30,15 @@ public class StockList {
     }
 
     /**
+     * Gets a particular StockType of the list based on the index.
+     * @param i The index of the stocktype
+     * @return the stocktype which the index references
+     */
+    public StockType get(int i) {
+        return stockList.get(i);
+    }
+
+    /**
      * Gets the whole stockList. Note: technically doing using this method will violate OOP.
      * @return the list.
      */
@@ -389,7 +398,4 @@ public class StockList {
     }
     //@@author
 
-    public StockType get(int i) {
-        return stockList.get(i);
-    }
 }
