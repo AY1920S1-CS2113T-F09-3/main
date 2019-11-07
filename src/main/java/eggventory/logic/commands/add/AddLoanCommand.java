@@ -60,17 +60,17 @@ public class AddLoanCommand extends Command {
      */
     public String execute(StockList list, Ui ui, Storage storage) {
         String output = "";
-        if (!stockExists()) {
-            output += "Sorry, that stock does not exist!";
-        } else if (!personExists()){
-            output += "Sorry, that person does not exist!";
+        if (!personExists()){
+            output += String.format("Sorry, the person with matric number \"%s\" does not exist!", matricNo);
+        } else if (!stockExists()) {
+            output += String.format("Sorry, that stock with StockCode \"%s\" does not exist!", stockCode);
         } else if (!sufficientStock()) {
             output = ("OOPS there is insufficient stock to loan out!");
         } else {
             LoanList.addLoan(matricNo, stockCode, quantity);
 
             String personName = PersonList.getName(matricNo);
-            String stockDescription = stockCode;  //In future write a method to get the stock description. 
+            String stockDescription = stockCode;  //In future write a method to get the stock description.
 
             output = (String.format("Nice, I have added this loan for you: \n"
                     + "Person: %s | Stock: %s | Quantity: %d", personName, stockDescription, quantity));
