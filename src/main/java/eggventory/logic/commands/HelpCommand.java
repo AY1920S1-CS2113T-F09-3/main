@@ -79,6 +79,13 @@ public class HelpCommand extends Command {
                 break;
             case "find":
                 try {
+                    output = getStringFromFile("/help/HelpList.txt");
+                } catch (IOException e) {
+                    output = "Error in reading HelpList.txt";
+                }
+                break;
+            case "find":
+                try {
                     output = getStringFromFile("/help/HelpFind.txt");
                 } catch (IOException e) {
                     output = "Error in reading HelpFind.txt";
