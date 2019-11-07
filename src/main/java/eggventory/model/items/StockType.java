@@ -276,7 +276,7 @@ public class StockType {
      * @return The formatted stock details for the entire StockType
      *          if query is within the description, else an empty string.
      */
-    public String queryStocksDescription (String query) {
+    public String queryStocksDescription(String query) {
         String output = "";
         for (Stock stock: stocks) {
             output += stock.containDescription(query);

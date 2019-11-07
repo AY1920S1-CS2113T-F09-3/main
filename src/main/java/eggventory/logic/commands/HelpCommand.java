@@ -77,7 +77,7 @@ public class HelpCommand extends Command {
                     output = "Error in reading HelpDelete.txt";
                 }
                 break;
-            case "find":
+            case "list":
                 try {
                     output = getStringFromFile("/help/HelpList.txt");
                 } catch (IOException e) {

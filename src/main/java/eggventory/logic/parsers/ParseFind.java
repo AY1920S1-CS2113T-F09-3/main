@@ -31,16 +31,15 @@ public class ParseFind {
         Command findCommand;
 
         switch (option) {
-            case "description":
-                if (!Parser.isCommandComplete(inputString, 1)) {
-                    throw new InsufficientInfoException(CommandDictionary.getCommandUsage("find description"));
-                }
-                String searchQuery = inputArr[1];
-                findCommand = processFindDescription(searchQuery);
-                break;
-
-            default:
-                throw new BadInputException(CommandDictionary.getCommandUsage("find"));
+        case "description":
+            if (!Parser.isCommandComplete(inputString, 1)) {
+                throw new InsufficientInfoException(CommandDictionary.getCommandUsage("find description"));
+            }
+            String searchQuery = inputArr[1];
+            findCommand = processFindDescription(searchQuery);
+            break;
+        default:
+            throw new BadInputException(CommandDictionary.getCommandUsage("find"));
         }
 
         return findCommand;

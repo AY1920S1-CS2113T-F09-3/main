@@ -185,7 +185,7 @@ public class Stock {
      * @param query The word to search for in the description
      * @return The formatted stock details if query is within the description, else an empty string.
      */
-    public String containDescription (String query) {
+    public String containDescription(String query) {
         if (this.getDescription().contains(query)) {
             return this.toString() + "\n";
         } else {
