@@ -3,6 +3,7 @@ package eggventory.logic.commands;
 import eggventory.model.LoanList;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
+import eggventory.model.TemplateList;
 import eggventory.storage.Storage;
 import eggventory.commons.enums.CommandType;
 import eggventory.ui.Ui;
@@ -35,8 +36,8 @@ public class ByeCommand extends Command {
      * @return String object with value null.
      */
     public String executeSaveMoreLists(StockList list, Ui ui, Storage storage, LoanList loanList,
-                                       PersonList personList) {
-        storage.save(list, loanList, personList);
+                                       PersonList personList, TemplateList templateList) {
+        storage.save(list, loanList, personList, templateList);
         ui.printExitMessage();
 
         return null;

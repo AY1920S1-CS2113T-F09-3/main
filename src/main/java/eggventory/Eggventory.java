@@ -7,6 +7,7 @@ import eggventory.logic.parsers.Parser;
 import eggventory.model.LoanList;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
+import eggventory.model.TemplateList;
 import eggventory.storage.Storage;
 import eggventory.ui.Cli;
 import eggventory.ui.Gui;
@@ -25,7 +26,7 @@ public class Eggventory {
     private static StockList stockList;
     private static LoanList loanList;
     private static PersonList personList;
-    //private static LoanList loanList;
+    private static TemplateList templateList;
 
     /**
      * Sets up the frontend, the Gui and the event handlers. This will create an instance of the
@@ -38,12 +39,15 @@ public class Eggventory {
         String stockTypesFilePath = currentDir + "/data/saved_stocktypes.csv";
         String loanListFilePath = currentDir + "/data/saved_loanlist.csv";
         String personListFilePath = currentDir + "/data/saved_personlist.csv";
+        String templateListFilePath = currentDir + "/data/saved_templatelist.csv";
 
-        storage = new Storage(stockFilePath, stockTypesFilePath, loanListFilePath, personListFilePath);
+        storage = new Storage(stockFilePath, stockTypesFilePath, loanListFilePath, personListFilePath,
+                templateListFilePath);
         parser = new Parser();
         stockList = storage.load();
         loanList = storage.loadLoanList();
         personList = storage.loadPersonList();
+        templateList = storage.loadTemplateList();
 
         /*
         Calendar date = Calendar.getInstance();
@@ -77,7 +81,7 @@ public class Eggventory {
 
             Command command = parser.parse(userInput);
             if (command.getType().equals(CommandType.BYE)) {
-                ((ByeCommand) command).executeSaveMoreLists(stockList, ui, storage, loanList, personList);
+                ((ByeCommand) command).executeSaveMoreLists(stockList, ui, storage, loanList, personList, templateList);
             }
             command.execute(stockList, ui, storage);
 

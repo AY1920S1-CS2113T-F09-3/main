@@ -1,13 +1,17 @@
 package eggventory.storage;
 
+import eggventory.logic.commands.Command;
+import eggventory.commons.enums.CommandType;
 import eggventory.logic.commands.add.AddLoanCommand;
 import eggventory.logic.commands.add.AddPersonCommand;
 import eggventory.logic.commands.add.AddStockCommand;
-import eggventory.commons.enums.CommandType;
 import eggventory.logic.commands.add.AddStockTypeCommand;
+import eggventory.logic.commands.add.AddTemplateCommand;
+import eggventory.logic.parsers.ParseAdd;
 import eggventory.model.LoanList;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
+import eggventory.model.TemplateList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,6 +32,7 @@ public class Storage {
     private String stockTypesFilePath;
     private String loanListFilePath;
     private String personListFilePath;
+    private String templateListFilePath;
 
     /**
      * Initialises storage object.
@@ -35,13 +40,15 @@ public class Storage {
      * @param stockTypesFilePath path to saved_stocktypes.csv.
      * @param loanListFilePath  path to saved_loanist.csv.
      * @param personListFilePath path to saved_personlist.csv.
+     * @param templateListFilePath path to saved_templatelist.txt.
      */
     public Storage(String stockFilePath, String stockTypesFilePath, String loanListFilePath,
-                   String personListFilePath) {
+                   String personListFilePath, String templateListFilePath) {
         this.stockFilePath = stockFilePath;
         this.stockTypesFilePath = stockTypesFilePath;
         this.loanListFilePath = loanListFilePath;
         this.personListFilePath = personListFilePath;
+        this.templateListFilePath = templateListFilePath;
     }
 
     /**
@@ -94,6 +101,7 @@ public class Storage {
         return savedList; //Returns a StockList.
     }
 
+    //@@author patwaririshab
     /**
      * Converts savefile into a LoanList object.
      */
@@ -121,11 +129,11 @@ public class Storage {
      */
     public LoanList loadLoanList() {
         LoanList savedLoanList = new LoanList();
-        File f3 = new File(loanListFilePath);
+        File f5 = new File(loanListFilePath);
         try {
-            Scanner s3 = new Scanner(f3); //Create a Scanner using LoanListFilePath as source
-            while (s3.hasNext()) {
-                String itemRaw = s3.nextLine();
+            Scanner s5 = new Scanner(f5); //Create a Scanner using LoanListFilePath as source
+            while (s5.hasNext()) {
+                String itemRaw = s5.nextLine();
                 String[] item = itemRaw.split(",", 0);
                 AddLoanCommand addLoans = new AddLoanCommand(CommandType.ADD, item[0], item[1],
                         Integer.parseInt(item[2]));
@@ -137,6 +145,27 @@ public class Storage {
             System.out.println("Save file cannot be read. Please fix it manually or use a new list.");
         }
         return savedLoanList;
+    }
+
+    /**
+     * Converts savefile into a TemplateList object.
+     */
+    public TemplateList loadTemplateList() {
+        TemplateList savedTemplateList = new TemplateList();
+        File f3 = new File(templateListFilePath);
+        try {
+            Scanner s3 = new Scanner(f3); //Create a Scanner using LoanListFilePath as source
+            while (s3.hasNext()) {
+                String itemRaw = s3.nextLine();
+                AddTemplateCommand addTemplate = ((AddTemplateCommand) new ParseAdd().processAddTemplate(itemRaw));
+                addTemplate.executeSaveTemplateList(savedTemplateList);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Save file not found. New list will be created instead.");
+        } catch (Exception e) {
+            System.out.println("Save file cannot be read. Please fix it manually or use a new list.");
+        }
+        return savedTemplateList;
     }
 
 
@@ -168,17 +197,19 @@ public class Storage {
     /**
      * Saves existing StockList, StockType, LoanList, PersonList into a text file.
      */
-    public void save(StockList stockList, LoanList loanList, PersonList personList) {
+    public void save(StockList stockList, LoanList loanList, PersonList personList, TemplateList templateList) {
         String stocksToSave = stockList.saveDetailsString();
         String stockTypesToSave = stockList.saveStockTypesString();
         String loanListToSave = loanList.saveLoanListString();
         String personListToSave = personList.savePersonListString();
+        String templateListToSave = templateList.saveTemplateListString();
 
         try {
             writeToFile(stocksToSave, stockFilePath);
             writeToFile(stockTypesToSave, stockTypesFilePath);
             writeToFile(loanListToSave, loanListFilePath);
             writeToFile(personListToSave, personListFilePath);
+            writeToFile(templateListToSave, templateListFilePath);
         } catch (IOException e) {
             System.out.println("Something went wrong saving the file :(");
         }
