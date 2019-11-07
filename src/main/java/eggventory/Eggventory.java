@@ -1,5 +1,6 @@
 package eggventory;
 
+import eggventory.logic.commands.ByeCommand;
 import eggventory.logic.commands.Command;
 import eggventory.commons.enums.CommandType;
 import eggventory.logic.parsers.Parser;
@@ -35,10 +36,12 @@ public class Eggventory {
         String currentDir = System.getProperty("user.dir");
         String stockFilePath = currentDir + "/data/saved_stocks.csv";
         String stockTypesFilePath = currentDir + "/data/saved_stocktypes.csv";
+        String loanListFilePath = currentDir + "/data/saved_loanlist.csv";
 
-        storage = new Storage(stockFilePath, stockTypesFilePath);
+        storage = new Storage(stockFilePath, stockTypesFilePath, loanListFilePath);
         parser = new Parser();
         stockList = storage.load();
+        loanList = storage.loadLoanList();
 
         /*
         Calendar date = Calendar.getInstance();
@@ -71,6 +74,9 @@ public class Eggventory {
             String userInput = ui.read();
 
             Command command = parser.parse(userInput);
+            if (command.getType().equals(CommandType.BYE)) {
+                ((ByeCommand) command).executeSaveMoreLists(stockList, ui, storage, loanList);
+            }
             command.execute(stockList, ui, storage);
 
             if (command.getType() == CommandType.BYE) {
