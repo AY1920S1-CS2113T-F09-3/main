@@ -2,6 +2,7 @@ package eggventory.model.items;
 
 
 import eggventory.commons.exceptions.BadInputException;
+import eggventory.model.LoanList;
 import eggventory.model.loans.Loan;
 
 import java.util.ArrayList;
@@ -98,6 +99,7 @@ public class Stock {
 
     //Note: The access to the quantity attribute might have to be changed in the future.
 
+    //@@author cyanoei
     /**
      * Gets the total number of this stock. Includes items lost and on loan.
      * @return total the total quantity of that stock.
@@ -106,14 +108,34 @@ public class Stock {
         return quantity;
     }
 
-
     /**
      * Sets the new total number of this stock. To be used by 'change' or 'qty' commands to modify the number.
      * @param newTotal the new total number of items.
      */
     public void setQuantity(int newTotal) throws BadInputException {
         quantitySanityCheck(newTotal);
+        quantityLoanCheck(newTotal);
         this.quantity = newTotal;
+    }
+
+    /**
+     * Checks if a quantity can be updated, based on the quantity of stock loaned out so far.
+     * @param newTotal the new quantity to change to.
+     * @throws BadInputException if there is more stock currently loaned than the new quantity being changed to.
+     */
+    public void quantityLoanCheck(int newTotal) throws BadInputException {
+        int loanedQuantity = LoanList.getStockLoanedQuantity(stockCode);
+
+        if (loanedQuantity == -1) { //This means none of that stock has been loaned out, and this check doesn't matter.
+            return;
+        }
+
+        if (newTotal < loanedQuantity) {
+            throw new BadInputException(String.format("Sorry, you have %d of \"%s\" loaned out so far, "
+                            + "so the quantity cannot be changed to %d.",
+                    loanedQuantity, description, newTotal));
+        }
+
     }
 
     /**
@@ -124,8 +146,12 @@ public class Stock {
     public void quantitySanityCheck(int quantity) throws BadInputException {
         if (quantity < 0) {
             throw new BadInputException("Sorry, the quantity cannot be negative!");
+        } else if (quantity > 1000000) {
+            throw new BadInputException("Sorry, the quantity cannot be greater than 1 000 000!");
         }
     }
+
+    //@@author
 
     /**
      * Gets the number of this stock that is on loan.
