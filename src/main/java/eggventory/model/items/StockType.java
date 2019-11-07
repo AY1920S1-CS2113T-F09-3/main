@@ -321,4 +321,8 @@ public class StockType {
         return dataArray;
     }
     //@@author
+
+    public Stock getStockWithIndex (int i) {
+        return stocks.get(i);
+    }
 }

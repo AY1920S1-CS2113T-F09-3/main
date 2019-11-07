@@ -388,4 +388,8 @@ public class StockList {
         return tableStruct;
     }
     //@@author
+
+    public StockType get(int i) {
+        return stockList.get(i);
+    }
 }
