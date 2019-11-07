@@ -26,7 +26,7 @@ public class DeletePersonCommand extends Command {
             Person deletedPerson = PersonList.delete(matricNo);
             output = "";
             output = (String.format("Nice, I have deleted this person for you: %s", deletedPerson.getName()));
-        } catch (BadInputException e){
+        } catch (BadInputException e) {
             output = (String.format("No person with matric no: %s was found. Please recheck your input", matricNo));
         }
 
