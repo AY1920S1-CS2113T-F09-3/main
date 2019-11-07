@@ -49,8 +49,8 @@ public class AddLoanCommand extends Command {
         return true;
     }
 
-    private boolean sufficientStock() {
-        if (LoanList.getStockLoanedQuantity(stockCode) - quantity < 0) {
+    private boolean sufficientStock(StockList list) {
+        if (list.getStockQuantity(stockCode) - LoanList.getStockLoanedQuantity(stockCode) - quantity < 0) {
             return false;
         }
         return true;
@@ -71,7 +71,7 @@ public class AddLoanCommand extends Command {
         } else if (!stockExists(list)) {
             output += String.format("Sorry, that stock with StockCode \"%s\" does not exist!", stockCode);
 
-        } else if (!sufficientStock()) {
+        } else if (!sufficientStock(list)) {
             output = ("OOPS there is insufficient stock to loan out!");
 
         } else {

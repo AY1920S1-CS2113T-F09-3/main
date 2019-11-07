@@ -205,7 +205,7 @@ public class StockList {
      * Gets the total number of stocks in this stockList. This sums the number of stocks across stockTypes.
      * @return the total number of stocks.
      */
-    public int getStockQuantity() { //The number of stocks in the list, across all stockTypes.
+    public int getTotalNumberOfStocks() { //The number of stocks in the list, across all stockTypes.
         int total = 0;
         for (StockType stockType : stockList) {
             total += stockType.getQuantity();
@@ -215,6 +215,17 @@ public class StockList {
     }
 
     //@@author cyanoei
+
+    public int getStockQuantity(String stockCode) {
+        Stock stock = findStock(stockCode);
+        if (stock == null) {
+            return -1;
+        } else {
+            return stock.getQuantity();
+        }
+    }
+
+
     /**
      * Determines if any of the stocks in this stockList have the same stockCode.
      * @param stockCode the queried stockCode.
