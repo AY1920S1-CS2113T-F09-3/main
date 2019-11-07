@@ -2,13 +2,19 @@ package eggventory.logic.parsers;
 
 import eggventory.logic.commands.Command;
 import eggventory.logic.commands.CommandDictionary;
-import eggventory.logic.commands.add.AddLoanCommand;
 import eggventory.logic.commands.add.AddPersonCommand;
+import eggventory.logic.commands.add.AddLoanCommand;
 import eggventory.logic.commands.add.AddStockCommand;
 import eggventory.logic.commands.add.AddStockTypeCommand;
+import eggventory.logic.commands.add.AddTemplateCommand;
+import eggventory.logic.commands.add.AddLoanByTemplateCommand;
 import eggventory.commons.enums.CommandType;
 import eggventory.commons.exceptions.BadInputException;
 import eggventory.commons.exceptions.InsufficientInfoException;
+import eggventory.model.TemplateList;
+import javafx.util.Pair;
+
+import java.util.ArrayList;
 
 //@@author cyanoei
 public class ParseAdd {
@@ -61,12 +67,35 @@ public class ParseAdd {
         return new AddPersonCommand(CommandType.ADD, addInput[0], addInput[1]);
     }
 
+    private Command processAddTemplate(String input) throws BadInputException {
+        String[] addInput = input.split(" +");
+        if (addInput.length % 2 == 0) { // A parameter is missing if there are odd number of arguments.
+            throw new BadInputException("Template is missing a <StockCode> or <Quantity>");
+        }
+
+        ArrayList<Pair<String, String>> loanPairs = new ArrayList<>();
+
+        for (int i = 1; i < addInput.length; i += 2) {
+            loanPairs.add(new Pair<>(addInput[i], addInput[i + 1]));
+        }
+
+        return new AddTemplateCommand(CommandType.ADD, addInput[0], loanPairs);
+    }
+
     //@@author cyanoei
-    private Command processAddLoan(String input) throws BadInputException {
+    private Command processAddLoan(String input) throws BadInputException, InsufficientInfoException {
         String[] addInput = input.split(" +");
         if (Parser.isReserved(addInput[0])) {
             throw new BadInputException("'" + addInput[0] + "' is an invalid name as it is a keyword"
                     + " for an existing command.");
+        }
+
+        if (TemplateList.templateExists(addInput[1])) {
+            return new AddLoanByTemplateCommand(CommandType.ADD, addInput[0], addInput[1]);
+        }
+
+        if (!Parser.isCommandComplete(input, 2)) {
+            throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
         }
         return new AddLoanCommand(CommandType.ADD, addInput[0], addInput[1], Integer.parseInt(addInput[2]));
     }
@@ -103,7 +132,7 @@ public class ParseAdd {
             break;
 
         case "loan":
-            if (!Parser.isCommandComplete(inputString, 3)) {
+            if (!Parser.isCommandComplete(inputString, 2)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
             }
             addCommand = processAddLoan(addInput[1]);
@@ -117,15 +146,18 @@ public class ParseAdd {
             addCommand = processAddPerson(addInput[1]);
             break;
 
+        case "template":
+            if (!Parser.isCommandComplete(inputString, 3)) {
+                throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add template"));
+            }
+            addCommand = processAddTemplate(addInput[1]);
+            break;
+
         default:
             throw new BadInputException("Unexpected value: " + addInput[0]);
         }
 
         return addCommand;
-
-    }
-
-    private void checkIfCommandComplete() {
 
     }
 
