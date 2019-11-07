@@ -1,5 +1,5 @@
 # Eggventory User GuideBy: Team F09-03  
-Dated: 5 November 2019  
+Dated: 7 November 2019  
 ## Table of contents  
 ### [1. Introduction ](#introduction)  
 ### [2. Quick Start ](#quickstart)  
@@ -119,6 +119,7 @@ Stocks are the main types of items that Eggventory helps you to manage. Every St
 Stocks may be Collective or Unique. Collective stocks consist of items that are not tracked individually. They generally are stocks that do not have each have their own serial number, and are considered interchangeable. Unique stocks are items that are often expensive or limited in quantity. Such stocks usually are each assigned a serial number, and are loaned out and tracked by this number. Stocks are set as Collective by default.  
   
 Stocks have the following properties:  
+
 | Property | Description |  
 |---:|---| 
 StockType|The category the stock belongs to. The StockType should have previously been added to the inventory system before being referenced.  
@@ -138,6 +139,7 @@ eg. `add stock Resistor R500 1000 500ohm resistor`
   
 **[coming in v2.0]**  
 In addition to the required parameters, stocks can also be added with the following optional parameters:  
+
 Format|Purpose|  
 |---|---|  
 `-mq <Mintity>` |Sets the minimum quantity of stock that should be maintained in the inventory  
@@ -159,11 +161,8 @@ This removes a stock from the inventory, including any references to loaned out 
 This directly modifies the value of a property stock. You may modify as many properties as you wish in one command.  
   
 Keywords to modify each property:  
-  
--
 
-
--   stockcode  
+- stockcode  
       
 - description  
       
@@ -315,14 +314,14 @@ eg. `add loan A0187654 CG1112_Alex`
   
 Note: Additional Loans can still be added on to the same Person afterwards using the loan add command.  
 
-#### 3.6.4 Listing Loan Templates: `list template  
+#### 3.6.4 Listing Loan Templates: `list template` 
   
 This lists out all the templates and their associated loans that you have created.
   
 Format: `list template`
   
 ---  
-### 3.7 Marking Stock as lost [coming in v2.0]  
+### 3.7 Marking Stock as lost **[coming in v2.0]**
 Marks a certain quantity of a stock as lost. Differs from deleting stock in the fact that the quantity of stock will still be saved in the inventory (eg. for administrative purposes). Lost stock will not be included in tallies of available stock.  
   
 #### 3.7.1 Marking Stock as lost: `lost`  
@@ -349,9 +348,9 @@ This finds all StockTypes that matches the query.
 Format: `find stocktype <Query>`  
 
 ---  
-### 3.9 Using Undo and Redo commands: [coming in v2.0]  
+### 3.9 Using Undo and Redo commands: **[coming in v2.0]**
   
-#### 3.9.1 Undoing a command: `undo  
+#### 3.9.1 Undoing a command: `undo`
   
 If you accidentally entered a command by accident, the effects of any command can be reversed with the undo command.  
   Format: `undo`  
