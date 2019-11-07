@@ -76,7 +76,7 @@ public class ParseFind {
 
         switch (option) {
             case "description":
-                if (!Parser.isCommandComplete(inputString, 2)) {
+                if (!Parser.isCommandComplete(inputString, 1)) {
                     throw new InsufficientInfoException(CommandDictionary.getCommandUsage("find description"));
                 }
                 String searchQuery = inputArr[1];
