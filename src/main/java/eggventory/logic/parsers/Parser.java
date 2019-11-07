@@ -45,7 +45,8 @@ public class Parser {
      * @return True if invalid, false otherwise.
      */
     public static boolean isReserved(String input) {
-        return reservedNames.contains(input);
+        String lowercaseInput = input.toLowerCase();
+        return reservedNames.contains(lowercaseInput);
     }
 
     /**
