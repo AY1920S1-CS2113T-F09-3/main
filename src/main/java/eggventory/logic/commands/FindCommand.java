@@ -7,7 +7,7 @@ import eggventory.storage.Storage;
 import eggventory.commons.enums.CommandType;
 
 /**
- * Command objects for searching for stocks by name.
+ * Command objects for searching for stocks by filter then the search query.
  */
 public class FindCommand extends Command {
     private String search;
