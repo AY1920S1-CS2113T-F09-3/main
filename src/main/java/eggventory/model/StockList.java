@@ -216,6 +216,11 @@ public class StockList {
 
     //@@author cyanoei
 
+    /**
+     * Obtains the quantity of a Stock based on its StockCode.
+     * @param stockCode the StockCode of the Stock.
+     * @return the quantity of the stock, if found, otherwise -1. 
+     */
     public int getStockQuantity(String stockCode) {
         Stock stock = findStock(stockCode);
         if (stock == null) {
