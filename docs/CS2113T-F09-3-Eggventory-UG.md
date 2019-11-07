@@ -86,8 +86,6 @@ Note: Stock Type names are not allowed to have spaces in them.
 This adds a new category of stock to the inventory.  
   
 Format: `add stocktype <StockType> ` 
-  
-
 
 eg. add stocktype Resistor  
   
@@ -96,21 +94,18 @@ eg. add stocktype Resistor
 This removes a stocktype from the inventory, and all stock under it.  
   
 Format: `delete stocktype <StockType>`  
-  
-
 
 #### 3.2.3 Editing Stock Types: `edit stocktype`  
     
 This changes the name of the selected stock type.  
   
-Format: `edit stocktype <StockType><name>`  
-  #### 3.2.4 Listing Stock Types: `list stocktype`  
+Format: `edit stocktype <StockType><name>`
+
+#### 3.2.4 Listing Stock Types: `list stocktype`  
   
 This lists out all Stock Types that are present in the inventory.  
   
 Format: `list stocktype all`  
-  
-
 
 ---  
 ### 3.3 Working with Stocks  
@@ -123,7 +118,7 @@ Stocks have the following properties:
 | Property | Description |  
 |---:|---| 
 StockType|The category the stock belongs to. The StockType should have previously been added to the inventory system before being referenced.  
-StockCode|nique string of numbers and letters, used to identify the stock.  
+StockCode|A unique string of numbers and letters, used to identify the stock.  
 Quantity | The number of items under the stock.
 Description | The common name of the item.  
   
@@ -142,7 +137,7 @@ In addition to the required parameters, stocks can also be added with the follow
 
 Format|Purpose|  
 |---|---|  
-`-mq <Mintity>` |Sets the minimum quantity of stock that should be maintained in the inventory  
+`-mq <MinQuantity>` |Sets the minimum quantity of stock that should be maintained in the inventory  
 `-u`|Sets the stock to contain items that are unique  
   
     
@@ -440,8 +435,6 @@ undo last command | `undo`
 redo previous command | `redo`  
 exit application | `bye`
  
-
-
 ## 6. Glossary  
 |Item|Description|
 | --- | --- |
