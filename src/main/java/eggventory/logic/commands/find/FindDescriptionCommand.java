@@ -8,6 +8,7 @@ import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.commons.enums.CommandType;
 
+//@@author yanprosobo
 /**
  * Command objects for searching for stocks by filter then the search query.
  */
@@ -53,4 +54,4 @@ public class FindDescriptionCommand extends Command {
         return output;
     }
 }
-
+//@@author
