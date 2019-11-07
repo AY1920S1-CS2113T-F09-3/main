@@ -17,7 +17,7 @@ public class ParseFind {
 
     /**
      * Processes a user command that began with the word "find".
-     * Used to differentiate between the different elements the user is able to find (stock, stocktype, etc),
+     * Used to filter between the different properties the user wants to search through (stock, description, etc),
      * and create a Command object to execute the finding of the query.
      * @param inputString String input that was given after the word "find".
      *        Describes what the user wants to filter, and the word query to search for.
