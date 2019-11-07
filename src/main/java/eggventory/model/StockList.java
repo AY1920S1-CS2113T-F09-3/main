@@ -127,8 +127,6 @@ public class StockList {
         return null;
     }
 
-    //@@author cyanoei
-
     /**
      * Formats an error message for the case of editing to a repeated stockCode.
      * @param newStockCode the new stockCode chosen by the user.
@@ -240,8 +238,23 @@ public class StockList {
         return false;
     }
 
+    /**
+     * Searches for a stock in the stockList which has that stockCode.
+     * @param stockCode the stockCode being queried.
+     * @return the stock in question.
+     */
+    public Stock findStock(String stockCode) {
+        for (StockType stocktype : stockList) {
+            for (Stock stock : stocktype.getStockList()) {
+                if (stock.getStockCode().equals(stockCode)) {
+                    return stock;
+                }
+            }
+        }
+        return null;
+    }
 
-    //@@author
+    //@@author yanprosobo
     /**
      * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
      * @return The string of the stocklist whose stocktype matches query.
