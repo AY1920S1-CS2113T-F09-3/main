@@ -2,7 +2,7 @@ package eggventory.model.items;
 
 import eggventory.commons.enums.StockProperty;
 import eggventory.commons.exceptions.BadInputException;
-
+import java.util.List;
 import java.util.ArrayList;
 
 //@@author Deculsion
@@ -276,14 +276,14 @@ public class StockType {
      * @return The formatted stock details for that stock if query is within the description,
      *         else an empty string.
      */
-    public String queryAllStocksDescription(String query) {
-        String output = "";
+    public ArrayList<Stock> queryAllStocksDescription(String query) {
+        ArrayList<Stock> outputList = new ArrayList<>();;
         for (Stock stock: stocks) {
             if(stock.containDescription(query)) {
-                output += stock.toString() + "\n";
+                outputList.add(stock);
             }
         }
-        return output;
+        return outputList;
     }
 
     //@@author Deculsion
