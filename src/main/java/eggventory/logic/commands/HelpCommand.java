@@ -1,16 +1,16 @@
-package eggventory.logic;
+package eggventory.logic.commands;
+
+import eggventory.commons.enums.CommandType;
+import eggventory.model.StockList;
+import eggventory.storage.Storage;
+import eggventory.ui.Ui;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
 
-
-import eggventory.logic.commands.Command;
-import eggventory.ui.Ui;
-import eggventory.storage.Storage;
-import eggventory.model.StockList;
-import eggventory.commons.enums.CommandType;
+//@@author yanprosobo
 
 //@@author yanprosobo
 /**
@@ -76,6 +76,20 @@ public class HelpCommand extends Command {
                     output = getStringFromFile("/help/HelpDelete.txt");
                 } catch (IOException e) {
                     output = "Error in reading HelpDelete.txt";
+                }
+                break;
+            case "list":
+                try {
+                    output = getStringFromFile("/help/HelpList.txt");
+                } catch (IOException e) {
+                    output = "Error in reading HelpList.txt";
+                }
+                break;
+            case "find":
+                try {
+                    output = getStringFromFile("/help/HelpFind.txt");
+                } catch (IOException e) {
+                    output = "Error in reading HelpFind.txt";
                 }
                 break;
             case "bye":

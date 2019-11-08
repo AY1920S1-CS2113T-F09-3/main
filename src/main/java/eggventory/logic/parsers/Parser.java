@@ -1,16 +1,17 @@
 package eggventory.logic.parsers;
 
-import eggventory.logic.commands.Command;
-import eggventory.logic.commands.CommandDictionary;
-import eggventory.logic.commands.FindCommand;
-import eggventory.logic.HelpCommand;
-import eggventory.logic.commands.ByeCommand;
 import eggventory.commons.enums.CommandType;
 import eggventory.commons.exceptions.BadInputException;
 import eggventory.commons.exceptions.InsufficientInfoException;
+import eggventory.logic.commands.HelpCommand;
+import eggventory.logic.commands.ByeCommand;
+import eggventory.logic.commands.Command;
+import eggventory.logic.commands.CommandDictionary;
 
 import java.util.Arrays;
 import java.util.HashSet;
+
+;
 
 //@@author cyanoei
 /**
@@ -26,6 +27,7 @@ public class Parser {
     private ParseDelete deleteParser;
     private ParseEdit editParser;
     private ParseList listParser;
+    private ParseFind findParser;
 
     /**
      * Parser object contains submodules for parsing commands with many different options.
@@ -35,6 +37,7 @@ public class Parser {
         deleteParser = new ParseDelete();
         editParser = new ParseEdit();
         listParser = new ParseList();
+        findParser = new ParseFind();
     }
 
     //@@author Raghav-B
@@ -45,7 +48,8 @@ public class Parser {
      * @return True if invalid, false otherwise.
      */
     public static boolean isReserved(String input) {
-        return reservedNames.contains(input);
+        String lowercaseInput = input.toLowerCase();
+        return reservedNames.contains(lowercaseInput);
     }
 
     /**
@@ -64,6 +68,18 @@ public class Parser {
         return commandArr.length - 1 >= reqArguments;
     }
     //@@author cyanoei
+
+    /**
+     * Checks if a string input is an integer.
+     * @param testInteger the input to test.
+     */
+    public static void isCheckIsInteger(String testInteger, String inputName) throws BadInputException {
+        try {
+            Integer.parseInt(testInteger);
+        } catch (NumberFormatException e) {
+            throw new BadInputException(String.format("Sorry, the input for %s has to be an integer!", inputName));
+        }
+    }
 
     /**
      * Checks if the command keyword (first word is valid).
@@ -120,13 +136,8 @@ public class Parser {
         case "find": {
             if (inputArr.length == 1) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("find"));
-            }
-
-            String description = inputArr[1].trim(); //Might need to catch empty string exceptions?
-            if (!description.isBlank()) {
-                command = new FindCommand(CommandType.FIND, description);
             } else {
-                throw new InsufficientInfoException("Please enter the search description.");
+                command = findParser.parse(inputArr[1]);
             }
             break;
         }
