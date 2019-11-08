@@ -5,7 +5,7 @@ import eggventory.model.items.Stock;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+//@@author cyanoei
 class QuantityManagerTest {
 
     Stock stock1;
