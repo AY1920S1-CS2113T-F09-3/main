@@ -92,13 +92,13 @@ public class QuantityManager {
      * @return the formatted String.
      */
     private static String formatStock(Stock stock, int loaned) {
-        return stock.toString() + " | Loaned: " + Integer.toString(loaned);
+        return stock.toString() + " | Loaned: " + Integer.toString(loaned) + " | Minimum: " + stock.getMinimum();
     }
 
     /**
-     *
-     * @param minimumList
-     * @return
+     * Produces output string describing stocks that are below the minimum required quantity.
+     * @param minimumList The ArrayList of stocks which are below minimum required quantity.
+     * @return the output string.
      */
     private static String lessThanMinimumOutput(ArrayList<Stock> minimumList) {
         String output = "";
@@ -106,27 +106,28 @@ public class QuantityManager {
         if (minimumList.size() == 0) {
             output = "No stocks are below their minimum quantity! All's good!";
         } else {
+            output += "These stocks have less than the minimum quantity you wanted to keep:\n";
+            int i = 1;
             for (Stock stock : minimumList) {
                 int loaned = getLoanedQuantity(stock);
-                output += formatStock(stock, loaned) + "\n";
+                output += Integer.toString(i++) + ". " + formatStock(stock, loaned) + "\n";
             }
         }
-        return output; //But this is only the string output. Need the tablestruct also.
+        return output;
     }
 
+    /**
+     * Returns the table required for GUI to show the list of stocks below minimum quantity.
+     * @param minimumList the ArrayList of stocks.
+     * @return the tableStruct.
+     */
     private static TableStruct getLessThanMinimumStocksStruct(ArrayList<Stock> minimumList) {
         TableStruct tableStruct = new TableStruct("List of Stocks below Minimum Quantity");
         tableStruct.setTableColumns("Stock Type", "Stock Code", "Total Quantity", "Description", "Minimum", "Loaned");
 
         ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
         for (Stock stock : minimumList) {
-
-            //Add extra info.
             ArrayList<String> stockDescription = stock.getDataAsArray();
-            stockDescription.add(String.valueOf(stock.getMinimum()));
-            stockDescription.add(String.valueOf(getLoanedQuantity(stock)));
-
-            //Add into the main array.
             dataArray.add(stockDescription);
         }
         tableStruct.setTableData(dataArray);
@@ -134,10 +135,20 @@ public class QuantityManager {
         return tableStruct;
     }
 
+    /**
+     * Public method for printing the listMinimum output.
+     * @param list the StockList.
+     * @return the print output.
+     */
     public static String printMinimumOutput(StockList list) {
         return lessThanMinimumOutput(lessThanMinimumList(list));
     }
 
+    /**
+     * Public method for returning the TableStruct for GUI display.
+     * @param list the StockList.
+     * @return the TableStruct.
+     */
     public static TableStruct printMinimumTable(StockList list) {
         return getLessThanMinimumStocksStruct(lessThanMinimumList(list));
     }
