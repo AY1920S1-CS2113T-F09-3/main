@@ -103,7 +103,7 @@ public class QuantityManager {
         return output; //But this is only the string output. Need the tablestruct also.
     }
 
-    private static TableStruct getMRQStocksStruct(ArrayList<Stock> minimumList) {
+    private static TableStruct getLessThanMinimumStocksStruct(ArrayList<Stock> minimumList) {
         TableStruct tableStruct = new TableStruct("List of Stocks below Minimum Quantity");
         tableStruct.setTableColumns("Stock Type", "Stock Code", "Total Quantity", "Description", "Minimum", "Loaned");
 
@@ -128,7 +128,7 @@ public class QuantityManager {
     }
 
     public static TableStruct printMinimumTable(StockList list) {
-        return getMRQStocksStruct(lessThanMinimumList(list));
+        return getLessThanMinimumStocksStruct(lessThanMinimumList(list));
     }
 
 
