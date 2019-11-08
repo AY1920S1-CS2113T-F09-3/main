@@ -270,11 +270,13 @@ public class StockType {
         return false; //If none of the stocks had the same code.
     }
 
+    //@@author yanprosobo
     /**
      * Checks the entire StockType if any of the stocks contains a description equal to query.
      * @param query The word to search for in the description
-     * @return The formatted stock details for that stock if query is within the description,
-     *         else an empty string.
+     * @return An ArrayList of stock objects for the stock whose query is within the description.
+     *         If there are no stock which matches, an empty ArrayList is returned.
+     *
      */
     public ArrayList<Stock> queryAllStocksDescription(String query) {
         ArrayList<Stock> outputList = new ArrayList<>();;

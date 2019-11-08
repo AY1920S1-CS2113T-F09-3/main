@@ -24,20 +24,23 @@ public class FindDescriptionCommand extends Command {
 
     /**
      * Allows the user to search for stock descriptions that match a given string.
-     * Prints the list of stocks that match. Alternatively prints a message if none are found.
+     * Prints the list of stocks that matches. Alternatively prints a message if none are found.
      */
     @Override
     public String execute(StockList list, Ui ui, Storage storage) {
         String output;
         int stockTypeQuantity = list.getStockTypeQuantity();
         boolean found = false;
-        //int counter = 1;
 
-        //TableStruct tableStruct = new TableStruct("Find");
-        //tableStruct.setTableColumns("Stock Type", "Stock Code", "Quantity", "Description");
-        //ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
-
+        //for UI
         ArrayList<Stock> findList = new ArrayList<>();
+        /*
+        //for GUI
+        TableStruct tableStruct = new TableStruct("Find");
+        tableStruct.setTableColumns("Stock Type", "Stock Code", "Quantity", "Description");
+        ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
+        */
+
         //for each stocktype
         for (int i = 0; i < stockTypeQuantity; i++) {
             ArrayList<Stock> subList = new ArrayList<>();;
@@ -46,7 +49,6 @@ public class FindDescriptionCommand extends Command {
             findList.addAll(subList);
         }
 
-        //condition is false if listString had no changes.
         if (!findList.isEmpty()) {
             found = true;
         }
@@ -56,11 +58,20 @@ public class FindDescriptionCommand extends Command {
                     + search + "\".\nPlease try a different search string.";
             ui.print(output);
         } else {
-            output = "";
-            System.out.println("This Works!");
-            //output = findList;
-            //ui.print(output);
-            //ui.drawTable(findList.getAllFindStruct())
+            //formatting and print ui
+            StringBuilder ret = new StringBuilder();
+            int i = 1;
+            for (Stock stock : findList) {
+                ret.append(String.format("%d. ", i++)).append(stock.toString()).append("\n");
+            }
+            output = ret.toString();
+            ui.print(output);
+
+          /*  //print GUI.
+            for (Stock stock: findList) {
+                dataArray.add
+            }
+            ui.drawTable(tableStruct)*/
         }
         return output;
     }
