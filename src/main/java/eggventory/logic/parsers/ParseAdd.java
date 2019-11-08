@@ -20,6 +20,37 @@ import java.util.ArrayList;
 public class ParseAdd {
 
     /**
+     * Extracts the minimum quantity parameter from the string.
+     * @param input the entire add stock string.
+     * @return the minimum quantity, if specified, or -1 if not specified.
+     * @throws BadInputException if the minimum quantity is not an integer.
+     */
+    private int processAddStockMinimum(String input) throws BadInputException {
+        String[] parseMinimum = input.split(" -m ");
+
+        if (parseMinimum.length == 1) { //If there is no minimum quantity specified.
+            return -1; //Consider: Edge case where user specifies minQty of 0. Command still needs to have -m removed.
+
+        } else {
+            String minString = parseMinimum[1].split(" ", 2)[0]; //Take only the first word after " -m ".
+
+            Parser.isCheckIsInteger(minString, "minimum quantity");
+            return Integer.parseInt(minString);
+        }
+    }
+
+    /**
+     * Removes the optional parameter "minimum quantity" from the input string, for description to be parsed normally.
+     * @param fullInput the original user command string.
+     * @param minQuantity the minimum quantity (integer) as found earlier.
+     * @return the string without " -m Quantity".
+     */
+    private String removeMinInput(String fullInput, int minQuantity) {
+        fullInput = fullInput.replace(" -m " + Integer.toString(minQuantity), "");
+        return fullInput;
+    }
+
+    /**
      * Processes the contents of an add stock command (everything after the words "add" and "stock").
      * Splits up the input string into an array containing the various attributes of the stock being added.
      * Ignores leading/trailing whitespace between the first word and subsequent string,
@@ -29,10 +60,24 @@ public class ParseAdd {
      * @return an array consisting of StockType, StockCode, Quantity and Description.
      * @throws InsufficientInfoException If any of the required attributes is missed out.
      */
-    private Command processAddStock(String input) {
+    private Command processAddStock(String input) throws BadInputException {
+        int minimumQuantity = processAddStockMinimum(input);
+
+        if (minimumQuantity != -1) { //There was a min quantity set.
+            input = removeMinInput(input, minimumQuantity); //Cleans the command.
+        } else {
+            minimumQuantity = 0; //Set it to 0 to be added.
+        }
+
         String[] addInput = input.split(" +", 4); //There are 4 attributes for now.
+
+        if (Parser.isReserved(addInput[1])) {
+            throw new BadInputException("'" + input + "' is an invalid StockCode as it is a keyword"
+                    + " for an existing command.");
+        }
+
         return new AddStockCommand(CommandType.ADD, addInput[0], addInput[1],
-                Integer.parseInt(addInput[2]), addInput[3]);
+                Integer.parseInt(addInput[2]), addInput[3], minimumQuantity);
     }
 
 
@@ -61,6 +106,9 @@ public class ParseAdd {
         return new AddStockTypeCommand(CommandType.ADD, input);
     }
 
+    /**
+     * Processes input sequence for adding a person.
+     */
     private Command processAddPerson(String input) throws BadInputException {
         String[] addInput = input.split(" +", 2); //Permits spaces in names.
 
@@ -72,7 +120,10 @@ public class ParseAdd {
         return new AddPersonCommand(CommandType.ADD, addInput[0], addInput[1]);
     }
 
-    private Command processAddTemplate(String input) throws BadInputException {
+    /**
+     * Processes the input sequence for adding a template.
+     */
+    public Command processAddTemplate(String input) throws BadInputException {
         String[] addInput = input.split(" +");
 
         //Checks if template name is reserved.
@@ -95,19 +146,21 @@ public class ParseAdd {
     }
 
     //@@author cyanoei
-
     /**
      * Processes the user command to add a loan.
      * @param input string in the format matricNo, stockCode and quantity.
      * @return a command to add a loan.
      */
-    private Command processAddLoan(String input) {
+    private Command processAddLoan(String input) throws InsufficientInfoException {
         String[] addInput = input.split(" +");
 
+        System.out.println("Working");
         if (TemplateList.templateExists(addInput[1])) {
             return new AddLoanByTemplateCommand(CommandType.ADD, addInput[0], addInput[1]);
         }
-
+        if (addInput.length < 3) {
+            throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
+        }
         return new AddLoanCommand(CommandType.ADD, addInput[0], addInput[1], Integer.parseInt(addInput[2]));
     }
 
@@ -146,7 +199,9 @@ public class ParseAdd {
 
         case "loan":
             //Required: loan <matric> <stockCode> <quantity>
-            if (!Parser.isCommandComplete(inputString, 3)) {
+            //OR:       loan <matrix> <TemplateName>
+            if (!Parser.isCommandComplete(inputString, 3) && !Parser.isCommandComplete(inputString,
+                    2)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
             }
             addCommand = processAddLoan(addInput[1]);
