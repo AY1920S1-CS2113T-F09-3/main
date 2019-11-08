@@ -41,7 +41,6 @@ public class FindDescriptionCommand extends Command {
         tableStruct.setTableColumns("Stock Type", "Stock Code", "Quantity", "Description");
         ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
 
-
         //for each stocktype
         for (int i = 0; i < stockTypeQuantity; i++) {
             ArrayList<Stock> uiSubList = new ArrayList<>();
@@ -59,7 +58,7 @@ public class FindDescriptionCommand extends Command {
                     + search + "\".\nPlease try a different search string.";
             ui.print(output);
         } else {
-            //formatting and print ui
+            //Format and prints ui
             StringBuilder ret = new StringBuilder();
             int i = 1;
             for (Stock stock : findList) {
@@ -68,7 +67,7 @@ public class FindDescriptionCommand extends Command {
             output = ret.toString();
             ui.print(output);
 
-           //print GUI.
+            //Format and prints gui
             for (Stock stock: findList) {
                 ArrayList<String> subDataArray = new ArrayList<>();;
                 subDataArray = stock.getDataAsArray();

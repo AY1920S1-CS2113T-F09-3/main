@@ -281,7 +281,7 @@ public class StockType {
     public ArrayList<Stock> queryAllStocksDescription(String query) {
         ArrayList<Stock> outputList = new ArrayList<>();;
         for (Stock stock: stocks) {
-            if(stock.containDescription(query)) {
+            if (stock.containDescription(query)) {
                 outputList.add(stock);
             }
         }
