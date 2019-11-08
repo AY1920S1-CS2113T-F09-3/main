@@ -39,7 +39,7 @@ public class FindDescriptionCommand extends Command {
         //for each stocktype
         for (int i = 0; i < stockTypeQuantity; i++) {
             StockType currStockType = list.get(i);
-            findList += currStockType.queryStocksDescription(search);
+            findList += currStockType.queryAllStocksDescription(search);
         }
 
         //condition is false if listString had no changes.

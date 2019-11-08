@@ -273,10 +273,10 @@ public class StockType {
     /**
      * Checks the entire StockType if any of the stocks contains a description equal to query.
      * @param query The word to search for in the description
-     * @return The formatted stock details for the entire StockType
-     *          if query is within the description, else an empty string.
+     * @return The formatted stock details for that stock if query is within the description,
+     *         else an empty string.
      */
-    public String queryStocksDescription(String query) {
+    public String queryAllStocksDescription(String query) {
         String output = "";
         for (Stock stock: stocks) {
             if(stock.containDescription(query)) {
