@@ -27,13 +27,13 @@ public class QuantityManager {
      * @param stock the stock to check.
      * @return true if minimum required is met, false otherwise.
      */
-    private static boolean isMinimumFulfilled(Stock stock) {
+    private static boolean isLessThanMinimum(Stock stock) {
         int totalQuantity = stock.getQuantity();
         int loaned = getLoanedQuantity(stock);
         int lost = stock.getLost();
         int minimum = stock.getMinimum();
 
-        return totalQuantity - loaned - lost >= minimum;
+        return totalQuantity - loaned - lost < minimum;
     }
 
     /**
@@ -41,7 +41,7 @@ public class QuantityManager {
      * @param stock the stock to check.
      * @return the calculated value.
      */
-    private static int calculateRemaining(Stock stock) {
+    public static int calculateRemaining(Stock stock) {
         int totalQuantity = stock.getQuantity();
         int loaned = getLoanedQuantity(stock);
         int lost = stock.getLost();
@@ -58,7 +58,7 @@ public class QuantityManager {
         int minimum = stock.getMinimum();
         int newTotal = calculateRemaining(stock);
 
-        if (!isMinimumFulfilled(stock)) {
+        if (isLessThanMinimum(stock)) {
             return String.format("\nThe stock \"%s\" is currently below minimum quantity. "
                     + "Available quantity: %d. Minimum quantity: %d.", stock.getDescription(), newTotal, minimum);
         } else {
@@ -68,7 +68,7 @@ public class QuantityManager {
     }
 
     /**
-     * Lists all stocks that are below their minimum required quantity.
+     * Creates a list of all stocks that are below their minimum required quantity.
      * @param list the StockList.
      * @return a string containing the formatted list.
      */
@@ -77,7 +77,7 @@ public class QuantityManager {
 
         for (StockType stockType : list.getList()) {
             for (Stock stock : stockType.getStockList()) {
-                if (!isMinimumFulfilled(stock)) {
+                if (isLessThanMinimum(stock)) {
                     minimumList.add(stock);
                 }
             }
@@ -85,10 +85,21 @@ public class QuantityManager {
         return minimumList;
     }
 
+    /**
+     * Augments the Stock's toString to show meaningful info about the minimum quantity in CLI.
+     * @param stock the Stock.
+     * @param loaned the amount loaned.
+     * @return the formatted String.
+     */
     private static String formatStock(Stock stock, int loaned) {
         return stock.toString() + " | Loaned: " + Integer.toString(loaned);
     }
 
+    /**
+     *
+     * @param minimumList
+     * @return
+     */
     private static String lessThanMinimumOutput(ArrayList<Stock> minimumList) {
         String output = "";
 
