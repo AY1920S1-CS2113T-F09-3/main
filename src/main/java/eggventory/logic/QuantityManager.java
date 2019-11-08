@@ -41,13 +41,18 @@ public class QuantityManager {
      * @param stock the stock to check.
      * @return the calculated value.
      */
-    public static int calculateRemaining(Stock stock) {
+    private static int calculateRemaining(Stock stock) {
         int totalQuantity = stock.getQuantity();
         int loaned = getLoanedQuantity(stock);
         int lost = stock.getLost();
 
         return totalQuantity - loaned - lost;
     }
+
+    private static int toBuy(Stock stock) {
+        return stock.getMinimum() - calculateRemaining(stock);
+    }
+
 
     /**
      * Checks if minimum required quantity of the stock is fulfilled.
@@ -96,6 +101,17 @@ public class QuantityManager {
     }
 
     /**
+     * Creates a stock description string stating the quantity to buy to reach the minimum quantity.
+     * @param stock the Stock.
+     * @param loaned the amount loaned.
+     * @return the formatted shopping String.
+     */
+    private static String formatStockToBuy(Stock stock, int loaned) {
+        int toBuy = toBuy(stock);
+        return stock.getStockCode() + ": " + stock.getDescription() + " | To buy: " + Integer.toString(toBuy);
+    }
+
+    /**
      * Produces output string describing stocks that are below the minimum required quantity.
      * @param minimumList The ArrayList of stocks which are below minimum required quantity.
      * @return the output string.
@@ -110,7 +126,7 @@ public class QuantityManager {
             int i = 1;
             for (Stock stock : minimumList) {
                 int loaned = getLoanedQuantity(stock);
-                output += Integer.toString(i++) + ". " + formatStock(stock, loaned) + "\n";
+                output += i++ + ". " + formatStock(stock, loaned) + "\n";
             }
         }
         return output;
@@ -136,6 +152,52 @@ public class QuantityManager {
     }
 
     /**
+     * Formats the output for shopping list.
+     * @param minimumList the ArrayList of below minimum stocks.
+     * @return the shopping list.
+     */
+    private static String shoppingListOutput(ArrayList<Stock> minimumList) {
+        String output = "";
+
+        if (minimumList.size() == 0) {
+            output = "Nothing to buy - no stocks are below their minimum quantity!";
+        } else {
+            output += "Here's a list of things you might want to stock up on:\n";
+            int i = 1;
+            for (Stock stock : minimumList) {
+                int loaned = getLoanedQuantity(stock);
+                output += Integer.toString(i++) + ". " + formatStockToBuy(stock, loaned) + "\n";
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Returns the table required for GUI to show the shopping list.
+     * @param minimumList the ArrayList of stocks below minimum.
+     * @return the tableStruct.
+     */
+    private static TableStruct shoppingListTable(ArrayList<Stock> minimumList) {
+        TableStruct tableStruct = new TableStruct("Recommended Shopping List:");
+        tableStruct.setTableColumns("Stock Type", "Stock Code", "Description", "Quantity To Buy");
+
+        ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
+        for (Stock stock : minimumList) {
+            ArrayList<String> stockArray = new ArrayList<>();
+
+            stockArray.add(stock.getStockType());
+            stockArray.add(stock.getStockCode());
+            stockArray.add(stock.getDescription());
+            stockArray.add(Integer.toString(toBuy(stock)));
+
+            dataArray.add(stockArray);
+        }
+        tableStruct.setTableData(dataArray);
+
+        return tableStruct;
+    }
+
+    /**
      * Public method for printing the listMinimum output.
      * @param list the StockList.
      * @return the print output.
@@ -153,5 +215,21 @@ public class QuantityManager {
         return getLessThanMinimumStocksStruct(lessThanMinimumList(list));
     }
 
+    /**
+     * Public method for printing the listMinimum output.
+     * @param list the StockList.
+     * @return the print output.
+     */
+    public static String printShoppingList(StockList list) {
+        return shoppingListOutput(lessThanMinimumList(list));
+    }
 
+    /**
+     * Public method for returning the TableStruct for GUI display.
+     * @param list the StockList.
+     * @return the TableStruct.
+     */
+    public static TableStruct printShoppingListTable(StockList list) {
+        return shoppingListTable(lessThanMinimumList(list));
+    }
 }
