@@ -151,10 +151,13 @@ public class ParseAdd {
      * @param input string in the format matricNo, stockCode and quantity.
      * @return a command to add a loan.
      */
-    private Command processAddLoan(String input) {
+    private Command processAddLoan(String input) throws InsufficientInfoException {
+        if (!Parser.isCommandComplete(input, 2)) {
+            throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
+        }
+
         String[] addInput = input.split(" +");
         System.out.println("Working");
-
         if (TemplateList.templateExists(addInput[1])) {
             return new AddLoanByTemplateCommand(CommandType.ADD, addInput[0], addInput[1]);
         }
