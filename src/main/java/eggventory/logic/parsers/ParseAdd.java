@@ -152,7 +152,7 @@ public class ParseAdd {
 
         case "loan":
             //Required: loan <matric> <stockCode> <quantity>
-            if (!Parser.isCommandComplete(inputString, 3) || !Parser.isCommandComplete(inputString,
+            if (!Parser.isCommandComplete(inputString, 3) && !Parser.isCommandComplete(inputString,
                     2)) {
                 throw new InsufficientInfoException(CommandDictionary.getCommandUsage("add loan"));
             }

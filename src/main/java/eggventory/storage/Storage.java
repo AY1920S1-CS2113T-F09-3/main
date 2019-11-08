@@ -23,7 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-//@@author yanprosobo
+//@@author patwaririshab
 /**
  * Handles reading and writing the stockList to file.
  */
@@ -101,7 +101,6 @@ public class Storage {
         return savedList; //Returns a StockList.
     }
 
-    //@@author patwaririshab
     /**
      * Converts savefile into a LoanList object.
      */
@@ -194,6 +193,7 @@ public class Storage {
         }
     }
 
+    //@@author patwaririshab
     /**
      * Saves existing StockList, StockType, LoanList, PersonList into a text file.
      */

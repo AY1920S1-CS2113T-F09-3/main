@@ -12,6 +12,7 @@ import eggventory.storage.Storage;
 import eggventory.model.StockList;
 import eggventory.commons.enums.CommandType;
 
+//@@author yanprosobo
 /**
  * Command object for all help command.
  */
@@ -121,3 +122,4 @@ public class HelpCommand extends Command {
         return sb.toString();
     }
 }
+//@@author

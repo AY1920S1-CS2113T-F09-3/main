@@ -8,6 +8,7 @@ import eggventory.model.TemplateList;
 import eggventory.storage.Storage;
 import eggventory.ui.Ui;
 
+//@@author patwaririshab
 public class DeleteTemplateCommand extends Command {
     private String templateName;
 
@@ -26,3 +27,4 @@ public class DeleteTemplateCommand extends Command {
         return output;
     }
 }
+//@@author

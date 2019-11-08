@@ -9,6 +9,7 @@ import eggventory.model.loans.Person;
 import eggventory.storage.Storage;
 import eggventory.ui.Ui;
 
+//@@author patwaririshab
 public class DeletePersonCommand extends Command {
     private String matricNo;
 
@@ -24,7 +25,6 @@ public class DeletePersonCommand extends Command {
         String output;
         try {
             Person deletedPerson = PersonList.delete(matricNo);
-            output = "";
             output = (String.format("Nice, I have deleted this person for you: %s", deletedPerson.getName()));
         } catch (BadInputException e) {
             output = (String.format("No person with matric no: %s was found. Please recheck your input", matricNo));
@@ -34,3 +34,4 @@ public class DeletePersonCommand extends Command {
         return output;
     }
 }
+//@@author
