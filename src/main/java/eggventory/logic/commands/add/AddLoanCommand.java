@@ -1,10 +1,12 @@
 package eggventory.logic.commands.add;
 
 import eggventory.commons.enums.CommandType;
+import eggventory.logic.QuantityManager;
 import eggventory.logic.commands.Command;
 import eggventory.model.LoanList;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
+import eggventory.model.items.Stock;
 import eggventory.storage.Storage;
 import eggventory.ui.Ui;
 
@@ -29,8 +31,13 @@ public class AddLoanCommand extends Command {
         this.quantity = quantity;
     }
 
-    private boolean stockExists() {
-        if (LoanList.getStockLoanedQuantity(stockCode) == -1) {
+    /**
+     * Determines if this Stock exists, checked by the stockCode.
+     * @param list the stockList being checked.
+     * @return true if the stock exists inside the list.
+     */
+    private boolean stockExists(StockList list) {
+        if (list.findStock(stockCode) == null) {
             return false;
         }
 
@@ -44,8 +51,8 @@ public class AddLoanCommand extends Command {
         return true;
     }
 
-    private boolean sufficientStock() {
-        if (LoanList.getStockLoanedQuantity(stockCode) - quantity < 0) {
+    private boolean sufficientStock(StockList list) {
+        if (list.getStockQuantity(stockCode) - LoanList.getStockLoanedQuantity(stockCode) - quantity < 0) {
             return false;
         }
         return true;
@@ -58,26 +65,41 @@ public class AddLoanCommand extends Command {
      * @param storage the storage.
      * @return the print string for assertion in testing.
      */
+    @Override
     public String execute(StockList list, Ui ui, Storage storage) {
         String output = "";
         if (!personExists()) {
             output += String.format("Sorry, the person with matric number \"%s\" does not exist!", matricNo);
-        } else if (!stockExists()) {
+
+        } else if (!stockExists(list)) {
             output += String.format("Sorry, that stock with StockCode \"%s\" does not exist!", stockCode);
-        } else if (!sufficientStock()) {
+
+        } else if (!sufficientStock(list)) {
             output = ("OOPS there is insufficient stock to loan out!");
+
         } else {
             LoanList.addLoan(matricNo, stockCode, quantity);
 
+            Stock stock = list.findStock(stockCode);
+
             String personName = PersonList.getName(matricNo);
-            String stockDescription = stockCode;  //In future write a method to get the stock description.
+            String stockDescription = stock.getDescription();
+            storage.save(list);
 
             output = (String.format("Nice, I have added this loan for you: \n"
                     + "Person: %s | Stock: %s | Quantity: %d", personName, stockDescription, quantity));
+
+            output += QuantityManager.checkMinimum(stock);
         }
 
         ui.print(output);
 
         return output;
     }
+
+    // Used by load function
+    public void executeLoadLoanList(LoanList savedLoanList) {
+        savedLoanList.addLoan(matricNo, stockCode, quantity);
+    }
+
 }

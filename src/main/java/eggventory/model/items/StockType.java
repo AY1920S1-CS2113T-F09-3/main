@@ -161,7 +161,7 @@ public class StockType {
      * @param quantity The new minimum quantity to change to
      * @return Stock if stockCode is found, else null
      */
-    public Stock setStockMinimum(String stockCode, int quantity) {
+    public Stock setStockMinimum(String stockCode, int quantity) throws BadInputException {
         for (Stock stock : stocks) {
             if (stock.getStockCode().equals(stockCode)) {
                 stock.setMinimum(quantity);
@@ -270,7 +270,19 @@ public class StockType {
         return false; //If none of the stocks had the same code.
     }
 
-
+    /**
+     * Checks the entire StockType if any of the stocks contains a description equal to query.
+     * @param query The word to search for in the description
+     * @return The formatted stock details for the entire StockType
+     *          if query is within the description, else an empty string.
+     */
+    public String queryStocksDescription(String query) {
+        String output = "";
+        for (Stock stock: stocks) {
+            output += stock.containDescription(query);
+        }
+        return output;
+    }
 
     //@@author Deculsion
     /**

@@ -59,7 +59,7 @@ public final class LoanList {
      * @param template Name of the template.
      * @return String of the loans added.
      */
-    public static String addLoan(String matricNo, String template) {
+    public static String addLoanByTemplate(String matricNo, String template) {
         Loan[] loans = TemplateList.getTemplateLoans(template);
         if (loans == null) {
             return null;
@@ -96,15 +96,6 @@ public final class LoanList {
     }
 
     //@@author Deculsion
-
-    /**
-     * Adds a new stock to track in LoanList.
-     * @param stockCode The code of the stock
-     * @param quantity The starting quantity of the stock
-     */
-    public static void addStock(String stockCode, int quantity) {
-        updateStockLoaned(stockCode, quantity);
-    }
 
     /**
      * Returns the quantity of a certain Stock that a Person has loaned out.
@@ -153,11 +144,11 @@ public final class LoanList {
     /**
      * Returns the total quantity of a certain Stock has been loaned out.
      * @param stockCode stockCode of the queried Stock.
-     * @return The total quantity currently loaned out.
+     * @return The total quantity currently loaned out. Or 0 if the stock has not be loaned before.
      */
     public static int getStockLoanedQuantity(String stockCode) {
         if (stockLoaned.get(stockCode) == null) {
-            return -1;
+            return 0;
         }
         return stockLoaned.get(stockCode);
     }
@@ -310,6 +301,23 @@ public final class LoanList {
         dataTable.setTableData(dataList);
 
         return dataTable;
+    }
+
+
+    //@@author patwaririshab
+    /**
+     * Saves the stocktypes into a String.
+     * @return The String will be directly saved into a saved_stocktypes file.
+     */
+    public String saveLoanListString() {
+        StringBuilder stockTypesString = new StringBuilder();
+
+        for (Loan loan : loansList) {
+            stockTypesString.append(loan.savedLoanString()).append("\n");
+        }
+        System.out.println(stockTypesString.toString());
+
+        return stockTypesString.toString();
     }
 
     //@@author
