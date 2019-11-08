@@ -2,6 +2,7 @@ package eggventory.logic.commands.find;
 
 import java.util.List;
 import java.util.ArrayList;
+import eggventory.ui.TableStruct;
 import eggventory.ui.Ui;
 import eggventory.model.items.StockType;
 import eggventory.model.items.Stock;
@@ -34,19 +35,19 @@ public class FindDescriptionCommand extends Command {
 
         //for UI
         ArrayList<Stock> findList = new ArrayList<>();
-        /*
+
         //for GUI
-        TableStruct tableStruct = new TableStruct("Find");
+        TableStruct tableStruct = new TableStruct("Query for: " + search);
         tableStruct.setTableColumns("Stock Type", "Stock Code", "Quantity", "Description");
         ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
-        */
+
 
         //for each stocktype
         for (int i = 0; i < stockTypeQuantity; i++) {
-            ArrayList<Stock> subList = new ArrayList<>();;
+            ArrayList<Stock> uiSubList = new ArrayList<>();
             StockType currStockType = list.get(i);
-            subList = currStockType.queryAllStocksDescription(search);
-            findList.addAll(subList);
+            uiSubList = currStockType.queryAllStocksDescription(search);
+            findList.addAll(uiSubList);
         }
 
         if (!findList.isEmpty()) {
@@ -67,11 +68,14 @@ public class FindDescriptionCommand extends Command {
             output = ret.toString();
             ui.print(output);
 
-          /*  //print GUI.
+           //print GUI.
             for (Stock stock: findList) {
-                dataArray.add
+                ArrayList<String> subDataArray = new ArrayList<>();;
+                subDataArray = stock.getDataAsArray();
+                dataArray.add(subDataArray);
             }
-            ui.drawTable(tableStruct)*/
+            tableStruct.setTableData(dataArray);
+            ui.drawTable(tableStruct);
         }
         return output;
     }
