@@ -279,7 +279,9 @@ public class StockType {
     public String queryStocksDescription(String query) {
         String output = "";
         for (Stock stock: stocks) {
-            output += stock.containDescription(query);
+            if(stock.containDescription(query)) {
+                output += stock.toString() + "\n";
+            }
         }
         return output;
     }

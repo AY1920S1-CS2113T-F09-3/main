@@ -29,17 +29,21 @@ public class FindDescriptionCommand extends Command {
         String output;
         int stockTypeQuantity = list.getStockTypeQuantity();
         boolean found = false;
-        int counter = 1;
+        //int counter = 1;
 
-        String listString = "";
+        //TableStruct tableStruct = new TableStruct("Find");
+        //tableStruct.setTableColumns("Stock Type", "Stock Code", "Quantity", "Description");
+        //ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
+
+        String findList = "";
         //for each stocktype
         for (int i = 0; i < stockTypeQuantity; i++) {
             StockType currStockType = list.get(i);
-            listString += currStockType.queryStocksDescription(search);
+            findList += currStockType.queryStocksDescription(search);
         }
 
         //condition is false if listString had no changes.
-        if (!listString.equals("")) {
+        if (!findList.equals("")) {
             found = true;
         }
 
@@ -48,8 +52,9 @@ public class FindDescriptionCommand extends Command {
                     + search + "\".\nPlease try a different search string.";
             ui.print(output);
         } else {
-            output = listString;
+            output = findList;
             ui.print(output);
+            //ui.drawTable(findList.getAllFindStruct())
         }
         return output;
     }
