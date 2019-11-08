@@ -1,7 +1,8 @@
 package eggventory.logic.commands;
 
-import java.util.ArrayList;
 import javafx.util.Pair;
+
+import java.util.ArrayList;
 
 //@@author Raghav-B
 public class CommandDictionary {
@@ -43,10 +44,11 @@ public class CommandDictionary {
         commandDict.add(new Pair<>("list lost", null));
         commandDict.add(new Pair<>("list person", null));
         commandDict.add(new Pair<>("list person", "<MatricNo>"));
+        commandDict.add(new Pair<>("list minimum", null));
+
 
         // Find Commands
-        commandDict.add(new Pair<>("find stock", "<Query>"));
-        commandDict.add(new Pair<>("find stocktype", "<Query>"));
+        commandDict.add(new Pair<>("find description", "<Query>"));
 
         // Loan Commands
         commandDict.add(new Pair<>("loan add", "<MatricNo> <StockCode> <Quantity>"));

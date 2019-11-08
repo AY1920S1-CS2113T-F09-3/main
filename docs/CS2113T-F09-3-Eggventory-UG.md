@@ -1,6 +1,7 @@
 # Eggventory User Guide
 By: Team F09-03  
 Dated: 8 November 2019  
+
 ## Table of contents  
 ### [1. Introduction ](#introduction)  
 ### [2. Quick Start ](#quickstart)  
@@ -280,8 +281,8 @@ Format: `list loan`
 To speed up the loaning process, Eggventory allows you to create loan templates. These templates are simply lists of stocks and quantity to be loaned out all at once. Loans added via templates are not special in any way. As such, you will have to delete each loan added by a template individually.
   
 #### 3.6.1 Adding loan templates: `add template`  
-This creates a new template of loans which can be assigned.
-  
+This creates a new template of loans which can be assigned to a person.
+
 Format: `add template <TemplateName> {<StockCode> <Quantity>}`  
   
 e.g. `add template CG1112_Alex R500 5 A123 1`  
