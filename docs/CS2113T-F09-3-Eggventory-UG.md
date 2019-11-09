@@ -334,7 +334,7 @@ This directly marks a quantity of a Person’s Loan as lost. The items are remov
 Format: `lost <MatricNo> <StockCode>`
   
 ### 3.8 Searching the inventory: `find description` 
-It is possible to search the inventory for a Stock based its description with the find command. All Stocks whose description contains the query will be displayed.  
+It is possible to search the inventory for a Stock based its description with the find command. All Stocks with description containing the query will be displayed.  
     
 Format: `find description <Query>`  
 
@@ -436,3 +436,4 @@ Matric No. | Matriculation number of student to be added
 Stock | A physical asset to be tracked by Eggventory  
 Stock Code | A unique string of characters to identify a stock  
 Stock Type | A category of stock
+Query | The word or phrase to search for
