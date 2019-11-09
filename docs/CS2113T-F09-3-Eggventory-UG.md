@@ -424,14 +424,16 @@ Format: `bye`
   add stock | `add stockStockType> <StockCode> <Quantity> <Description>` 
   add stocktype | `add stocktype <StockType>`  
   add person | `add person <MatricNo>`  
+  add template | `add template <TemplateName> {<StockCode> <Quantity>}`
   
   ### Delete Commands  
 |Command| Syntax  
 |---|---|  
-stock | `delete stock <StockCode>`  
+delete stock | `delete stock <StockCode>`  
 delete stocktype | `delete stocktype <StockType>`  
-delete template | `delete template <TemplateName>`
 delete person | `delete person <MatricNo>`  
+delete template | `delete template <TemplateName>`
+
   ### Edit Commands  
 |Command| Syntax
 |---|---|  
@@ -450,9 +452,14 @@ list loan | `list loan`
 list template | `list template`  
 list lost | `list lost`
   
-  
-### Loan Commands  
+### List Minimum Commands  
+| Command | Syntax  
+|---|---|
+list minimum | `list minimum`
+list shopping | `list shopping`
 
+  
+### Loan Commands 
 |Command| Syntax  
 |---|---|  
 add loan | `add loan <MatricNo> <StockCode> <Quantity>`
@@ -460,13 +467,19 @@ loan return | `loan return <MatricNo> <StockCode> <Quantity>`
 loan returnall | `loan returnall <MatricNo>`
 
 ### Template Commands
-
 |Command|Syntax
 |---|---|
   add template | `add template <TemplateName> {<StockCode> <Quantity>}`
   delete template | `delete template <TemplateName>`
   add loan | `add loan <TemplateName>`
-### Lost Commands  
+  
+### Find Commands
+|Command|Syntax
+|---|---|
+find description | `find description <Query>`
+
+ 
+### Lost Commands [coming in v2.0]
 |Command| Syntax  
 |---|---|  
 lost | `lost <Stock Code> <Quantity>`
