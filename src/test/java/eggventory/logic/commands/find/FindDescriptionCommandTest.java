@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 //@@author yanprosobo
 class FindDescriptionCommandTest {
     StockList testStockList = new StockList();
@@ -20,8 +19,11 @@ class FindDescriptionCommandTest {
 
     //Test for search returning no result.
     @Test
-    public void testExecuteFindDescription_EmptyResult() {
+    public void testExecuteFindDescription_EmptyResult() throws BadInputException {
         String search = "search";
+        testStockList.addStockType("TestType");
+        testStockList.addStock("TestType", "#T", 1, "Test query");
+
         String expected = "Sorry, I could not find any stock containing the description \""
                         + search + "\".\nPlease try a different search string.";
         String output = new FindDescriptionCommand(CommandType.FIND, search)
@@ -44,16 +46,5 @@ class FindDescriptionCommandTest {
                 .execute(testStockList, testCli, testStorage);
         assertEquals(expected, output);
     }
-
-    /*
-    @Test
-    public void execute_Task_success() {
-        OutputStream os = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(os);
-        System.setOut(ps);
-        stockType.addItem(TaskType.TODO, "Test FIND");
-        new FindCommand(CommandType.FIND, "FIND").execute(stockType, cli, storage);
-        assertEquals("1. [T] " + stockType.getTask(0).getStatusIcon() + "Test FIND", os.toString().trim());
-    }*/
 }
 //@@author
