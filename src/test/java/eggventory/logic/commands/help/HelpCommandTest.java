@@ -28,9 +28,10 @@ class HelpCommandTest {
 
     @Test
     public void testExecuteHelpCommand_HelpBye_Success() throws BadInputException {
-        String expected = "Exits EggVentory and bids user goodbye.\n" +
-                "\n" +
-                "bye:        bye" + "\n";
+        String expected = "Exits EggVentory and bids user goodbye.\n"
+                + "\n"
+                + "bye:        bye"
+                + "\n";
         String output = new HelpCommand(CommandType.HELP, "bye").execute(testStockList, testCli, testStorage);
         assertEquals(expected, output);
     }
