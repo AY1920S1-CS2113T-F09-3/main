@@ -1,8 +1,11 @@
 package eggventory.logic.commands;
 
 import eggventory.commons.exceptions.BadInputException;
+
+import eggventory.model.*;
+
+import eggventory.model.states.State;
 import eggventory.ui.Ui;
-import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.commons.enums.CommandType;
 
@@ -28,4 +31,21 @@ public abstract class Command {
      * Executes the command. Need to implement if inheriting from Command class.
      */
     public abstract String execute(StockList list, Ui ui, Storage storage) throws BadInputException;
+
+    public void updateState(StateInterface stateInterface) throws BadInputException {
+        switch (type) {
+        case UNDO: {
+            stateInterface.executeUndoCommand();
+            break;
+        }
+        case REDO: {
+            stateInterface.executeRedoCommand();
+            break;
+        }
+        default: {
+            stateInterface.updateStateHistory();
+        }
+        }
+    }
+
 }
