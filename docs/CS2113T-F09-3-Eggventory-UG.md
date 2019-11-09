@@ -321,11 +321,11 @@ This is an example of what the output will look like with 3 templates added.
 ---
 ### 3.7 Minimum Required Quantity 
 
-Each stock can be assigned a _minimum required quantity_ that can be used keep you aware of when it is running low.  
-
-The _minimum required quantity_ is the minimum amount of the stock that your lab intends to have on hand at all times. In context, your lab may typically start restocking batteries when there are less than 30 left. Thus, your minimum
- required quantity should be set to 30. Loans can still be made until the stock fully runs out, but additional
-  warnings will be displayed to remind you that the stock is running low. 
+The _minimum required quantity_ is the minimum amount of the stock that your lab intends to have on hand at all times. Loans can still be made until the stock fully runs out, but additional
+  warnings will be displayed to remind you that stock is running low. 
+  
+In context, your lab may typically start restocking batteries when there are less than 30 batteries left. Thus, your minimum
+   required quantity should be set to 30. 
 
 #### 3.7.1 Setting Minimum Required Quantity
 There are two ways to set a Stock's minimum required quantity. 
@@ -346,23 +346,37 @@ eg. `edit stock R500 minimum 100`
   
 #### 3.7.2 Receiving warnings about Quantity
 
-Once you have set a _minimum required quantity_, checks are performed to compare the _available quantity_ (total quantity without loaned or lost stock) and _minimum quantity_ at every instance where any quantity values are updated. 
+Once you have set a _minimum required quantity_, checks are performed to compare the _available quantity_ (total quantity without loaned or lost stock) and _minimum required quantity_ at every instance where any values are updated. If your latest action, such as adding a Loan, causes the available quantity to fall below minimum, a warning will be printed as shown below. 
 
+   ![](images/add_loan_mrq.png)
 
-
-Realistically, you may not have sufficient quantity of a Stock at the moment you add it into the system. Thus, it is normal to receive minimum quantity warnings for adding a stock that currently has less than the minimum quantity, as shown below.
+Realistically, you may not have sufficient quantity of a Stock at the moment you add it into the system. Thus, it is normal to receive minimum quantity warnings when adding a stock that currently has less than the minimum quantity, as shown below.
 
    ![](images/add_below_mrq.png)
-   
   
-Format: `lost <MatricNo> <StockCode>`
+#### 3.7.3 Listing Stocks that are low in quantity: `list minimum`
+
+This shows you a complete list of Stocks below their minimum required quantities. This list allows you quickly determine which Stocks are running out, and understand how much of this is due to excessive loaning or loss [coming in v2.0] of items. 
+
+Format: `list minimum`
+
+   ![](images/list_min.png)
+
+#### 3.7.3 Generating Shopping List: `list shopping`
+
+This automatically generates a list of Stock and the quantity of each that you should consinder buying in order to attain the minimum required quantities. 
+
+Format: `list shopping`
+
+[ui screenshot coming soon]
+
 ---  
 ### 3.8 Marking Stock as lost **[coming in v2.0]**
 Marks a certain quantity of a stock as lost. Differs from deleting stock in the fact that the quantity of stock will still be saved in the inventory (eg. for administrative purposes). Lost stock will not be included in tallies of available stock.  
   
 #### 3.8.1 Marking Stock as lost: `lost`  
     
-Format:` lost <Stock Code> <Quantity>`  
+Format: `lost <Stock Code> <Quantity>`  
   
 eg. `lost R500 10`  
   
