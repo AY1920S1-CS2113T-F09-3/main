@@ -41,6 +41,9 @@ public class State {
         return templateList;
     }
 
+
+
+
     public void setStockList(StockList stockList) {
         this.stockList = stockList;
     }

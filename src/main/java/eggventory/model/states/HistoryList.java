@@ -4,31 +4,64 @@ import eggventory.model.states.State;
 import java.util.Stack;
 
 public class HistoryList {
-    private Stack<State> historyList = new Stack<State>();
+    public Stack<String> stockHistory;
+    private Stack<String> stockTypeHistory;
+    private Stack<String> loanListHistory;
+    private Stack<String> templateListHistory;
+    private Stack<String> personListHistory;
 
-
-    public State addLatestState(State newState) {
-        historyList.push(newState);
-        return historyList.peek();
+    public HistoryList() {
+        this.stockHistory = new Stack<>();
+        this.stockTypeHistory = new Stack<>();
+        this.loanListHistory = new Stack<>();
+        this.templateListHistory = new Stack<>();
+        this.personListHistory = new Stack<>();
     }
 
-    public Stack<State> getHistoryList() {
-        return historyList;
+    public boolean isEmpty() {
+        return (stockHistory.empty() || stockTypeHistory.empty() || loanListHistory.empty());
     }
 
-    public int getStackSize() {
-        return historyList.size();
+    public void pushStockSave(String stockStateSave) {
+        stockHistory.push(stockStateSave);
     }
 
-    public State popLastState() {
-        State current = historyList.peek();
-        historyList.pop();
-        return current;
+    public void pushStockTypeSave(String stockTypeSave) {
+        stockTypeHistory.push(stockTypeSave);
     }
 
-    public void pushState(State newState) {
-        historyList.push(newState);
+    public void pushLoanListSave(String loanListSave) {
+        loanListHistory.push(loanListSave);
     }
+
+    public void pushTemplateListSave(String templateListSave) {
+        templateListHistory.push(templateListSave);
+    }
+
+    public void pushPersonListSave(String personListSave) {
+        personListHistory.push(personListSave);
+    }
+
+    public String popStockSave() {
+        return stockHistory.pop();
+    }
+
+    public String popStockTypeSave() {
+        return stockTypeHistory.pop();
+    }
+
+    public String popLoanListSave() {
+        return loanListHistory.pop();
+    }
+
+    public String popPersonListSave() {
+        return personListHistory.pop();
+    }
+
+    public String popTemplateListSave() {
+        return templateListHistory.pop();
+    }
+
 
 
 }
