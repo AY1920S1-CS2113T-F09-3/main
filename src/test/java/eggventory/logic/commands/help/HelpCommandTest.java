@@ -19,8 +19,9 @@ class HelpCommandTest {
     Storage testStorage = new StorageStub();
 
     @Test
-    public void testExecuteHelpCommand_InvalidCommand_ThrowsBadInputException() throws BadInputException {
+    public void testExecuteHelpCommand_InvalidCommandName_ThrowsBadInputException() throws BadInputException {
         assertThrows(BadInputException.class, () -> new HelpCommand(CommandType.HELP, "invalid")
                 .execute(testStockList,testCli,testStorage));
     }
+
 }
