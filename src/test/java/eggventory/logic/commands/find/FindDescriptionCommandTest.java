@@ -1,6 +1,7 @@
 package eggventory.logic.commands.find;
 
 import eggventory.commons.enums.CommandType;
+import eggventory.commons.exceptions.BadInputException;
 import eggventory.stubs.StorageStub;
 import eggventory.stubs.UiStub;
 import eggventory.ui.Ui;
@@ -26,19 +27,20 @@ class FindCommandTest {
         String output = new FindDescriptionCommand(CommandType.FIND, search).execute(testStockList, testCli, testStorage);
         assertEquals(expected, output);
     }
-    /*
+
     //Integration test with add stocktype and add stock. Using "search" as the word to be searching for.
     @Test
-    public void testExecuteFindDescription_Success() {
+    public void testExecuteFindDescription_Success() throws BadInputException {
         testStockList.addStockType("TestType");
         testStockList.addStock("TestType", "#T", 1, "Test search");
         testStockList.addStock("TestType", "#T2", 10, "Test query");
         testStockList.addStock("TestType", "#T3", 100, "Test search query");
 
-        String expected = "TestType | #T | 1 | Test search\n" + "TestType | #T3 | 100 | Test search query\n";
-        String output = FindDescriptionCommand(CommandType.FIND, "search").execute(testStockList, testCli, testStorage);
+        String expected = "1. TestType | #T | 1 | Test search\n" +
+                          "2. TestType | #T3 | 100 | Test search query\n";
+        String output = new FindDescriptionCommand(CommandType.FIND, "search").execute(testStockList, testCli, testStorage);
         assertEquals(expected, output);
-    }*/
+    }
 
     /*
     @Test
