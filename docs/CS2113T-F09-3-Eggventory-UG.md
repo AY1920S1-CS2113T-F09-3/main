@@ -1,24 +1,25 @@
 # Eggventory User Guide
 By: Team F09-03  
-Dated: 7 November 2019  
+Dated: 8 November 2019  
+
 ## Table of contents  
-### [1. Introduction ](#introduction)  
-### [2. Quick Start ](#quickstart)  
-### [3. Features and Command Usage ](#features-and-command-usage)  
-##### [3.1 Viewing help ](#viewing-help-help)  
-##### [3.2 Working with Stock Types ](#working-with-stock-types)  
-##### [3.3 Working with Stocks ](#working-with-stocks)  
-##### [3.4 Managing your list of People ](#managing-your-list-of-people)  
-##### [3.5 Managing your list of Loans ](#managing-your-list-of-loans)  
-##### [3.6 Loaning using Templates](#loaning-using-templates)
-##### [3.7 Marking Stock as Lost ](#marking-stock-as-lost--coming-in-v2.0)  
-##### [3.8 Searching the Inventory ](#searching-the-inventory)  
-##### [3.9 Using Undo and Redo Commands ](#using-undo-and-redo-commands-coming-in-v2.0)  
-##### [3.10 Setting autosave options ](#setting-autosave-options-coming-in-v2.0)  
-##### [3.11 Exiting the program: bye ](#exiting-the-program-bye)  
-### [4. FAQ ](#faq)  
-### [5. Command Summary ](#command-summary)  
-### [6. Glossary ](#glossary)  
+### [1. Introduction ](#1-introduction)  
+### [2. Quick Start ](#2-quick-start)  
+### [3. Features and Command Usage ](#3-features-and-command-usage)  
+##### [3.1 Viewing help ](#31-viewing-help-help)  
+##### [3.2 Working with Stock Types ](#32-working-with-stock-types)  
+##### [3.3 Working with Stocks ](#33-working-with-stocks)  
+##### [3.4 Managing your list of People ](#34-managing-your-list-of-people)  
+##### [3.5 Managing your list of Loans ](#35-managing-your-list-of-loans)  
+##### [3.6 Loaning using Templates](#36-loaning-using-templates)
+##### [3.7 Marking Stock as Lost ](#37-marking-stock-as-lost-coming-in-v20)  
+##### [3.8 Searching the Inventory ](#38-searching-the-inventory)  
+##### [3.9 Using Undo and Redo Commands ](#39-using-undo-and-redo-commands-coming-in-v20)  
+##### [3.10 Setting autosave options ](#310-setting-autosave-options-coming-in-v20)  
+##### [3.11 Exiting the program: bye ](#311-exiting-the-program-bye)  
+### [4. FAQ ](#4-faq)  
+### [5. Command Summary ](#5-command-summary)  
+### [6. Glossary ](#6-glossary)  
   
   
 ## 1. Introduction  
@@ -58,9 +59,11 @@ Eggventory is an inventory management system targeted towards engineering labora
   
 The following section describes the command line interface commands that Eggventory recognises. Each command you input has to follow a specific format of words and parameters.  
   
-Command Format    Text in <Angled Brackets> are mandatory parameter to be supplied by the user. E.g. add stocktype <Stock Type> , <Stock Type> is a parameter which is the name of the stocktype the user wishes to add.  
+Command Format    
+
+- Text in \<Angled Brackets\> are mandatory parameter to be supplied by the user. E.g. `add stocktype <Stock Type>` , \<Stock Type\> is a parameter which is the name of the stocktype the user wishes to add.  
   
-- Parameters in {Braces} can be repeated multiple times in the same command, separated by a space. E.g. loan add <Matric. No> {<Stock Code> <Quantity>} , more <Stock Code> <Quantity> pairs can be added after the first pair as such: `loan add A0191234A R500 20 R250 10 R100 5`  
+- Parameters in {Braces} can be repeated multiple times in the same command, separated by a space. E.g. `add template <TemplateName>  {<Stock Code> <Quantity>}` , more \<Stock Code\> \<Quantity\> pairs can be added after the first pair as such: `loan add A0191234A R500 20 R250 10 R100 5`  
   
 -   [coming in v2.0] Some commands have optional parameters available. Optional parameters are added to the end of the corresponding command, after all mandatory parameters. E.g. `add stock R500 50 “500-ohm Resistors” -st Resistors` , will create a new stock, and placed under the “Resistors” Stock Type with the “-st” tag.  
   
@@ -275,42 +278,45 @@ Format: `list loan`
 ---  
 ### 3.6 Loaning using Templates
     
-To speed up the loaning process, Eggventory allows you to create loan templates. These templates are simply lists of
- stocks and quantity to be loaned out all at once. 
+To speed up the loaning process, Eggventory allows you to create loan templates. These templates are simply lists of stocks and quantity to be loaned out all at once. Loans added via templates are not special in any way. As such, you will have to delete each loan added by a template individually.
   
 #### 3.6.1 Adding loan templates: `add template`  
-This creates a new template of Loans. 
-  
+This creates a new template of loans which can be assigned to a person.
+
 Format: `add template <TemplateName> {<StockCode> <Quantity>}`  
   
 e.g. `add template CG1112_Alex R500 5 A123 1`  
  
- Note: The name of each template must be unique, or it will not be added. 
-  
-#### 3.6.2  Deleting a Template: `delete template`  
+Note: The name of each template must be unique, or it will not be added. 
 
-  This deletes a loan template.  
-  
-  Format: `delete template <Template Name>`  
-  
-eg. `delete template CG1112_Alex`  
-  
-#### 3.6.3 Making a Loan from a template: `add loan`
+#### 3.6.2 Making a Loan from a template: `add loan`
 
-This adds a Loan to a Person from a Template. Every loan in the template will be added to the person as if you added
- them individually. 
+This adds a loan to a person from a template. Every loan in the template will be added to the person as if you added them individually. 
 
 Format: `add loan <Matric. No> <Template Name>`  
   
-eg. `add loan A0187654 CG1112_Alex`  
-  
-Note: Additional Loans can still be added on to the same Person afterwards using the loan add command.  
+eg. `add loan A0187654 CG1112_Alex`
 
+If you have added the template "CG1112_Alex" using this example above, you can use the list loan command to view the
+ newly added loans using the template like this.  
+ ![](images/templateListAlex.png)
+
+#### 3.6.3  Deleting a Template: `delete template`  
+
+This deletes a loan template. It does not delete any loans assigned to people using the template.
+
+Format: `delete template <Template Name>`  
+  
+eg. `delete template CG1112_Alex`  
+  
 #### 3.6.4 Listing Loan Templates: `list template` 
   
-This lists out all the templates and their associated loans that you have created.
+Once you have added at least one template, you will be able to see them all listed out with this command. 
   
 Format: `list template`
+
+This is an example of what the output will look like with 3 templates added.
+ ![](images/templateList.png)
   
 ---  
 ### 3.7 Marking Stock as lost **[coming in v2.0]**
