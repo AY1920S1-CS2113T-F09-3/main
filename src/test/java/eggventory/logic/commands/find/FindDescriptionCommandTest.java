@@ -19,7 +19,7 @@ class FindDescriptionCommandTest {
 
     //Test for search returning no result.
     @Test
-    public void testExecuteFindDescription_EmptyResult() throws BadInputException {
+    public void testExecuteFindDescription_UnmatchedInput_Success() throws BadInputException {
         String search = "search";
         testStockList.addStockType("TestType");
         testStockList.addStock("TestType", "#T", 1, "Test query");
@@ -33,7 +33,7 @@ class FindDescriptionCommandTest {
 
     //Integration test with add stocktype and add stock. Using "search" as the word to be searching for.
     @Test
-    public void testExecuteFindDescription_Success() throws BadInputException {
+    public void testExecuteFindDescription_MatchedInput_Success() throws BadInputException {
         String search = "search";
         testStockList.addStockType("TestType");
         testStockList.addStock("TestType", "#T", 1, "Test search");

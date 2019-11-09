@@ -13,7 +13,7 @@ class ParseFindTest {
 
     //add to this test when adding more options for find
     @Test
-    public void testOptionArgument() {
+    public void testParseFind_BadFirstInput_ThrowsBadInputException() {
         assertDoesNotThrow(() -> testParser.parse("description query"));
         assertDoesNotThrow(() -> testParser.parse("description search"));
         assertThrows(BadInputException.class, () -> testParser.parse("stock multiple query"));
@@ -22,7 +22,7 @@ class ParseFindTest {
 
     //Testing for the requirement of <query> after "find description"
     @Test
-    public void testArgumentAfterTestOption() {
+    public void testParseFind_RequiredSearchQuery_ThrowsInsufficientInfoException() {
         assertDoesNotThrow(() -> testParser.parse("description query"));
         assertDoesNotThrow(() -> testParser.parse("description search"));
         assertThrows(InsufficientInfoException.class, () -> testParser.parse("description"));
