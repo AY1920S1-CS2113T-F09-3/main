@@ -288,8 +288,20 @@ Format: `add template <TemplateName> {<StockCode> <Quantity>}`
 e.g. `add template CG1112_Alex R500 5 A123 1`  
  
 Note: The name of each template must be unique, or it will not be added. 
+
+#### 3.6.2 Making a Loan from a template: `add loan`
+
+This adds a loan to a person from a template. Every loan in the template will be added to the person as if you added them individually. 
+
+Format: `add loan <Matric. No> <Template Name>`  
   
-#### 3.6.2  Deleting a Template: `delete template`  
+eg. `add loan A0187654 CG1112_Alex`
+
+If you have added the template "CG1112_Alex" using this example above, you can use the list loan command to view the
+ newly added loans using the template like this.  
+ ![](images/templateListAlex.png)
+
+#### 3.6.3  Deleting a Template: `delete template`  
 
 This deletes a loan template. It does not delete any loans assigned to people using the template.
 
@@ -297,21 +309,15 @@ Format: `delete template <Template Name>`
   
 eg. `delete template CG1112_Alex`  
   
-#### 3.6.3 Making a Loan from a template: `add loan`
-
-This adds a loan to a person from a template. Every loan in the template will be added to the person as if you added them individually. 
-
-Format: `add loan <Matric. No> <Template Name>`  
-  
-eg. `add loan A0187654 CG1112_Alex`  
-  
-Note: Additional Loans can still be added on to the same Person afterwards using the `add loan` command.  
-
 #### 3.6.4 Listing Loan Templates: `list template` 
   
-This lists out all the templates and their associated loans that you have created.
+Once a template has been added properly, you will be able to see it listed out with this command. This is an example
+ of what it will look like. With 3 templates added.
+ 
+ ![](images/templateList.png)
   
 Format: `list template`
+
   
 ---  
 ### 3.7 Marking Stock as lost **[coming in v2.0]**
