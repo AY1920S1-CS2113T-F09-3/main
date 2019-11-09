@@ -3,24 +3,25 @@ By: Team F09-03
 Dated: 8 November 2019  
 
 ## Table of contents  
-### [1. Introduction ](#1.-introduction)  
-### [2. Quick Start ](#2.-quick-start)  
-### [3. Features and Command Usage ](#3.-features-and-command-usage-)  
-##### [3.1 Viewing help ](#3.1-Viewing-help:-help) 
-##### [3.2 Working with Stock Types ](#3.2-working-with-stock-types)  
-##### [3.3 Working with Stocks ](#3.3-working-with-stocks)  
-##### [3.4 Managing your list of People ](#3.4-managing-your-list-of-people)  
-##### [3.5 Managing your list of Loans ](#3.5-managing-your-list-of-loans)  
-##### [3.6 Loaning using Templates](#3.6-loaning-using-templates)
-##### [3.7 Minimum Required Quantity](#3.7-minimum-required-quantity)
-##### [3.8 Marking Stock as Lost ](#marking-stock-as-lost--coming-in-v2.0)  
-##### [3.9 Searching the Inventory ](#searching-the-inventory)  
-##### [3.10 Using Undo and Redo Commands ](#using-undo-and-redo-commands-coming-in-v2.0)  
-##### [3.11 Setting autosave options ](#setting-autosave-options-coming-in-v2.0)  
-##### [3.12 Exiting the program: bye ](#exiting-the-program-bye)  
-### [4. FAQ ](#4.-faq)  
-### [5. Command Summary ](#5.command-summary)  
-### [6. Glossary ](#6.glossary)  
+
+### [1. Introduction ](#1-introduction)  
+### [2. Quick Start ](#2-quick-start)  
+### [3. Features and Command Usage ](#3-features-and-command-usage)  
+##### [3.1 Viewing help ](#31-viewing-help-help)  
+##### [3.2 Working with Stock Types ](#32-working-with-stock-types)  
+##### [3.3 Working with Stocks ](#33-working-with-stocks)  
+##### [3.4 Managing your list of People ](#34-managing-your-list-of-people)  
+##### [3.5 Managing your list of Loans ](#35-managing-your-list-of-loans)  
+##### [3.6 Loaning using Templates](#36-loaning-using-templates)
+##### [3.7 Minimum Required Quantity](#37-minimum-required-quantity)
+##### [3.7 Marking Stock as Lost ](#38-marking-stock-as-lost-coming-in-v20)  
+##### [3.8 Searching the Inventory ](#39-searching-the-inventory)  
+##### [3.9 Using Undo and Redo Commands ](#310-using-undo-and-redo-commands-coming-in-v20)  
+##### [3.10 Setting autosave options ](#311-setting-autosave-options-coming-in-v20)  
+##### [3.11 Exiting the program: bye ](#312-exiting-the-program-bye)  
+### [4. FAQ ](#4-faq)  
+### [5. Command Summary ](#5-command-summary)  
+### [6. Glossary ](#6-glossary)  
   
   
 ## 1. Introduction  
@@ -141,7 +142,7 @@ In addition to the required parameters, stocks can also be added with the follow
 
 Format|Purpose|  
 |---|---|  
-`-m <MinQuantity>` |Sets the [minimum required quantity](#3.7-minimum-required-quantity) of stock that should be maintained in the inventory  
+`-m <MinQuantity>` |Sets the [minimum required quantity](#37-minimum-required-quantity) of stock that should be maintained in the inventory  
 `-u`|**[coming in v2.0]**  Sets the stock to contain items that are unique  
   
 Format: `add stock <StockType> <Stock Code> <Quantity> <Description> {<optional parameter>}`  
@@ -287,8 +288,20 @@ Format: `add template <TemplateName> {<StockCode> <Quantity>}`
 e.g. `add template CG1112_Alex R500 5 A123 1`  
  
 Note: The name of each template must be unique, or it will not be added. 
+
+#### 3.6.2 Making a Loan from a template: `add loan`
+
+This adds a loan to a person from a template. Every loan in the template will be added to the person as if you added them individually. 
+
+Format: `add loan <Matric. No> <Template Name>`  
   
-#### 3.6.2  Deleting a Template: `delete template`  
+eg. `add loan A0187654 CG1112_Alex`
+
+If you have added the template "CG1112_Alex" using this example above, you can use the list loan command to view the
+ newly added loans using the template like this.  
+ ![](images/templateListAlex.png)
+
+#### 3.6.3  Deleting a Template: `delete template`  
 
 This deletes a loan template. It does not delete any loans assigned to people using the template.
 
@@ -296,21 +309,14 @@ Format: `delete template <Template Name>`
   
 eg. `delete template CG1112_Alex`  
   
-#### 3.6.3 Making a Loan from a template: `add loan`
-
-This adds a loan to a person from a template. Every loan in the template will be added to the person as if you added them individually. 
-
-Format: `add loan <Matric. No> <Template Name>`  
-  
-eg. `add loan A0187654 CG1112_Alex`  
-  
-Note: Additional Loans can still be added on to the same Person afterwards using the `add loan` command.  
-
 #### 3.6.4 Listing Loan Templates: `list template` 
   
-This lists out all the templates and their associated loans that you have created.
+Once you have added at least one template, you will be able to see them all listed out with this command. 
   
 Format: `list template`
+
+This is an example of what the output will look like with 3 templates added.
+ ![](images/templateList.png)
   
 ---
 ### 3.7 Minimum Required Quantity 
@@ -332,13 +338,24 @@ eg. `add stock Resistor R1k 1000 1Kohm resistor -m 500`
 
    ![](images/add_mrq.png)
 
-If you did not assign a minimum required quantity to the Stock when it was added, you can always edit it at any time using the `edit` command. 
+If you did not assign a minimum required quantity to the Stock when it was added, you can edit it at any time using the `edit` command. 
   
 Format: `edit stock <StockCode> <Property> <New Value>`  
   
 eg. `edit stock R500 minimum 100`  
   
-#### 3.7.2 
+#### 3.7.2 Receiving warnings about Quantity
+
+Once you have set a _minimum required quantity_, checks are performed to compare the _available quantity_ (total quantity without loaned or lost stock) and _minimum quantity_ at every instance where any quantity values are updated. 
+
+
+
+Realistically, you may not have enough of a Stock on hand at the moment you add it into the system. This means that it is normal to receive minimum quantity warnings for adding a stock that currently has less than the minimum quantity, as shown below.
+
+   ![](images/add_below_mrq.png)
+   
+
+
   
 Format: `lost <MatricNo> <StockCode>`
 ---  
