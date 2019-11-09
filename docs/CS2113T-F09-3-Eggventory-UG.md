@@ -3,23 +3,23 @@ By: Team F09-03
 Dated: 8 November 2019  
 
 ## Table of contents  
-### [1. Introduction ](#introduction)  
-### [2. Quick Start ](#quickstart)  
-### [3. Features and Command Usage ](#features-and-command-usage)  
-##### [3.1 Viewing help ](#viewing-help-help)  
-##### [3.2 Working with Stock Types ](#working-with-stock-types)  
-##### [3.3 Working with Stocks ](#working-with-stocks)  
-##### [3.4 Managing your list of People ](#managing-your-list-of-people)  
-##### [3.5 Managing your list of Loans ](#managing-your-list-of-loans)  
-##### [3.6 Loaning using Templates](#loaning-using-templates)
-##### [3.7 Marking Stock as Lost ](#marking-stock-as-lost--coming-in-v2.0)  
-##### [3.8 Searching the Inventory ](#searching-the-inventory)  
-##### [3.9 Using Undo and Redo Commands ](#using-undo-and-redo-commands-coming-in-v2.0)  
-##### [3.10 Setting autosave options ](#setting-autosave-options-coming-in-v2.0)  
-##### [3.11 Exiting the program: bye ](#exiting-the-program-bye)  
-### [4. FAQ ](#faq)  
-### [5. Command Summary ](#command-summary)  
-### [6. Glossary ](#glossary)  
+### [1. Introduction ](#1-introduction)  
+### [2. Quick Start ](#2-quick-start)  
+### [3. Features and Command Usage ](#3-features-and-command-usage)  
+##### [3.1 Viewing help ](#31-viewing-help-help)  
+##### [3.2 Working with Stock Types ](#32-working-with-stock-types)  
+##### [3.3 Working with Stocks ](#33-working-with-stocks)  
+##### [3.4 Managing your list of People ](#34-managing-your-list-of-people)  
+##### [3.5 Managing your list of Loans ](#35-managing-your-list-of-loans)  
+##### [3.6 Loaning using Templates](#36-loaning-using-templates)
+##### [3.7 Marking Stock as Lost ](#37-marking-stock-as-lost-coming-in-v20)  
+##### [3.8 Searching the Inventory ](#38-searching-the-inventory)  
+##### [3.9 Using Undo and Redo Commands ](#39-using-undo-and-redo-commands-coming-in-v20)  
+##### [3.10 Setting autosave options ](#310-setting-autosave-options-coming-in-v20)  
+##### [3.11 Exiting the program: bye ](#311-exiting-the-program-bye)  
+### [4. FAQ ](#4-faq)  
+### [5. Command Summary ](#5-command-summary)  
+### [6. Glossary ](#6-glossary)  
   
   
 ## 1. Introduction  
@@ -311,13 +311,12 @@ eg. `delete template CG1112_Alex`
   
 #### 3.6.4 Listing Loan Templates: `list template` 
   
-Once a template has been added properly, you will be able to see it listed out with this command. This is an example
- of what it will look like. With 3 templates added.
- 
- ![](images/templateList.png)
+Once you have added at least one template, you will be able to see them all listed out with this command. 
   
 Format: `list template`
 
+This is an example of what the output will look like with 3 templates added.
+ ![](images/templateList.png)
   
 ---  
 ### 3.7 Marking Stock as lost **[coming in v2.0]**
