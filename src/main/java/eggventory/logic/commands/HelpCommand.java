@@ -101,7 +101,7 @@ public class HelpCommand extends Command {
                 }
                 break;
             default:
-                throw new BadInputException ("Your help command is not defined. Please enter 'help' for reference.");
+                throw new BadInputException("Your help command is not defined. Please enter 'help' for reference.");
             }
         }
         ui.print(output);
