@@ -366,7 +366,7 @@ This automatically generates a list of Stock and the quantity of each that you s
 
 Format: `list shopping`
 
-[ui screenshot coming soon]
+   ![](images/shopping_list.png)
 
 ---  
 ### 3.8 Marking Stock as lost **[coming in v2.0]**
