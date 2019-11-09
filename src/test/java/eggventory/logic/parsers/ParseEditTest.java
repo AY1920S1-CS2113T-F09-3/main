@@ -21,7 +21,6 @@ class ParseEditTest {
     public void setParseEditStock_InvalidProperty_ThrowsBadInputException() {
         //stockcode cannot be edited.
         assertThrows(BadInputException.class, () -> testParser.parse("stock #stockcode stockcode arg3"));
-        assertThrows(BadInputException.class, () -> testParser.parse("stock #stockcode wrongProperty arg3"));
 
         //quantity
         assertDoesNotThrow(() -> testParser.parse("stock #stockcode quantity 500"));
