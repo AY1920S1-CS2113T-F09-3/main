@@ -12,7 +12,7 @@ Dated: 8 November 2019
 ##### [3.3 Working with Stocks ](#33-working-with-stocks)  
 ##### [3.4 Managing your list of People ](#34-managing-your-list-of-people)  
 ##### [3.5 Managing your list of Loans ](#35-managing-your-list-of-loans)  
-##### [3.6 Loaning using Templates](#36-loaning-using-templates)
+##### [3.6 Loaning using Templates](#36-loaning-using-templates-1)
 ##### [3.7 Minimum Required Quantity](#37-minimum-required-quantity-1)
 ##### [3.8 Marking Stock as Lost ](#38-marking-stock-as-lost-coming-in-v20)  
 ##### [3.9 Searching the Inventory ](#39-searching-the-inventory-find-description)  
@@ -30,7 +30,7 @@ Eggventory is an inventory management system targeted towards engineering labora
 ## 2. Quick start  
   
 1. #### [Download and install Java 11 on your machine. ](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)  
-2. #### [Download the latest eggventory.jar the github repository. ](https://github.com/AY1920S1-CS2113T-F09-3/main)  
+2. #### [Download the latest eggventory.jar the github repository. ](https://github.com/AY1920S1-CS2113T-F09-3/main/releases)  
 3.   #### Copy the file to the folder you want to use as the home folder for your inventory management system.  
 4. #### Double-click the file to start the app. The GUI should appear in a few seconds.  
  
