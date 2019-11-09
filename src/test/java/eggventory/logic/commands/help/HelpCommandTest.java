@@ -18,10 +18,20 @@ class HelpCommandTest {
     Ui testCli = new UiStub();
     Storage testStorage = new StorageStub();
 
+    //test for "help x" command where x is not a valid command.
     @Test
     public void testExecuteHelpCommand_InvalidCommandName_ThrowsBadInputException() throws BadInputException {
-        assertThrows(BadInputException.class, () -> new HelpCommand(CommandType.HELP, "invalid")
-                .execute(testStockList,testCli,testStorage));
+        Exception exception = assertThrows(BadInputException.class, () -> new HelpCommand(CommandType.HELP, "invalid")
+                                .execute(testStockList,testCli,testStorage));
+        assertEquals("Your help command is not defined. Please enter 'help' for reference.", exception.getMessage());
     }
 
+    @Test
+    public void testExecuteHelpCommand_HelpBye_Success() throws BadInputException {
+        String expected = "Exits EggVentory and bids user goodbye.\n" +
+                "\n" +
+                "bye:        bye" + "\n";
+        String output = new HelpCommand(CommandType.HELP, "bye").execute(testStockList, testCli, testStorage);
+        assertEquals(expected, output);
+    }
 }
