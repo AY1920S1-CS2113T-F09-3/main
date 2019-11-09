@@ -105,7 +105,7 @@ This changes the name of the selected stock type.
   
 Format: `edit stocktype <StockType> <NewStockType>`
 
-#### 3.2.4 Listing Stock Types: `list stocktype`  
+#### 3.2.4 Listing All Stock Types: `list stocktype all`  
   
 This lists out all Stock Types that are present in the inventory.  
   
@@ -180,13 +180,13 @@ eg. `edit stock R500 quantity 1000` : Changes the quantity of the stock R500 to 
 This lists out all Stocks that are present in the inventory.  
 Format: `list stock`
   
-#### 3.3.5 Listing Stock of a particular StockType: `list <StockType>`  
+#### 3.3.5 Listing Stock of a particular StockType: `list stocktype <StockType>`  
     
 This lists out all Stock under a particular Stock Type  
   
-Format: `list <Stock Type>`  
+Format: `list stocktype <Stock Type>`  
   
-eg. `list Resistor`  
+eg. `list stocktype Resistor`  
   
 ---  
 ### 3.4 Managing your list of People  
@@ -333,17 +333,10 @@ This directly marks a quantity of a Person’s Loan as lost. The items are remov
   
 Format: `lost <MatricNo> <StockCode>`
   
-### 3.8 Searching the inventory  
-It is possible to search the inventory for a Stock or StockType with the find command. It will display all Stocks or StockType that partially or fully matches the input query.  
-  
-#### 3.8.1 Finding a Stock: `find stock`  
+### 3.8 Searching the inventory: `find description` 
+It is possible to search the inventory for a Stock based its description with the find command. All Stocks whose description contains the query will be displayed.  
     
-This finds all stocks that match the query.  
-  Format: `find stock <Query>`    
-#### 3.8.2 Finding a StockType: `find stocktype`  
-    
-This finds all StockTypes that matches the query.  
-Format: `find stocktype <Query>`  
+Format: `find description <Query>`  
 
 ---  
 ### 3.9 Using Undo and Redo commands: **[coming in v2.0]**
