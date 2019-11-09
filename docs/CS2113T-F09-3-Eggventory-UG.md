@@ -350,12 +350,10 @@ Once you have set a _minimum required quantity_, checks are performed to compare
 
 
 
-Realistically, you may not have enough of a Stock on hand at the moment you add it into the system. This means that it is normal to receive minimum quantity warnings for adding a stock that currently has less than the minimum quantity, as shown below.
+Realistically, you may not have sufficient quantity of a Stock at the moment you add it into the system. Thus, it is normal to receive minimum quantity warnings for adding a stock that currently has less than the minimum quantity, as shown below.
 
    ![](images/add_below_mrq.png)
    
-
-
   
 Format: `lost <MatricNo> <StockCode>`
 ---  
