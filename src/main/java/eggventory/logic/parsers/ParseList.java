@@ -12,6 +12,8 @@ import eggventory.logic.commands.list.ListStockCommand;
 import eggventory.logic.commands.list.ListStockTypeCommand;
 import eggventory.logic.commands.list.ListTemplateCommand;
 import eggventory.logic.commands.list.ListTemplatesAllCommand;
+import eggventory.logic.commands.list.ListMinimumCommand;
+import eggventory.logic.commands.list.ListShoppingCommand;
 
 //@@author yanprosobo
 public class ParseList {
@@ -106,6 +108,14 @@ public class ParseList {
             
         case "template":
             listCommand = processListTemplate(inputString);
+            break;
+
+        case "minimum":
+            listCommand = new ListMinimumCommand();
+            break;
+
+        case "shopping":
+            listCommand = new ListShoppingCommand();
             break;
 
         default:

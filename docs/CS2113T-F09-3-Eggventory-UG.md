@@ -1,24 +1,27 @@
 # Eggventory User Guide
 By: Team F09-03  
-Dated: 7 November 2019  
+Dated: 8 November 2019  
+
 ## Table of contents  
-### [1. Introduction ](#introduction)  
-### [2. Quick Start ](#quickstart)  
-### [3. Features and Command Usage ](#features-and-command-usage)  
-##### [3.1 Viewing help ](#viewing-help-help)  
-##### [3.2 Working with Stock Types ](#working-with-stock-types)  
-##### [3.3 Working with Stocks ](#working-with-stocks)  
-##### [3.4 Managing your list of People ](#managing-your-list-of-people)  
-##### [3.5 Managing your list of Loans ](#managing-your-list-of-loans)  
-##### [3.6 Loaning using Templates](#loaning-using-templates)
-##### [3.7 Marking Stock as Lost ](#marking-stock-as-lost--coming-in-v2.0)  
-##### [3.8 Searching the Inventory ](#searching-the-inventory)  
-##### [3.9 Using Undo and Redo Commands ](#using-undo-and-redo-commands-coming-in-v2.0)  
-##### [3.10 Setting autosave options ](#setting-autosave-options-coming-in-v2.0)  
-##### [3.11 Exiting the program: bye ](#exiting-the-program-bye)  
-### [4. FAQ ](#faq)  
-### [5. Command Summary ](#command-summary)  
-### [6. Glossary ](#glossary)  
+
+### [1. Introduction ](#1-introduction)  
+### [2. Quick Start ](#2-quick-start)  
+### [3. Features and Command Usage ](#3-features-and-command-usage)  
+##### [3.1 Viewing help ](#31-viewing-help-help)  
+##### [3.2 Working with Stock Types ](#32-working-with-stock-types)  
+##### [3.3 Working with Stocks ](#33-working-with-stocks)  
+##### [3.4 Managing your list of People ](#34-managing-your-list-of-people)  
+##### [3.5 Managing your list of Loans ](#35-managing-your-list-of-loans)  
+##### [3.6 Loaning using Templates](#36-loaning-using-templates-1)
+##### [3.7 Minimum Required Quantity](#37-minimum-required-quantity-1)
+##### [3.8 Marking Stock as Lost ](#38-marking-stock-as-lost-coming-in-v20)  
+##### [3.9 Searching the Inventory ](#39-searching-the-inventory-find-description)  
+##### [3.10 Using Undo and Redo Commands ](#310-using-undo-and-redo-commands-coming-in-v20)  
+##### [3.11 Setting autosave options ](#311-setting-autosave-options-coming-in-v20)  
+##### [3.12 Exiting the program: bye ](#312-exiting-the-program-bye)  
+### [4. FAQ ](#4-faq)  
+### [5. Command Summary ](#5-command-summary)  
+### [6. Glossary ](#6-glossary)  
   
   
 ## 1. Introduction  
@@ -27,7 +30,7 @@ Eggventory is an inventory management system targeted towards engineering labora
 ## 2. Quick start  
   
 1. #### [Download and install Java 11 on your machine. ](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)  
-2. #### [Download the latest eggventory.jar the github repository. ](https://github.com/AY1920S1-CS2113T-F09-3/main)  
+2. #### [Download the latest eggventory.jar the github repository. ](https://github.com/AY1920S1-CS2113T-F09-3/main/releases)  
 3.   #### Copy the file to the folder you want to use as the home folder for your inventory management system.  
 4. #### Double-click the file to start the app. The GUI should appear in a few seconds.  
  
@@ -58,9 +61,11 @@ Eggventory is an inventory management system targeted towards engineering labora
   
 The following section describes the command line interface commands that Eggventory recognises. Each command you input has to follow a specific format of words and parameters.  
   
-Command Format    Text in <Angled Brackets> are mandatory parameter to be supplied by the user. E.g. add stocktype <Stock Type> , <Stock Type> is a parameter which is the name of the stocktype the user wishes to add.  
+Command Format    
+
+- Text in \<Angled Brackets\> are mandatory parameter to be supplied by the user. E.g. `add stocktype <Stock Type>` , \<Stock Type\> is a parameter which is the name of the stocktype the user wishes to add.  
   
-- Parameters in {Braces} can be repeated multiple times in the same command, separated by a space. E.g. loan add <Matric. No> {<Stock Code> <Quantity>} , more <Stock Code> <Quantity> pairs can be added after the first pair as such: `loan add A0191234A R500 20 R250 10 R100 5`  
+- Parameters in {Braces} can be repeated multiple times in the same command, separated by a space. E.g. `add template <TemplateName>  {<Stock Code> <Quantity>}` , more \<Stock Code\> \<Quantity\> pairs can be added after the first pair as such: `loan add A0191234A R500 20 R250 10 R100 5`  
   
 -   [coming in v2.0] Some commands have optional parameters available. Optional parameters are added to the end of the corresponding command, after all mandatory parameters. E.g. `add stock R500 50 “500-ohm Resistors” -st Resistors` , will create a new stock, and placed under the “Resistors” Stock Type with the “-st” tag.  
   
@@ -77,7 +82,7 @@ Format: `help <Command>`
 eg. `help edit`
   
 ---  
-  ### 3.2 Working with Stock Types  
+### 3.2 Working with Stock Types  
 Stock Types are the main categories of the inventory, and each Stock Type stores multiple Stocks. For example, your inventory may have Stock Types such as Resistors, Tools or Wires. You are required to add your Stock Types to the inventory before Stocks can be added. By default, Eggventory comes with an Uncategorised Stock Type, where Stocks not assigned to a specified Stock Typee added.  
   
 Note: Stock Type names are not allowed to have spaces in them.  
@@ -100,9 +105,9 @@ Format: `delete stocktype <StockType>`
     
 This changes the name of the selected stock type.
   
-Format: `edit stocktype <StockType> <NewStockType>`
+Format: `edit stocktype <StockType> <NewName>`
 
-#### 3.2.4 Listing Stock Types: `list stocktype`  
+#### 3.2.4 Listing All Stock Types: `list stocktype all`  
   
 This lists out all Stock Types that are present in the inventory.  
   
@@ -133,18 +138,16 @@ Format: `add stock <StockType> <StockCode> <Quantity> <Description>`
   
 eg. `add stock Resistor R500 1000 500ohm resistor`  
   
-**[coming in v2.0]**  
 In addition to the required parameters, stocks can also be added with the following optional parameters:  
 
 Format|Purpose|  
 |---|---|  
-`-mq <MinQuantity>` |Sets the minimum quantity of stock that should be maintained in the inventory  
-`-u`|Sets the stock to contain items that are unique  
+`-m <MinQuantity>` |Sets the [minimum required quantity](#37-minimum-required-quantity-1) of stock that should be maintained in the inventory  
+`-u`|**[coming in v2.0]**  Sets the stock to contain items that are unique  
   
-
-Format: `add stock <StockType> <Stock Code> <Quantity> <Description> {<optional parameter>}`  
+Format: `add stock <StockType> <StockCode> <Quantity> <Description> {<optional parameter>}`  
   
-eg. `add stock Resistor R500 1000 500ohm resistor -mq 100`  
+eg. `add stock Resistor R500 1000 500ohm resistor -m 100`  
   
 #### 3.3.2 Deleting Stocks: `delete  stock`  
     
@@ -156,19 +159,17 @@ This removes a stock from the inventory, including any references to loaned out 
 This directly modifies the value of a property stock. You may modify as many properties as you wish in one command.
   
 Keywords to modify each property:  
+      
+- `description`  
+            
+- `quantity`  
+      
+- `minimum`  
 
-- stockcode  
-      
-- description  
-      
-- stocktype  
-      
-- quantity  
-      
-- minquantity  
+Note: The ability to edit StockCode and StockType will be added in v2.0. For now, please delete and re-add a stock if you need to change those properties. 
       
     
-Format: `edit stock <Stock Code> <Property> <New Value>`  
+Format: `edit stock <StockCode> <Property> <New Value>`  
   
 eg. `edit stock R500 quantity 1000` : Changes the quantity of the stock R500 to 1000.
   
@@ -177,13 +178,13 @@ eg. `edit stock R500 quantity 1000` : Changes the quantity of the stock R500 to 
 This lists out all Stocks that are present in the inventory.  
 Format: `list stock`
   
-#### 3.3.5 Listing Stock of a particular StockType: `list <StockType>`  
+#### 3.3.5 Listing Stock of a particular StockType: `list stocktype <StockType>`  
     
 This lists out all Stock under a particular Stock Type  
   
-Format: `list <Stock Type>`  
+Format: `list stocktype <Stock Type>`  
   
-eg. `list Resistor`  
+eg. `list stocktype Resistor`  
   
 ---  
 ### 3.4 Managing your list of People  
@@ -275,79 +276,127 @@ Format: `list loan`
 ---  
 ### 3.6 Loaning using Templates
     
-To speed up the loaning process, Eggventory allows you to create loan templates. These templates are simply lists of
- stocks and quantity to be loaned out all at once. 
+To speed up the loaning process, Eggventory allows you to create loan templates. These templates are simply lists of stocks and quantity to be loaned out all at once. Loans added via templates are not special in any way. As such, you will have to delete each loan added by a template individually.
   
 #### 3.6.1 Adding loan templates: `add template`  
-This creates a new template of Loans. 
-  
+This creates a new template of loans which can be assigned to a person.
+
 Format: `add template <TemplateName> {<StockCode> <Quantity>}`  
   
 e.g. `add template CG1112_Alex R500 5 A123 1`  
  
- Note: The name of each template must be unique, or it will not be added. 
-  
-#### 3.6.2  Deleting a Template: `delete template`  
+Note: The name of each template must be unique, or it will not be added. 
 
-  This deletes a loan template.  
-  
-  Format: `delete template <Template Name>`  
-  
-eg. `delete template CG1112_Alex`  
-  
-#### 3.6.3 Making a Loan from a template: `add loan`
+#### 3.6.2 Making a Loan from a template: `add loan`
 
-This adds a Loan to a Person from a Template. Every loan in the template will be added to the person as if you added
- them individually. 
+This adds a loan to a person from a template. Every loan in the template will be added to the person as if you added them individually. 
 
 Format: `add loan <Matric. No> <Template Name>`  
   
-eg. `add loan A0187654 CG1112_Alex`  
-  
-Note: Additional Loans can still be added on to the same Person afterwards using the loan add command.  
+eg. `add loan A0187654 CG1112_Alex`
 
+If you have added the template "CG1112_Alex" using this example above, you can use the list loan command to view the
+ newly added loans using the template like this.  
+ ![](images/templateListAlex.png)
+
+#### 3.6.3  Deleting a Template: `delete template`  
+
+This deletes a loan template. It does not delete any loans assigned to people using the template.
+
+Format: `delete template <Template Name>`  
+  
+eg. `delete template CG1112_Alex`  
+  
 #### 3.6.4 Listing Loan Templates: `list template` 
   
-This lists out all the templates and their associated loans that you have created.
+Once you have added at least one template, you will be able to see them all listed out with this command. 
   
 Format: `list template`
+
+This is an example of what the output will look like with 3 templates added.
+ ![](images/templateList.png)
   
+---
+### 3.7 Minimum Required Quantity
+
+The _minimum required quantity_ is the minimum amount of the stock that your lab intends to have on hand at all times. Loans can still be made until the stock fully runs out, but additional
+  warnings will be displayed to remind you that stock is running low. 
+  
+In context, your lab may typically start restocking batteries when there are less than 30 batteries left. Thus, your minimum
+   required quantity should be set to 30. 
+
+#### 3.7.1 Setting Minimum Required Quantity
+There are two ways to set a Stock's minimum required quantity. 
+
+The first is to specify it when adding the stock, using the optional parameter `-m <minimum quantity>`. An additional confirmation message will acknowledge your use of the optional parameter. 
+
+Format: `add stock <StockType> <Stock Code> <Quantity> <Description> -m <Minimum Quantity>`  
+  
+eg. `add stock Resistor R1k 1000 1Kohm resistor -m 500`
+
+   ![](images/add_mrq.png)
+
+If you did not assign a minimum required quantity to the Stock when it was added, you can edit it at any time using the `edit` command. 
+  
+Format: `edit stock <StockCode> <Property> <New Value>`  
+  
+eg. `edit stock R500 minimum 100`  
+  
+#### 3.7.2 Receiving warnings about Quantity
+
+Once you have set a _minimum required quantity_, checks are performed to compare the _available quantity_ (total quantity without loaned or lost stock) and _minimum required quantity_ at every instance where any values are updated. If your latest action, such as adding a Loan, causes the available quantity to fall below minimum, a warning will be printed as shown below. 
+
+   ![](images/add_loan_mrq.png)
+
+Realistically, you may not have sufficient quantity of a Stock at the moment you add it into the system. Thus, it is normal to receive minimum quantity warnings when adding a stock that currently has less than the minimum quantity, as shown below.
+
+   ![](images/add_below_mrq.png)
+  
+#### 3.7.3 Listing Stocks that are low in quantity: `list minimum`
+
+This shows you a complete list of Stocks below their minimum required quantities. This list allows you quickly determine which Stocks are running out, and understand how much of this is due to excessive loaning or loss [coming in v2.0] of items. 
+
+Format: `list minimum`
+
+   ![](images/list_min.png)
+
+#### 3.7.3 Generating Shopping List: `list shopping`
+
+This automatically generates a list of Stock and the quantity of each that you should consinder buying in order to attain the minimum required quantities. 
+
+Format: `list shopping`
+
+   ![](images/shopping_list.png)
+
 ---  
-### 3.7 Marking Stock as lost **[coming in v2.0]**
+### 3.8 Marking Stock as lost **[coming in v2.0]**
 Marks a certain quantity of a stock as lost. Differs from deleting stock in the fact that the quantity of stock will still be saved in the inventory (eg. for administrative purposes). Lost stock will not be included in tallies of available stock.  
   
-#### 3.7.1 Marking Stock as lost: `lost`  
+#### 3.8.1 Marking Stock as lost: `lost`  
     
-Format:` lost <Stock Code> <Quantity>`  
+Format: `lost <Stock Code> <Quantity>`  
   
 eg. `lost R500 10`  
   
-#### 3.7.2 Marking Loaned Stock as lost:   
+#### 3.8.2 Marking Loaned Stock as lost:   
 This directly marks a quantity of a Person’s Loan as lost. The items are removed from the Loan list and counted as lost within the main inventory.  
   
 Format: `lost <MatricNo> <StockCode>`
   
-### 3.8 Searching the inventory  
-It is possible to search the inventory for a Stock or StockType with the find command. It will display all Stocks or StockType that partially or fully matches the input query.  
-  
-#### 3.8.1 Finding a Stock: `find stock`  
-    
-This finds all stocks that match the query.  
-  Format: `find stock <Query>`    
-#### 3.8.2 Finding a StockType: `find stocktype`  
-    
-This finds all StockTypes that matches the query.  
-Format: `find stocktype <Query>`  
+### 3.9 Searching the inventory: `find description`
+It is possible to search the inventory for a Stock based its description with the find command. All Stocks with description containing the query will be displayed.  
+
+Format: `find description <Query>`  
 
 ---  
-### 3.9 Using Undo and Redo commands: **[coming in v2.0]**
+### 3.10 Using Undo and Redo commands: **[coming in v2.0]**
   
-#### 3.9.1 Undoing a command: `undo`
+#### 3.10.1 Undoing a command: `undo`
   
 If you accidentally entered a command by accident, the effects of any command can be reversed with the undo command.  
   Format: `undo`  
   
-#### 3.9.2 Reversing an undo command: `redo`  
+#### 3.10.2 Reversing an undo command: `redo`  
     
 Undoing a command can be reversed using the redo command.  
   
@@ -356,13 +405,13 @@ Undoing a command can be reversed using the redo command.
 Format: `redo`  
   
 ---  
-### 3.10 Setting autosave options: [coming in v2.0]  
+### 3.11 Setting autosave options: [coming in v2.0]
   Eggventory automatically saves the current inventory to the disk every time data is added, removed, or edited. You can disable this feature with this command. Eggventory will then save only when the program exits.  
   
 Format: `autosave on` OR `autosave off`  
   
 ---  
-### 3.11 Exiting the program: `bye`  
+### 3.12 Exiting the program: `bye`  
 Format: `bye`  
   
 ## 4. FAQ    
@@ -375,14 +424,16 @@ Format: `bye`
   add stock | `add stockStockType> <StockCode> <Quantity> <Description>` 
   add stocktype | `add stocktype <StockType>`  
   add person | `add person <MatricNo>`  
+  add template | `add template <TemplateName> {<StockCode> <Quantity>}`
   
   ### Delete Commands  
 |Command| Syntax  
 |---|---|  
-stock | `delete stock <StockCode>`  
+delete stock | `delete stock <StockCode>`  
 delete stocktype | `delete stocktype <StockType>`  
-delete template | `delete template <TemplateName>`
 delete person | `delete person <MatricNo>`  
+delete template | `delete template <TemplateName>`
+
   ### Edit Commands  
 |Command| Syntax
 |---|---|  
@@ -401,9 +452,14 @@ list loan | `list loan`
 list template | `list template`  
 list lost | `list lost`
   
-  
-### Loan Commands  
+### List Minimum Commands  
+| Command | Syntax  
+|---|---|
+list minimum | `list minimum`
+list shopping | `list shopping`
 
+  
+### Loan Commands 
 |Command| Syntax  
 |---|---|  
 add loan | `add loan <MatricNo> <StockCode> <Quantity>`
@@ -411,13 +467,19 @@ loan return | `loan return <MatricNo> <StockCode> <Quantity>`
 loan returnall | `loan returnall <MatricNo>`
 
 ### Template Commands
-
 |Command|Syntax
 |---|---|
   add template | `add template <TemplateName> {<StockCode> <Quantity>}`
   delete template | `delete template <TemplateName>`
   add loan | `add loan <TemplateName>`
-### Lost Commands  
+  
+### Find Commands
+|Command|Syntax
+|---|---|
+find description | `find description <Query>`
+
+ 
+### Lost Commands [coming in v2.0]
 |Command| Syntax  
 |---|---|  
 lost | `lost <Stock Code> <Quantity>`
@@ -437,3 +499,4 @@ Matric No. | Matriculation number of student to be added
 Stock | A physical asset to be tracked by Eggventory  
 Stock Code | A unique string of characters to identify a stock  
 Stock Type | A category of stock
+Query | The word or phrase to search for
