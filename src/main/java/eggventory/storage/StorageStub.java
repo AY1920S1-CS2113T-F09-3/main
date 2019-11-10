@@ -13,6 +13,7 @@ import eggventory.model.PersonList;
 import eggventory.model.StockList;
 import eggventory.model.TemplateList;
 
+//@@author patwaririshab
 public class StorageStub {
 
     /**
@@ -104,3 +105,4 @@ public class StorageStub {
     }
 
 }
+//@@ author
