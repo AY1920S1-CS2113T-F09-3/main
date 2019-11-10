@@ -22,7 +22,7 @@ class TemplateListTest {
     }
 
     @BeforeEach
-    void ResetTemplateList() {
+    void resetTemplateList() {
         if (TemplateList.isEmpty()) {
             return;
         }
@@ -51,8 +51,8 @@ class TemplateListTest {
         TemplateList.addTemplate(testTemplateName, loans);
         assertTrue(TemplateList.deleteTemplate(testTemplateName));
     }
-    @Test
 
+    @Test
     void deleteTemplate_TemplateDoesNotExist_ReturnsFalse() {
         assertFalse(TemplateList.deleteTemplate("No delete"));
     }
@@ -78,7 +78,7 @@ class TemplateListTest {
     }
 
     @Test
-    void TemplateExists_TemplateNotExists_ReturnsFalse() {
+    void templateExists_TemplateNotExists_ReturnsFalse() {
         assertFalse(TemplateList.templateExists(testTemplateName));
     }
 

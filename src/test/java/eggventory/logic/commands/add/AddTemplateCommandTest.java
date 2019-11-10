@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddTemplateCommandTest {
     private ArrayList<Pair<String,String>> loanPairs = new ArrayList<>();
@@ -31,7 +31,7 @@ class AddTemplateCommandTest {
     }
 
     @BeforeEach
-    void ResetTemplateList() {
+    void resetTemplateList() {
         if (TemplateList.isEmpty()) {
             return;
         }
