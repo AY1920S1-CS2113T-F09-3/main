@@ -42,7 +42,7 @@ public class StateInterface {
         PersonList personList = currentState.getPersonList();
         TemplateList templateList = currentState.getTemplateList();
 
-        //Push current state into historyList
+        //Push current state into futurelist
         futureList.pushStockSave(stockList.saveDetailsString());
         futureList.pushStockTypeSave(stockList.saveStockTypesString());
         futureList.pushLoanListSave(loanList.saveLoanListString());
@@ -71,6 +71,10 @@ public class StateInterface {
             throw new BadInputException("The UNDO command could not be executed.\n");
         }
         pushStateFutureList();
+        getStockList().getList().clear();
+        getPersonList().getPersonList().clear();
+        getTemplateList().getTemplates().clear();
+        getLoanList().getLoansList().clear();
         StockList updatedStockList = new StorageStub().loadStockList(historyList.popStockSave(),
                 historyList.popStockTypeSave());
         LoanList updatedLoanList = new StorageStub().loadLoanList(historyList.popLoanListSave());

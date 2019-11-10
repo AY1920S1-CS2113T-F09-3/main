@@ -10,6 +10,10 @@ import java.util.ArrayList;
 //@@author Raghav-B
 public final class PersonList {
 
+    public static ArrayList<Person> getPersonList() {
+        return personList;
+    }
+
     private static ArrayList<Person> personList = new ArrayList<Person>();
 
 
