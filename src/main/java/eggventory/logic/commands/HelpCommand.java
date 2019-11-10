@@ -4,6 +4,7 @@ import eggventory.commons.enums.CommandType;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.ui.Ui;
+import eggventory.commons.exceptions.BadInputException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,12 +47,11 @@ public class HelpCommand extends Command {
      * @return The string passed to Ui for parsing.
      */
     @Override
-    public String execute(StockList list, Ui ui, Storage storage) {
+    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
         String output = "";
         if (this.options == null) {
             try {
                 output = getStringFromFile("/help/Help.txt");
-                System.out.println(output);
             } catch (IOException e) {
                 output = "Error in reading Help.txt";
             }
@@ -100,7 +100,7 @@ public class HelpCommand extends Command {
                 }
                 break;
             default:
-                output = "Your help command is not defined. Please enter 'help' for reference.";
+                throw new BadInputException("Your help command is not defined. Please enter 'help' for reference.");
             }
         }
         ui.print(output);
