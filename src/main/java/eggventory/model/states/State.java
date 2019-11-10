@@ -41,23 +41,27 @@ public class State {
 
     /**
      * Clears current state components and updates with new component value.
-     * @param stockList new stockList containing stock and stocktype state.
-     * @param loanList new loanList containing loanList state.
-     * @param personList new personList containing personlist state.
-     * @param templateList new templatelist containing templatelist state.
      */
-    public void setAllStates(StockList stockList, LoanList loanList, PersonList personList, TemplateList templateList) {
+    public void setAllStates(StateList stateList) {
         clearAllStates();
-        this.stockList = stockList;
-        this.loanList = loanList;
-        this.personList = personList;
-        this.templateList = templateList;
+        StockList updatedStockList = new StorageLoadStub().loadStockList(stateList.popStockSave(),
+                stateList.popStockTypeSave());
+        String  loanString = stateList.popLoanListSave();
+        LoanList updatedLoanList = new StorageLoadStub().loadLoanList(loanString);
+        String personString = stateList.popPersonListSave();
+        PersonList updatedPersonList = new StorageLoadStub().loadPersonList(personString);
+        TemplateList updatedTemplateList = new StorageLoadStub().loadTemplateList(stateList.popTemplateListSave());
+
+        this.stockList = updatedStockList;
+        this.loanList = updatedLoanList;
+        this.personList = updatedPersonList;
+        this.templateList = updatedTemplateList;
     }
 
     /**
      * Clears all statelists.
      */
-    private void clearAllStates() {
+    public void clearAllStates() {
         stockList.getList().clear();
         loanList.getLoansList().clear();
         personList.getPersonList().clear();

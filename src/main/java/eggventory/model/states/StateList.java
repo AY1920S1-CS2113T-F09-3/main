@@ -51,13 +51,13 @@ public class StateList {
 
     /**
      * Push all state components to statelist.
-     * @param stockList stockList contains stock and stocktype state.
-     * @param loanList loanlList contains loan state.
-     * @param personList personList contains personList state.
-     * @param templateList templateList contains templateList state.
      */
-    public void pushAllStatesSave(StockList stockList, LoanList loanList, PersonList personList,
-                                  TemplateList templateList) {
+    public void pushAllStatesSave(State currentState) {
+        StockList stockList = currentState.getStockList();
+        LoanList loanList = currentState.getLoanList();
+        PersonList personList = currentState.getPersonList();
+        TemplateList templateList = currentState.getTemplateList();
+
         pushStockSave(stockList.saveDetailsString());
         pushStockTypeSave(stockList.saveStockTypesString());
         pushLoanListSave(loanList.saveLoanListString());

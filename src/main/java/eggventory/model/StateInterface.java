@@ -3,7 +3,6 @@ package eggventory.model;
 import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.states.State;
 import eggventory.model.states.StateList;
-import eggventory.storage.StorageLoadStub;
 
 //@@author patwaririshab
 public class StateInterface {
@@ -24,26 +23,16 @@ public class StateInterface {
      * Pushes state of model components converted into String to historylist.
      */
     public void pushStateHistoryList() {
-        StockList stockList = currentState.getStockList();
-        LoanList loanList = currentState.getLoanList();
-        PersonList personList = currentState.getPersonList();
-        TemplateList templateList = currentState.getTemplateList();
-
         //Push current state into historyList
-        historyList.pushAllStatesSave(stockList, loanList, personList, templateList);
+        historyList.pushAllStatesSave(currentState); //No problem
     }
 
     /**
      * Pushes state of model components converted into String to futurelist.
      */
     public void pushStateFutureList() {
-        StockList stockList = currentState.getStockList();
-        LoanList loanList = currentState.getLoanList();
-        PersonList personList = currentState.getPersonList();
-        TemplateList templateList = currentState.getTemplateList();
-
         //Push current state into futurelist
-        futureList.pushAllStatesSave(stockList, loanList, personList, templateList);
+        futureList.pushAllStatesSave(currentState); //No problem
     }
 
 
@@ -75,15 +64,8 @@ public class StateInterface {
         //Push current state information into futurelist
         pushStateFutureList();
 
-        //Load the newstate information from history list
-        StockList updatedStockList = new StorageLoadStub().loadStockList(historyList.popStockSave(),
-                historyList.popStockTypeSave());
-        LoanList updatedLoanList = new StorageLoadStub().loadLoanList(historyList.popLoanListSave());
-        PersonList updatedPersonList = new StorageLoadStub().loadPersonList(historyList.popPersonListSave());
-        TemplateList updatedTemplateList = new StorageLoadStub().loadTemplateList(historyList.popTemplateListSave());
-
         //Update currentstate infromation with new state information
-        currentState.setAllStates(updatedStockList, updatedLoanList, updatedPersonList, updatedTemplateList);
+        currentState.setAllStates(historyList);
     }
 
     /**
@@ -98,15 +80,8 @@ public class StateInterface {
         //Push current state into history list
         pushStateHistoryList();
 
-        //Load the newstate information from history list
-        StockList updatedStockList = new StorageLoadStub().loadStockList(futureList.popStockSave(),
-                futureList.popStockTypeSave());
-        LoanList updatedLoanList = new StorageLoadStub().loadLoanList(futureList.popLoanListSave());
-        PersonList updatedPersonList = new StorageLoadStub().loadPersonList(futureList.popPersonListSave());
-        TemplateList updatedTemplateList = new StorageLoadStub().loadTemplateList(futureList.popTemplateListSave());
-
         //Update currentstate infromation with new stateinformation
-        currentState.setAllStates(updatedStockList, updatedLoanList, updatedPersonList, updatedTemplateList);
+        currentState.setAllStates(futureList);
     }
 
     /**
