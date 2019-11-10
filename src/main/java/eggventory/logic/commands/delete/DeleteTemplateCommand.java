@@ -6,11 +6,17 @@ import eggventory.logic.commands.Command;
 import eggventory.model.StockList;
 import eggventory.model.TemplateList;
 import eggventory.storage.Storage;
+import eggventory.stubs.StorageStub;
+import eggventory.stubs.UiStub;
 import eggventory.ui.Ui;
 
 //@@author patwaririshab
 public class DeleteTemplateCommand extends Command {
     private String templateName;
+
+    private StockList testStockList = new StockList();
+    private Ui testCli = new UiStub();
+    private Storage testStorage = new StorageStub();
 
     public DeleteTemplateCommand(CommandType type, String templateName) {
         super(type);
