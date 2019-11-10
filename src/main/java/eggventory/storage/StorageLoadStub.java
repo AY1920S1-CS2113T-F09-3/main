@@ -14,7 +14,7 @@ import eggventory.model.StockList;
 import eggventory.model.TemplateList;
 
 //@@author patwaririshab
-public class StorageStub {
+public class StorageLoadStub {
 
     /**
      * Loads stockList from state strings obtained from state stacks.

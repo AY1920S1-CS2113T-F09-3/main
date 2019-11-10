@@ -4,6 +4,8 @@ import eggventory.model.LoanList;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
 import eggventory.model.TemplateList;
+import eggventory.storage.Storage;
+import eggventory.storage.StorageLoadStub;
 
 public class State {
     private StockList stockList;
@@ -37,22 +39,28 @@ public class State {
         return templateList;
     }
 
-
-
-
-    public void setStockList(StockList stockList) {
+    /**
+     * Clears current state components and updates with new component value.
+     * @param stockList new stockList containing stock and stocktype state.
+     * @param loanList new loanList containing loanList state.
+     * @param personList new personList containing personlist state.
+     * @param templateList new templatelist containing templatelist state.
+     */
+    public void setAllStates(StockList stockList, LoanList loanList, PersonList personList, TemplateList templateList) {
+        clearAllStates();
         this.stockList = stockList;
-    }
-
-    public void setLoanList(LoanList loanList) {
         this.loanList = loanList;
-    }
-
-    public void setPersonList(PersonList personList) {
         this.personList = personList;
+        this.templateList = templateList;
     }
 
-    public void setTemplateList(TemplateList templateList) {
-        this.templateList = templateList;
+    /**
+     * Clears all statelists.
+     */
+    private void clearAllStates() {
+        stockList.getList().clear();
+        loanList.getLoansList().clear();
+        personList.getPersonList().clear();
+        templateList.getTemplates().clear();
     }
 }

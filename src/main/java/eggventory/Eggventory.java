@@ -70,8 +70,6 @@ public class Eggventory {
             storage.save(stateInterface.getStockList(), stateInterface.getLoanList(), stateInterface.getPersonList(),
                     stateInterface.getTemplateList());
 
-
-
             if (command.getType() == CommandType.BYE) {
                 System.exit(0);
             }

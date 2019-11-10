@@ -211,5 +211,5 @@ public class TemplateList {
     public static HashMap<String, Loan[]> getTemplates() {
         return templates;
     }
-    //@@ author
+    //@@author
 }
