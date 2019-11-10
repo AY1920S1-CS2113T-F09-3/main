@@ -82,6 +82,8 @@ public class Eggventory {
             }
             command.updateState(stateInterface);
             command.execute(stateInterface.getStockList(), ui, storage);
+            storage.save(stateInterface.getStockList(), stateInterface.getLoanList(), stateInterface.getPersonList(),
+                    stateInterface.getTemplateList());
 
 
 

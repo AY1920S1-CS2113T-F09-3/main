@@ -4,7 +4,6 @@ import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.states.FutureList;
 import eggventory.model.states.HistoryList;
 import eggventory.model.states.State;
-import eggventory.storage.Storage;
 import eggventory.storage.StorageStub;
 
 //@@author patwaririshab
@@ -141,6 +140,14 @@ public class StateInterface {
     public void updateStateHistory() {
         futureList = new FutureList();
         pushStateHistoryList();
+    }
+
+    public HistoryList getHistoryList() {
+        return historyList;
+    }
+
+    public FutureList getFutureList() {
+        return futureList;
     }
 }
 //@@author
