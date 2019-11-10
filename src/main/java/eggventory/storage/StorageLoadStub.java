@@ -2,6 +2,7 @@ package eggventory.storage;
 
 import eggventory.commons.enums.CommandType;
 
+import eggventory.commons.exceptions.BadInputException;
 import eggventory.logic.commands.add.AddLoanCommand;
 import eggventory.logic.commands.add.AddPersonCommand;
 import eggventory.logic.commands.add.AddStockCommand;
@@ -16,9 +17,40 @@ import eggventory.model.TemplateList;
 //@@author patwaririshab
 public class StorageLoadStub {
 
+    private void addStock(StockList savedList, String line) {
+        AddStockTypeCommand loadStockTypes = new AddStockTypeCommand(CommandType.ADD, line);
+        loadStockTypes.execute(savedList);
+    }
+
+    private void addStockType(StockList savedList, String line) throws BadInputException {
+        String[] item = line.split(",", 0);
+        AddStockCommand loadStocks = new AddStockCommand(CommandType.ADD, item[0], item[1],
+                Integer.parseInt(item[2]), item[3], Integer.parseInt(item[4]));
+        loadStocks.execute(savedList);
+    }
+
+    private void addLoan(LoanList savedLoanList, String line) {
+        String[] item = line.split(",", 0);
+        AddLoanCommand addLoans = new AddLoanCommand(CommandType.ADD, item[0], item[1],
+                Integer.parseInt(item[2]));
+        addLoans.executeLoadLoanList(savedLoanList);
+    }
+
+    private void addPerson(PersonList savedPersonList, String line) throws BadInputException {
+        String[] item = line.split(",", 0);
+        AddPersonCommand addPersons = new AddPersonCommand(CommandType.ADD, item[0], item[1]);
+        addPersons.executeLoadPersonList(savedPersonList);
+    }
+
+    private void addTemplate(TemplateList savedTemplateList, String line) throws BadInputException {
+        AddTemplateCommand addTemplate = ((AddTemplateCommand) new ParseAdd().processAddTemplate(line));
+        addTemplate.executeSaveTemplateList(savedTemplateList);
+    }
+
     /**
      * Loads stockList from state strings obtained from state stacks.
-     * @param stockListSave string save state of stocks.
+     *
+     * @param stockListSave     string save state of stocks.
      * @param stockTypeListSave string save state of stocktypes.
      * @return StockList object.
      */
@@ -28,15 +60,11 @@ public class StorageLoadStub {
 
             String[] lines2 = stockTypeListSave.split(System.getProperty("line.separator"));
             for (String line : lines2) {
-                AddStockTypeCommand loadStockTypes = new AddStockTypeCommand(CommandType.ADD, line);
-                loadStockTypes.execute(savedList);
+                addStock(savedList, line);
             }
             String[] lines = stockListSave.split(System.getProperty("line.separator"));
             for (String line : lines) {
-                String[] item = line.split(",", 0);
-                AddStockCommand loadStocks = new AddStockCommand(CommandType.ADD, item[0], item[1],
-                        Integer.parseInt(item[2]), item[3], Integer.parseInt(item[4]));
-                loadStocks.execute(savedList);
+                addStockType(savedList, line);
             }
         } catch (Exception e) {
             System.out.println("Could not load historical savedList");
@@ -46,6 +74,7 @@ public class StorageLoadStub {
 
     /**
      * Loads LoanList from state strings obtained from state stacks.
+     *
      * @param loanListSave string save state of loanlist.
      * @return LoanList object.
      */
@@ -54,10 +83,7 @@ public class StorageLoadStub {
         try {
             String[] lines = loanListSave.split(System.getProperty("line.separator"));
             for (String line : lines) {
-                String[] item = line.split(",", 0);
-                AddLoanCommand addLoans = new AddLoanCommand(CommandType.ADD, item[0], item[1],
-                        Integer.parseInt(item[2]));
-                addLoans.executeLoadLoanList(savedLoanList);
+                addLoan(savedLoanList, line);
             }
         } catch (Exception e) {
             System.out.println("Could not load historical savedLoanList");
@@ -67,6 +93,7 @@ public class StorageLoadStub {
 
     /**
      * Loads personlist from state strings obtained from state stacks.
+     *
      * @param personListSave string save state of personlist.
      * @return PersonList object.
      */
@@ -75,9 +102,7 @@ public class StorageLoadStub {
         try {
             String[] lines = personListSave.split(System.getProperty("line.separator"));
             for (String line : lines) {
-                String[] item = line.split(",", 0);
-                AddPersonCommand addPersons = new AddPersonCommand(CommandType.ADD, item[0], item[1]);
-                addPersons.executeLoadPersonList(savedPersonList);
+                addPerson(savedPersonList, line);
             }
         } catch (Exception e) {
             System.out.println("Could not load historical savedPersonList");
@@ -87,6 +112,7 @@ public class StorageLoadStub {
 
     /**
      * Loads templatelist from state strings obtained from state stacks.
+     *
      * @param templateListSave string save state of templatelist.
      * @return TemplateList object.
      */
@@ -95,8 +121,7 @@ public class StorageLoadStub {
         try {
             String[] lines = templateListSave.split(System.getProperty("line.separator"));
             for (String line : lines) {
-                AddTemplateCommand addTemplate = ((AddTemplateCommand) new ParseAdd().processAddTemplate(line));
-                addTemplate.executeSaveTemplateList(savedTemplateList);
+                addTemplate(savedTemplateList, line);
             }
         } catch (Exception e) {
             System.out.println("Could not load historical savedTemplateList");
