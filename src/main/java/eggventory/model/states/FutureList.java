@@ -10,10 +10,13 @@ public class FutureList {
     private Stack<String> templateListFuture;
     private Stack<String> personListFuture;
 
+    /**
+     * Initialises stacks to store future states of model components.
+     */
     public FutureList() {
         this.stockFuture = new Stack<>();
         this.stockTypeFuture = new Stack<>();
-        this.loanListFuture= new Stack<>();
+        this.loanListFuture = new Stack<>();
         this.templateListFuture = new Stack<>();
         this.personListFuture = new Stack<>();
     }

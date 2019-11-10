@@ -2,8 +2,6 @@ Uncategorised,#TEST,100,TD,0
 Uncategorised,#TEST2,100,TD2,0
 Uncategorised,#50,500,Test,0
 Uncategorised,t1,50,test,0
-Uncategorised,123,500,test,0
-Uncategorised,#123,500,test,0
 Uncategorised,#223,50,test2,0
 Uncategorised,#333,50,test3,0
 Uncategorised,#444,500,test4,0
@@ -13,3 +11,8 @@ Uncategorised,#T3,500,t3,0
 Uncategorised,T4,500,t4,0
 Uncategorised,t6,600,t6,0
 Uncategorised,#TT123,200,TestType,0
+Uncategorised,#TTest,500,TestType,0
+Uncategorised,#T123,500,#T123,0
+Uncategorised,#ttype1,500,ttype1,0
+Uncategorised,#ttype2,500,ttype2,0
+ttype,tt1,500,tit,0

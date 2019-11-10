@@ -4,10 +4,8 @@ import eggventory.logic.commands.ByeCommand;
 import eggventory.logic.commands.Command;
 import eggventory.commons.enums.CommandType;
 import eggventory.logic.parsers.Parser;
-import eggventory.model.*;
-import eggventory.model.states.FutureList;
-import eggventory.model.states.HistoryList;
-import eggventory.model.states.State;
+
+import eggventory.model.StateInterface;
 import eggventory.storage.Storage;
 import eggventory.ui.Cli;
 import eggventory.ui.Gui;
@@ -23,7 +21,6 @@ public class Eggventory {
     private static Storage storage;
     private static Parser parser;
     private static Ui ui;
-    private static State state;
     private static StateInterface stateInterface;
 
     /**

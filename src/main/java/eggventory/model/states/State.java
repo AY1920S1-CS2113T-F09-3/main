@@ -11,13 +11,9 @@ public class State {
     private PersonList personList;
     private TemplateList templateList;
 
-
-    public State() {
-        this.stockList = new StockList();
-        this.loanList = new LoanList();
-        this.personList = new PersonList();
-        this.templateList = new TemplateList();
-    }
+    /**
+     * Initializes referrences to static model components.
+     */
     public State(StockList stockList, LoanList loanList, PersonList personList, TemplateList templateList) {
         this.stockList = stockList;
         this.loanList = loanList;

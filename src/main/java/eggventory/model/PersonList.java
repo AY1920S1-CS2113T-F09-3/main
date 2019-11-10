@@ -160,8 +160,6 @@ public final class PersonList {
         for (Person person : personList) {
             stockTypesString.append(person.savedPersonString()).append("\n");
         }
-        System.out.println(stockTypesString.toString());
-
         return stockTypesString.toString();
     }
     //@@author

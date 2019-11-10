@@ -11,6 +11,7 @@ public class UndoCommand extends Command {
     public UndoCommand(CommandType type) {
         super(type);
     }
+
     @Override
     public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
         return null;

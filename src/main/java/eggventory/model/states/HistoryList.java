@@ -10,6 +10,9 @@ public class HistoryList {
     private Stack<String> templateListHistory;
     private Stack<String> personListHistory;
 
+    /**
+     * Initialises stacks to store historical states of model components.
+     */
     public HistoryList() {
         this.stockHistory = new Stack<>();
         this.stockTypeHistory = new Stack<>();
@@ -61,7 +64,5 @@ public class HistoryList {
     public String popTemplateListSave() {
         return templateListHistory.pop();
     }
-
-
 
 }

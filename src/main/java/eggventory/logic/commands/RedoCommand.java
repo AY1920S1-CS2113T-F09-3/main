@@ -6,11 +6,12 @@ import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.ui.Ui;
 
-public class RedoCommand extends Command{
+public class RedoCommand extends Command {
 
     public RedoCommand(CommandType type) {
         super(type);
     }
+
     @Override
     public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
         return null;

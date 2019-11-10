@@ -2,9 +2,9 @@ package eggventory.logic.commands;
 
 import eggventory.commons.exceptions.BadInputException;
 
-import eggventory.model.*;
 
-import eggventory.model.states.State;
+import eggventory.model.StateInterface;
+import eggventory.model.StockList;
 import eggventory.ui.Ui;
 import eggventory.storage.Storage;
 import eggventory.commons.enums.CommandType;
@@ -32,6 +32,9 @@ public abstract class Command {
      */
     public abstract String execute(StockList list, Ui ui, Storage storage) throws BadInputException;
 
+    /**
+     * Updates the state of the model for use by UNDO and REDO operations.
+     */
     public void updateState(StateInterface stateInterface) throws BadInputException {
         switch (type) {
         case UNDO: {
@@ -42,6 +45,9 @@ public abstract class Command {
             stateInterface.executeRedoCommand();
             break;
         }
+        case LIST: break;
+        case HELP: break;
+        case FIND: break;
         default: {
             stateInterface.updateStateHistory();
         }
