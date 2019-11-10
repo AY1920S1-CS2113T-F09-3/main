@@ -285,6 +285,19 @@ public class StockList {
     }
 
     //@@author yanprosobo
+    /**
+     * Returns whether there are any stocktypes stored in the list
+     */
+    public boolean isEmpty() {
+        return stockList.isEmpty();
+    }
+
+    /**
+     * Clears the list of all elements.
+     */
+    public void clearList() {
+        stockList.clear();
+    }
 
     /**
      * Checks if a given stocktype has no stocks with its stocktype.
