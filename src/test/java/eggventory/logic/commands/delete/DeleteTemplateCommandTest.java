@@ -1,6 +1,7 @@
 package eggventory.logic.commands.delete;
 
 import eggventory.commons.enums.CommandType;
+import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.StockList;
 import eggventory.model.TemplateList;
 import eggventory.model.loans.Loan;
@@ -26,9 +27,10 @@ class DeleteTemplateCommandTest {
     }
 
     @Test
-    void execute_TemplateExists_ReturnsSuccessString() {
+    void execute_TemplateExists_ReturnsSuccessString() throws BadInputException {
         DeleteTemplateCommand commandUnderTest = new DeleteTemplateCommand(CommandType.DELETE, testTemplateName);
         TemplateList.addTemplate(testTemplateName, loans);
-        assertEquals("Nice, I have deleted this template for you: Test Template", commandUnderTest.execute());
+        assertEquals("Nice, I have deleted this template for you: Test Template",
+                commandUnderTest.execute(testStockList, testCli,testStorage));
     }
 }
