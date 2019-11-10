@@ -293,7 +293,7 @@ public class StockList {
      */
     public boolean isStocktypeZeroQuantity(String stockTypeName) {
         for (StockType stocktype: stockList) {
-            if (stocktype.getName().equals(stockTypeName) && stocktype.getQuantity() == 0) {
+            if (stocktype.getName().equals(stockTypeName) && isStockTypeEmpty(stocktype)) {
                 return true;
             }
         }
