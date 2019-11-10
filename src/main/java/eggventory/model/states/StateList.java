@@ -54,14 +54,16 @@ public class StateList {
      */
     public void pushAllStatesSave(State currentState) {
         StockList stockList = currentState.getStockList();
-        LoanList loanList = currentState.getLoanList();
-        PersonList personList = currentState.getPersonList();
-        TemplateList templateList = currentState.getTemplateList();
-
         pushStockSave(stockList.saveDetailsString());
         pushStockTypeSave(stockList.saveStockTypesString());
+
+        LoanList loanList = currentState.getLoanList();
         pushLoanListSave(loanList.saveLoanListString());
+
+        PersonList personList = currentState.getPersonList();
         pushPersonListSave(personList.savePersonListString());
+
+        TemplateList templateList = currentState.getTemplateList();
         pushTemplateListSave(templateList.saveTemplateListString());
     }
 

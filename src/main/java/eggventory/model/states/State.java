@@ -7,6 +7,7 @@ import eggventory.model.TemplateList;
 import eggventory.storage.Storage;
 import eggventory.storage.StorageLoadStub;
 
+//@@author patwaririshab
 public class State {
     private StockList stockList;
     private LoanList loanList;
@@ -46,15 +47,16 @@ public class State {
         clearAllStates();
         StockList updatedStockList = new StorageLoadStub().loadStockList(stateList.popStockSave(),
                 stateList.popStockTypeSave());
-        String  loanString = stateList.popLoanListSave();
-        LoanList updatedLoanList = new StorageLoadStub().loadLoanList(loanString);
+        this.stockList = updatedStockList;
+
+        LoanList updatedLoanList = new StorageLoadStub().loadLoanList(stateList.popLoanListSave());
+        this.loanList = updatedLoanList;
+
         String personString = stateList.popPersonListSave();
         PersonList updatedPersonList = new StorageLoadStub().loadPersonList(personString);
-        TemplateList updatedTemplateList = new StorageLoadStub().loadTemplateList(stateList.popTemplateListSave());
-
-        this.stockList = updatedStockList;
-        this.loanList = updatedLoanList;
         this.personList = updatedPersonList;
+
+        TemplateList updatedTemplateList = new StorageLoadStub().loadTemplateList(stateList.popTemplateListSave());
         this.templateList = updatedTemplateList;
     }
 
@@ -68,3 +70,4 @@ public class State {
         templateList.getTemplates().clear();
     }
 }
+//@@author

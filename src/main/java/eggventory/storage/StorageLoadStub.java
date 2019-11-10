@@ -12,7 +12,6 @@ import eggventory.model.LoanList;
 import eggventory.model.PersonList;
 import eggventory.model.StockList;
 import eggventory.model.TemplateList;
-import eggventory.model.states.StateList;
 
 //@@author patwaririshab
 public class StorageLoadStub {
@@ -104,11 +103,5 @@ public class StorageLoadStub {
         }
         return savedTemplateList;
     }
-
-    public void loadAddStates(String stockSave, String stockTypeSave, String loanSave, String personSave,
-                              String templateSave, StateList statelist ) {
-
-
-    }
 }
-//@@ author
+//@@author
