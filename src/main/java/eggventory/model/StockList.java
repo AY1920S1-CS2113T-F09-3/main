@@ -286,7 +286,7 @@ public class StockList {
 
     //@@author yanprosobo
     /**
-     * Returns whether there are any stocktypes stored in the list
+     * Returns whether there are any stocktypes stored in the list.
      */
     public boolean isEmpty() {
         return stockList.isEmpty();

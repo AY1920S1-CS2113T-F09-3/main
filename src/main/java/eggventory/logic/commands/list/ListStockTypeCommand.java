@@ -27,7 +27,7 @@ public class ListStockTypeCommand extends Command {
             ui.print(output);
             // Drawing stock data in GUI table.
             ui.drawTable(list.getAllStockTypesStruct());
-        } else if (!list.isExistingStockType(query)) {;
+        } else if (!list.isExistingStockType(query)) {
             throw new BadInputException("Invalid command: No such stocktype exists!");
         } else if (list.isStocktypeZeroQuantity(query)) {
             output = "There is currently 0 stock with that stocktype.";
@@ -40,7 +40,7 @@ public class ListStockTypeCommand extends Command {
             ui.print(output);
             // Drawing data on stocks under specific stocktype in GUI table.
             ui.drawTable(list.getAllStocksInStockTypeStruct(query));
-            }
+        }
         return output;
     }
 }
