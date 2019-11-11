@@ -134,7 +134,7 @@ Format: `list stocktype all`
 ### 3.3 Working with Stocks  
 Stocks are the main types of items that Eggventory helps you to manage. Every Stock belongs to a Stock Type. For example, you may have the Stocks “500 ohm resistor” and “1k ohm resistor” in the Resistor Stock Type.  
   
-Stocks may be Collective or Unique. Collective stocks consist of items that are not tracked individually. They generally are Stocks that do not have each have their own serial number (Stock Code), and are considered interchangeable. Unique Stocks are items that are often expensive or limited in quantity. Such Stocks usually are each assigned a serial number (Stock Code), and are loaned out and tracked by this number. Stocks are set as Collective by default.  
+Stocks may be Collective or Unique. Collective stocks consist of items that are not tracked individually. They generally are Stocks that do not have each have their own serial number (Stock Code) and are considered interchangeable. Unique Stocks are items that are often expensive or limited in quantity. Such Stocks usually are each assigned a serial number (Stock Code), and are loaned out and tracked by this number. Stocks are set as Collective by default.  
   
 Stocks have the following properties:  
 
