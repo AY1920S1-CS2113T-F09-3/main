@@ -374,7 +374,7 @@ Realistically, you may not have sufficient quantity of a stock at the moment you
   
 #### 3.7.3 Listing Stocks that are low in quantity: `list minimum`
 
-This shows you a complete list of stocks below their minimum required quantities. This list allows you quickly determine which stocks are running out, and understand how much of this is due to excessive loaning or loss [coming in v2.0] of items. 
+This shows you a complete list of stocks below their minimum required quantities. This list allows you to quickly determine which stocks are running out, and understand how much of this is due to excessive loaning or loss [coming in v2.0] of items. 
 
 Format: `list minimum`
 
