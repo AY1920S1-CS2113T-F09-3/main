@@ -44,8 +44,7 @@ public class Stock {
         this.stockCode = stockCode;
         this.quantity = quantity;
         this.description = description;
-        this.loaned = 0; //TODO: Determine whether to remove this attribute or update it from the LoanList.
-        this.lost = 0;
+        this.lost = 0; //For future use.
         this.minimum = 0;
     }
 
@@ -152,23 +151,6 @@ public class Stock {
     }
 
     /**
-     * Gets the number of this stock that is on loan.
-     * @return loaned the number of loaned items.
-     */
-    public int getLoaned() {
-        return loaned;
-    }
-
-
-    /**
-     * Sets the number of this stock on loan. To be used by the 'loan' command.
-     * @param loaned the number of items on loan.
-     */
-    public void setLoaned(int loaned) {
-        this.loaned = loaned;
-    }
-
-    /**
      * Gets the number of this stock that is lost.
      * @return lost the number of lost items.
      */
@@ -218,7 +200,7 @@ public class Stock {
      * @param query The word to search for in the description
      * @return True if query is within the description, else false.
      */
-    public Boolean containDescription(String query) {
+    public boolean containDescription(String query) {
         if (this.getDescription().contains(query)) {
             return true;
         } else {
