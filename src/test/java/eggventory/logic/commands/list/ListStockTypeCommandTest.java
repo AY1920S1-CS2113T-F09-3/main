@@ -28,8 +28,8 @@ class ListStockTypeCommandTest {
 
         testStockList.addStockType(valid);
         testStockList.addStockType(alsoValid);
-        assertDoesNotThrow(() -> ListStockTypeCommand(CommandType.LIST, valid).execute(testStockList, testCli, testStorage));
-        assertThrows(BadInputException.class, () -> ListStockTypeCommand(CommandType.LIST, invalid)
+        assertDoesNotThrow(() -> new ListStockTypeCommand(CommandType.LIST, valid).execute(testStockList, testCli, testStorage));
+        assertThrows(BadInputException.class, () -> new ListStockTypeCommand(CommandType.LIST, invalid)
                 .execute(testStockList, testCli, testStorage));
     }
 }
