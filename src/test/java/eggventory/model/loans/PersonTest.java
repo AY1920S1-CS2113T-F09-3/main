@@ -45,9 +45,13 @@ class PersonTest {
 
     @Test
     void testToString() {
+        final String outputExpected = testMatric + " | " + testName;
+        assertEquals(outputExpected, person.toString());
     }
 
     @Test
     void savedPersonString() {
+        final String outputExpected = testMatric + "," + testName;
+        assertEquals(outputExpected, person.savedPersonString());
     }
 }
