@@ -21,7 +21,7 @@ class ListStockTypeCommandTest {
     private Storage testStorage = new StorageStub();
 
     @Test
-    void execute_InvalidStocktype_ThrowsBadInputException() throws BadInputException{
+    void execute_InvalidStocktype_ThrowsBadInputException() throws BadInputException {
         String invalid = "InvalidType";
         String valid = "ValidType";
 
@@ -34,7 +34,7 @@ class ListStockTypeCommandTest {
     }
 
     @Test
-    void execute_ValidStockTypeWithStocks_Success() throws BadInputException{
+    void execute_ValidStockTypeWithStocks_Success() throws BadInputException {
         String validWithStocks = "ValidType";
         String validWithoutStocks = "AlsoValidType";
 
