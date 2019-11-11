@@ -84,7 +84,7 @@ Did you enter a command incorrectly and came across a Parser error? Not to worry
   
 - Parameters in {Braces} can be repeated multiple times in the same command, separated by a space. E.g. `add template <TemplateName>  {<StockCode> <Quantity>}` , more \<StockCode\> \<Quantity\> pairs can be added after the first pair as such: `loan add A0191234A R500 20 R250 10 R100 5`  
   
--   **[coming in v2.0]** Some commands have optional parameters available. Optional parameters are added to the end of the corresponding command, after all mandatory parameters. E.g. `add stock R500 50 “500-ohm Resistors” -st Resistors` , will create a new stock, and placed under the “Resistors” Stock Type with the “-st” tag.  
+-   **[coming in v2.0]** Some commands have optional parameters available. Optional parameters are added to the end of the corresponding command, after all the mandatory parameters. E.g. `add stock R500 50 “500-ohm Resistors” -st Resistors` , will create a new stock, and placed under the “Resistors” Stock Type with the “-st” tag.  
   
 ### 3.1 Viewing help: ``help``  
   
