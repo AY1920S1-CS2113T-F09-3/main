@@ -98,34 +98,6 @@ public final class LoanList {
     //@@author cyanoei
 
     /**
-     * Returns the loaned date of a Loan.
-     * @param stockCode the stockCode of the Stock loaned.
-     * @param matricNo the matric number of the Person making the Loan.
-     * @return the loaned date.
-     */
-    public static Calendar getStockLoanDate(String matricNo, String stockCode) {
-        Loan loan = findLoan(matricNo, stockCode);
-        if (loan == null) {
-            return null;
-        }
-        return loan.getLoanDate();
-    }
-
-    /**
-     * Returns the due date of the Loan.
-     * @param stockCode the stockCode of the Stock loaned.
-     * @param matricNo the matric number of the Person making the Loan.
-     * @return the return date.
-     */
-    public static Calendar getStockReturnDate(String matricNo, String stockCode) {
-        Loan loan = findLoan(matricNo, stockCode);
-        if (loan == null) {
-            return null;
-        }
-        return loan.getReturnDate();
-    }
-
-    /**
      * Returns the total quantity of a certain Stock has been loaned out.
      * @param stockCode stockCode of the queried Stock.
      * @return The total quantity currently loaned out. Or 0 if the stock has not be loaned before.
