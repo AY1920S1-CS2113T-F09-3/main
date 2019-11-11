@@ -114,7 +114,7 @@ eg. `add stocktype Resistor`
   
 #### 3.2.2 Deleting Stock Types: `delete stocktype`  
     
-This removes a Stock Type from the inventory, and all Stock under it.  
+This removes a Stock Type from the inventory and all Stock under it.  
   
 Format: `delete stocktype <StockType>`  
 
