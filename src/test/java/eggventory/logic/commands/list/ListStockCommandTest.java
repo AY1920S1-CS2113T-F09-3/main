@@ -27,7 +27,8 @@ class ListStockCommandTest {
     void execute_StockListHasItem_ReturnsListString() throws BadInputException {
         String expectedOutput = "CURRENT INVENTORY\n"
                 + "------------------------\n"
-                + "1. " + testStockType + " | " + testStockCode + " | " + testQuantity + " | " + testDescription + "\n\n";
+                + "1. " + testStockType + " | " + testStockCode + " | "
+                + testQuantity + " | " + testDescription + "\n\n";
 
         testStockList.addStockType(testStockType);
         testStockList.addStock(testStockType, testStockCode, testQuantity, testDescription);
