@@ -80,7 +80,7 @@ Did you enter a command incorrectly and came across a Parser error? Not to worry
 
 **Command Format**    
 
-- Text in \<AngledBrackets\> are mandatory parameter to be supplied by the user. E.g. `add stocktype <StockType>` , \<StockType\> is a parameter which is the name of the stocktype the user wishes to add.  
+- Text in \<AngledBrackets\> are mandatory parameters to be supplied by the user. E.g. `add stocktype <StockType>` , \<StockType\> is a parameter which is the name of the stocktype the user wishes to add.  
   
 - Parameters in {Braces} can be repeated multiple times in the same command, separated by a space. E.g. `add template <TemplateName>  {<StockCode> <Quantity>}` , more \<StockCode\> \<Quantity\> pairs can be added after the first pair as such: `loan add A0191234A R500 20 R250 10 R100 5`  
   
