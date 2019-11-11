@@ -30,6 +30,19 @@ public class LoanTest {
     }
 
     @Test
+    void settersGetters_Exists_ReturnsValue() {
+        loan = new Loan("A1", "R5", 10);
+
+        Assertions.assertEquals("A1", loan.getMatricNo());
+        Assertions.assertEquals("R5", loan.getStockCode());
+
+        Assertions.assertEquals(10, loan.getQuantity());
+        loan.setQuantity(20);
+        Assertions.assertEquals(20, loan.getQuantity());
+
+    }
+
+    @Test
     void testGetDataAsArray_Input() {
         data.add("A1");
     }
