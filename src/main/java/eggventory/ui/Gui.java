@@ -54,7 +54,6 @@ public class Gui extends Ui  {
                 e.printStackTrace();
             }
 
-
             inputField = new InputTextBox(textFlow);
             outputTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             printIntro();
@@ -90,13 +89,21 @@ public class Gui extends Ui  {
                         break;
 
                     case UP:
-                        inputField.clearAllText();
-                        inputField.appendText(CommandHistory.getCommand(-1), 0);
+                        if (keyEvent.isShiftDown()) {
+                            inputField.appendText("", -1);
+                        } else {
+                            inputField.clearAllText();
+                            inputField.appendText(CommandHistory.getCommand(-1), 0);
+                        }
                         break;
 
                     case DOWN:
-                        inputField.clearAllText();
-                        inputField.appendText(CommandHistory.getCommand(1), 0);
+                        if (keyEvent.isShiftDown()) {
+                            inputField.appendText("", 1);
+                        } else {
+                            inputField.clearAllText();
+                            inputField.appendText(CommandHistory.getCommand(1), 0);
+                        }
                         break;
 
                     case LEFT:
