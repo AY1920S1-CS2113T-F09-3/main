@@ -2,29 +2,36 @@ package eggventory.model;
 
 import eggventory.model.loans.Loan;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class LoanListTest {
 
-    private String stockCode = "R5";
-    private String matric = "A1";
+    private final String testStockCode = "R5";
+    private final String testMatricNo = "A1";
+    private final int testQuantity = 10;
 
-    Loan loan = new Loan(matric, stockCode, 10);
+    Loan loan;
 
-    @Test
-    void testDeleteLoan_LoanExists_ReturnTrue() {
-        LoanList.addLoan("A1", "R5", 10);
-        Assertions.assertTrue(LoanList.deleteLoan("A1", "R5"));
+    @BeforeEach
+    void resetLoanObject() {
+        loan = new Loan(testMatricNo, testStockCode, testQuantity);
     }
 
     @Test
-    void testDeleteLoan_LoanDoesNotExist_ReturnFalse() {
-        LoanList.addLoan("A1", "R5", 10);
-        Assertions.assertFalse(LoanList.deleteLoan("A2", "R5"));
+    void deleteLoan_LoanExists_ReturnTrue() {
+        LoanList.addLoan(testMatricNo, testStockCode, testQuantity);
+        Assertions.assertTrue(LoanList.deleteLoan(testMatricNo, testStockCode));
+    }
 
-        Assertions.assertFalse(LoanList.deleteLoan("A1", "R1"));
+    @Test
+    void deleteLoan_LoanDoesNotExist_ReturnFalse() {
+        LoanList.addLoan(testMatricNo, testStockCode, testQuantity);
+        Assertions.assertFalse(LoanList.deleteLoan("A2", testStockCode));
 
-        Assertions.assertFalse(LoanList.deleteLoan("a2", "r5"));
+        Assertions.assertFalse(LoanList.deleteLoan(testMatricNo, "R1"));
+
+        Assertions.assertFalse(LoanList.deleteLoan("a2", testStockCode));
     }
 
     @Test
@@ -36,7 +43,7 @@ public class LoanListTest {
     @Test
     void getStockLoanedQuantity_StockExists_ReturnQuantity() {
         Assertions.assertEquals(0, LoanList.getStockLoanedQuantity("abc"));
-        LoanList.addLoan("A1", "abc", 100);
+        LoanList.addLoan(testMatricNo, "abc", 100);
         Assertions.assertEquals(100, LoanList.getStockLoanedQuantity("abc"));
     }
 }
