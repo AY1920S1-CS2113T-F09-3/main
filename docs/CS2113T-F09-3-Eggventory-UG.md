@@ -58,7 +58,7 @@ Eggventory is an inventory management system targeted towards engineering labora
     
 ## 3. Features and command usage  
   
-The following section describes the command line interface commands that Eggventory recognises. Each command you input has to follow a specific format of words and parameters.  
+The following section describes the command-line interface commands that Eggventory recognises. Each command you input has to follow a specific format of words and parameters.  
 
 **Predictive Search / Autocomplete**
 
