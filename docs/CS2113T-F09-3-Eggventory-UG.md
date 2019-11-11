@@ -29,7 +29,7 @@ Eggventory is an inventory management system targeted towards engineering labora
 ## 2. Quick start  
   
 1. #### [Download and install Java 11 on your machine. ](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)  
-2. #### [Download the latest eggventory.jar the github repository. ](https://github.com/AY1920S1-CS2113T-F09-3/main/releases)  
+2. #### [Download the latest eggventory.jar at the GitHub repository. ](https://github.com/AY1920S1-CS2113T-F09-3/main/releases)  
 3. #### Copy the file to the folder you want to use as the home folder for your inventory management system.  
 4. #### Double-click the file to start the app. The GUI should appear in a few seconds.  
  
