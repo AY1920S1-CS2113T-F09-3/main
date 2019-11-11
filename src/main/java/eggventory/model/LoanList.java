@@ -34,21 +34,6 @@ public final class LoanList {
         updateStockLoaned(stockCode, quantity);
     }
 
-    /**
-     * Adds a Loan object to both the LoanList and LoanPairs.
-     * @param matricNo the matric number of the Person who is loaning.
-     * @param stockCode the stockCode of the Stock loaned.
-     * @param quantity the quantity loaned out.
-     * @param loanDate the date the loan was made.
-     * @param returnDate the date the loan is to be returned.
-     */
-    public static void addLoan(String matricNo, String stockCode, int quantity,
-                               Calendar loanDate, Calendar returnDate) {
-        Loan loan = new Loan(matricNo, stockCode, quantity, loanDate, returnDate);
-
-        loansList.add(loan);
-        updateStockLoaned(stockCode, quantity);
-    }
     //@@author
 
     //@@author Deculsion

@@ -29,24 +29,6 @@ public class Loan {
     }
 
     /**
-     * Constructor for Loan class.
-     * @param stockCode the stockCode of the stock being loaned.
-     * @param matricNo the matric number of the person making the loan.
-     * @param quantity the quantity being loaned out.
-     * @param loanDate the date the loan was processed.
-     * @param returnDate the date the loans have to be returned by.
-     */
-    public Loan(String matricNo, String stockCode, int quantity, Calendar loanDate, Calendar returnDate) {
-        //AddLoanCommand should have determined beforehand that the Person and Stock being referred to
-        //are existing entries.
-        this.matricNo = matricNo;
-        this.stockCode = stockCode;
-        this.quantity = quantity;
-        this.loanDate = loanDate;
-        this.returnDate = returnDate;
-    }
-
-    /**
      * Constructor for creating templates.
      * @param stockCode Stockcode of the loan.
      * @param quantity Quantity to be loaned out.
