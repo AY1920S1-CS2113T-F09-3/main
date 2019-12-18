@@ -1,6 +1,7 @@
 package eggventory.model.items;
 
 
+import eggventory.commons.enums.StockProperty;
 import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.LoanList;
 import eggventory.model.loans.Loan;
@@ -240,6 +241,33 @@ public class Stock {
         dataArray.add(String.valueOf(LoanList.getStockLoanedQuantity(stockCode)));
 
         return dataArray;
+    }
+
+    public Stock setProperty(String stockCode, StockProperty property, String newValue)
+            throws BadInputException {
+
+        switch (property) {
+            case STOCKCODE:
+                setStockCode(newValue);
+                break;
+
+            case QUANTITY:
+                setQuantity(Integer.parseInt(newValue));
+                break;
+
+            case DESCRIPTION:
+                setDescription(newValue);
+                break;
+
+            case MINIMUM:
+                setMinimum(Integer.parseInt(newValue));
+                break;
+
+            default:
+                return null;
+        }
+
+        return this;
     }
     //@@author
 }

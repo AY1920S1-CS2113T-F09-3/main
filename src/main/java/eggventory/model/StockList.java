@@ -92,7 +92,7 @@ public class StockList {
     }
 
     /**
-     * Adds a Stock to the specified StockType in the list.
+     * Adds a Stock to the list.
      * @param stockType A String matching exactly the StockType to add the new Stock object under.
      * @param stockCode A unique String that identifies the Stock.
      * @param quantity Quantity of the stock.
@@ -100,15 +100,9 @@ public class StockList {
      */
     public void addStock(String stockType, String stockCode, int quantity, String description)
             throws BadInputException {
-        for (StockType listType: stockList) {
-            if (listType.getName().equals(stockType)) {
-                listType.addStock(stockType, stockCode, quantity, description);
-                return;
-            }
-        }
 
-        // "Uncategorised" is always the first element on stockList.
-        stockList.get(0).addStock("Uncategorised", stockCode, quantity, description);
+        stockList.add(new Stock(stockType, stockCode, quantity, description));
+
     }
 
     //@@author cyanoei
@@ -118,14 +112,13 @@ public class StockList {
      * @return the stock that was deleted, for printing purposes.
      */
     public Stock deleteStock(String stockCode) {
-        Stock deleted;
-        for (StockType stockType : stockList) {
-            deleted = stockType.deleteStock(stockCode);
-            if (deleted !=  null) { //If something was deleted
-                return deleted;
-            }
+        Stock deleted = null;
+
+        for (Stock stock : stockList) {
+            deleted = stock;
         }
-        return null;
+
+        return deleted;
     }
 
     /**
@@ -150,7 +143,7 @@ public class StockList {
 
     //@@author patwaririshab
     /**
-     * Edits a Stock object in a StockList.
+     * Edits a stock in the stocklist.
      * @param stockCode The unique String that identifies a Stock.
      * @param property The attribute of the Stock that needs to be modified (Note: for now only 1).
      * @param newValue  The new value of the property we want to edit.
@@ -158,7 +151,7 @@ public class StockList {
      */
     public Stock setStock(String stockCode, StockProperty property, String newValue)
             throws BadInputException {
-        Stock updatedStock;
+        Stock updatedStock = null;
 
         //Error: StockCode not found.
         if (!isExistingStockCode(stockCode)) {
@@ -170,36 +163,30 @@ public class StockList {
             throw new BadInputException(repeatedStockCodeOutput(newValue));
         }
 
-        for (StockType stockType : stockList) {
-            updatedStock = stockType.setStock(stockCode, property, newValue);
-            if (updatedStock != null) { //The corresponding stockCode was found in the StockList
-                return updatedStock;
+        for (Stock stock : stockList) {
+            if (stock.getStockCode().equals(stockCode)) {
+                updatedStock = stock.setProperty(stockCode, property, newValue);
+                break;
             }
         }
-        return null;
+        return updatedStock;
     }
 
     /**
-     * Edits a StockType object in a StockList. Note, the only edit to StockType in this version is to its name.
+     * Edits the name of all stocks with the current stockTypeName to a newName.
      * @param stockTypeName The unique String that identifies a StockType.
      * @param newName The newName of the StockType.
-     * @return the stockType before editing, for printing purpose.
+     * @return An ArrayList of all stock objects changed.
      */
-    public StockType setStockType(String stockTypeName, String newName) {
-        StockType updated;
-        for (StockType stockType : stockList) {
-            if (stockTypeName.equals(stockType.getName())) {
-                updated = stockType;
-                stockType.setName(newName);
-
-                for (Stock stock : stockType.getStockList()) {
-                    stock.setStockType(newName);
-                }
-
-                return updated;
+    public ArrayList<Stock> setStockType(String stockTypeName, String newName) {
+        ArrayList<Stock> updated = new ArrayList<>();
+        for (Stock stock : stockList) {
+            if (stock.getStockType().equals(stockTypeName)) {
+                stock.setStockType(newName);
+                updated.add(stock);
             }
         }
-        return null;
+        return updated;
     }
 
     /**
@@ -207,12 +194,8 @@ public class StockList {
      * @return the total number of stocks.
      */
     public int getTotalNumberOfStocks() { //The number of stocks in the list, across all stockTypes.
-        int total = 0;
-        for (StockType stockType : stockList) {
-            total += stockType.getQuantity();
-        }
+        return stockList.size();
 
-        return total;
     }
 
     //@@author cyanoei
@@ -238,8 +221,8 @@ public class StockList {
      * @return true if a stock in this stockList has that stockCode and false if none of the stocks have this stockCode.
      */
     public boolean isExistingStockCode(String stockCode) {
-        for (StockType stockType : stockList) {
-            if (stockType.isExistingStockCode(stockCode)) {
+        for (Stock stock : stockList) {
+            if (stock.getStockCode().equals(stockCode)) {
                 return true;
             }
         }
@@ -252,8 +235,8 @@ public class StockList {
      * @return true if the stockType is already implemented, false if it is new.
      */
     public boolean isExistingStockType(String stockTypeName) {
-        for (StockType stockType : stockList) {
-            if (stockType.getName().equals(stockTypeName)) {
+        for (Stock stock: stockList) {
+            if (stock.getStockType().equals(stockTypeName)) {
                 return true;
             }
         }
@@ -266,11 +249,9 @@ public class StockList {
      * @return the stock in question.
      */
     public Stock findStock(String stockCode) {
-        for (StockType stocktype : stockList) {
-            for (Stock stock : stocktype.getStockList()) {
-                if (stock.getStockCode().equals(stockCode)) {
-                    return stock;
-                }
+        for (Stock stock : stockList) {
+            if (stock.getStockCode().equals(stockCode)) {
+                return stock;
             }
         }
         return null;
@@ -290,20 +271,20 @@ public class StockList {
     public void clearList() {
         stockList.clear();
     }
-
-    /**
-     * Checks if a given stocktype has no stocks with its stocktype.
-     * @param stockTypeName The name of the stocktype to be queried
-     * @return True if the stocktype has no stocks, false otherwise.
-     */
-    public boolean isStocktypeZeroQuantity(String stockTypeName) {
-        for (StockType stocktype: stockList) {
-            if (stocktype.getName().equals(stockTypeName) && isStockTypeEmpty(stocktype)) {
-                return true;
-            }
-        }
-        return false;
-    }
+// Not needed with removal of StockType class.
+//    /**
+//     * Checks if a given stocktype has no stocks with its stocktype.
+//     * @param stockTypeName The name of the stocktype to be queried
+//     * @return True if the stocktype has no stocks, false otherwise.
+//     */
+//    public boolean isStocktypeZeroQuantity(String stockTypeName) {
+//        for (StockType stocktype: stockList) {
+//            if (stocktype.getName().equals(stockTypeName) && isStockTypeEmpty(stocktype)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
@@ -314,7 +295,7 @@ public class StockList {
         StringBuilder ret = new StringBuilder();
         ret.append(query).append(" INVENTORY\n");
         ret.append("------------------------\n");
-        for (StockType stocktype : stockList) {
+        for (Stock stock : stockList) {
             if (stocktype.getName().equals(query)) {
                 ret.append(stocktype.toString()).append("\n");
             }
