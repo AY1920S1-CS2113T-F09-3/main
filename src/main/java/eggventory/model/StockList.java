@@ -11,13 +11,13 @@ import java.util.Collections;
 
 //@@author Deculsion
 public class StockList {
-    private ArrayList<StockType> stockList;
+    private ArrayList<Stock> stockList;
 
     /**
      * Constructs a new StockList object using an already existing stockList.
      * @param stockList ArrayList<> of StockType objects. There should already be a default "Uncategorised" StockType.
      */
-    public StockList(ArrayList<StockType> stockList) {
+    public StockList(ArrayList<Stock> stockList) {
         this.stockList = stockList;
     }
 
@@ -26,7 +26,6 @@ public class StockList {
      */
     public StockList() {
         this.stockList = new ArrayList<>();
-        this.stockList.add(new StockType("Uncategorised", false));
     }
 
     /**
@@ -34,7 +33,7 @@ public class StockList {
      * @param i The index of the stocktype
      * @return the stocktype which the index references
      */
-    public StockType get(int i) {
+    public Stock get(int i) {
         return stockList.get(i);
     }
 
@@ -42,16 +41,8 @@ public class StockList {
      * Gets the whole stockList. Note: technically doing using this method will violate OOP.
      * @return the list.
      */
-    public ArrayList<StockType> getList() {
+    public ArrayList<Stock> getList() {
         return stockList;
-    }
-
-    /**
-     * Adds a new StockType to the list.
-     * @param name Name of new stocktype being added.
-     */
-    public void addStockType(String name) {
-        stockList.add(new StockType(name, false));
     }
 
     //@@author cyanoei
@@ -61,13 +52,13 @@ public class StockList {
      * @param name Name of StockType to be deleted
      * @return The object if it was deleted, null if nothing waas deleted.
      */
-    public StockType deleteStockType(String name) {
-        StockType deleted;
+    public Stock deleteStockType(String name) {
+        Stock deleted;
 
-        for (StockType stocktype : stockList) {
-            if (stocktype.getName().equals(name)) {
-                deleted = stocktype;
-                stockList.remove(stocktype);
+        for (Stock stock : stockList) {
+            if (stock.getStockType().equals(name)) {
+                deleted = stock;
+                stockList.remove(stock);
                 return deleted;
             }
         }
@@ -76,19 +67,20 @@ public class StockList {
     }
 
     //@@author
+
     /**
-     * Returns a stockType from stockList if it exists else retuns a null StockType.
-     * @param stockType The unique string that identifies a stockType
-     * @return stockType of stockList
+     * Returns all stocks corresponding to a stockType specified.
+     * @param stockType The unique string of the stockType of Stocks to search for
+     * @return ArrayList of Stock objects
      */
-    public StockType getStockType(String stockType) {
-        StockType nullType = new StockType("NULL", true);
-        for (StockType stType : stockList) {
-            if (stType.getName().equals(stockType)) {
-                return stType;
+    public ArrayList<Stock> getStockType(String stockType) {
+        ArrayList<Stock> stocks = new ArrayList<>();
+        for (Stock stock : stockList) {
+            if (stock.getStockType().equals(stockType)) {
+                stocks.add(stock);
             }
         }
-        return nullType;
+        return stocks;
     }
 
     /**
