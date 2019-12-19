@@ -308,11 +308,16 @@ public class StockList {
      * @return The string of all the stocktypes
      */
     public String toStocktypeString() {
+        ArrayList<String> stockTypes = new ArrayList<>();
         StringBuilder ret = new StringBuilder();
         ret.append("LISTING STOCKTYPES\n");
-        for (StockType stocktype : stockList) {
-            ret.append("------------------------\n");
-            ret.append(stocktype.getName()).append("\n");
+        for (Stock stock : stockList) {
+            if (!stockTypes.contains(stock.getStockType())) {
+                stockTypes.add(stock.getStockType());
+
+                ret.append("------------------------\n");
+                ret.append(stock.getStockType()).append("\n");
+            }
         }
         return ret.toString();
     }
@@ -325,11 +330,9 @@ public class StockList {
         StringBuilder ret = new StringBuilder();
         ret.append("CURRENT INVENTORY\n");
 
-        for (StockType stocktype : stockList) {
-            if (stocktype.toString() != "") { //Does not print empty StockTypes.
+        for (Stock stock : stockList) {
                 ret.append("------------------------\n");
-                ret.append(stocktype.toString()).append("\n");
-            }
+                ret.append(stock.toString()).append("\n");
         }
 
         return ret.toString();
@@ -346,10 +349,8 @@ public class StockList {
      */
     public String saveDetailsString() {
         StringBuilder details = new StringBuilder();
-        for (StockType stocktype : stockList) {
-            if (isStockTypeEmpty(stocktype) == false) {
-                details.append(stocktype.saveDetailsString()); //Don't need to add newline.
-            }
+        for (Stock stock: stockList) {
+            details.append(stock.saveDetailsString()).append("\n");
         }
 
         return details.toString();
@@ -363,8 +364,8 @@ public class StockList {
     public String saveStockTypesString() {
         StringBuilder stockTypesString = new StringBuilder();
 
+        stockTypesString.append(stocktype.getName()).append("\n");
         for (StockType stocktype : stockList) {
-            stockTypesString.append(stocktype.getName()).append("\n");
         }
         return stockTypesString.toString();
     }
@@ -380,8 +381,8 @@ public class StockList {
         tableStruct.setTableColumns("Stock Type", "Stock Code", "Total", "Description", "Minimum", "Loaned");
 
         ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
-        for (StockType stockType : stockList) {
-            dataArray.addAll(stockType.getDataAsArray());
+        for (Stock stock : stockList) {
+            dataArray.add(stock.getDataAsArray());
         }
         tableStruct.setTableData(dataArray);
 
@@ -398,8 +399,9 @@ public class StockList {
         tableStruct.setTableColumns("Stock Type");
 
         ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
-        for (StockType stockType : stockList) {
-            dataArray.add(new ArrayList<>(Collections.singletonList(stockType.getName())));
+        ArrayList<String> stockTypes = getStockTypes();
+        for (String stockType: stockTypes) {
+            dataArray.add(new ArrayList<>(Collections.singletonList(stockType)));
         }
         tableStruct.setTableData(dataArray);
 
@@ -417,15 +419,26 @@ public class StockList {
         tableStruct.setTableColumns("Stock Type", "Stock Code", "Quantity", "Description", "Minimum", "Loaned");
 
         ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
-        for (StockType stockType : stockList) {
-            if (stockType.getName().equals(stockTypeName)) {
-                dataArray.addAll(stockType.getDataAsArray());
+        for (Stock stock : stockList) {
+            if (stock.getStockType().equals(stockTypeName)) {
+                dataArray.add(stock.getDataAsArray());
             }
         }
         tableStruct.setTableData(dataArray);
 
         return tableStruct;
     }
-    //@@author
+
+    private ArrayList<String> getStockTypes() {
+        ArrayList<String> stockTypes = new ArrayList<>();
+
+        for (Stock stock: stockList) {
+            if (!stockTypes.contains(stock.getStockType())) {
+                stockTypes.add(stock.getStockType());
+            }
+        }
+
+        return stockTypes;
+    }
 
 }
