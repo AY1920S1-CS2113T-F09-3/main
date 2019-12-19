@@ -2,11 +2,13 @@ package eggventory.logic.commands.edit;
 
 import eggventory.commons.exceptions.DuplicateEntryException;
 import eggventory.model.StockList;
+import eggventory.model.items.Stock;
 import eggventory.storage.Storage;
 import eggventory.logic.commands.Command;
 import eggventory.commons.enums.CommandType;
-import eggventory.model.items.StockType;
 import eggventory.ui.Ui;
+
+import java.util.ArrayList;
 
 //@@author patwaririshab
 /**
@@ -45,9 +47,9 @@ public class EditStockTypeCommand extends Command {
                     newName));
 
         } else {
-            StockType edited = list.setStockType(stockType, newName);
+            ArrayList<Stock> edited = list.setStockType(stockType, newName);
             output = String.format("Awesome! I have successfully updated the following stockType name: %s\n",
-                    edited.getName());
+                    edited.toString());
             storage.save(list);
         }
         ui.print(output);

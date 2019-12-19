@@ -3,7 +3,6 @@ package eggventory.model;
 import eggventory.commons.enums.StockProperty;
 import eggventory.commons.exceptions.BadInputException;
 import eggventory.model.items.Stock;
-import eggventory.model.items.StockType;
 import eggventory.ui.TableStruct;
 
 import java.util.ArrayList;
@@ -12,20 +11,28 @@ import java.util.Collections;
 //@@author Deculsion
 public class StockList {
     private ArrayList<Stock> stockList;
+    private ArrayList<String> stockTypeList;
 
     /**
      * Constructs a new StockList object using an already existing stockList.
      * @param stockList ArrayList<> of StockType objects. There should already be a default "Uncategorised" StockType.
      */
     public StockList(ArrayList<Stock> stockList) {
-        this.stockList = stockList;
+        intialiseLists();
+        this.stockList.addAll(stockList);
+
+        for (Stock stock : stockList) {
+            if (!stockTypeList.contains(stock.getStockType())) {
+                stockTypeList.add(stock.getStockType());
+            }
+        }
     }
 
     /**
      * Constructs a new StockList object with one default StockType, "Uncategorised".
      */
     public StockList() {
-        this.stockList = new ArrayList<>();
+        intialiseLists();
     }
 
     /**
@@ -45,25 +52,34 @@ public class StockList {
         return stockList;
     }
 
+    /**
+     * Adds a new stocktype to the list of stocktypes.
+     * @param name Name of the new stocktype to add.
+     */
+    public void addStockType(String name) {
+        if (!stockTypeList.contains(name)) {
+            stockTypeList.add(name);
+        }
+    }
+
     //@@author cyanoei
     /**
-     * Prints every stock within stocklist. Should only be called by Ui.
      * Deletes a StockType object, and all the stocks under it.
      * @param name Name of StockType to be deleted
      * @return The object if it was deleted, null if nothing waas deleted.
      */
-    public Stock deleteStockType(String name) {
-        Stock deleted;
+    public ArrayList<Stock> deleteStockType(String name) {
+        ArrayList<Stock> deleted = new ArrayList<>();
+        stockTypeList.remove(name);
 
         for (Stock stock : stockList) {
             if (stock.getStockType().equals(name)) {
-                deleted = stock;
+                deleted.add(stock);
                 stockList.remove(stock);
-                return deleted;
             }
         }
 
-        return null;
+        return deleted;
     }
 
     //@@author
@@ -180,6 +196,9 @@ public class StockList {
      */
     public ArrayList<Stock> setStockType(String stockTypeName, String newName) {
         ArrayList<Stock> updated = new ArrayList<>();
+        stockTypeList.remove(stockTypeName);
+        stockTypeList.add(newName);
+
         for (Stock stock : stockList) {
             if (stock.getStockType().equals(stockTypeName)) {
                 stock.setStockType(newName);
@@ -235,12 +254,7 @@ public class StockList {
      * @return true if the stockType is already implemented, false if it is new.
      */
     public boolean isExistingStockType(String stockTypeName) {
-        for (Stock stock: stockList) {
-            if (stock.getStockType().equals(stockTypeName)) {
-                return true;
-            }
-        }
-        return false;
+        return stockTypeList.contains(stockTypeName);
     }
 
     /**
@@ -257,6 +271,40 @@ public class StockList {
         return null;
     }
 
+    /**
+     * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
+     * @pre Stocktype has been checked to exist and contains at least one stock.
+     * @return The string of the stocktype whose stocktype matches query.
+     */
+    public String queryStockType(String query) {
+        StringBuilder ret = new StringBuilder();
+        ret.append(query).append(" INVENTORY\n");
+        ret.append("------------------------\n");
+        for (Stock stock : stockList) {
+            if (stock.getStockType().equals(query)) {
+                ret.append(stock.toString()).append("\n");
+            }
+        }
+        return ret.toString();
+    }
+
+    /**
+     * Checks the entire StockType if any of the stocks contains a description equal to query.
+     * @param query The word to search for in the description
+     * @return An ArrayList of stock objects for the stock whose query is within the description.
+     *         If there are no stock which matches, an empty ArrayList is returned.
+     *
+     */
+    public ArrayList<Stock> queryStocksDescription(String query) {
+        ArrayList<Stock> outputList = new ArrayList<>();;
+        for (Stock stock: stockList) {
+            if (stock.containDescription(query)) {
+                outputList.add(stock);
+            }
+        }
+        return outputList;
+    }
+
     //@@author yanprosobo
     /**
      * Returns whether there are any stocktypes stored in the list.
@@ -269,7 +317,7 @@ public class StockList {
      * Clears the list of all elements.
      */
     public void clearList() {
-        stockList.clear();
+        intialiseLists();
     }
 // Not needed with removal of StockType class.
 //    /**
@@ -285,23 +333,6 @@ public class StockList {
 //        }
 //        return false;
 //    }
-
-    /**
-     * Prints every stock within stocklist whose stocktype matches query. Should only be called by Cli.
-     * @pre Stocktype has been checked to exist and contains at least one stock.
-     * @return The string of the stocktype whose stocktype matches query.
-     */
-    public String queryStocks(String query) {
-        StringBuilder ret = new StringBuilder();
-        ret.append(query).append(" INVENTORY\n");
-        ret.append("------------------------\n");
-        for (Stock stock : stockList) {
-            if (stock.getStockType().equals(query)) {
-                ret.append(stock.toString()).append("\n");
-            }
-        }
-        return ret.toString();
-    }
 
     /**
      * Prints all the stocktypes that are currently handled by Eggventory. Should only be called by Cli.
@@ -338,11 +369,6 @@ public class StockList {
         return ret.toString();
     }
 
-    public boolean isStockTypeEmpty(StockType stocktype) {
-        return (stocktype.getQuantity() == 0);
-    }
-
-
     /**
      * Saves the list into a String.
      * @return The String that will be directly saved into file.
@@ -363,9 +389,8 @@ public class StockList {
      */
     public String saveStockTypesString() {
         StringBuilder stockTypesString = new StringBuilder();
-        ArrayList<String> stockTypes = getStockTypes();
 
-        for (String stockType : stockTypes) {
+        for (String stockType : stockTypeList) {
             stockTypesString.append(stockType).append("\n");
         }
         return stockTypesString.toString();
@@ -400,8 +425,7 @@ public class StockList {
         tableStruct.setTableColumns("Stock Type");
 
         ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
-        ArrayList<String> stockTypes = getStockTypes();
-        for (String stockType: stockTypes) {
+        for (String stockType: stockTypeList) {
             dataArray.add(new ArrayList<>(Collections.singletonList(stockType)));
         }
         tableStruct.setTableData(dataArray);
@@ -430,16 +454,10 @@ public class StockList {
         return tableStruct;
     }
 
-    private ArrayList<String> getStockTypes() {
-        ArrayList<String> stockTypes = new ArrayList<>();
-
-        for (Stock stock: stockList) {
-            if (!stockTypes.contains(stock.getStockType())) {
-                stockTypes.add(stock.getStockType());
-            }
-        }
-
-        return stockTypes;
+    private void intialiseLists() {
+        stockList = new ArrayList<>();
+        stockTypeList = new ArrayList<>();
+        stockTypeList.add("Uncategorised");
     }
 
 }

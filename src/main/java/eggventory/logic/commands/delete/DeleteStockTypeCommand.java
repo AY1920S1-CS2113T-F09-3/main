@@ -1,11 +1,13 @@
 package eggventory.logic.commands.delete;
 
+import eggventory.model.items.Stock;
 import eggventory.ui.Ui;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.logic.commands.Command;
 import eggventory.commons.enums.CommandType;
-import eggventory.model.items.StockType;
+
+import java.util.ArrayList;
 
 //@@author cyanoei
 public class DeleteStockTypeCommand extends Command {
@@ -28,9 +30,9 @@ public class DeleteStockTypeCommand extends Command {
             return output;
         }
 
-        StockType deleted = list.deleteStockType(stockTypeName);
+        ArrayList<Stock> deleted = list.deleteStockType(stockTypeName);
 
-        if (deleted == null) {
+        if (!list.isExistingStockType(stockTypeName)) {
             output = String.format("Sorry, I cannot find the stock type \"%s\" refers to. "
                     + "Please try again.", stockTypeName);
             ui.print(output);

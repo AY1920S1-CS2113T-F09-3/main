@@ -1,10 +1,8 @@
 package eggventory.logic.commands.find;
 
-import java.util.List;
 import java.util.ArrayList;
 import eggventory.ui.TableStruct;
 import eggventory.ui.Ui;
-import eggventory.model.items.StockType;
 import eggventory.model.items.Stock;
 import eggventory.logic.commands.Command;
 import eggventory.model.StockList;
@@ -41,13 +39,7 @@ public class FindDescriptionCommand extends Command {
         tableStruct.setTableColumns("Stock Type", "Stock Code", "Quantity", "Description");
         ArrayList<ArrayList<String>> dataArray = new ArrayList<>();
 
-        //for each stocktype
-        for (int i = 0; i < stockTypeQuantity; i++) {
-            ArrayList<Stock> uiSubList = new ArrayList<>();
-            StockType currStockType = list.get(i);
-            uiSubList = currStockType.queryAllStocksDescription(search);
-            findList.addAll(uiSubList);
-        }
+        findList.addAll(list.queryStocksDescription(search));
 
         if (!findList.isEmpty()) {
             found = true;

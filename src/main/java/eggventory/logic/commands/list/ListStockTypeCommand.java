@@ -41,7 +41,7 @@ public class ListStockTypeCommand extends Command {
 //            ui.print(output);
         } else { // list stocktype <Stock Type> command
             String listString = "";
-            listString = list.queryStocks(query);
+            listString = list.queryStockType(query);
             output = listString;
 
             ui.print(output);
