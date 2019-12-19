@@ -7,6 +7,7 @@ import eggventory.ui.TableStruct;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 //@@author Deculsion
 public class StockList {
@@ -18,7 +19,7 @@ public class StockList {
      * @param stockList ArrayList<> of StockType objects. There should already be a default "Uncategorised" StockType.
      */
     public StockList(ArrayList<Stock> stockList) {
-        intialiseLists();
+        initialiseLists();
         this.stockList.addAll(stockList);
 
         for (Stock stock : stockList) {
@@ -32,7 +33,7 @@ public class StockList {
      * Constructs a new StockList object with one default StockType, "Uncategorised".
      */
     public StockList() {
-        intialiseLists();
+        initialiseLists();
     }
 
     /**
@@ -68,14 +69,15 @@ public class StockList {
      * @param name Name of StockType to be deleted
      * @return The object if it was deleted, null if nothing waas deleted.
      */
-    public ArrayList<Stock> deleteStockType(String name) {
-        ArrayList<Stock> deleted = new ArrayList<>();
+    public StockList deleteStockType(String name) {
+        StockList deleted = new StockList();
         stockTypeList.remove(name);
 
-        for (Stock stock : stockList) {
-            if (stock.getStockType().equals(name)) {
-                deleted.add(stock);
-                stockList.remove(stock);
+        for (Iterator<Stock> it = stockList.iterator() ; it.hasNext();) {
+            Stock currStock = it.next();
+            if (currStock.getStockType().equals(name)) {
+                deleted.addStock(currStock);
+                it.remove();
             }
         }
 
@@ -104,7 +106,7 @@ public class StockList {
      * @return the number of stockTypes.
      */
     public int getStockTypeQuantity() { //The number of stockTypes in the list.
-        return stockList.size();
+        return stockTypeList.size();
     }
 
     /**
@@ -119,6 +121,10 @@ public class StockList {
 
         stockList.add(new Stock(stockType, stockCode, quantity, description));
 
+    }
+
+    private void addStock(Stock stock) {
+        stockList.add(stock);
     }
 
     //@@author cyanoei
@@ -214,7 +220,6 @@ public class StockList {
      */
     public int getTotalNumberOfStocks() { //The number of stocks in the list, across all stockTypes.
         return stockList.size();
-
     }
 
     //@@author cyanoei
@@ -276,30 +281,28 @@ public class StockList {
      * @pre Stocktype has been checked to exist and contains at least one stock.
      * @return The string of the stocktype whose stocktype matches query.
      */
-    public String queryStockType(String query) {
-        StringBuilder ret = new StringBuilder();
-        ret.append(query).append(" INVENTORY\n");
-        ret.append("------------------------\n");
+    public StockList queryStockType(String query) {
+        StockList stocks = new StockList();
         for (Stock stock : stockList) {
             if (stock.getStockType().equals(query)) {
-                ret.append(stock.toString()).append("\n");
+                stocks.addStock(stock);
             }
         }
-        return ret.toString();
+        return stocks;
     }
 
     /**
      * Checks the entire StockType if any of the stocks contains a description equal to query.
      * @param query The word to search for in the description
-     * @return An ArrayList of stock objects for the stock whose query is within the description.
+     * @return A StockList object of stock objects for the stock whose query is within the description.
      *         If there are no stock which matches, an empty ArrayList is returned.
      *
      */
-    public ArrayList<Stock> queryStocksDescription(String query) {
-        ArrayList<Stock> outputList = new ArrayList<>();;
+    public StockList queryStocksDescription(String query) {
+        StockList outputList = new StockList();
         for (Stock stock: stockList) {
             if (stock.containDescription(query)) {
-                outputList.add(stock);
+                outputList.addStock(stock);
             }
         }
         return outputList;
@@ -317,7 +320,7 @@ public class StockList {
      * Clears the list of all elements.
      */
     public void clearList() {
-        intialiseLists();
+        initialiseLists();
     }
 
     /**
@@ -328,10 +331,10 @@ public class StockList {
     public boolean isStocktypeZeroQuantity(String stockTypeName) {
         for (Stock stock: stockList) {
             if (stock.getStockType().equals(stockTypeName)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
@@ -359,10 +362,10 @@ public class StockList {
      */
     public String toString() {
         StringBuilder ret = new StringBuilder();
-        ret.append("CURRENT INVENTORY\n");
+        int count = 1;
 
         for (Stock stock : stockList) {
-            ret.append("------------------------\n");
+            ret.append(count++).append(". ");
             ret.append(stock.toString()).append("\n");
         }
 
@@ -454,7 +457,7 @@ public class StockList {
         return tableStruct;
     }
 
-    private void intialiseLists() {
+    private void initialiseLists() {
         stockList = new ArrayList<>();
         stockTypeList = new ArrayList<>();
         stockTypeList.add("Uncategorised");

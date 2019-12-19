@@ -30,7 +30,7 @@ public class AddStockCommandTest {
                 "testDescription", 0).execute(testStockList, testCli, testStorage);
 
         //Check whether a stock is added to the list correctly
-        assertEquals("testStockType", testStockList.getStockType("testStockType").getName());
+        assertEquals("testStockType", testStockList.getStockType("testStockType").get(0).getStockType());
 
         //Check whether execute sends correct message to print
         assertEquals(String.format("Nice! I have successfully added the stock: StockType: %s StockCode: %s "

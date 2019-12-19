@@ -60,19 +60,19 @@ class QuantityManagerTest {
         assertNotNull(quantityManager.getLessThanMinimumList(list));
         assertTrue(quantityManager.getLessThanMinimumList(list).size() == 0);
 
-        list.get(0).getStock("A1").setMinimum(100);
+        list.findStock("A1").setMinimum(100);
         assertNotNull(quantityManager.getLessThanMinimumList(list));
         assertTrue(quantityManager.getLessThanMinimumList(list).size() == 0);
 
-        list.get(0).getStock("A1").setMinimum(210);
+        list.findStock("A1").setMinimum(210);
         assertNotNull(quantityManager.getLessThanMinimumList(list));
         assertTrue(quantityManager.getLessThanMinimumList(list).size() == 1);
 
-        list.get(0).getStock("A2").setMinimum(500);
+        list.findStock("A2").setMinimum(500);
         assertNotNull(quantityManager.getLessThanMinimumList(list));
         assertTrue(quantityManager.getLessThanMinimumList(list).size() == 2);
 
-        list.get(0).getStock("A4").setMinimum(3);
+        list.findStock("A4").setMinimum(3);
         assertNotNull(quantityManager.getLessThanMinimumList(list));
         assertTrue(quantityManager.getLessThanMinimumList(list).size() == 3);
     }

@@ -54,20 +54,22 @@ class ListStockTypeCommandTest {
 
         assertDoesNotThrow(() -> new ListStockTypeCommand(CommandType.LIST, validWithStocks)
                 .execute(testStockList, testCli, testStorage));
+
         assertDoesNotThrow(() -> new ListStockTypeCommand(CommandType.LIST, validWithoutStocks)
                 .execute(testStockList, testCli, testStorage));
+
         String output = new ListStockTypeCommand(CommandType.LIST, validWithStocks)
                 .execute(testStockList, testCli, testStorage);
+
         String expected = validWithStocks
                 + " INVENTORY\n"
                 + "------------------------\n"
-                + "1. " + validWithStocks + " | #Test1 | 1 | Test description\n"
-                + "\n";
+                + "1. " + validWithStocks + " | #Test1 | 1 | Test description\n";
         assertEquals(expected, output);
     }
 
     @Test
-    void execute_ValidZeroQuantiyStocktype_Success() throws BadInputException {
+    void execute_ValidZeroQuantityStocktype_Success() throws BadInputException {
         String zeroQuantityStockType = "Zero";
         String someQuantityStockType = "Some";
 
@@ -77,7 +79,7 @@ class ListStockTypeCommandTest {
 
         String output = new ListStockTypeCommand(CommandType.LIST, zeroQuantityStockType)
                 .execute(testStockList, testCli, testStorage);
-        String expected = "There is currently 0 stock with that stocktype.";
+        String expected = "There are currently 0 stocks with that stocktype.";
         assertEquals(expected, output);
     }
 }
