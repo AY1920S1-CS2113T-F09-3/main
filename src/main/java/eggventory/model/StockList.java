@@ -181,7 +181,7 @@ public class StockList {
 
         for (Stock stock : stockList) {
             if (stock.getStockCode().equals(stockCode)) {
-                updatedStock = stock.setProperty(stockCode, property, newValue);
+                updatedStock = stock.setProperty(property, newValue);
                 break;
             }
         }
@@ -319,6 +319,7 @@ public class StockList {
     public void clearList() {
         intialiseLists();
     }
+
     /**
      * Checks if a given stocktype has no stocks with its stocktype.
      * @param stockTypeName The name of the stocktype to be queried
@@ -361,8 +362,8 @@ public class StockList {
         ret.append("CURRENT INVENTORY\n");
 
         for (Stock stock : stockList) {
-                ret.append("------------------------\n");
-                ret.append(stock.toString()).append("\n");
+            ret.append("------------------------\n");
+            ret.append(stock.toString()).append("\n");
         }
 
         return ret.toString();

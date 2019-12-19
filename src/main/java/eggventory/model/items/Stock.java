@@ -243,28 +243,34 @@ public class Stock {
         return dataArray;
     }
 
-    public Stock setProperty(String stockCode, StockProperty property, String newValue)
+    /**
+     * Sets the specified attribute of the stock.
+     * @param property Attribute to be changed.
+     * @param newValue New value of the attribute.
+     * @return The stock object with the new value.
+     */
+    public Stock setProperty(StockProperty property, String newValue)
             throws BadInputException {
 
         switch (property) {
-            case STOCKCODE:
-                setStockCode(newValue);
-                break;
+        case STOCKCODE:
+            setStockCode(newValue);
+            break;
 
-            case QUANTITY:
-                setQuantity(Integer.parseInt(newValue));
-                break;
+        case QUANTITY:
+            setQuantity(Integer.parseInt(newValue));
+            break;
 
-            case DESCRIPTION:
-                setDescription(newValue);
-                break;
+        case DESCRIPTION:
+            setDescription(newValue);
+            break;
 
-            case MINIMUM:
-                setMinimum(Integer.parseInt(newValue));
-                break;
+        case MINIMUM:
+            setMinimum(Integer.parseInt(newValue));
+            break;
 
-            default:
-                return null;
+        default:
+            return null;
         }
 
         return this;
