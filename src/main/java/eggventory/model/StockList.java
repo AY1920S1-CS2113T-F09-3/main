@@ -319,20 +319,19 @@ public class StockList {
     public void clearList() {
         intialiseLists();
     }
-// Not needed with removal of StockType class.
-//    /**
-//     * Checks if a given stocktype has no stocks with its stocktype.
-//     * @param stockTypeName The name of the stocktype to be queried
-//     * @return True if the stocktype has no stocks, false otherwise.
-//     */
-//    public boolean isStocktypeZeroQuantity(String stockTypeName) {
-//        for (StockType stocktype: stockList) {
-//            if (stocktype.getName().equals(stockTypeName) && isStockTypeEmpty(stocktype)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    /**
+     * Checks if a given stocktype has no stocks with its stocktype.
+     * @param stockTypeName The name of the stocktype to be queried
+     * @return True if the stocktype has no stocks, false otherwise.
+     */
+    public boolean isStocktypeZeroQuantity(String stockTypeName) {
+        for (Stock stock: stockList) {
+            if (stock.getStockType().equals(stockTypeName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Prints all the stocktypes that are currently handled by Eggventory. Should only be called by Cli.
