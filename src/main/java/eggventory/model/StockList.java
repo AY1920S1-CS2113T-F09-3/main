@@ -363,9 +363,10 @@ public class StockList {
      */
     public String saveStockTypesString() {
         StringBuilder stockTypesString = new StringBuilder();
+        ArrayList<String> stockTypes = getStockTypes();
 
-        stockTypesString.append(stocktype.getName()).append("\n");
-        for (StockType stocktype : stockList) {
+        for (String stockType : stockTypes) {
+            stockTypesString.append(stockType).append("\n");
         }
         return stockTypesString.toString();
     }
