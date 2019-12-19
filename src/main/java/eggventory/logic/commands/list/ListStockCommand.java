@@ -24,8 +24,8 @@ public class ListStockCommand extends Command {
             ui.print(output);
             return output;
         }
-        output += "CURRENT INVENTORY\n" +
-                "------------------------\n";
+        output += "CURRENT INVENTORY\n"
+                + "------------------------\n";
 
         output += list.toString(); //Should contain all the stockTypes already, need not iterate.
         ui.print(output);

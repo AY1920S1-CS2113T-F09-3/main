@@ -47,8 +47,8 @@ public class ListStockTypeCommand extends Command {
         }
 
         // list stocktype <Stock Type> command
-        output = String.format("%s INVENTORY\n" +
-                "------------------------\n", query);
+        output = String.format("%s INVENTORY\n"
+                + "------------------------\n", query);
 
         output += list.queryStockType(query).toString();
 
