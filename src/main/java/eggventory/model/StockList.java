@@ -296,8 +296,8 @@ public class StockList {
         ret.append(query).append(" INVENTORY\n");
         ret.append("------------------------\n");
         for (Stock stock : stockList) {
-            if (stocktype.getName().equals(query)) {
-                ret.append(stocktype.toString()).append("\n");
+            if (stock.getStockType().equals(query)) {
+                ret.append(stock.toString()).append("\n");
             }
         }
         return ret.toString();
