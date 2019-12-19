@@ -3,7 +3,6 @@ package eggventory.logic;
 import eggventory.model.LoanList;
 import eggventory.model.StockList;
 import eggventory.model.items.Stock;
-import eggventory.model.items.StockType;
 import eggventory.ui.TableStruct;
 
 import java.util.ArrayList;
@@ -80,13 +79,12 @@ public class QuantityManager {
     private static ArrayList<Stock> lessThanMinimumList(StockList list) {
         ArrayList<Stock> minimumList = new ArrayList<>();
 
-        for (StockType stockType : list.getList()) {
-            for (Stock stock : stockType.getStockList()) {
+            for (Stock stock : list.getList()) {
                 if (isLessThanMinimum(stock)) {
                     minimumList.add(stock);
                 }
             }
-        }
+
         return minimumList;
     }
 
