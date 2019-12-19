@@ -79,11 +79,11 @@ public class QuantityManager {
     private static ArrayList<Stock> lessThanMinimumList(StockList list) {
         ArrayList<Stock> minimumList = new ArrayList<>();
 
-            for (Stock stock : list.getList()) {
-                if (isLessThanMinimum(stock)) {
-                    minimumList.add(stock);
-                }
+        for (Stock stock : list.getList()) {
+            if (isLessThanMinimum(stock)) {
+                minimumList.add(stock);
             }
+        }
 
         return minimumList;
     }
