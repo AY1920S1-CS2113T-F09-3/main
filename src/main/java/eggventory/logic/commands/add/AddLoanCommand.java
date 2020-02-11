@@ -41,7 +41,7 @@ public class AddLoanCommand extends Command {
     }
 
     private boolean personExists() {
-        return PersonList.findPerson(matricNo) != -1;
+        return PersonList.getInstance().findPerson(matricNo) != -1;
     }
 
     private boolean sufficientStock(StockList list) {
@@ -72,7 +72,7 @@ public class AddLoanCommand extends Command {
 
             Stock stock = list.findStock(stockCode);
 
-            String personName = PersonList.getName(matricNo);
+            String personName = PersonList.getInstance().getName(matricNo);
             String stockDescription = stock.getDescription();
             storage.save(list);
 

@@ -34,13 +34,14 @@ public class AddPersonCommand extends Command {
      * @return The string that is output to ui.
      */
     public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
-        PersonList.add(matricNo, name);
+        PersonList personList = PersonList.getInstance();
+        personList.add(matricNo, name);
 
         String output = String.format("Nice, I have added this person for you.\n"
                 + "Matriculation No.: %s | Name: %s", matricNo, name);
 
         ui.print(output);
-        ui.drawTable(PersonList.getAllPersonStruct());
+        ui.drawTable(personList.getAllPersonStruct());
 
         return output;
     }

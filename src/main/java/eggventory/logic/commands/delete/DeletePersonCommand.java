@@ -21,17 +21,18 @@ public class DeletePersonCommand extends Command {
     }
 
     @Override
-    public String execute(StockList list, Ui ui, Storage storage) throws BadInputException {
+    public String execute(StockList list, Ui ui, Storage storage) {
         String output;
+        PersonList personList = PersonList.getInstance();
         try {
-            Person deletedPerson = PersonList.delete(matricNo);
+            Person deletedPerson = personList.delete(matricNo);
             output = (String.format("Nice, I have deleted this person for you: %s", deletedPerson.getName()));
         } catch (BadInputException e) {
             output = (String.format("No person with matric no: %s was found. Please recheck your input", matricNo));
         }
 
         ui.print(output);
-        ui.drawTable(PersonList.getAllPersonStruct());
+        ui.drawTable(personList.getAllPersonStruct());
         return output;
     }
 }

@@ -21,17 +21,18 @@ public class ListPersonCommand extends Command {
      * @param storage storage objcet.
      */
     public String execute(StockList stockList, Ui ui, Storage storage) {
-        String output = "";
+        String output;
+        PersonList personList = PersonList.getInstance();
 
-        if (PersonList.getSize() == 0) {
+        if (personList.getSize() == 0) {
             output = "There is nobody in the list";
             ui.print(output);
             return output;
         }
 
-        output = PersonList.listToString();
+        output = personList.listToString();
         ui.print(output);
-        ui.drawTable(PersonList.getAllPersonStruct());
+        ui.drawTable(personList.getAllPersonStruct());
 
         return output;
 
