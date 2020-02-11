@@ -37,24 +37,15 @@ public class AddLoanCommand extends Command {
      * @return true if the stock exists inside the list.
      */
     private boolean stockExists(StockList list) {
-        if (list.findStock(stockCode) == null) {
-            return false;
-        }
-        return true;
+        return list.findStock(stockCode) != null;
     }
 
     private boolean personExists() {
-        if (PersonList.findPerson(matricNo) == -1) {
-            return false;
-        }
-        return true;
+        return PersonList.getInstance().findPerson(matricNo) != -1;
     }
 
     private boolean sufficientStock(StockList list) {
-        if (list.getStockQuantity(stockCode) - LoanList.getStockLoanedQuantity(stockCode) - quantity < 0) {
-            return false;
-        }
-        return true;
+        return list.getStockQuantity(stockCode) - LoanList.getStockLoanedQuantity(stockCode) - quantity >= 0;
     }
 
     /**
@@ -81,7 +72,7 @@ public class AddLoanCommand extends Command {
 
             Stock stock = list.findStock(stockCode);
 
-            String personName = PersonList.getName(matricNo);
+            String personName = PersonList.getInstance().getName(matricNo);
             String stockDescription = stock.getDescription();
             storage.save(list);
 

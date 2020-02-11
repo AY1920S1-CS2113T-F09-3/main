@@ -10,8 +10,33 @@ import java.util.ArrayList;
 //@@author Raghav-B
 public final class PersonList {
 
-    private static ArrayList<Person> personList = new ArrayList<Person>();
+    private static PersonList Singleton;
+    private ArrayList<Person> personList;
 
+    /**
+     * Creates an (or obtains the) instance of PersonList in memory.
+     * @return Instance of PersonList object.
+     */
+    public static PersonList getInstance() {
+        if (Singleton == null) {
+            Singleton = new PersonList();
+        }
+        return Singleton;
+    }
+
+    /**
+     * Resets the instance of PersonList if instantiated.
+     */
+    public static void reset() {
+        if (Singleton == null) {
+            return;
+        }
+        Singleton = new PersonList();
+    }
+
+    private PersonList() {
+        personList = new ArrayList<>();
+    }
 
     /**
      * Adds a unique Person to the personList.
@@ -19,7 +44,7 @@ public final class PersonList {
      * @param name Name to assign to Person. Not unique.
      * @throws BadInputException If Person already exists.
      */
-    public static void add(String matricNo, String name) throws BadInputException {
+     public void add(String matricNo, String name) throws BadInputException {
         matricNo = matricNo.toUpperCase();
         if (findPerson(matricNo) != -1) { // Person exists already
             throw new BadInputException("The Person with the specified matriculation number already exists!\n Did you"
@@ -34,7 +59,7 @@ public final class PersonList {
      * @return The unedited Person, for printing purpose.
      * @throws BadInputException If desired Person cannot be found.
      */
-    public static Person delete(String matricNo) throws BadInputException {
+      public Person delete(String matricNo) throws BadInputException {
         matricNo = matricNo.toUpperCase();
         int personDeleteIndex = findPerson(matricNo);
         if (personDeleteIndex == -1) {
@@ -54,7 +79,7 @@ public final class PersonList {
      * @return The unedited Person, for printing purpose.
      * @throws BadInputException If no Person could be found.
      */
-    public static Person edit(String matricNo, PersonProperty property, String newValue) throws BadInputException {
+     public Person edit(String matricNo, PersonProperty property, String newValue) throws BadInputException {
         matricNo = matricNo.toUpperCase();
         Person uneditedPerson;
         int editPersonIndex = findPerson(matricNo);
@@ -84,7 +109,7 @@ public final class PersonList {
      * @param matricNo Search query: matricNo.
      * @return index of Person found in PersonList.
      */
-    public static int findPerson(String matricNo) {
+     public int findPerson(String matricNo) {
         matricNo = matricNo.toUpperCase();
         for (int i = 0; i < personList.size(); i++) {
             if (personList.get(i).getMatricNo().equals(matricNo)) {
@@ -102,14 +127,14 @@ public final class PersonList {
      * @param matricNo Matric No of person to search for
      * @return The name of the person.
      */
-    public static String getName(String matricNo) {
+    public String getName(String matricNo) {
         matricNo = matricNo.toUpperCase();
         Person person = personList.get(findPerson(matricNo));
 
         return person.getName();
     }
 
-    public static int getSize() {
+    public int getSize() {
         return personList.size();
     }
 
@@ -117,7 +142,7 @@ public final class PersonList {
      * Creates a tablestruct of all persons in personlist.
      * @return A tablestruct object.
      */
-    public static TableStruct getAllPersonStruct() {
+    public TableStruct getAllPersonStruct() {
         TableStruct tableStruct = new TableStruct("Person List");
         tableStruct.setTableColumns("Matriculation No.", "Full Name");
 
@@ -135,7 +160,7 @@ public final class PersonList {
      * Converts the person list to a string.
      * @return A string representing all data in personlist.
      */
-    public static String listToString() {
+    public String listToString() {
         StringBuilder sb = new StringBuilder();
         sb.append("List of people registered\n");
         sb.append("------------------------\n");
@@ -149,7 +174,7 @@ public final class PersonList {
         return sb.toString();
     }
 
-    public static ArrayList<Person> getPersonList() {
+    public ArrayList<Person> getPersonList() {
         return personList;
     }
 

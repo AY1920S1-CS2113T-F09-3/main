@@ -104,9 +104,10 @@ public class Loan {
      */
     public ArrayList<String> getDataAsArray() {
         ArrayList<String> dataArray = new ArrayList<>();
+        PersonList personList = PersonList.getInstance();
 
         dataArray.add(matricNo);
-        dataArray.add(PersonList.getName(matricNo));
+        dataArray.add(personList.getName(matricNo));
         dataArray.add(stockCode);
         dataArray.add(Integer.toString(quantity));
 

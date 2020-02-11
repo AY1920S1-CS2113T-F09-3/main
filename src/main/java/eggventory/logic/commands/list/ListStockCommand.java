@@ -24,10 +24,12 @@ public class ListStockCommand extends Command {
             ui.print(output);
             return output;
         }
+        output += "CURRENT INVENTORY\n"
+                + "------------------------\n";
 
-        listString = list.toString(); //Should contain all the stockTypes already, need not iterate.
-        output = listString;
+        output += list.toString(); //Should contain all the stockTypes already, need not iterate.
         ui.print(output);
+
         // Drawing stock data in GUI table.
         ui.drawTable(list.getAllStocksStruct());
 

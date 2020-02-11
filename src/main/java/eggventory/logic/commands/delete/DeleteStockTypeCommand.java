@@ -1,11 +1,13 @@
 package eggventory.logic.commands.delete;
 
+import eggventory.model.items.Stock;
 import eggventory.ui.Ui;
 import eggventory.model.StockList;
 import eggventory.storage.Storage;
 import eggventory.logic.commands.Command;
 import eggventory.commons.enums.CommandType;
-import eggventory.model.items.StockType;
+
+import java.util.ArrayList;
 
 //@@author cyanoei
 public class DeleteStockTypeCommand extends Command {
@@ -19,7 +21,6 @@ public class DeleteStockTypeCommand extends Command {
 
     @Override
     public String execute(StockList list, Ui ui, Storage storage) {
-
         String output;
 
         if (stockTypeName.equals("Uncategorised")) {
@@ -28,22 +29,24 @@ public class DeleteStockTypeCommand extends Command {
             return output;
         }
 
-        StockType deleted = list.deleteStockType(stockTypeName);
-
-        if (deleted == null) {
+        if (!list.isExistingStockType(stockTypeName)) {
             output = String.format("Sorry, I cannot find the stock type \"%s\" refers to. "
                     + "Please try again.", stockTypeName);
             ui.print(output);
-        } else {
-            output = String.format("I deleted the following stockType: %s. "
-                    + "I also deleted the following stocks of that type: \n"
-                    + deleted.toString(), stockTypeName);
-            storage.save(list);
-            ui.print(output);
-            // Drawing stock data in GUI table.
-            ui.drawTable(list.getAllStocksStruct());
-            //ui.drawTable(list.getAllStockTypesStruct());
+            return output;
         }
+
+        StockList deleted = list.deleteStockType(stockTypeName);
+
+        output = String.format("I deleted the following stockType: %s. "
+                + "I also deleted the following stocks of that type: \n"
+                + deleted.toString(), stockTypeName);
+        storage.save(list);
+
+        ui.print(output);
+        // Drawing stock data in GUI table.
+        ui.drawTable(list.getAllStocksStruct());
+        //ui.drawTable(list.getAllStockTypesStruct());
 
         return output;
     }

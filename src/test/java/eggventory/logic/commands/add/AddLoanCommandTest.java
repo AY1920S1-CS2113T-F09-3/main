@@ -32,9 +32,6 @@ class AddLoanCommandTest {
 
     @BeforeEach
     void resetPersonList() throws BadInputException {
-        if (PersonList.getSize() == 0) {
-            return;
-        }
 
         ArrayList<Person> persons = PersonList.getPersonList();
         ArrayList<String> matrics = new ArrayList<>();
